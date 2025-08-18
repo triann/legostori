@@ -9,7 +9,15 @@ import { Minus, Plus, Trash2, Loader2, Calendar, ChevronLeft, ChevronRight, X, L
 import Link from "next/link"
 import { CheckoutHeader } from "@/components/checkout-header"
 
-import { createPixPayment, type PixPaymentData } from "@/lib/pix-api"
+import {
+  createPixPayment,
+  type PixPaymentData,
+  maskCPF,
+  maskPhone,
+  validateEmail,
+  VALOR_MINIMO,
+  VALOR_MAXIMO,
+} from "@/lib/pix-api"
 import { Edit2 } from "lucide-react"
 
 interface CartItem {
@@ -145,13 +153,13 @@ export default function CheckoutPage() {
   }
 
   const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatCpf(e.target.value)
-    setCpf(formatted)
+    const masked = maskCPF(e.target.value)
+    setCpf(masked)
   }
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatPhone(e.target.value)
-    setPhone(formatted)
+    const masked = maskPhone(e.target.value)
+    setPhone(masked)
   }
 
   const getAddressFromCep = async (cep: string) => {
@@ -326,13 +334,12 @@ export default function CheckoutPage() {
 
   const handleEmailSubmit = () => {
     if (!email.trim()) {
-      setEmailError("Campo obrigatório.")
+      setEmailError("E-mail é obrigatório")
       return
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      setEmailError("E-mail inválido.")
+    if (!validateEmail(email)) {
+      setEmailError("E-mail deve ter um formato válido")
       return
     }
 
@@ -341,70 +348,86 @@ export default function CheckoutPage() {
     setFormData({ ...formData, email: email })
   }
 
-  const handlePersonalDataSubmit = () => {
-    if (!firstName.trim() || !lastName.trim() || !cpf.trim() || !phone.trim()) {
-      return
-    }
-    setCurrentStep("address")
-    setFormData({
-      ...formData,
-      firstName: firstName,
-      lastName: lastName,
-      cpf: cpf,
-      phone: phone,
-    })
-  }
+  const validateForm = (): boolean => {
+    const errors: string[] = []
 
-  const handleAddressSubmit = () => {
-    if (!addressNumber.trim()) {
-      return
+    // Validar email (obrigatório)
+    if (!formData.email.trim()) {
+      errors.push("E-mail é obrigatório")
+    } else if (!validateEmail(formData.email)) {
+      errors.push("E-mail deve ter um formato válido")
     }
-    setCurrentStep("payment")
+
+    // Validar valor
+    const amountReais = totalPrice / 100
+    if (amountReais < VALOR_MINIMO) {
+      errors.push(`Valor mínimo é R$ ${VALOR_MINIMO.toFixed(2).replace(".", ",")}`)
+    } else if (amountReais > VALOR_MAXIMO) {
+      errors.push(`Valor máximo é R$ ${VALOR_MAXIMO.toFixed(2).replace(".", ",")}`)
+    }
+
+    if (errors.length > 0) {
+      alert("Erros encontrados:\n" + errors.join("\n"))
+      return false
+    }
+
+    return true
   }
 
   const handlePaymentSubmit = async () => {
-    if (selectedPaymentMethod === "pix") {
-      setIsLoading(true)
+    if (selectedPaymentMethod !== "pix") {
+      alert("Selecione PIX como método de pagamento")
+      return
+    }
 
-      try {
-        // Preparar dados do pagamento
-        const pixData: PixPaymentData = {
-          amount: totalPrice,
-          email: formData.email,
-          name: `${formData.firstName} ${formData.lastName}`,
-          phone: formData.phone,
-          cpf: formData.cpf,
-          description: `Compra LEGO - ${product?.name || "Produto"}`,
-        }
+    if (!validateForm()) {
+      return
+    }
 
-        // Criar pagamento PIX via API
-        const pixResponse = await createPixPayment(pixData)
+    setIsLoading(true)
 
-        if (pixResponse.success && pixResponse.qrcode && pixResponse.token) {
-          // Salvar dados do PIX no localStorage para a página PIX
-          localStorage.setItem(
-            "pixPayment",
-            JSON.stringify({
-              qrcode: pixResponse.qrcode,
-              token: pixResponse.token,
-              amount: totalPrice,
-              productName: product?.name,
-              email: formData.email,
-              name: `${formData.firstName} ${formData.lastName}`,
-            }),
-          )
-
-          // Redirecionar para página PIX
-          window.location.href = "/pix"
-        } else {
-          alert("Erro ao gerar pagamento PIX: " + (pixResponse.error || "Erro desconhecido"))
-        }
-      } catch (error) {
-        console.error("Erro ao processar pagamento:", error)
-        alert("Erro ao processar pagamento. Tente novamente.")
-      } finally {
-        setIsLoading(false)
+    try {
+      const pixData: PixPaymentData = {
+        amount: totalPrice, // Valor em centavos
+        email: formData.email,
+        name: `${formData.firstName} ${formData.lastName}`.trim(),
+        phone: formData.phone,
+        cpf: formData.cpf,
+        description: `Compra LEGO - ${product?.name || "Produto"}`,
       }
+
+      console.log("📤 Enviando dados PIX:", pixData)
+
+      // Criar pagamento PIX via API
+      const pixResponse = await createPixPayment(pixData)
+
+      if (pixResponse.success && (pixResponse.qrcode || pixResponse.pixCopiaECola) && pixResponse.token) {
+        const pixCode = pixResponse.qrcode || pixResponse.pixCopiaECola || ""
+
+        // Salvar dados do PIX no localStorage para a página PIX
+        localStorage.setItem(
+          "pixPayment",
+          JSON.stringify({
+            qrcode: pixCode,
+            token: pixResponse.token,
+            amount: totalPrice,
+            productName: product?.name || "Produto LEGO",
+            email: formData.email,
+            name: `${formData.firstName} ${formData.lastName}`.trim(),
+          }),
+        )
+
+        console.log("🔄 Redirecionando para PIX...")
+        // Redirecionar para página PIX
+        window.location.href = "/pix"
+      } else {
+        throw new Error(pixResponse.error || "Erro ao gerar PIX")
+      }
+    } catch (error) {
+      console.error("❌ Erro ao processar pagamento:", error)
+      alert("Erro ao processar pagamento: " + (error as Error).message)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -435,6 +458,29 @@ export default function CheckoutPage() {
 
   const handleEditDelivery = () => {
     setCurrentStep("address")
+  }
+
+  const handlePersonalDataSubmit = () => {
+    if (!firstName.trim() || !lastName.trim() || !cpf.trim() || !phone.trim()) {
+      alert("Por favor, preencha todos os campos obrigatórios.")
+      return
+    }
+    setFormData({
+      ...formData,
+      firstName: firstName,
+      lastName: lastName,
+      cpf: cpf,
+      phone: phone,
+    })
+    setCurrentStep("address")
+  }
+
+  const handleAddressSubmit = () => {
+    if (deliveryMethod === "RECEBER" && !addressNumber.trim()) {
+      alert("Por favor, preencha o número do endereço.")
+      return
+    }
+    setCurrentStep("payment")
   }
 
   if (currentStep === "personal") {
@@ -494,29 +540,21 @@ export default function CheckoutPage() {
                 {!lastName.trim() && <p className="text-xs text-red-500 mt-1">Campo obrigatório.</p>}
               </div>
 
-              <div>
-                <Input
-                  type="text"
-                  value={cpf}
-                  onChange={handleCpfChange}
-                  placeholder="CPF"
-                  maxLength={14}
-                  className="w-full"
-                />
-                {!cpf.trim() && <p className="text-xs text-red-500 mt-1">Campo obrigatório.</p>}
-              </div>
+              <Input
+                type="text"
+                placeholder="000.000.000-00"
+                value={cpf}
+                onChange={handleCpfChange}
+                className="w-full"
+              />
 
-              <div>
-                <Input
-                  type="text"
-                  value={phone}
-                  onChange={handlePhoneChange}
-                  placeholder="Telefone"
-                  maxLength={15}
-                  className="w-full"
-                />
-                {!phone.trim() && <p className="text-xs text-red-500 mt-1">Campo obrigatório.</p>}
-              </div>
+              <Input
+                type="tel"
+                placeholder="(11) 99999-9999"
+                value={phone}
+                onChange={handlePhoneChange}
+                className="w-full"
+              />
 
               <div className="space-y-3 pt-4">
                 <label className="flex items-center gap-2">

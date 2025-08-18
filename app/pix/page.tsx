@@ -29,16 +29,104 @@ export default function PixPage() {
     }
   }, [])
 
+  const showToast = (message: string, type: "success" | "error" | "warning" | "info" = "success") => {
+    // Remove toast anterior se existir
+    const existingToast = document.querySelector(".toast")
+    if (existingToast) {
+      existingToast.remove()
+    }
+
+    // Cria novo toast
+    const toast = document.createElement("div")
+    toast.className = `toast ${type}`
+    toast.textContent = message
+
+    // Adicionar estilos do toast
+    toast.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: ${type === "success" ? "#22c55e" : type === "error" ? "#ef4444" : type === "warning" ? "#f59e0b" : "#3b82f6"};
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 2000;
+      opacity: 0;
+      transition: all 0.3s ease;
+      min-width: 280px;
+      max-width: 85%;
+      text-align: center;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.4;
+    `
+
+    document.body.appendChild(toast)
+
+    // Mostra o toast
+    setTimeout(() => {
+      toast.style.opacity = "1"
+      toast.style.transform = "translateX(-50%) translateY(0)"
+    }, 100)
+
+    // Remove o toast após 4 segundos
+    setTimeout(() => {
+      toast.style.opacity = "0"
+      toast.style.transform = "translateX(-50%) translateY(100px)"
+      setTimeout(() => {
+        if (toast.parentNode) {
+          toast.parentNode.removeChild(toast)
+        }
+      }, 300)
+    }, 4000)
+  }
+
+  const confirmPayment = () => {
+    if (confirm("Você confirma que já efetuou o pagamento?")) {
+      checkPaymentStatusNow()
+      showToast("Obrigado! Estamos verificando seu pagamento.", "info")
+    }
+  }
+
+  const checkPaymentStatusNow = async () => {
+    if (!pixData?.token) return
+
+    try {
+      const status = await checkPaymentStatus(pixData.token)
+      if (status.success && status.status === "APPROVED") {
+        setPaymentStatus("approved")
+        showToast("Pagamento confirmado! Obrigado pela sua contribuição.", "success")
+
+        // Redirecionar após 3 segundos
+        setTimeout(() => {
+          window.location.href = "/"
+        }, 3000)
+      } else if (status.status === "REJECTED") {
+        setPaymentStatus("rejected")
+        showToast("Pagamento rejeitado. Tente novamente.", "error")
+      } else {
+        showToast("Pagamento ainda está sendo processado.", "warning")
+      }
+    } catch (error) {
+      console.error("Erro ao verificar status:", error)
+      showToast("Erro ao verificar status do pagamento.", "error")
+    }
+  }
+
   useEffect(() => {
     if (!pixData?.token) return
 
-    // Verificar status do pagamento a cada 10 segundos
     const interval = setInterval(async () => {
       try {
+        console.log("Verificando status para transação:", pixData.token)
         const status = await checkPaymentStatus(pixData.token)
+
         if (status.success && status.status === "APPROVED") {
           setPaymentStatus("approved")
           clearInterval(interval)
+          showToast("Pagamento confirmado! Redirecionando...", "success")
 
           // Redirecionar após 3 segundos
           setTimeout(() => {
@@ -47,15 +135,18 @@ export default function PixPage() {
         } else if (status.status === "REJECTED") {
           setPaymentStatus("rejected")
           clearInterval(interval)
+        } else {
+          console.log("Pagamento ainda pendente")
         }
       } catch (error) {
         console.error("Erro ao verificar status:", error)
       }
-    }, 10000)
+    }, 10000) // Verificar a cada 10 segundos
 
     // Parar verificação após 15 minutos
     setTimeout(() => {
       clearInterval(interval)
+      console.log("Verificação automática interrompida após 15 minutos")
     }, 900000)
 
     return () => clearInterval(interval)
@@ -65,6 +156,7 @@ export default function PixPage() {
     if (pixData?.qrcode) {
       navigator.clipboard.writeText(pixData.qrcode)
       setCopied(true)
+      showToast("Código PIX copiado!", "success")
       setTimeout(() => setCopied(false), 2000)
     }
   }
@@ -166,6 +258,15 @@ export default function PixPage() {
                 <li>3. Escaneie o código QR</li>
                 <li>4. Confirme o pagamento</li>
               </ol>
+            </div>
+
+            <div className="text-center mb-4">
+              <button
+                onClick={confirmPayment}
+                className="text-green-500 font-medium text-sm underline hover:text-green-600"
+              >
+                Tudo certo, já paguei!
+              </button>
             </div>
 
             <Button
