@@ -223,19 +223,19 @@ export default function CheckoutPage() {
     if (deliveryMethod === "RETIRAR") {
       const bairro = address?.district || "Centro"
       const storeOption = {
-        type: `Centro de Distribuição LEGO - ${bairro}`,
+        type: `Centro de Distribuição LEGO}`,
         distance: "3.1km",
-        address: "Rua das Flores, 123 - Centro Comercial",
+        address: "${bairro}",
         price: onlyFreeItems ? 0 : 0,
       }
       setShippingOptions([storeOption])
     } else {
       if (onlyFreeItems) {
-        setShippingOptions([{ type: "PAC", price: 15.9, days: "5-7 dias úteis" }])
+        setShippingOptions([{ type: "Correios Pac", price: 25.91, days: "de 5-7 dias úteis" }])
       } else {
         setShippingOptions([
-          { type: "Grátis", price: 0, days: "7-10 dias úteis" },
-          { type: "Expresso", price: 25.9, days: "2-3 dias úteis" },
+          { type: "Correios Pac", price: 0, days: "de 5-7 dias úteis." },
+          { type: "JadLog Transportadora", price: 25.91, days: "Chegará amanhã." },
         ])
       }
     }
@@ -991,9 +991,7 @@ export default function CheckoutPage() {
                 </div>
               ))}
 
-              <Link href="/checkout" className="text-sm text-blue-600 hover:underline block mb-4">
-                Voltar para o carrinho
-              </Link>
+
 
               <div className="space-y-2 pt-4 border-t">
                 <div className="flex justify-between text-sm">
@@ -1114,9 +1112,6 @@ export default function CheckoutPage() {
         <div className="max-w-md mx-auto bg-white min-h-screen transform transition-all duration-500 ease-in-out">
           <div className="p-4 border-b">
             <h1 className="text-xl font-semibold text-gray-900 text-center">Finalizar compra</h1>
-            <Link href="#" onClick={() => setCurrentStep("cart")} className="text-sm text-orange-500 hover:underline">
-              Voltar para o carrinho
-            </Link>
           </div>
 
           <div className="p-6 text-center">
