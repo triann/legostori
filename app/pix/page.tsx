@@ -193,7 +193,7 @@ export default function PixPage() {
 
       <div className="max-w-md mx-auto bg-white min-h-screen">
         <div className="p-4 border-b">
-          <h1 className="text-xl font-semibold text-gray-900">Pagamento PIX</h1>
+          <h1 className="text-xl font-semibold text-gray-900 text-center">Pagamento PIX</h1>
           <Link href="/checkout" className="text-sm text-orange-500 hover:underline">
             Voltar para o checkout
           </Link>
