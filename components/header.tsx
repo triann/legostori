@@ -120,14 +120,19 @@ export function Header() {
                     NOVOS
                   </Button>
                 </Link>
-                <Link href="/categoria/exclusivos">
+                <Link href="/categoria/harrypotter">
                   <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
-                    EXCLUSIVOS
+                    HARRY POTTER
                   </Button>
                 </Link>
-                <Link href="/categoria/ofertas">
+                <Link href="/categoria/disney">
                   <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
-                    OFERTAS
+                    DISNEY
+                  </Button>
+                </Link>
+                <Link href="/categoria/marvel">
+                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
+                    MARVEL
                   </Button>
                 </Link>
               </nav>
@@ -286,20 +291,52 @@ export function Header() {
                 NOVOS
               </Button>
             </Link>
-            <Link href="/categoria/exclusivos" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link href="/categoria/harrypotter" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant="ghost"
                 className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
               >
-                EXCLUSIVOS
+                HARRY POTTER
               </Button>
             </Link>
-            <Link href="/categoria/ofertas" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link href="/categoria/disney" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant="ghost"
                 className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
               >
-                OFERTAS
+                DISNEY
+              </Button>
+            </Link>
+            <Link href="/categoria/marvel" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
+              >
+                MARVEL
+              </Button>
+            </Link>
+            <Link href="/categoria/icons" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
+              >
+                ICONS
+              </Button>
+            </Link>
+            <Link href="/categoria/classic" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
+              >
+                CLASSIC
+              </Button>
+            </Link>
+            <Link href="/categoria/botanicals" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
+              >
+                BOTANICALS
               </Button>
             </Link>
           </nav>

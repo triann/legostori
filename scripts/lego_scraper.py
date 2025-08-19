@@ -10,7 +10,7 @@ import os
 
 # Configure aqui a categoria que será aplicada a todos os produtos desta execução
 # Opções: ["novos"], ["exclusivos"], ["ofertas"], ["novos", "ofertas"], etc.
-CATEGORIA_PRODUTOS = ["ofertas"]  # Altere esta linha antes de executar o script
+CATEGORIA_PRODUTOS = ["marvel"]  # Altere esta linha antes de executar o script
 
 class LegoScraper:
     def __init__(self):
@@ -52,9 +52,20 @@ class LegoScraper:
     
     def check_duplicate_product(self, item_number, name):
         """Verifica se produto já existe baseado no itemNumber"""
+        print(f"🔍 Verificando duplicata para itemNumber: {item_number}, nome: {name}")
+        
         for product_id, product in self.processed_products.items():
-            if product.get("itemNumber") == item_number:
+            existing_item_number = product.get("itemNumber")
+            existing_name = product.get("name")
+            
+            if existing_item_number == item_number:
+                print(f"🔄 DUPLICATA ENCONTRADA!")
+                print(f"   - Produto existente ID: {product_id}")
+                print(f"   - Nome existente: {existing_name}")
+                print(f"   - ItemNumber: {existing_item_number}")
                 return product_id, product
+        
+        print(f"✓ Produto novo, não é duplicata")
         return None, None
     
     def merge_categories(self, existing_product, new_categories):
@@ -80,7 +91,7 @@ class LegoScraper:
             
             # Extrair dados básicos
             name = self.extract_name(soup)
-            item_number = self.extract_item_number(url)
+            item_number = self.extract_item_number(url, soup)
             
             existing_id, existing_product = self.check_duplicate_product(item_number, name)
             
@@ -344,13 +355,82 @@ class LegoScraper:
         print(f"   - Produtos processados nesta execução: {len(products)}")
         print(f"   - Total de produtos no sistema: {len(all_products)}")
 
-    def extract_item_number(self, url):
-        """Extrai o número do item da URL"""
-        match = re.search(r'/(\d+)-', url)
-        if match:
-            return match.group(1)
-        return "00000"
-    
+    def extract_item_number(self, url, soup=None):
+        """Extrai o número do item da URL e do HTML com múltiplos padrões"""
+        print(f"🔍 Tentando extrair itemNumber de: {url}")
+        
+        # Padrões para URLs da LEGO Brasil
+        url_patterns = [
+            r'/(\d{4,6})-lego',           # /12345-lego-produto
+            r'/(\d{4,6})-',               # /12345-nome-produto  
+            r'/(\d{4,6})/',               # /12345/
+            r'(\d{4,6})-lego-',           # 12345-lego-nome
+            r'lego-.*?-(\d{4,6})',        # lego-nome-12345
+            r'lego-.*?(\d{4,6})',         # lego-nome12345
+            r'/p/(\d{4,6})',              # /p/12345
+            r'produto/(\d{4,6})',         # produto/12345
+            r'item/(\d{4,6})',            # item/12345
+        ]
+        
+        # Tentar extrair da URL primeiro
+        for i, pattern in enumerate(url_patterns):
+            match = re.search(pattern, url, re.IGNORECASE)
+            if match:
+                item_number = match.group(1)
+                print(f"✓ ItemNumber extraído da URL (padrão {i+1}): {item_number}")
+                return item_number
+        
+        # Se não conseguiu da URL, tentar extrair do HTML
+        if soup:
+            print("🔍 Tentando extrair itemNumber do HTML...")
+            html_patterns = [
+                r'item[:\s]*(\d{4,6})',
+                r'código[:\s]*(\d{4,6})',
+                r'ref[:\s]*(\d{4,6})',
+                r'sku[:\s]*(\d{4,6})',
+                r'product[:\s]*(\d{4,6})',
+            ]
+            
+            page_text = soup.get_text()
+            for i, pattern in enumerate(html_patterns):
+                match = re.search(pattern, page_text, re.IGNORECASE)
+                if match:
+                    item_number = match.group(1)
+                    print(f"✓ ItemNumber extraído do HTML (padrão {i+1}): {item_number}")
+                    return item_number
+            
+            # Tentar encontrar em atributos específicos
+            selectors = [
+                '[data-sku]',
+                '[data-product-id]', 
+                '[data-item-id]',
+                '.product-code',
+                '.item-number'
+            ]
+            
+            for selector in selectors:
+                element = soup.select_one(selector)
+                if element:
+                    for attr in ['data-sku', 'data-product-id', 'data-item-id']:
+                        value = element.get(attr)
+                        if value and re.match(r'\d{4,6}', value):
+                            print(f"✓ ItemNumber extraído do atributo {attr}: {value}")
+                            return value
+                    
+                    # Tentar extrair do texto do elemento
+                    text = element.get_text()
+                    match = re.search(r'(\d{4,6})', text)
+                    if match:
+                        item_number = match.group(1)
+                        print(f"✓ ItemNumber extraído do elemento {selector}: {item_number}")
+                        return item_number
+        
+        # Se ainda não encontrou, usar hash da URL como fallback único
+        import hashlib
+        url_hash = hashlib.md5(url.encode()).hexdigest()[:6].upper()
+        print(f"⚠️ ItemNumber não encontrado, usando hash único: {url_hash}")
+        return f"HASH_{url_hash}"
+
     def extract_vip_points(self, soup, price):
         """Extrai VIP points do site ou calcula baseado no preço"""
         # Procurar por VIP points no site

@@ -15,42 +15,42 @@ const categories = [
     href: "/categoria/novos", // adicionando navegação para página específica
   },
   {
-    name: "Exclusivos",
+    name: "Harry Potter",
     color: "bg-purple-600",
     image:
-      "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/dbba9da0-fef8-4752-8da3-4dd10e5fdae4___dff3250cc485e56c1e8392f20b546919.jpg",
-    href: "/categoria/exclusivos", // adicionando navegação para página específica
+      "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-HarryPotter.jpg",
+    href: "/categoria/harrypottter", // adicionando navegação para página específica
   },
   {
-    name: "Ofertas",
+    name: "Disney",
     color: "bg-red-600",
-    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Offers.jpg",
-    href: "/categoria/ofertas",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Disney.jpg",
+    href: "/categoria/disney",
   }, // adicionando navegação
   {
-    name: "Todos os sets",
+    name: "Marvel",
     color: "bg-red-700",
-    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Allsets.jpg",
-    href: "/categoria/todos-os-sets",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Marvel.jpg?v=2",
+    href: "/categoria/marvel",
   }, // adicionando navegação
   {
-    name: "LEGO ONE PIECE",
+    name: "Icons",
     color: "bg-blue-600",
     image:
-      "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/f5bd9554-1255-45fb-bcd4-b0b1b117a1cd___a9b2be72ae844ee84b2cd24199a88fbf.jpg",
-    href: "/categoria/one-piece",
+      "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Icons-2.jpg",
+    href: "/categoria/icons",
   }, // adicionando navegação
   {
-    name: "Presentes",
+    name: "Classic",
     color: "bg-green-600",
-    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-forkids.jpg",
-    href: "/categoria/presentes",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Classic.jpg",
+    href: "/categoria/classic",
   }, // adicionando navegação
   {
-    name: "Volta às Aulas",
+    name: "Botanicals",
     color: "bg-teal-600",
-    image: "/colorful-brick-backpack.png",
-    href: "/categoria/volta-as-aulas",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Botanicals.jpg",
+    href: "/categoria/botanicals",
   }, // adicionando navegação
 ]
 
