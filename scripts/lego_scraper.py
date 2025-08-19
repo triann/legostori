@@ -10,7 +10,7 @@ import os
 
 # Configure aqui a categoria que será aplicada a todos os produtos desta execução
 # Opções: ["novos"], ["exclusivos"], ["ofertas"], ["novos", "ofertas"], etc.
-CATEGORIA_PRODUTOS = ["novos"]  # Altere esta linha antes de executar o script
+CATEGORIA_PRODUTOS = ["ofertas"]  # Altere esta linha antes de executar o script
 
 class LegoScraper:
     def __init__(self):

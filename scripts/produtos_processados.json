@@ -1,0 +1,82 @@
+{
+  "10": {
+    "id": "10",
+    "name": "Mala de Viagem Amarela",
+    "price": 149.99,
+    "originalPrice": null,
+    "rating": 4.3,
+    "reviews": 310,
+    "ages": "8+",
+    "pieces": 184,
+    "itemNumber": "40817",
+    "vipPoints": 9,
+    "images": [
+      "https://legobrasil.vtexassets.com/arquivos/ids/189242/40817.jpg?v=638768033043630000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/189243/40817--1-.jpg?v=638768033204130000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/189244/40817--2-.jpg?v=638768033319000000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/189245/40817--3-.jpg?v=638768033475700000"
+    ],
+    "description": "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    "features": [],
+    "inStock": true,
+    "puzzleImage": "https://legobrasil.vtexassets.com/arquivos/ids/189242/40817.jpg?v=638768033043630000",
+    "puzzleTimeLimit": 300,
+    "puzzleDiscount": 70,
+    "categories": [
+      "novos",
+      "ofertas"
+    ]
+  },
+  "11": {
+    "id": "11",
+    "name": "Minecraft® - Ringue de luta da mansão Woodland",
+    "price": 479.99,
+    "originalPrice": null,
+    "rating": 4.6,
+    "reviews": 456,
+    "ages": "8+",
+    "pieces": 491,
+    "itemNumber": "21272",
+    "vipPoints": 31,
+    "images": [
+      "https://legobrasil.vtexassets.com/arquivos/ids/189063/21272.jpg?v=638738549970430000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/189064/21272--1-.jpg?v=638738550704500000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/189065/21272--2-.jpg?v=638738551705700000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/189066/21272--3-.jpg?v=638738552006470000"
+    ],
+    "description": "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    "features": [],
+    "inStock": true,
+    "puzzleImage": "https://legobrasil.vtexassets.com/arquivos/ids/189063/21272.jpg?v=638738549970430000",
+    "puzzleTimeLimit": 300,
+    "puzzleDiscount": 70,
+    "categories": [
+      "novos",
+      "ofertas"
+    ]
+  },
+  "12": {
+    "id": "12",
+    "name": "Produto LEGO",
+    "price": 299.99,
+    "originalPrice": null,
+    "rating": 4.1,
+    "reviews": 233,
+    "ages": "8+",
+    "pieces": 150,
+    "itemNumber": "76934",
+    "vipPoints": 19,
+    "images": [
+      "/placeholder.svg?height=400&width=400&text=LEGO+Product"
+    ],
+    "description": "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    "features": [],
+    "inStock": true,
+    "puzzleImage": "/placeholder.svg?height=400&width=400&text=LEGO+Product",
+    "puzzleTimeLimit": 300,
+    "puzzleDiscount": 70,
+    "categories": [
+      "novos"
+    ]
+  }
+}

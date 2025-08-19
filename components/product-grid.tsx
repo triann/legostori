@@ -188,18 +188,6 @@ export function ProductGrid() {
     setCurrentSlide((prev) => (prev - 1 + products.length) % products.length)
   }
 
-  const scrollCategoriesLeft = () => {
-    if (categoriesScrollRef.current) {
-      categoriesScrollRef.current.scrollBy({ left: -200, behavior: "smooth" })
-    }
-  }
-
-  const scrollCategoriesRight = () => {
-    if (categoriesScrollRef.current) {
-      categoriesScrollRef.current.scrollBy({ left: 200, behavior: "smooth" })
-    }
-  }
-
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 md:py-12">
       {/* Category navigation */}
@@ -210,55 +198,33 @@ export function ProductGrid() {
           <span className="text-gray-500 text-sm md:text-base whitespace-nowrap">Idade</span>
         </div>
 
-        <div className="relative">
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white z-10 w-8 h-8"
-            onClick={scrollCategoriesLeft}
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </Button>
-
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white z-10 w-8 h-8"
-            onClick={scrollCategoriesRight}
-          >
-            <ChevronRight className="w-4 h-4" />
-          </Button>
-
-          <div className="mx-8">
-            <div
-              ref={categoriesScrollRef}
-              className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide pb-2"
-              style={{
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
-                scrollBehavior: "smooth",
-              }}
-            >
-              {categories.map((category, index) => (
-                <Link key={index} href={category.href}>
-                  <Card
-                    className={`cursor-pointer hover:opacity-90 transition-opacity flex-shrink-0 w-24 md:w-32 relative overflow-hidden p-0 border-0`}
-                  >
-                    <div className="w-full" style={{ aspectRatio: "5/7" }}>
-                      <img
-                        src={category.image || "/placeholder.svg"}
-                        alt={category.name}
-                        className="w-full h-full object-contain bg-gray-100"
-                      />
-                    </div>
-                    <div className="absolute top-2 left-0 right-0 text-center">
-                      <p className="text-white text-xs md:text-sm font-semibold drop-shadow-lg">{category.name}</p>
-                    </div>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          </div>
+        <div
+          ref={categoriesScrollRef}
+          className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide pb-2"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            scrollBehavior: "smooth",
+          }}
+        >
+          {categories.map((category, index) => (
+            <Link key={index} href={category.href}>
+              <Card
+                className={`cursor-pointer hover:opacity-90 transition-opacity flex-shrink-0 w-24 md:w-32 relative overflow-hidden p-0 border-0`}
+              >
+                <div className="w-full" style={{ aspectRatio: "5/7" }}>
+                  <img
+                    src={category.image || "/placeholder.svg"}
+                    alt={category.name}
+                    className="w-full h-full object-contain bg-gray-100"
+                  />
+                </div>
+                <div className="absolute top-2 left-0 right-0 text-center">
+                  <p className="text-white text-xs md:text-sm font-semibold drop-shadow-lg">{category.name}</p>
+                </div>
+              </Card>
+            </Link>
+          ))}
         </div>
       </div>
 
