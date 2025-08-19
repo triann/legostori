@@ -39,11 +39,16 @@ export default function OfertasPage() {
       <Header />
       <div className="max-w-7xl mx-auto px-4 py-12">
         <h1 className="text-3xl font-bold text-center mb-8">Ofertas Especiais</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+        <div className="mb-6">
+          <p className="text-gray-600">Exibindo {ofertasProducts.length} Produtos</p>
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {ofertasProducts.map((product) => (
             <Card key={product.id} className="group cursor-pointer hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="relative mb-6">
+              <CardContent className="p-3 md:p-6">
+                <div className="relative mb-4 md:mb-6">
                   <a href={product.href}>
                     <img
                       src={product.image || "/placeholder.svg"}
@@ -59,8 +64,8 @@ export default function OfertasPage() {
                     -{product.discount}
                   </span>
                 </div>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                <div className="space-y-2 md:space-y-3">
+                  <div className="flex items-center gap-1 md:gap-2 text-xs md:text-sm text-gray-600">
                     <span>{product.ages}</span>
                     <span>•</span>
                     <span>{product.pieces} pcs</span>
@@ -71,15 +76,17 @@ export default function OfertasPage() {
                     </div>
                   </div>
                   <a href={product.href}>
-                    <h3 className="font-semibold text-xl hover:text-blue-600">{product.name}</h3>
+                    <h3 className="font-semibold text-sm md:text-xl hover:text-blue-600 line-clamp-2">
+                      {product.name}
+                    </h3>
                   </a>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-2xl">{product.price}</span>
+                    <span className="font-bold text-lg md:text-2xl">{product.price}</span>
                     {product.originalPrice && (
-                      <span className="text-gray-500 line-through text-sm">{product.originalPrice}</span>
+                      <span className="text-gray-500 line-through text-xs md:text-sm">{product.originalPrice}</span>
                     )}
                   </div>
-                  <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full">
+                  <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full text-xs md:text-sm py-2">
                     Adicionar à sacola
                   </Button>
                 </div>
