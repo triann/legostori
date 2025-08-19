@@ -15,6 +15,9 @@ export function Header() {
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false)
   const [searchResults, setSearchResults] = useState<any[]>([])
   const [showSearchResults, setShowSearchResults] = useState(false)
+  const [sidebarSearchQuery, setSidebarSearchQuery] = useState("")
+  const [sidebarSearchResults, setSidebarSearchResults] = useState<any[]>([])
+  const [showSidebarSearchResults, setShowSidebarSearchResults] = useState(false)
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -34,6 +37,17 @@ export function Header() {
     console.log("Search results:", results)
   }
 
+  const performSidebarSearch = (query: string) => {
+    const results = Object.values(products).filter(
+      (product: any) =>
+        product.name.toLowerCase().includes(query.toLowerCase()) ||
+        product.description.toLowerCase().includes(query.toLowerCase()),
+    )
+    setSidebarSearchResults(results)
+    setShowSidebarSearchResults(true)
+    console.log("Sidebar search results:", results)
+  }
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setSearchQuery(value)
@@ -43,6 +57,18 @@ export function Header() {
     } else {
       setShowSearchResults(false)
       setSearchResults([])
+    }
+  }
+
+  const handleSidebarSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setSidebarSearchQuery(value)
+
+    if (value.trim().length >= 2) {
+      performSidebarSearch(value)
+    } else {
+      setShowSidebarSearchResults(false)
+      setSidebarSearchResults([])
     }
   }
 
@@ -233,13 +259,6 @@ export function Header() {
         </div>
       </header>
 
-      {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-10 z-40 md:hidden"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
-
       <div
         className={`fixed top-0 left-0 h-full w-80 bg-yellow-400 z-50 transform transition-transform duration-300 ease-in-out md:hidden border-r-4 border-red-600 ${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
@@ -286,15 +305,51 @@ export function Header() {
           </nav>
 
           <div className="mt-8">
-            <form onSubmit={handleSearch} className="relative">
+            <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-4 h-4" />
               <Input
                 placeholder="Buscar produtos..."
                 className="pl-10 w-full bg-white border-2 border-black rounded-lg"
-                value={searchQuery}
-                onChange={handleSearchChange}
+                value={sidebarSearchQuery}
+                onChange={handleSidebarSearchChange}
               />
-            </form>
+
+              {showSidebarSearchResults && (
+                <div className="absolute top-full left-0 right-0 bg-white border-2 border-black rounded-b-lg shadow-lg max-h-64 overflow-y-auto z-50 mt-1">
+                  {sidebarSearchResults.length > 0 ? (
+                    <div className="p-2">
+                      <div className="text-sm text-gray-600 mb-2 px-2">
+                        {sidebarSearchResults.length} produto(s) encontrado(s)
+                      </div>
+                      {sidebarSearchResults.map((product) => (
+                        <Link
+                          key={product.id}
+                          href={`/product/${product.id}`}
+                          className="flex items-center gap-3 p-2 hover:bg-gray-100 rounded"
+                          onClick={() => {
+                            setShowSidebarSearchResults(false)
+                            setSidebarSearchQuery("")
+                            setIsMobileMenuOpen(false)
+                          }}
+                        >
+                          <img
+                            src={product.images[0] || "/placeholder.svg"}
+                            alt={product.name}
+                            className="w-10 h-10 object-cover rounded"
+                          />
+                          <div className="flex-1">
+                            <div className="font-medium text-sm text-black">{product.name}</div>
+                            <div className="text-sm text-gray-600">R$ {product.price.toFixed(2).replace(".", ",")}</div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="p-4 text-center text-gray-500 text-sm">Nenhum produto encontrado</div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
