@@ -9,12 +9,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Logo and location */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2 md:gap-8">
-              <img
-                src="https://legobrasil.vtexassets.com/assets/vtex/assets-builder/legobrasil.dup-template/1.28.0/logo___40c43ea8a6afef0f36be240072a0e00d.png"
-                alt="LEGO"
-                className="h-8 md:h-10 w-auto"
-              />
+            <img src="https://legobrasil.vtexassets.com/assets/vtex/assets-builder/legobrasil.dup-template/1.28.0/logo___40c43ea8a6afef0f36be240072a0e00d.png" alt="LEGO Logo" className="h-12 w-auto"></img>
             <div className="flex items-center gap-2 text-sm">
               <span>📍</span>
               <span>Brasil</span>
