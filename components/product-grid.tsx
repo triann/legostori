@@ -37,7 +37,7 @@ const categories = [
     name: "Minecraft",
     color: "bg-blue-600",
     image:
-      "https://www.lego.com/cdn/cs/set/assets/bltb94e6c3b7b65ad09/minecraft-characters-steve.jpg?fit=crop&format=jpg&quality=80&width=800&height=426&dpr=1",
+      "https://i.pinimg.com/474x/58/17/13/581713909e52b3e0445de19232b0bf02.jpg",
     href: "/categoria/minecraft",
   }, // adicionando navegação
   {
