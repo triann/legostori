@@ -6,10 +6,11 @@ import time
 from urllib.parse import urljoin
 import sys
 import random
+import os
 
 # Configure aqui a categoria que será aplicada a todos os produtos desta execução
 # Opções: ["novos"], ["exclusivos"], ["ofertas"], ["novos", "ofertas"], etc.
-CATEGORIA_PRODUTOS = ["novos", "ofertas"]  # Altere esta linha antes de executar o script
+CATEGORIA_PRODUTOS = ["novos"]  # Altere esta linha antes de executar o script
 
 class LegoScraper:
     def __init__(self):
@@ -17,7 +18,56 @@ class LegoScraper:
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         })
-        self.product_counter = 10
+        self.control_file = "scripts/produtos_processados.json"
+        self.processed_products = self.load_processed_products()
+        self.product_counter = self.get_next_id()
+        
+    def load_processed_products(self):
+        """Carrega produtos já processados do arquivo de controle"""
+        if os.path.exists(self.control_file):
+            try:
+                with open(self.control_file, 'r', encoding='utf-8') as f:
+                    return json.load(f)
+            except Exception as e:
+                print(f"⚠️ Erro ao carregar arquivo de controle: {e}")
+                return {}
+        return {}
+    
+    def get_next_id(self):
+        """Retorna o próximo ID disponível baseado nos produtos já processados"""
+        if not self.processed_products:
+            return 10
+        
+        max_id = max([int(product["id"]) for product in self.processed_products.values()])
+        return max_id + 1
+    
+    def save_processed_products(self):
+        """Salva produtos processados no arquivo de controle"""
+        try:
+            os.makedirs(os.path.dirname(self.control_file), exist_ok=True)
+            with open(self.control_file, 'w', encoding='utf-8') as f:
+                json.dump(self.processed_products, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            print(f"⚠️ Erro ao salvar arquivo de controle: {e}")
+    
+    def check_duplicate_product(self, item_number, name):
+        """Verifica se produto já existe baseado no itemNumber"""
+        for product_id, product in self.processed_products.items():
+            if product.get("itemNumber") == item_number:
+                return product_id, product
+        return None, None
+    
+    def merge_categories(self, existing_product, new_categories):
+        """Faz merge das categorias do produto existente com as novas"""
+        existing_categories = existing_product.get("categories", [])
+        
+        # Adicionar novas categorias que não existem
+        for category in new_categories:
+            if category not in existing_categories:
+                existing_categories.append(category)
+        
+        existing_product["categories"] = existing_categories
+        return existing_product
         
     def extract_product_data(self, url):
         """Extrai dados de um produto específico"""
@@ -28,38 +78,37 @@ class LegoScraper:
             
             soup = BeautifulSoup(response.content, 'html.parser')
             
-            # Extrair nome do produto
+            # Extrair dados básicos
             name = self.extract_name(soup)
-            
-            # Extrair preços
-            price = self.extract_price(soup)
-            
-            # Extrair imagens
-            images = self.extract_images(soup, url)
-            
-            # Extrair descrição (limitada a 6 linhas)
-            description = self.extract_description(soup)
-            
-            # Extrair número de peças
-            pieces = self.extract_pieces(soup)
-            
-            # Extrair idade recomendada
-            age = self.extract_age(soup)
-            
             item_number = self.extract_item_number(url)
             
-            vip_points = self.extract_vip_points(soup, price)
+            existing_id, existing_product = self.check_duplicate_product(item_number, name)
             
+            if existing_product:
+                print(f"🔄 Produto já existe (ID: {existing_id}): {name}")
+                print(f"   Adicionando categorias {CATEGORIA_PRODUTOS} ao produto existente")
+                
+                # Fazer merge das categorias
+                updated_product = self.merge_categories(existing_product, CATEGORIA_PRODUTOS)
+                self.processed_products[existing_id] = updated_product
+                
+                return updated_product
+            
+            # Se não existe, extrair todos os dados
+            price = self.extract_price(soup)
+            images = self.extract_images(soup, url)
+            description = self.extract_description(soup)
+            pieces = self.extract_pieces(soup)
+            age = self.extract_age(soup)
+            vip_points = self.extract_vip_points(soup, price)
             rating = round(random.uniform(4.0, 5.0), 1)
             reviews = random.randint(50, 500)
-            
-            categories = self.get_categories_input(name)
             
             product_data = {
                 "id": str(self.product_counter),
                 "name": name,
                 "price": price,
-                "originalPrice": None,  # Sempre null
+                "originalPrice": None,
                 "rating": rating,
                 "reviews": reviews,
                 "ages": age,
@@ -68,17 +117,18 @@ class LegoScraper:
                 "vipPoints": vip_points,
                 "images": images,
                 "description": description,
-                "features": [],  # Array vazio conforme solicitado
-                "inStock": True,  # Sempre em estoque
-                "puzzleImage": images[0] if images else "/placeholder.svg?height=400&width=400&text=LEGO+Product",  # Primeira imagem como puzzle
-                "puzzleTimeLimit": 300,  # Tempo limite do puzzle
-                "puzzleDiscount": 70,     # Desconto padrão do puzzle
-                "categories": categories  # Adicionada propriedade categories
+                "features": [],
+                "inStock": True,
+                "puzzleImage": images[0] if images else "/placeholder.svg?height=400&width=400&text=LEGO+Product",
+                "puzzleTimeLimit": 300,
+                "puzzleDiscount": 70,
+                "categories": CATEGORIA_PRODUTOS.copy()  # Usar cópia da lista de categorias
             }
             
+            self.processed_products[str(self.product_counter)] = product_data
             self.product_counter += 1
             
-            print(f"✓ Produto extraído: {name}")
+            print(f"✓ Novo produto adicionado: {name} (ID: {product_data['id']})")
             return product_data
             
         except Exception as e:
@@ -233,6 +283,9 @@ class LegoScraper:
         products = []
         
         print(f"Iniciando extração de {len(urls)} produtos...")
+        print(f"Categoria configurada: {CATEGORIA_PRODUTOS}")
+        print(f"Produtos já processados: {len(self.processed_products)}")
+        print(f"Próximo ID disponível: {self.product_counter}")
         
         for i, url in enumerate(urls, 1):
             print(f"\n[{i}/{len(urls)}] Processando produto...")
@@ -241,22 +294,24 @@ class LegoScraper:
             if product_data:
                 products.append(product_data)
             
-            # Delay entre requisições para não sobrecarregar o servidor
+            # Delay entre requisições
             time.sleep(2)
+        
+        self.save_processed_products()
         
         return products
     
-    def save_to_json(self, products, filename="produtos_lego.json"):
-        """Salva os produtos em arquivo JavaScript com chaves sem aspas"""
-        products_dict = {}
-        for product in products:
-            products_dict[product["id"]] = product
+    def save_to_json(self, products, filename="produtos_lego.js"):
+        """Salva TODOS os produtos processados (não apenas os novos) em arquivo JavaScript"""
+        all_products = self.processed_products
         
         with open(filename, 'w', encoding='utf-8') as f:
             f.write("// Mock product data - in a real app this would come from a database\n")
             f.write("const products = {\n")
             
-            for i, (key, product) in enumerate(products_dict.items()):
+            sorted_products = sorted(all_products.items(), key=lambda x: int(x[0]))
+            
+            for i, (key, product) in enumerate(sorted_products):
                 f.write(f'  "{key}": {{\n')
                 f.write(f'    id: "{product["id"]}",\n')
                 f.write(f'    name: "{product["name"]}",\n')
@@ -275,17 +330,19 @@ class LegoScraper:
                 f.write(f'    puzzleImage: "{product["puzzleImage"]}",\n')
                 f.write(f'    puzzleTimeLimit: {product["puzzleTimeLimit"]},\n')
                 f.write(f'    puzzleDiscount: {product["puzzleDiscount"]},\n')
-                f.write(f'    categories: {json.dumps(product["categories"])}\n')  # Adicionada linha categories
+                f.write(f'    categories: {json.dumps(product["categories"])}\n')
                 
-                # Adicionar vírgula se não for o último item
-                if i < len(products_dict) - 1:
+                if i < len(sorted_products) - 1:
                     f.write('  },\n')
                 else:
                     f.write('  }\n')
             
             f.write('};\n')
         
-        print(f"\n✓ {len(products)} produtos salvos em {filename}")
+        print(f"\n✓ {len(all_products)} produtos totais salvos em {filename}")
+        print(f"📊 Resumo da execução:")
+        print(f"   - Produtos processados nesta execução: {len(products)}")
+        print(f"   - Total de produtos no sistema: {len(all_products)}")
 
     def extract_item_number(self, url):
         """Extrai o número do item da URL"""
@@ -320,15 +377,12 @@ class LegoScraper:
         return CATEGORIA_PRODUTOS
 
 def main():
-    # URLs de exemplo - substitua pelas URLs reais
     urls = []
     
-    # Tentar ler URLs do arquivo urls.txt
     try:
         with open('scripts/urls.txt', 'r', encoding='utf-8') as f:
             for line in f:
                 line = line.strip()
-                # Ignorar linhas vazias e comentários
                 if line and not line.startswith('#'):
                     urls.append(line)
         print(f"✓ {len(urls)} URLs carregadas do arquivo urls.txt")
@@ -344,7 +398,6 @@ def main():
         print("❌ Nenhuma URL válida encontrada no arquivo urls.txt")
         return
     
-    # Se URLs foram passadas como argumentos, usar elas ao invés do arquivo
     if len(sys.argv) > 1:
         urls = sys.argv[1:]
         print(f"✓ Usando {len(urls)} URLs dos argumentos da linha de comando")
@@ -354,7 +407,7 @@ def main():
     
     if products:
         scraper.save_to_json(products)
-        print(f"\n🎉 Extração concluída! {len(products)} produtos processados.")
+        print(f"\n🎉 Extração concluída!")
     else:
         print("\n❌ Nenhum produto foi extraído com sucesso.")
 

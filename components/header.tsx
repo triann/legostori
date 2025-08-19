@@ -107,30 +107,71 @@ export function Header() {
               </Button>
             </div>
           </div>
-
-          {isMobileMenuOpen && (
-            <div className="md:hidden bg-yellow-400 border-t border-yellow-500 py-4">
-              <nav className="flex flex-col gap-2">
-                <Link href="/categoria/novos" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start text-black font-semibold hover:bg-yellow-300">
-                    NOVOS
-                  </Button>
-                </Link>
-                <Link href="/categoria/exclusivos" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start text-black font-semibold hover:bg-yellow-300">
-                    EXCLUSIVOS
-                  </Button>
-                </Link>
-                <Link href="/categoria/ofertas" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start text-black font-semibold hover:bg-yellow-300">
-                    OFERTAS
-                  </Button>
-                </Link>
-              </nav>
-            </div>
-          )}
         </div>
       </header>
+
+      {/* Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-full w-80 bg-white z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
+          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="p-4">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-bold text-black">MENU</h2>
+            <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(false)} className="text-black">
+              <X className="w-5 h-5" />
+            </Button>
+          </div>
+
+          <nav className="flex flex-col gap-4">
+            <Link href="/categoria/novos" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-black font-semibold hover:bg-gray-100 text-lg py-6"
+              >
+                NOVOS
+              </Button>
+            </Link>
+            <Link href="/categoria/exclusivos" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-black font-semibold hover:bg-gray-100 text-lg py-6"
+              >
+                EXCLUSIVOS
+              </Button>
+            </Link>
+            <Link href="/categoria/ofertas" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-black font-semibold hover:bg-gray-100 text-lg py-6"
+              >
+                OFERTAS
+              </Button>
+            </Link>
+          </nav>
+
+          <div className="mt-8">
+            <form onSubmit={handleSearch} className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-4 h-4" />
+              <Input
+                placeholder="Buscar produtos..."
+                className="pl-10 w-full bg-gray-50 border-gray-300"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </form>
+          </div>
+        </div>
+      </div>
     </>
   )
 }
