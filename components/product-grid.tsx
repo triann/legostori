@@ -8,11 +8,11 @@ import Link from "next/link"
 
 const categories = [
   {
-    name: "Novos",
+    name: "Todos os Legos",
     color: "bg-amber-600",
     image:
       "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/4feeb981-fba7-46b5-8b9d-72991831c64d___433bd283e0146251ce864d0b90e9039b.jpg",
-    href: "/categoria/novos", // adicionando navegação para página específica
+    href: "/categoria/todos", // adicionando navegação para página específica
   },
   {
     name: "Maletas",

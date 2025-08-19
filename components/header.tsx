@@ -115,9 +115,9 @@ export function Header() {
               </Button>
 
               <nav className="hidden md:flex items-center gap-6">
-                <Link href="/categoria/novos">
+                <Link href="/categoria/todos">
                   <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
-                    NOVOS
+                    TODOS OS LEGOS
                   </Button>
                 </Link>
                 <Link href="/categoria/classic">
@@ -323,12 +323,12 @@ export function Header() {
           </div>
 
           <nav className="flex flex-col gap-4">
-            <Link href="/categoria/novos" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link href="/categoria/todos" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant="ghost"
                 className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
               >
-                NOVOS
+                TODOS OS LEGOS
               </Button>
             </Link>
             <Link href="/categoria/harrypotter" onClick={() => setIsMobileMenuOpen(false)}>

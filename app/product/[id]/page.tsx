@@ -34,7 +34,7 @@ const products = {
       "https://legobrasil.vtexassets.com/arquivos/ids/176770/lego_40478_Disney_Mini_Castelo_da_Disney_01.jpg?v=637732735262400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 25,
-    categories: ["novos", "exclusivos"],
+    categories: ["disney"],
   },
   "2": {
     id: "2",
@@ -64,7 +64,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188946/43268.jpg?v=638731528542870000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 20,
-    categories: ["exclusivos"],
+    categories: ["disney"],
   },
   "3": {
     id: "3",
@@ -94,7 +94,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189242/40817.jpg?v=638768033043630000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 15,
-    categories: ["ofertas", "novos"],
+    categories: ["icons"],
   },
   "4": {
     id: "4",
@@ -124,7 +124,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189063/21272.jpg?v=638738549970430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 15,
-    categories: ["novos"],
+    categories: ["minecraft"],
   },
   "5": {
     id: "5",
@@ -154,7 +154,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189063/21272.jpg?v=638738549970430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 15,
-    categories: ["exclusivos"],
+    categories: ["speedchampions"],
   },
   "6": {
     id: "6",
@@ -184,7 +184,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188029/76443.jpg?v=638689283624800000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 15,
-    categories: ["novos"],
+    categories: ["harrypotter"],
   },
   "7": {
     id: "7",
@@ -214,7 +214,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/170220/31058_prod.jpg?v=637111671490100000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 15,
-    categories: ["ofertas"],
+    categories: ["creator"],
   },
   "8": {
     id: "8",
@@ -244,7 +244,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187552/21352.jpg?v=638621859108970000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 15,
-    categories: ["exclusivos"],
+    categories: ["disney"],
   },
   "9": {
     id: "9",
@@ -275,7 +275,7 @@ const products = {
       "https://legobrasil.vtexassets.com/arquivos/ids/184072/60367-lego-city-aviao-de-passageiros.jpg?v=638276417925400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 15,
-    categories: ["novos"],
+    categories: ["icons"],
   },
   "10": {
     id: "10",
@@ -295,7 +295,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/162852/41621_prod.jpg?v=636790186742700000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "11": {
     id: "11",
@@ -315,7 +315,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/180431/76400_Lego_Harry_Potter_Carruagem_e_Testralio_de_Hogwarts_01.jpg?v=637976600125630000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "12": {
     id: "12",
@@ -335,7 +335,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/180467/76403_Lego_Harry_Potter_O_Ministerio_da_Magia_01.jpg?v=637977279760200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "13": {
     id: "13",
@@ -355,7 +355,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/162277/75950_Prod.jpg?v=636703727023800000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "14": {
     id: "14",
@@ -375,7 +375,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/170012/75964_prod.jpg?v=637087413666270000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "15": {
     id: "15",
@@ -395,7 +395,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/171543/lego_harry_potter_rua_dos_alfeneiros_4_01.jpg?v=637357099304130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "16": {
     id: "16",
@@ -415,7 +415,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/166476/75957_prod.jpg?v=636989162165400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "17": {
     id: "17",
@@ -435,7 +435,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186016/76432.jpg?v=638443147311000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "18": {
     id: "18",
@@ -455,7 +455,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/162292/75953_detail5.jpg?v=636703796861300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "19": {
     id: "19",
@@ -475,7 +475,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/173837/lego_76386_harry_potter_hogwarts_erro_de_pocao_de_polissuco_01.jpg?v=637606010549370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "20": {
     id: "20",
@@ -495,7 +495,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/171551/lego_harry_potter_a_torre_de_astronomia_de_hogwarts_01.jpg?v=637357111117930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "21": {
     id: "21",
@@ -515,7 +515,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/171941/lego_harry_potter_75979_hedwig_01.jpg?v=637375236955900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "22": {
     id: "22",
@@ -535,7 +535,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/162745/41615_prod.jpg?v=636778176805330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "23": {
     id: "23",
@@ -555,7 +555,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/172315/lego_75978_harry_potter_o_beco_diagonal_01.jpg?v=637441594302230000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "24": {
     id: "24",
@@ -575,7 +575,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/180729/76405_Lego_Harry_Potter_Hogwarts_Express_Edicao_de_Colecionador_01.jpg?v=637987609257470000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "25": {
     id: "25",
@@ -595,7 +595,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182935/76421-lego-harry-potter-dobby-elfo-domestico.jpg?v=638199429000070000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "26": {
     id: "26",
@@ -615,7 +615,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181611/854198_prod.jpg?v=638065377419870000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "27": {
     id: "27",
@@ -635,7 +635,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186598/76435.jpg?v=638514073083930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "28": {
     id: "28",
@@ -655,7 +655,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186044/76425.jpg?v=638443155131000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "29": {
     id: "29",
@@ -675,7 +675,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186029/76428.jpg?v=638443151396500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "30": {
     id: "30",
@@ -695,7 +695,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186051/76424.jpg?v=638443157216730000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "31": {
     id: "31",
@@ -715,7 +715,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188109/76441.jpg?v=638693667005600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "32": {
     id: "32",
@@ -735,7 +735,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188020/76446.jpg?v=638689277449870000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "33": {
     id: "33",
@@ -755,7 +755,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188116/76442.jpg?v=638693668385400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "34": {
     id: "34",
@@ -775,7 +775,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189584/76458-lego-harry-potter-familia-testralio.jpg?v=638829181488400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "35": {
     id: "35",
@@ -795,7 +795,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191085/40802-LEGO-harry-potter-luna-lovegood-testralio -4-.jpg?v=638901240689830000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "36": {
     id: "36",
@@ -815,7 +815,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191079/40791-lego-harry-potter-figuras-do-calice-de-fogo -5-.jpg?v=638901238863030000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "37": {
     id: "37",
@@ -835,7 +835,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191179/76457-lego-harry-potter-vila-de-hogsmeade-edicao-de-colecionador -9-.jpg?v=638906062919500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "38": {
     id: "38",
@@ -855,7 +855,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191130/76456-lego-harry-potter-calendario-do-advento-2025--1-.jpg?v=638901270777700000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "39": {
     id: "39",
@@ -875,7 +875,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186590/76433.jpg?v=638514071660170000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "40": {
     id: "40",
@@ -895,7 +895,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186576/76427.jpg?v=638514025832900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "41": {
     id: "41",
@@ -915,7 +915,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186606/76439.jpg?v=638514074560430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "42": {
     id: "42",
@@ -935,7 +935,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186037/76426.jpg?v=638443153302330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "43": {
     id: "43",
@@ -955,7 +955,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186525/76440.jpg?v=638507864552000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "44": {
     id: "44",
@@ -975,7 +975,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/175457/lego_76391_harry_potter_icones_de_hogwarts_edicao_de_colecionador_01.jpg?v=637649039177770000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "45": {
     id: "45",
@@ -995,7 +995,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188138/76453.jpg?v=638693673023270000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "46": {
     id: "46",
@@ -1015,7 +1015,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181610/854155_prod.jpg?v=638065376900230000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "47": {
     id: "47",
@@ -1035,7 +1035,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186022/76430.jpg?v=638443149657670000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "48": {
     id: "48",
@@ -1055,7 +1055,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185923/76429.jpg?v=638442974946000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "49": {
     id: "49",
@@ -1075,7 +1075,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188131/76447.jpg?v=638693671601300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "50": {
     id: "50",
@@ -1095,7 +1095,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187513/76437.jpg?v=638618521767400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "51": {
     id: "51",
@@ -1115,7 +1115,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188122/76444.jpg?v=638693669556600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "52": {
     id: "52",
@@ -1135,7 +1135,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186514/76434.jpg?v=638507854710200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "53": {
     id: "53",
@@ -1155,7 +1155,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182921/76423-lego-harry-potter-expresso-de-hogwarts-estacao-hogsmeade.jpg?v=638199415731300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "54": {
     id: "54",
@@ -1175,7 +1175,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186583/76431.jpg?v=638514060629700000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "55": {
     id: "55",
@@ -1195,7 +1195,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/170103/71043_prod.jpg?v=637104782019130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "56": {
     id: "56",
@@ -1215,7 +1215,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184094/76417-lego-harry-potter-gringotes-banco-dos-bruxos-edicao-de-colecionador.jpg?v=638278919322130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "57": {
     id: "57",
@@ -1235,7 +1235,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184076/76419-lego-harry-potter-castelo-e-terreno-de-hogwarts.jpg?v=638278913234270000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "58": {
     id: "58",
@@ -1255,7 +1255,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189722/76448-lego-harry-potter-fawkes-fenix-dumbledore.jpg?v=638832675667830000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "59": {
     id: "59",
@@ -1275,7 +1275,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189728/76449-lego-harry-potter-livro-monstruoso-dos-monstros.jpg?v=638832677091230000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "60": {
     id: "60",
@@ -1295,7 +1295,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189741/76452-lego-harry-potter-artigos-para-quadribol-sorveteira.jpg?v=638832679487530000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "61": {
     id: "61",
@@ -1315,7 +1315,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189591/76450-lego-harry-potter-aparador-de-livros-expresso-hogwarts.jpg?v=638829183282000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "62": {
     id: "62",
@@ -1335,7 +1335,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189713/76445-lego-harry-potter-castelo-hogwarts-aula-herbologia.jpg?v=638832673956700000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "63": {
     id: "63",
@@ -1355,7 +1355,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189551/76454-lego-harry-potter-castelo-hogwarts-torre-central.jpg?v=638829172043600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["harrypotter"]
+    categories: ["harrypotter", "todos"]
   },
   "64": {
     id: "64",
@@ -1375,7 +1375,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163360/41160_prod.jpg?v=636836853982330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "65": {
     id: "65",
@@ -1395,7 +1395,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/161590/41153_prod.jpg?v=636626037355370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "66": {
     id: "66",
@@ -1415,7 +1415,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/176858/lego_43202_Disney_Princess_A_Casa_dos_Madrigal_01.jpg?v=637732735841000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "67": {
     id: "67",
@@ -1435,7 +1435,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/180422/43204_Lego_Disney_Princess_Castelo_Divertido_de_Anna_e_Olaf_01.jpg?v=637975779822870000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "68": {
     id: "68",
@@ -1455,7 +1455,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181488/10777_prod.jpg?v=638059524507930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "69": {
     id: "69",
@@ -1475,7 +1475,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/158299/10597_prod.jpg?v=635721241854830000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "70": {
     id: "70",
@@ -1495,7 +1495,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182825/43213-lego-disney-livro-do-conto-da-pequena-sereia--5-.jpg?v=638192548534000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "71": {
     id: "71",
@@ -1515,7 +1515,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/161719/41156_Prod.jpg?v=636646703131870000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "72": {
     id: "72",
@@ -1535,7 +1535,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184920/43238.jpg?v=638394749545470000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "73": {
     id: "73",
@@ -1555,7 +1555,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191135/43273-LEGO-Disney-calendario-do-advento--1-.jpg?v=638901271372930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "74": {
     id: "74",
@@ -1575,7 +1575,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184927/43233.jpg?v=638394751700400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "75": {
     id: "75",
@@ -1595,7 +1595,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188096/43261.jpg?v=638693663716870000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "76": {
     id: "76",
@@ -1615,7 +1615,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182862/43221-lego-disney-100-anos-icones-animacoes-disney.jpg?v=638199278002500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "77": {
     id: "77",
@@ -1635,7 +1635,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188955/43262.jpg?v=638731617996130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "78": {
     id: "78",
@@ -1655,7 +1655,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182791/43225-lego-disney-reino-subaquatico-da-pequena-sereia.jpg?v=638179442665100000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "79": {
     id: "79",
@@ -1675,7 +1675,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186204/43248.jpg?v=638482028285070000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "80": {
     id: "80",
@@ -1695,7 +1695,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186432/43251.jpg?v=638507781089800000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "81": {
     id: "81",
@@ -1715,7 +1715,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186449/43254.jpg?v=638507829972270000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "82": {
     id: "82",
@@ -1735,7 +1735,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187742/854287.jpg?v=638647002133070000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "83": {
     id: "83",
@@ -1755,7 +1755,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186411/43240.jpg?v=638507775738300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "84": {
     id: "84",
@@ -1775,7 +1775,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182876/43229-lego-disney-bau-de-tesouro-da-ariel--1-.jpg?v=638199288436070000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "85": {
     id: "85",
@@ -1795,7 +1795,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184334/43224-lego-disney-castelo-do-rei-magnifico.jpg?v=638334349832130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["disney"]
+    categories: ["disney", "todos"]
   },
   "86": {
     id: "86",
@@ -1815,7 +1815,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/161561/10876_prod.jpg?v=636621665734900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "87": {
     id: "87",
@@ -1835,7 +1835,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181696/10995_prod.jpg?v=638083866576730000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "88": {
     id: "88",
@@ -1855,7 +1855,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163447/76133_prod.jpg?v=636837769148870000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "89": {
     id: "89",
@@ -1875,7 +1875,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/177579/10784_Prod.jpg?v=637783069211530000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "90": {
     id: "90",
@@ -1895,7 +1895,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186619/10424.jpg?v=638514850631430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "91": {
     id: "91",
@@ -1915,7 +1915,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185152/76275.jpg?v=638400828870330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "92": {
     id: "92",
@@ -1935,7 +1935,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183503/76261-lego-marvel-batalha-final-do-homem-aranha--4-.jpg?v=638240935157000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "93": {
     id: "93",
@@ -1955,7 +1955,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182318/10789-lego-super-heroes-marvel-o-carro-do-homem-aranha-e-doc-ock1.jpg?v=638126925892730000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "94": {
     id: "94",
@@ -1975,7 +1975,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186161/76284.jpg?v=638452660128130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "95": {
     id: "95",
@@ -1995,7 +1995,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184765/76279.jpg?v=638393021644600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "96": {
     id: "96",
@@ -2015,7 +2015,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184761/76280.jpg?v=638392992766000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "97": {
     id: "97",
@@ -2035,7 +2035,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186167/76298.jpg?v=638452661467170000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "98": {
     id: "98",
@@ -2055,7 +2055,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184747/76285.jpg?v=638392974725930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "99": {
     id: "99",
@@ -2075,7 +2075,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184777/76276.jpg?v=638393028742200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "100": {
     id: "100",
@@ -2095,7 +2095,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187108/854290.jpg?v=638530415090570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "101": {
     id: "101",
@@ -2115,7 +2115,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182180/Miles_Morales_01.jpg?v=638103531285400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "102": {
     id: "102",
@@ -2135,7 +2135,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187114/854292.jpg?v=638530416500370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "103": {
     id: "103",
@@ -2155,7 +2155,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/179867/76212_Lego_Super_Heroes_Marvel_.Laboratorio_de_Shuri_01.jpg?v=637956637869100000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "104": {
     id: "104",
@@ -2175,7 +2175,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185297/10792.jpg?v=638436201806970000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "105": {
     id: "105",
@@ -2195,7 +2195,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/175517/lego_854077_chaveiro_spider_ham_01.jpg?v=637649039703870000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "106": {
     id: "106",
@@ -2215,7 +2215,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/173726/lego_76187_super_heroes_marvel_venom_01.jpg?v=637584255728600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "107": {
     id: "107",
@@ -2235,7 +2235,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185290/10793.jpg?v=638436184953700000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "108": {
     id: "108",
@@ -2255,7 +2255,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/170327/853950_box4.jpg?v=637116807691430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "109": {
     id: "109",
@@ -2275,7 +2275,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/164777/76125_prod.jpg?v=636908799849030000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "110": {
     id: "110",
@@ -2295,7 +2295,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/173627/lego_76178_super_heroes_marvel_daily_bugle_do_homem_aranha_01.jpg?v=637577163818270000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "111": {
     id: "111",
@@ -2315,7 +2315,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184345/76269-lego-marvel-torre-dos-vingadores.jpg?v=638350689646470000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "112": {
     id: "112",
@@ -2335,7 +2335,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185174/40670.jpg?v=638423114735930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "113": {
     id: "113",
@@ -2355,7 +2355,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189262/76323.jpg?v=638768043764470000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "114": {
     id: "114",
@@ -2375,7 +2375,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189914/76319-LEGO-Marvel-capitao-america-vs-thanos.jpg?v=638842388345370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "115": {
     id: "115",
@@ -2395,7 +2395,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189909/76320-LEGO-Marvel-homem-de-ferro-maquina-de-combate-drones-hammer.jpg?v=638842387334670000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "116": {
     id: "116",
@@ -2415,7 +2415,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189888/76325-LEGO-Marvel-vingadores-era-de-ultron-quinjet.jpg?v=638842382752600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "117": {
     id: "117",
@@ -2435,7 +2435,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189882/76326-LEGO-Marvel-busto-do-homem-aranha-de-ferro.jpg?v=638842381909230000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "118": {
     id: "118",
@@ -2455,7 +2455,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189904/76322-LEGO-Marvel-vingadores-ultimato-thor-vs-chitauri.jpg?v=638842386624230000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "119": {
     id: "119",
@@ -2475,7 +2475,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189898/76324-LEGO-Marvel-homem-aranha-oscorp.jpg?v=638842385795400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "120": {
     id: "120",
@@ -2495,7 +2495,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189919/76317-LEGO-Marvel-apartamento-do-peter-parker.jpg?v=638842389032800000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "121": {
     id: "121",
@@ -2515,7 +2515,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189852/76321-LEGO-Marvel-cena-homem-aranha-doutor-octopus-no-trem-do-metro.jpg?v=638841268710370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "122": {
     id: "122",
@@ -2535,7 +2535,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183476/76266-lego-marvel-ultimato-a-batalha-final--3-.jpg?v=638240928802130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "123": {
     id: "123",
@@ -2555,7 +2555,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184770/76278.jpg?v=638393026065900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "124": {
     id: "124",
@@ -2575,7 +2575,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182658/76254-lego-super-heroes-marvel-nave-rocket-bebe--2-.jpg?v=638151232710430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "125": {
     id: "125",
@@ -2595,7 +2595,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182626/76251-lego-super-heroes-marvel-capacete-do-senhor-das-estrelas--5-.jpg?v=638151223408430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "126": {
     id: "126",
@@ -2615,7 +2615,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187087/76293.jpg?v=638530401747830000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "127": {
     id: "127",
@@ -2635,7 +2635,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188069/11198.jpg?v=638689320050000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "128": {
     id: "128",
@@ -2655,7 +2655,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188583/11200.jpg?v=638709199130200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "129": {
     id: "129",
@@ -2675,7 +2675,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187277/76295.jpg?v=638574282439730000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "130": {
     id: "130",
@@ -2695,7 +2695,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187481/76289.jpg?v=638618510256930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "131": {
     id: "131",
@@ -2715,7 +2715,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187486/76290.jpg?v=638618511268570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "132": {
     id: "132",
@@ -2735,7 +2735,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188578/11199.jpg?v=638709196231170000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "133": {
     id: "133",
@@ -2755,7 +2755,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188870/76311.jpg?v=638709265579030000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "134": {
     id: "134",
@@ -2775,7 +2775,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187326/76286.jpg?v=638587616640170000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "135": {
     id: "135",
@@ -2795,7 +2795,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182707/76256-lego-super-heroes-marvel-figura-homem-formiga--4-.jpg?v=638169178370230000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "136": {
     id: "136",
@@ -2815,7 +2815,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182105/76245_prod.jpg?v=638088166150430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "137": {
     id: "137",
@@ -2835,7 +2835,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187083/76288.jpg?v=638530400335800000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "138": {
     id: "138",
@@ -2855,7 +2855,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188864/76310.jpg?v=638709264577770000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "139": {
     id: "139",
@@ -2875,7 +2875,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188192/76309.jpg?v=638694300742670000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "140": {
     id: "140",
@@ -2895,7 +2895,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184756/76281.jpg?v=638392982764030000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "141": {
     id: "141",
@@ -2915,7 +2915,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/172262/lego_854064_chaveiro_capita_marvel_01.jpg?v=637432328840830000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "142": {
     id: "142",
@@ -2935,7 +2935,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182182/854154_Lego_Super_Heroes_Marvel_Chaveiro_Carnage_01.jpg?v=638103546035430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "143": {
     id: "143",
@@ -2955,7 +2955,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187382/76287.jpg?v=638597839064770000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "144": {
     id: "144",
@@ -2975,7 +2975,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183493/76263-lego-marvel-hulkbuster-vs-thanos--4-.jpg?v=638240933316100000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "145": {
     id: "145",
@@ -2995,7 +2995,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187773/76292.jpg?v=638670413731070000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "146": {
     id: "146",
@@ -3015,7 +3015,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188037/76313.jpg?v=638689287939400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "147": {
     id: "147",
@@ -3035,7 +3035,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189223/76312.jpg?v=638756722040130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "148": {
     id: "148",
@@ -3055,7 +3055,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187337/76297.jpg?v=638587642427170000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "149": {
     id: "149",
@@ -3075,7 +3075,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181433/Sem-Titulo-1_0000_76210_prod.jpg?v=638055473510670000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "150": {
     id: "150",
@@ -3095,7 +3095,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184752/76282.jpg?v=638392979461630000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "151": {
     id: "151",
@@ -3115,7 +3115,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188036/76314.jpg?v=638689286669000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "152": {
     id: "152",
@@ -3135,7 +3135,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/175393/lego_76191_super_heroes_marvel_manopla_do_infinito_02.jpg?v=637649038634870000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "153": {
     id: "153",
@@ -3155,7 +3155,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187111/854291.jpg?v=638530415727700000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "154": {
     id: "154",
@@ -3175,7 +3175,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187331/76291.jpg?v=638587636857130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "155": {
     id: "155",
@@ -3195,7 +3195,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187834/40668.jpg?v=638670462370500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "156": {
     id: "156",
@@ -3215,7 +3215,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185284/10794.jpg?v=638436174248070000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "157": {
     id: "157",
@@ -3235,7 +3235,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189216/76315.jpg?v=638756719920600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "158": {
     id: "158",
@@ -3255,7 +3255,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187779/76296.jpg?v=638670414734230000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "159": {
     id: "159",
@@ -3275,7 +3275,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188858/76308.jpg?v=638709263727700000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "160": {
     id: "160",
@@ -3295,7 +3295,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187765/76294.jpg?v=638652878020130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "161": {
     id: "161",
@@ -3315,7 +3315,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184774/76277.jpg?v=638393027403000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "162": {
     id: "162",
@@ -3335,7 +3335,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187117/854294.jpg?v=638530417085070000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "163": {
     id: "163",
@@ -3355,7 +3355,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188852/76307.jpg?v=638709261296900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "164": {
     id: "164",
@@ -3375,7 +3375,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189368/76327-lego-marvel-busto-do-homem-de-ferro-mk4.jpg?v=638805356256600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "165": {
     id: "165",
@@ -3395,7 +3395,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190549/76329-LEGO-marvel-mascara-miles-morales -5-.jpg?v=638851789922700000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "166": {
     id: "166",
@@ -3415,7 +3415,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189767/76316-LEGO-Marvel-quarteto-fantastico-vs-galactus.jpg.jpg?v=638832719793300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["marvel"]
+    categories: ["marvel", "todos"]
   },
   "167": {
     id: "167",
@@ -3435,7 +3435,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184305/854243-lego-minecraft-chaveiro-steve.jpg?v=638333375667500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "168": {
     id: "168",
@@ -3455,7 +3455,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/177658/21181_Prod.jpg?v=637783118380430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "169": {
     id: "169",
@@ -3475,7 +3475,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/180101/21186_Lego_Minecraft_O_Castelo_de_Gelo_01.jpg?v=637970299935700000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "170": {
     id: "170",
@@ -3495,7 +3495,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184474/21257.jpg?v=638380872734530000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "171": {
     id: "171",
@@ -3515,7 +3515,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/180155/21190_Lego_Minecraft_A_Aldeia_Abandonada_01.jpg?v=637970486958930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "172": {
     id: "172",
@@ -3535,7 +3535,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163343/41612_Prod.jpg?v=636834183954130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "173": {
     id: "173",
@@ -3555,7 +3555,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163500/21149_prod.jpg?v=636841517332600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "174": {
     id: "174",
@@ -3575,7 +3575,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163506/21150_prod.jpg?v=636841525539570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "175": {
     id: "175",
@@ -3595,7 +3595,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/164949/21147_prod.jpg?v=636916469500000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "176": {
     id: "176",
@@ -3615,7 +3615,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/180072/21184_Lego_Minecraft_A_Padaria_01.jpg?v=637969684148130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "177": {
     id: "177",
@@ -3635,7 +3635,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186134/66779.jpg?v=638448141513930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "178": {
     id: "178",
@@ -3655,7 +3655,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/166625/21153_prod.jpg?v=637008072162700000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "179": {
     id: "179",
@@ -3675,7 +3675,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/172593/lego_21164_minecraft_o_recife_de_coral_01.jpg?v=637478886379300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "180": {
     id: "180",
@@ -3695,7 +3695,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/177649/21180_Prod.jpg?v=637783115082870000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "181": {
     id: "181",
@@ -3715,7 +3715,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163493/21148_prod.jpg?v=636841515247870000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "182": {
     id: "182",
@@ -3735,7 +3735,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/174190/lego_21172_minecraft_o_portal_em_ruinas_01.jpg?v=637631802151930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "183": {
     id: "183",
@@ -3755,7 +3755,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/177627/21177_Prod.jpg?v=637783106733430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "184": {
     id: "184",
@@ -3775,7 +3775,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/180082/21185_Lego_Minecraft_O_Portal_do_Nether_01.jpg?v=637969721166370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "185": {
     id: "185",
@@ -3795,7 +3795,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/166644/21155_prod.jpg?v=637008090963400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "186": {
     id: "186",
@@ -3815,7 +3815,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186830/21261.jpg?v=638525045933170000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "187": {
     id: "187",
@@ -3835,7 +3835,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185105/21253.jpg?v=638400799212300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "188": {
     id: "188",
@@ -3855,7 +3855,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191125/21280-LEGO-Minecraft-calendario-do-advento--1-.jpg?v=638901270398930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "189": {
     id: "189",
@@ -3875,7 +3875,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184466/21256.jpg?v=638380868654200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "190": {
     id: "190",
@@ -3895,7 +3895,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189159/21282.jpg?v=638742846317900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "191": {
     id: "191",
@@ -3915,7 +3915,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186842/21264.jpg?v=638525049621500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "192": {
     id: "192",
@@ -3935,7 +3935,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186836/21262.jpg?v=638525048440730000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "193": {
     id: "193",
@@ -3955,7 +3955,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186817/21260.jpg?v=638520644524270000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "194": {
     id: "194",
@@ -3975,7 +3975,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184459/21255.jpg?v=638380865747070000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "195": {
     id: "195",
@@ -3995,7 +3995,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188317/21269.jpg?v=638703250089100000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "196": {
     id: "196",
@@ -4015,7 +4015,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189113/21273.jpg?v=638739506675430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "197": {
     id: "197",
@@ -4035,7 +4035,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184452/21254.jpg?v=638380863325900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "198": {
     id: "198",
@@ -4055,7 +4055,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187391/21265.jpg?v=638597841750570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "199": {
     id: "199",
@@ -4075,7 +4075,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188324/21270.jpg?v=638703252296570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "200": {
     id: "200",
@@ -4095,7 +4095,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186809/21259.jpg?v=638520046331800000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "201": {
     id: "201",
@@ -4115,7 +4115,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185101/21252.jpg?v=638400798443130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "202": {
     id: "202",
@@ -4135,7 +4135,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186823/21263.jpg?v=638520645815500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "203": {
     id: "203",
@@ -4155,7 +4155,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188952/21271--1-.jpg?v=638731616434770000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "204": {
     id: "204",
@@ -4175,7 +4175,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188309/21268.jpg?v=638703247223230000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "205": {
     id: "205",
@@ -4195,7 +4195,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/177635/21178_Prod.jpg?v=637783108776370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "206": {
     id: "206",
@@ -4215,7 +4215,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189063/21272.jpg?v=638738549970430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "207": {
     id: "207",
@@ -4235,7 +4235,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187664/21281.jpg?v=638646979722470000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "208": {
     id: "208",
@@ -4255,7 +4255,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184445/21251.jpg?v=638380860620000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "209": {
     id: "209",
@@ -4275,7 +4275,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188301/21267.jpg?v=638703245705500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "210": {
     id: "210",
@@ -4295,7 +4295,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184303/854242-lego-mincraft-chaveiro-creeper.jpg?v=638333374918200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "211": {
     id: "211",
@@ -4315,7 +4315,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188591/21266.jpg?v=638709201309470000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "212": {
     id: "212",
@@ -4335,7 +4335,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190380/21276-LEGO-Minecraft-o-creeper -6-.jpg?v=638848149036900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "213": {
     id: "213",
@@ -4355,7 +4355,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190394/21274-LEGO-Minecraft-encontro-do-guardiao -6-.jpg?v=638848151851370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "214": {
     id: "214",
@@ -4375,7 +4375,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190387/21275-LEGO-Minecraft-casa-da-selva -5-.jpg?v=638848150369370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "215": {
     id: "215",
@@ -4395,7 +4395,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190372/21277-LEGO-Minecraft-a-mina-de-picaretas -7-.jpg?v=638848148548030000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "216": {
     id: "216",
@@ -4415,7 +4415,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190673/21279-LEGO-Minecraft-a-torre-enderman -6-.jpg?v=638852509020930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "217": {
     id: "217",
@@ -4435,7 +4435,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189876/21278-LEGO-Minecraft-posto-avancado-saqueador-e-devastador.jpg?v=638842381215000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["minecraft"]
+    categories: ["minecraft", "todos"]
   },
   "218": {
     id: "218",
@@ -4455,7 +4455,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189699/75411-lego-starwars-robo-darth-maul.jpg?v=638832669804600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["starwars"]
+    categories: ["starwars", "todos"]
   },
   "219": {
     id: "219",
@@ -4475,7 +4475,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/172345/lego_75318_star_wars_a_crianca_01.jpg?v=637443487347100000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["starwars"]
+    categories: ["starwars", "todos"]
   },
   "220": {
     id: "220",
@@ -4495,7 +4495,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163215/75226_prod.jpg?v=636833291155930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["starwars"]
+    categories: ["starwars", "todos"]
   },
   "221": {
     id: "221",
@@ -4515,7 +4515,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/177535/75320_Prod.jpg?v=637782962464430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["starwars"]
+    categories: ["starwars", "todos"]
   },
   "222": {
     id: "222",
@@ -4535,7 +4535,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163207/75225_prod.jpg?v=636833290034330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["starwars"]
+    categories: ["starwars", "todos"]
   },
   "223": {
     id: "223",
@@ -4555,7 +4555,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/160959/41603_detail1.jpg?v=636546545830300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["starwars"]
+    categories: ["starwars", "todos"]
   },
   "224": {
     id: "224",
@@ -4575,7 +4575,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/162849/41620_front.jpg?v=636790185068670000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["starwars"]
+    categories: ["starwars", "todos"]
   },
   "225": {
     id: "225",
@@ -4595,7 +4595,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/165031/75261_prod.jpg?v=636922294734130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["starwars"]
+    categories: ["starwars", "todos"]
   },
   "226": {
     id: "226",
@@ -4615,7 +4615,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181540/40547_prod.jpg?v=638060317069830000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["starwars"]
+    categories: ["starwars", "todos"]
   },
   "227": {
     id: "227",
@@ -4635,7 +4635,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/180799/75336_Lego_Star_Wars_Transporte_Inquisidor_Scythe_01.jpg?v=637989353557800000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["starwars"]
+    categories: ["starwars", "todos"]
   },
   "228": {
     id: "228",
@@ -4655,7 +4655,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/169987/75248_prod.jpg?v=637084933393530000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["starwars"]
+    categories: ["starwars", "todos"]
   },
   "229": {
     id: "229",
@@ -4675,7 +4675,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/170115/75181_prod.jpg?v=637104792950400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["starwars"]
+    categories: ["starwars", "todos"]
   },
   "230": {
     id: "230",
@@ -4695,7 +4695,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189295/76976.jpg?v=638768838928030000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["jurassicworld"]
+    categories: ["jurassicworld", "todos"]
   },
   "231": {
     id: "231",
@@ -4715,7 +4715,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189229/76968.jpg?v=638763521133300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["jurassicworld"]
+    categories: ["jurassicworld", "todos"]
   },
   "232": {
     id: "232",
@@ -4735,7 +4735,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/161412/75932_prod.jpg?v=636602647717330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["jurassicworld"]
+    categories: ["jurassicworld", "todos"]
   },
   "233": {
     id: "233",
@@ -4755,7 +4755,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187004/76966.jpg?v=638525163315170000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["jurassicworld"]
+    categories: ["jurassicworld", "todos"]
   },
   "234": {
     id: "234",
@@ -4775,7 +4775,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184715/76963.jpg?v=638385883003500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["jurassicworld"]
+    categories: ["jurassicworld", "todos"]
   },
   "235": {
     id: "235",
@@ -4795,7 +4795,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184723/76964_alt1.jpg?v=638385884460000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["jurassicworld"]
+    categories: ["jurassicworld", "todos"]
   },
   "236": {
     id: "236",
@@ -4815,7 +4815,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190842/854316-lego-jurassic-world-chaveiro-de-bebe-anquilossauro.jpg?v=638875052394500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["jurassicworld"]
+    categories: ["jurassicworld", "todos"]
   },
   "237": {
     id: "237",
@@ -4835,7 +4835,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189290/76973.jpg?v=638768837399770000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["jurassicworld"]
+    categories: ["jurassicworld", "todos"]
   },
   "238": {
     id: "238",
@@ -4855,7 +4855,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186718/76962.jpg?v=638515619607930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["jurassicworld"]
+    categories: ["jurassicworld", "todos"]
   },
   "239": {
     id: "239",
@@ -4875,7 +4875,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188150/76969.jpg?v=638693675710930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["jurassicworld"]
+    categories: ["jurassicworld", "todos"]
   },
   "240": {
     id: "240",
@@ -4895,7 +4895,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188145/76967.jpg?v=638693674661700000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["jurassicworld"]
+    categories: ["jurassicworld", "todos"]
   },
   "241": {
     id: "241",
@@ -4915,7 +4915,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189332/76974.jpg?v=638775847742370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["jurassicworld"]
+    categories: ["jurassicworld", "todos"]
   },
   "242": {
     id: "242",
@@ -4935,7 +4935,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189287/76970.jpg?v=638768836178370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["jurassicworld"]
+    categories: ["jurassicworld", "todos"]
   },
   "243": {
     id: "243",
@@ -4955,7 +4955,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189661/10348-lego-colecao-botanica-arvore-bonsai-vermelha.jpg?v=638832662741230000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals"]
+    categories: ["botanicals", "todos"]
   },
   "244": {
     id: "244",
@@ -4975,7 +4975,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189338/10347.jpg?v=638784305456500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals"]
+    categories: ["botanicals", "todos"]
   },
   "245": {
     id: "245",
@@ -4995,7 +4995,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187848/10343.jpg?v=638678850689570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals"]
+    categories: ["botanicals", "todos"]
   },
   "246": {
     id: "246",
@@ -5015,7 +5015,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/179332/40524_Lego_Girassois_01.jpg?v=637910922333130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals"]
+    categories: ["botanicals", "todos"]
   },
   "247": {
     id: "247",
@@ -5035,7 +5035,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187856/10344.jpg?v=638678857623330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals"]
+    categories: ["botanicals", "todos"]
   },
   "248": {
     id: "248",
@@ -5055,7 +5055,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184438/10328.jpg?v=638380830872270000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals", "icons"]
+    categories: ["botanicals", "icons", "todos"]
   },
   "249": {
     id: "249",
@@ -5075,7 +5075,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185133/40647.jpg?v=638400818849200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals"]
+    categories: ["botanicals", "todos"]
   },
   "250": {
     id: "250",
@@ -5095,7 +5095,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187658/10369.jpg?v=638646976287600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals", "icons"]
+    categories: ["botanicals", "icons", "todos"]
   },
   "251": {
     id: "251",
@@ -5115,7 +5115,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/172816/lego_10281_creator_expert_arvore_bonsai_01.jpg?v=637479611925370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals", "creator"]
+    categories: ["botanicals", "creator", "todos"]
   },
   "252": {
     id: "252",
@@ -5135,7 +5135,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184555/40725.jpg?v=638385850748300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals"]
+    categories: ["botanicals", "todos"]
   },
   "253": {
     id: "253",
@@ -5155,7 +5155,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187839/10342.jpg?v=638671182324370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals"]
+    categories: ["botanicals", "todos"]
   },
   "254": {
     id: "254",
@@ -5175,7 +5175,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185093/10329.jpg?v=638400777338070000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals", "icons"]
+    categories: ["botanicals", "icons", "todos"]
   },
   "255": {
     id: "255",
@@ -5195,7 +5195,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/178929/10309_lego_creator_expert_suculentas_01.jpg?v=637868387024830000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals", "icons"]
+    categories: ["botanicals", "icons", "todos"]
   },
   "256": {
     id: "256",
@@ -5215,7 +5215,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187652/10368.jpg?v=638646974882300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals", "icons"]
+    categories: ["botanicals", "icons", "todos"]
   },
   "257": {
     id: "257",
@@ -5235,7 +5235,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188938/10345--9-.jpg?v=638730585183130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals"]
+    categories: ["botanicals", "todos"]
   },
   "258": {
     id: "258",
@@ -5255,7 +5255,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182260/10313-lego-icons-buque-de-flores-silvestres_1.jpg?v=638119046861030000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals", "icons"]
+    categories: ["botanicals", "icons", "todos"]
   },
   "259": {
     id: "259",
@@ -5275,7 +5275,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182254/10314-lego-icons-centro-de-mesa-de-flores-secas1.jpg?v=638119045565600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals", "icons"]
+    categories: ["botanicals", "icons", "todos"]
   },
   "260": {
     id: "260",
@@ -5295,7 +5295,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190875/10372-lego-colecao-botanica-Hibisco -10-.jpg?v=638877629901270000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals"]
+    categories: ["botanicals", "todos"]
   },
   "261": {
     id: "261",
@@ -5315,7 +5315,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189670/10349-lego-colecao-botanica-plantas-felizes.jpg?v=638832664314000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals"]
+    categories: ["botanicals", "todos"]
   },
   "262": {
     id: "262",
@@ -5335,7 +5335,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/178941/10311_LEGO_Creator_Expert_Orquidea_01.jpg?v=637868434750400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals", "creator"]
+    categories: ["botanicals", "creator", "todos"]
   },
   "263": {
     id: "263",
@@ -5355,7 +5355,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183160/40646-lego-nascisos.jpg?v=638223803260570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["botanicals"]
+    categories: ["botanicals", "todos"]
   },
   "264": {
     id: "264",
@@ -5375,7 +5375,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163540/31086_front_02.jpg?v=636843008664400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "265": {
     id: "265",
@@ -5395,7 +5395,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163547/31087_prod.jpg?v=636843012601400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "266": {
     id: "266",
@@ -5415,7 +5415,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163573/31091_prod.jpg?v=636843017316500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "267": {
     id: "267",
@@ -5435,7 +5435,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163579/31092_prod.jpg?v=636843019944270000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "268": {
     id: "268",
@@ -5455,7 +5455,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/170224/31073_prod.jpg?v=637111677072670000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "269": {
     id: "269",
@@ -5475,7 +5475,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/170231/31098_prod.jpg?v=637111679602800000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "270": {
     id: "270",
@@ -5495,7 +5495,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190328/31166-LEGO-Creator-3em1-cavalo-lindo -6-.jpg?v=638847501045630000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "271": {
     id: "271",
@@ -5515,7 +5515,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190313/31168-LEGO-Creator-3em1-castelo-medieval-do-cavaleiro -11-.jpg?v=638847499927570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "272": {
     id: "272",
@@ -5535,7 +5535,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190325/31167-LEGO-Creator-3em1-mansao-mal-assombrada -2-.jpg?v=638847500551770000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "273": {
     id: "273",
@@ -5555,7 +5555,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190304/31175-LEGO-Creator-3em1-castelo-unicornio -1-.jpg?v=638847498046870000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "274": {
     id: "274",
@@ -5575,7 +5575,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189171/31172.jpg?v=638742916736170000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "275": {
     id: "275",
@@ -5595,7 +5595,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/174806/lego_40468_creator_taxi_amarelo_01.jpg?v=637649033871470000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "276": {
     id: "276",
@@ -5615,7 +5615,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185136/40650.jpg?v=638400821113330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "277": {
     id: "277",
@@ -5635,7 +5635,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184501/31147.jpg?v=638381658570130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "278": {
     id: "278",
@@ -5655,7 +5655,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188435/31169.jpg?v=638705794552200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "279": {
     id: "279",
@@ -5675,7 +5675,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188410/31163.jpg?v=638705790350530000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "280": {
     id: "280",
@@ -5695,7 +5695,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189075/31170.jpg?v=638738557699530000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "281": {
     id: "281",
@@ -5715,7 +5715,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184547/31157.jpg?v=638385848799930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "282": {
     id: "282",
@@ -5735,7 +5735,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188373/31159.jpg?v=638705785005230000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "283": {
     id: "283",
@@ -5755,7 +5755,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/172227/lego_31109_creator_3_in_1_barco_pirata_01.jpg?v=637432289425330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "284": {
     id: "284",
@@ -5775,7 +5775,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188428/31165.jpg?v=638705793334930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "285": {
     id: "285",
@@ -5795,7 +5795,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188419/31164.jpg?v=638705791847600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "286": {
     id: "286",
@@ -5815,7 +5815,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183293/31142-lego-creator-3em1-montanha-russa-espacial--2-.jpg?v=638233891824470000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "287": {
     id: "287",
@@ -5835,7 +5835,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184528/31150.jpg?v=638385846090000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "288": {
     id: "288",
@@ -5855,7 +5855,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184490/31146.jpg?v=638381655514370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "289": {
     id: "289",
@@ -5875,7 +5875,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/179321/40517_Lego_Creator_Vespa_01.jpg?v=637910756734630000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "290": {
     id: "290",
@@ -5895,7 +5895,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185019/31156.jpg?v=638394781470730000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "291": {
     id: "291",
@@ -5915,7 +5915,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/177066/31129_Prod.jpg?v=637781360739770000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "292": {
     id: "292",
@@ -5935,7 +5935,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183164/40651-lego-creator-cartao-postal-australia.jpg?v=638223804120170000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "293": {
     id: "293",
@@ -5955,7 +5955,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182389/31137-lego-creator-3em1-cachorros-adoraveis--2-.jpg?v=638127592312930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "294": {
     id: "294",
@@ -5975,7 +5975,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185025/31155.jpg?v=638394786045770000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "295": {
     id: "295",
@@ -5995,7 +5995,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/161126/10257_prod.jpg?v=636561151673330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "296": {
     id: "296",
@@ -6015,7 +6015,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/161117/10254_prod.jpg?v=636561145593170000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "297": {
     id: "297",
@@ -6035,7 +6035,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/161433/10255_prod.jpg?v=636608540120600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "298": {
     id: "298",
@@ -6055,7 +6055,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/161686/10260_detail2.jpg?v=636638983310930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "299": {
     id: "299",
@@ -6075,7 +6075,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/170152/10266_prod.jpg?v=637109137482130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "300": {
     id: "300",
@@ -6095,7 +6095,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/170051/10265_prod.jpg?v=637104585496100000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "301": {
     id: "301",
@@ -6115,7 +6115,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/177776/lego_10297_creator_expert_hotel_boutique_01.jpg?v=637789934268900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "302": {
     id: "302",
@@ -6135,7 +6135,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181515/40220_prod.jpg?v=638060303907900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "303": {
     id: "303",
@@ -6155,7 +6155,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/178624/10298_Vespa_125_01.jpg?v=637853750212300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "304": {
     id: "304",
@@ -6175,7 +6175,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/178971/10300_Maquina_do_Tempo_de_Volta_ao_Futuro_01.jpg?v=637878008251200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "305": {
     id: "305",
@@ -6195,7 +6195,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/172926/lego_10295_creator_expert_porsche_911_01.jpg?v=637486611186900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "306": {
     id: "306",
@@ -6215,7 +6215,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/172550/lego_10280_creator_expert_buque_de_flores_01.jpg?v=637478791788970000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["creator"]
+    categories: ["creator", "todos"]
   },
   "307": {
     id: "307",
@@ -6235,7 +6235,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189473/10352-LEGO-Icons-simpsons-krusty-burger.jpg?v=638827714523770000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "308": {
     id: "308",
@@ -6255,7 +6255,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181247/Sem-Titulo-1_0002_10308_Prod.jpg?v=638011149938700000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "309": {
     id: "309",
@@ -6275,7 +6275,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184218/10321-lego-icons-corvette.jpg?v=638300582594030000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "310": {
     id: "310",
@@ -6295,7 +6295,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187545/10340.jpg?v=638621857948030000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "311": {
     id: "311",
@@ -6315,7 +6315,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182594/10317-lego-icons-land-rover-defender-90-classico--7-.jpg?v=638151168078430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "312": {
     id: "312",
@@ -6335,7 +6335,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182302/10316-lego-icons-o-senhor-dos-aneis-rivendell11.jpg?v=638121776606200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "313": {
     id: "313",
@@ -6355,7 +6355,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181628/WhatsApp-Image-2022-12-26-at-15.06.03.jpg?v=638076748342430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "314": {
     id: "314",
@@ -6375,7 +6375,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/179758/10305_Lego_Creator_Expert_Castelo_dos_Cavaleiros_do-Leao_01.jpg?v=637949718144430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "315": {
     id: "315",
@@ -6395,7 +6395,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185200/10330.jpg?v=638424969949830000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "316": {
     id: "316",
@@ -6415,7 +6415,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/176684/lego_10294_Creator_Expert_Titanic_01.jpg?v=637703369354030000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "317": {
     id: "317",
@@ -6435,7 +6435,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190903/10358-LEGO-Icons-transformers-soundwave -12-.jpg?v=638883553804730000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "318": {
     id: "318",
@@ -6455,7 +6455,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190469/10375-LEGO-Icons-como-treinar-o-seu-dragao-banguela.jpg?v=638851577420670000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "319": {
     id: "319",
@@ -6475,7 +6475,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/173999/lego_10289_creator_expert_ave_do_paraiso_01.jpg?v=637630908141900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "320": {
     id: "320",
@@ -6495,7 +6495,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185188/10327.jpg?v=638423117101000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "321": {
     id: "321",
@@ -6515,7 +6515,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188288/10355.jpg?v=638703055718570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "322": {
     id: "322",
@@ -6535,7 +6535,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187873/10359.jpg?v=638682511528930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "323": {
     id: "323",
@@ -6555,7 +6555,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187526/10391.jpg?v=638619337001270000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "324": {
     id: "324",
@@ -6575,7 +6575,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/179924/10306_Lego_Icons_Atari_2600_01.jpg?v=637962760275770000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "325": {
     id: "325",
@@ -6595,7 +6595,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182996/10323-lego-icons-arcade-pac-man--8-.jpg?v=638212443034300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "326": {
     id: "326",
@@ -6615,7 +6615,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/179502/10302_Lego_Icons_Optimus_Prime_01.jpg?v=637926433552970000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "327": {
     id: "327",
@@ -6635,7 +6635,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185858/10332.jpg?v=638442284447870000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "328": {
     id: "328",
@@ -6655,7 +6655,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187538/10370.jpg?v=638621856464470000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "329": {
     id: "329",
@@ -6675,7 +6675,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184255/10325-lego-icons-alojamento-alpino.jpg?v=638325616095070000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "330": {
     id: "330",
@@ -6695,7 +6695,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183210/10315-lego-icons-jardim-tranquilo--4-.jpg?v=638231519455800000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "331": {
     id: "331",
@@ -6715,7 +6715,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185183/10331--2-.jpg?v=638423116377870000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "332": {
     id: "332",
@@ -6735,7 +6735,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185089/10326.jpg?v=638400776404430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "333": {
     id: "333",
@@ -6755,7 +6755,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187144/10337.jpg?v=638542613769900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "334": {
     id: "334",
@@ -6775,7 +6775,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187229/10338.jpg?v=638574245080500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "335": {
     id: "335",
@@ -6795,7 +6795,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181445/Sem-Titulo-1_0005_10307_prod.jpg?v=638055477679570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "336": {
     id: "336",
@@ -6815,7 +6815,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189041/10362.jpg?v=638738467569100000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "337": {
     id: "337",
@@ -6835,7 +6835,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184061/10318-lego-icons-concordia.jpg?v=638276380479330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "338": {
     id: "338",
@@ -6855,7 +6855,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187608/10339.jpg?v=638635883365600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "339": {
     id: "339",
@@ -6875,7 +6875,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186308/10341.jpg?v=638496673852300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "340": {
     id: "340",
@@ -6895,7 +6895,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186553/10333.jpg?v=638513258808130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "341": {
     id: "341",
@@ -6915,7 +6915,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186564/10334.jpg?v=638513262247070000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "342": {
     id: "342",
@@ -6935,7 +6935,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187933/10353.jpg?v=638685139556100000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "343": {
     id: "343",
@@ -6955,7 +6955,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187864/10363.jpg?v=638682494034700000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "344": {
     id: "344",
@@ -6975,7 +6975,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188072/10350.jpg?v=638689325426170000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "345": {
     id: "345",
@@ -6995,7 +6995,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187787/10335.jpg?v=638670416560130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "346": {
     id: "346",
@@ -7015,7 +7015,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189347/10354.jpg?v=638793159639470000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "347": {
     id: "347",
@@ -7035,7 +7035,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190796/10357-LEGO-Icons-shelby-cobra-427-sc -11-.jpg?v=638871627426670000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "348": {
     id: "348",
@@ -7055,7 +7055,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190480/10367-LEGO-Icons-cantinho-do-livro-senhor-dos-aneis-balrog-2.png?v=638851711617030000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "349": {
     id: "349",
@@ -7075,7 +7075,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189512/10351-LEGO-Icons-sharlock-holmes-cantinho-do-livro.jpg?v=638828282501370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "350": {
     id: "350",
@@ -7095,7 +7095,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/164954/21314_prod.jpg?v=636916475719230000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "351": {
     id: "351",
@@ -7115,7 +7115,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/162822/21311_prod.jpg?v=636790071609200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "352": {
     id: "352",
@@ -7135,7 +7135,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/161657/21313_detail2.jpg?v=636637087711370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "353": {
     id: "353",
@@ -7155,7 +7155,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/164823/21315_front_01.jpg?v=636908816209500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "354": {
     id: "354",
@@ -7175,7 +7175,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/173552/lego_21326_ideas_o_ursinho_pooh_01.jpg?v=637557570687570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "355": {
     id: "355",
@@ -7195,7 +7195,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/177013/lego_21330_ideas_esqueceram_de_mim_01.jpg?v=637757951054000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "356": {
     id: "356",
@@ -7215,7 +7215,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/161153/21309_prod.jpg?v=636561169216530000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "357": {
     id: "357",
@@ -7235,7 +7235,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/172283/lego_21323_ideas_grand_piano_01.jpg?v=637432348917900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "358": {
     id: "358",
@@ -7255,7 +7255,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183175/21341-lego-ideas-disney-abracadabra-chale-das-irmas-sanderson.jpg?v=638224520780000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "359": {
     id: "359",
@@ -7275,7 +7275,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189804/21358-LEGO-Ideas-maquina-de-venda-automatica-de-minifiguras.jpg?v=638839725593000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "360": {
     id: "360",
@@ -7295,7 +7295,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189503/21357-LEGO-Ideas-disney-pixar-luxo-jr.jpg?v=638828280324930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "361": {
     id: "361",
@@ -7315,7 +7315,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184382/21344-lego-ideas-trem-expresso-do-oriente.jpg?v=638367023328470000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "362": {
     id: "362",
@@ -7335,7 +7335,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186178/21348.jpg?v=638466431767600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "363": {
     id: "363",
@@ -7355,7 +7355,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182749/21340-lego-ideas-contos-da-era-espacial--5-.jpg?v=638169264666270000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "364": {
     id: "364",
@@ -7375,7 +7375,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185210/21347.jpg?v=638429255927500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "365": {
     id: "365",
@@ -7395,7 +7395,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185030/21345.jpg?v=638394787340330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "366": {
     id: "366",
@@ -7415,7 +7415,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184192/21342-lego-ideas-a-colecao-de-insetos.jpg?v=638284978554670000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "367": {
     id: "367",
@@ -7435,7 +7435,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187754/21353.jpg?v=638652872233970000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "368": {
     id: "368",
@@ -7455,7 +7455,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/179491/21333_Lego_Ideas_Vincent_van_Gogh_A_Noite_Estrelada_01.jpg?v=637926395648730000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "369": {
     id: "369",
@@ -7475,7 +7475,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187179/21350.jpg?v=638562412174470000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "370": {
     id: "370",
@@ -7495,7 +7495,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184263/21343-lego-ideas-vila-viking.jpg?v=638325628085770000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "371": {
     id: "371",
@@ -7515,7 +7515,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187398/21351.jpg?v=638602978454430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "372": {
     id: "372",
@@ -7535,7 +7535,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189249/21356.jpg?v=638768034976130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "373": {
     id: "373",
@@ -7555,7 +7555,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188896/21354.jpg?v=638727316724600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "374": {
     id: "374",
@@ -7575,7 +7575,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187552/21352.jpg?v=638621859108970000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "375": {
     id: "375",
@@ -7595,7 +7595,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185177/21346.jpg?v=638423115476330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["icons"]
+    categories: ["icons", "todos"]
   },
   "376": {
     id: "376",
@@ -7615,7 +7615,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/162323/42081_Prod.jpg?v=636704570291630000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "377": {
     id: "377",
@@ -7635,7 +7635,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163390/42088_front_01.jpg?v=636836870386330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "378": {
     id: "378",
@@ -7655,7 +7655,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/177195/42135_Prod.jpg?v=637782006490600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "379": {
     id: "379",
@@ -7675,7 +7675,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/177203/42137_Prod.jpg?v=637782010695900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "380": {
     id: "380",
@@ -7695,7 +7695,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/164843/42094_prod.jpg?v=636908825426600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "381": {
     id: "381",
@@ -7715,7 +7715,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/174539/lego_42128_technic_caminhao_rebocador_de_carga_pesada_01.jpg?v=637635071821070000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "382": {
     id: "382",
@@ -7735,7 +7735,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/172736/lego_42118_technic_monster_jam_grave_digger_01.jpg?v=637479523465100000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "383": {
     id: "383",
@@ -7755,7 +7755,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188597/42197.jpg?v=638709202439030000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "384": {
     id: "384",
@@ -7775,7 +7775,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182412/42152-lego-technic-aviao-de-combate-ao-fogo--3-.jpg?v=638128419385500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "385": {
     id: "385",
@@ -7795,7 +7795,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/172452/lego_42122_technic_jeep_wrangler_01.jpg?v=637473585145900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "386": {
     id: "386",
@@ -7815,7 +7815,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/164876/42095_prod.jpg?v=636909360749730000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "387": {
     id: "387",
@@ -7835,7 +7835,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/164803/42089_prod.jpg?v=636908808486430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "388": {
     id: "388",
@@ -7855,7 +7855,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/173124/lego_42123_technic_mclaren_senna_gtr_01.jpg?v=637487497279570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "389": {
     id: "389",
@@ -7875,7 +7875,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/172755/lego_42125_technic_ferrari_488_gte_af_corse_51_01.jpg?v=637479543120300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "390": {
     id: "390",
@@ -7895,7 +7895,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/170940/42111_prod.jpg?v=637249069787100000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "391": {
     id: "391",
@@ -7915,7 +7915,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188606/42198.jpg?v=638709204079070000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "392": {
     id: "392",
@@ -7935,7 +7935,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/179550/42143_Lego_Technic_Ferrari_Daytona_SP3_01.jpg?v=637931500985100000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "393": {
     id: "393",
@@ -7955,7 +7955,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185917/42179.jpg?v=638442972937430000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "394": {
     id: "394",
@@ -7975,7 +7975,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187356/42175.jpg?v=638597792959570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "395": {
     id: "395",
@@ -7995,7 +7995,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183398/42161-lego-technic-Lamborghini-Huracan-Tecnica.jpg?v=638234016223670000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "396": {
     id: "396",
@@ -8015,7 +8015,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188055/42204.jpg?v=638689310107100000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "397": {
     id: "397",
@@ -8035,7 +8035,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190255/42211-LEGO-Technic-veiculo-espacial-lunar-outpost-moon-rover.jpg?v=638847482827670000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "398": {
     id: "398",
@@ -8055,7 +8055,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190215/42215-LEGO-Technic-escavadeira-hibrida-volvo-EC500.jpg?v=638846421437900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "399": {
     id: "399",
@@ -8075,7 +8075,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190572/42214-LEGO-Technic-carro-esportivo-lamborghini-revuelto-super -7-.jpg?v=638851794859130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "400": {
     id: "400",
@@ -8095,7 +8095,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189837/42212-LEGO-Technic-ferrari-fxx-k.jpg?v=638841267274800000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "401": {
     id: "401",
@@ -8115,7 +8115,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185958/42180.jpg?v=638443019349970000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "402": {
     id: "402",
@@ -8135,7 +8135,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184979/42166.jpg?v=638394767714900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "403": {
     id: "403",
@@ -8155,7 +8155,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184020/42159-lego-technic-tamaha-mt-10-sp.jpg?v=638272715261770000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "404": {
     id: "404",
@@ -8175,7 +8175,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183299/42157-lego-technic-trator-florestal-john-deere-948lII--4-.jpg?v=638233893086800000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "405": {
     id: "405",
@@ -8195,7 +8195,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185951/42178.jpg?v=638443017476400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "406": {
     id: "406",
@@ -8215,7 +8215,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185966/42181.jpg?v=638443025665170000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "407": {
     id: "407",
@@ -8235,7 +8235,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188624/42201.jpg?v=638709207176200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "408": {
     id: "408",
@@ -8255,7 +8255,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183403/42160-lego-technic-audi-rs-q-etron.jpg?v=638234017013900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "409": {
     id: "409",
@@ -8275,7 +8275,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187036/42182.jpg?v=638530384783330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "410": {
     id: "410",
@@ -8295,7 +8295,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183305/42158-lego-technic-nasa-mars-rover-perseverance--3-.jpg?v=638233895127300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "411": {
     id: "411",
@@ -8315,7 +8315,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183662/42146-lego-technic-guindaste-sobre-esteiras-liebherr-lr-13000--4-.jpg?v=638241755582170000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "412": {
     id: "412",
@@ -8335,7 +8335,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/177762/lego_42130_technic_bmw_m_1000_rr_01.jpg?v=637789918007300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "413": {
     id: "413",
@@ -8355,7 +8355,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188617/42200.jpg?v=638709206200930000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "414": {
     id: "414",
@@ -8375,7 +8375,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188611/42199.jpg?v=638709205157900000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "415": {
     id: "415",
@@ -8395,7 +8395,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182819/42156-peugeot-9x8-24h-le-mans-hydrid-hypercar.jpg?v=638192527819230000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "416": {
     id: "416",
@@ -8415,7 +8415,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181886/42151_prod.jpg?v=638087440566700000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "417": {
     id: "417",
@@ -8435,7 +8435,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185937/42170.jpg?v=638443012279200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "418": {
     id: "418",
@@ -8455,7 +8455,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187343/42115.jpg?v=638597788135600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "419": {
     id: "419",
@@ -8475,7 +8475,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187250/42172.jpg?v=638574269806230000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "420": {
     id: "420",
@@ -8495,7 +8495,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187531/42174.jpg?v=638621848217630000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "421": {
     id: "421",
@@ -8515,7 +8515,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184983/42164.jpg?v=638394769528800000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "422": {
     id: "422",
@@ -8535,7 +8535,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184973/42167.jpg?v=638394766537400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "423": {
     id: "423",
@@ -8555,7 +8555,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187027/42173.jpg?v=638530382232570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "424": {
     id: "424",
@@ -8575,7 +8575,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/178163/42141_Carro_de_Corrida_McLaren_Formula_1_01.jpg?v=637843509228200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "425": {
     id: "425",
@@ -8595,7 +8595,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184967/42168.jpg?v=638394765602330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "426": {
     id: "426",
@@ -8615,7 +8615,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188217/42205.jpg?v=638694370900570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "427": {
     id: "427",
@@ -8635,7 +8635,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187366/42177.jpg?v=638597824763700000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "428": {
     id: "428",
@@ -8655,7 +8655,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182436/42154-lego-technic-2022-ford-gt--5-.jpg?v=638128424648230000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "429": {
     id: "429",
@@ -8675,7 +8675,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187031/42176.jpg?v=638530383550630000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "430": {
     id: "430",
@@ -8695,7 +8695,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185929/42169.jpg?v=638443010593200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "431": {
     id: "431",
@@ -8715,7 +8715,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188202/42202.jpg?v=638694314772730000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "432": {
     id: "432",
@@ -8735,7 +8735,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186144/42196.jpg?v=638452655593570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "433": {
     id: "433",
@@ -8755,7 +8755,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184989/42163.jpg?v=638394770973470000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "434": {
     id: "434",
@@ -8775,7 +8775,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188212/42203.jpg?v=638694316764000000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "435": {
     id: "435",
@@ -8795,7 +8795,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185943/42171.jpg?v=638443015456600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "436": {
     id: "436",
@@ -8815,7 +8815,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187260/42184.jpg?v=638574279229070000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "437": {
     id: "437",
@@ -8835,7 +8835,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189092/42206.jpg?v=638739499291500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "438": {
     id: "438",
@@ -8855,7 +8855,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189083/42207.jpg?v=638739496784530000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "439": {
     id: "439",
@@ -8875,7 +8875,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185890/42165.jpg?v=638442317221830000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "440": {
     id: "440",
@@ -8895,7 +8895,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189685/42209-LEGO-Technic-carregadeira-eletrica-l120.jpg?v=638832667327570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "441": {
     id: "441",
@@ -8915,7 +8915,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189600/42217-LEGO-Technic-chevrolet-corvette-stingray-azul.jpg?v=638829185112800000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "442": {
     id: "442",
@@ -8935,7 +8935,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190260/42208-LEGO-Technic-aston-martin-valkyrie -6-.jpg?v=638847492682500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "443": {
     id: "443",
@@ -8955,7 +8955,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190246/42213-LEGO-Technic-suv-ford-bronco -8-.jpg?v=638847482155400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "444": {
     id: "444",
@@ -8975,7 +8975,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189541/42210-LEGO-Technic-nissa-skyline-gtr-de-velorez-e-furiosos.jpg?v=638829169266200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "445": {
     id: "445",
@@ -8995,7 +8995,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/178395/11018_Diversao_Criativa_no_Oceano_01.jpg?v=637849503453230000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["classic"]
+    categories: ["classic", "todos"]
   },
   "446": {
     id: "446",
@@ -9015,7 +9015,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182351/11028-lego-duplo-diversao-pastel-criativo1.jpg?v=638126966920100000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["classic"]
+    categories: ["classic", "todos"]
   },
   "447": {
     id: "447",
@@ -9035,7 +9035,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/161642/10405_prod.jpg?v=636632094243470000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["classic"]
+    categories: ["classic", "todos"]
   },
   "448": {
     id: "448",
@@ -9055,7 +9055,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/161648/10713_detail1.jpg?v=636634594442870000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["classic"]
+    categories: ["classic", "todos"]
   },
   "449": {
     id: "449",
@@ -9075,7 +9075,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/157872/10698_box_front.jpg?v=635609094508200000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["classic"]
+    categories: ["classic", "todos"]
   },
   "450": {
     id: "450",
@@ -9095,7 +9095,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/178423/11023_Base-de_Construcao_Verde_01.jpg?v=637849514802400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["classic"]
+    categories: ["classic", "todos"]
   },
   "451": {
     id: "451",
@@ -9115,7 +9115,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/157867/10696_box_front.jpg?v=635609093478130000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["classic"]
+    categories: ["classic", "todos"]
   },
   "452": {
     id: "452",
@@ -9135,7 +9135,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/178557/11024_Base-de_Construcao_Cinzenta_01.jpg?v=637853045511500000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["classic"]
+    categories: ["classic", "todos"]
   },
   "453": {
     id: "453",
@@ -9155,7 +9155,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/178564/11025_Base_de_Construcao_Azul_01.jpg?v=637853051642600000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["classic"]
+    categories: ["classic", "todos"]
   },
   "454": {
     id: "454",
@@ -9175,7 +9175,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/178571/11026_Base_de_Construcao_Branca_01.jpg?v=637853055313300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["classic"]
+    categories: ["classic", "todos"]
   },
   "455": {
     id: "455",
@@ -9195,7 +9195,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189865/77239-speed-champions-porsche-911-gt3-rs.jpg?v=638842379742400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "456": {
     id: "456",
@@ -9215,7 +9215,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/161864/75888_Prod.jpg?v=636655310914530000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "457": {
     id: "457",
@@ -9235,7 +9235,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/173762/lego_76900_speed_champions_koenigsegg_jesko_01.jpg?v=637601655743370000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "458": {
     id: "458",
@@ -9255,7 +9255,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187959/77244.jpg?v=638688262585170000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "459": {
     id: "459",
@@ -9275,7 +9275,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190720/77238-lego-speed-champions-lamborguini-revuelto-huracan-sto -3-.jpg?v=638852513926270000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "460": {
     id: "460",
@@ -9295,7 +9295,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187981/77247.jpg?v=638688269844030000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "461": {
     id: "461",
@@ -9315,7 +9315,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186001/76920.jpg?v=638443143740970000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "462": {
     id: "462",
@@ -9335,7 +9335,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187092/76923.jpg?v=638530405583270000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "463": {
     id: "463",
@@ -9355,7 +9355,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/166604/75895_prod.jpg?v=637008065077800000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "464": {
     id: "464",
@@ -9375,7 +9375,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187953/77243.jpg?v=638688260682330000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "465": {
     id: "465",
@@ -9395,7 +9395,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182119/76917_prod.jpg?v=638088171560570000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "466": {
     id: "466",
@@ -9415,7 +9415,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187989/77248.jpg?v=638688271348670000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "467": {
     id: "467",
@@ -9435,7 +9435,7 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185985/76922.jpg?v=638443131191300000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
   },
   "468": {
     id: "468",
@@ -9455,7 +9455,6007 @@ const products = {
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189860/77240-speed-champions-carro-hiperesportivo-bugatti-centodieci-hyper.jpg?v=638842379122870000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
-    categories: ["speedchampions"]
+    categories: ["speedchampions", "todos"]
+  },
+  "469": {
+    id: "469",
+    name: "Minifiguras - Série 27",
+    price: 49.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 500,
+    ages: "8+",
+    pieces: 9,
+    itemNumber: "71048",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188048/71048.jpg?v=638689300398370000", "https://legobrasil.vtexassets.com/arquivos/ids/188049/71048--1-.jpg?v=638689300499600000", "https://legobrasil.vtexassets.com/arquivos/ids/188050/71048--2-.jpg?v=638689300747130000", "https://legobrasil.vtexassets.com/arquivos/ids/188051/71048--3-.jpg?v=638689300882200000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188048/71048.jpg?v=638689300398370000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "470": {
+    id: "470",
+    name: "Minifiguras - Dungeons & Dragons®",
+    price: 49.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 74,
+    ages: "8+",
+    pieces: 9,
+    itemNumber: "71047",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187648/71047.jpg?v=638646965646170000", "https://legobrasil.vtexassets.com/arquivos/ids/187649/71047--1-.jpg?v=638646965806230000", "https://legobrasil.vtexassets.com/arquivos/ids/187650/71047--2-.jpg?v=638646965963570000", "https://legobrasil.vtexassets.com/arquivos/ids/187651/71047--3-.jpg?v=638646966108700000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187648/71047.jpg?v=638646965646170000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "471": {
+    id: "471",
+    name: "Marvel - Homem-Aranha: Através do Aranhaverso Pack com 6",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 328,
+    ages: "8+",
+    pieces: 47,
+    itemNumber: "66797",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190974/66797-lego-marvel-homem-aranha-atraves-do-aranhaverso.jpg?v=638900352776470000", "https://legobrasil.vtexassets.com/arquivos/ids/190975/66797-lego-marvel-homem-aranha-atraves-do-aranhaverso -5-.jpg?v=638900352776630000", "https://legobrasil.vtexassets.com/arquivos/ids/190976/66797-lego-marvel-homem-aranha-atraves-do-aranhaverso -4-.jpg?v=638900352776700000", "https://legobrasil.vtexassets.com/arquivos/ids/190977/66797-lego-marvel-homem-aranha-atraves-do-aranhaverso -1-.jpg?v=638900352776730000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190974/66797-lego-marvel-homem-aranha-atraves-do-aranhaverso.jpg?v=638900352776470000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "472": {
+    id: "472",
+    name: "Marvel - Homem-Aranha: Através do Aranhaverso",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 375,
+    ages: "8+",
+    pieces: 5,
+    itemNumber: "71050",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/191074/71050-LEGO-marvel-homem-aranha-atraves-do-aranhaverso -4-.jpg?v=638901236248830000", "https://legobrasil.vtexassets.com/arquivos/ids/191075/71050-LEGO-marvel-homem-aranha-atraves-do-aranhaverso -3-.jpg?v=638901236248900000", "https://legobrasil.vtexassets.com/arquivos/ids/191076/71050-LEGO-marvel-homem-aranha-atraves-do-aranhaverso.jpg?v=638901236248970000", "https://legobrasil.vtexassets.com/arquivos/ids/191077/71050-LEGO-marvel-homem-aranha-atraves-do-aranhaverso -2-.jpg?v=638901236249000000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191074/71050-LEGO-marvel-homem-aranha-atraves-do-aranhaverso -4-.jpg?v=638901236248830000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "473": {
+    id: "473",
+    name: "Minifiguras - Pacote Série 26 - Espaço",
+    price: 299.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 283,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "71046",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186200/71046.jpg?v=638482006097800000", "https://legobrasil.vtexassets.com/arquivos/ids/186201/71046--2-.jpg?v=638482006235570000", "https://legobrasil.vtexassets.com/arquivos/ids/186202/71046--3-.jpg?v=638482006351070000", "https://legobrasil.vtexassets.com/arquivos/ids/186203/71046--1-.jpg?v=638482025298500000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186200/71046.jpg?v=638482006097800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "474": {
+    id: "474",
+    name: "Minifiguras - Série 26 Pacote Espaço 6",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 287,
+    ages: "8+",
+    pieces: 54,
+    itemNumber: "66764",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186659/66764.jpg?v=638514870413270000", "https://legobrasil.vtexassets.com/arquivos/ids/186660/66764--1-.jpg?v=638514870590500000", "https://legobrasil.vtexassets.com/arquivos/ids/186661/66764--2-.jpg?v=638514870730070000", "https://legobrasil.vtexassets.com/arquivos/ids/186662/66764--3-.jpg?v=638514870864030000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186659/66764.jpg?v=638514870413270000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "475": {
+    id: "475",
+    name: "Minifiguras - Ninjago: O Filme",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 247,
+    ages: "8+",
+    pieces: 8,
+    itemNumber: "HASH_F17458",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/160225/71019_detail1.jpg?v=636352762611770000", "https://legobrasil.vtexassets.com/arquivos/ids/160224/71019_prod.jpg?v=636352762488370000", "https://legobrasil.vtexassets.com/arquivos/ids/161956/71019_box.jpg?v=636657829849200000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/160225/71019_detail1.jpg?v=636352762611770000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "476": {
+    id: "476",
+    name: "Minifigures - Marvel Série 2 - Pack de 6",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 273,
+    ages: "8+",
+    pieces: 63,
+    itemNumber: "66735",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184187/66735-lego-minifigures-marvel-serie-2-pack-de-6.jpg?v=638284863884770000", "https://legobrasil.vtexassets.com/arquivos/ids/184188/66735-lego-minifigures-marvel-serie-2-pack-de-6--1-.jpg?v=638284864037030000", "https://legobrasil.vtexassets.com/arquivos/ids/184189/66735-lego-minifigures-marvel-serie-2-pack-de-6--2-.jpg?v=638284864222070000", "https://legobrasil.vtexassets.com/arquivos/ids/184190/66735-lego-minifigures-marvel-serie-2-pack-de-6--3-.jpg?v=638284868171470000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184187/66735-lego-minifigures-marvel-serie-2-pack-de-6.jpg?v=638284863884770000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "477": {
+    id: "477",
+    name: "Minifiguras - Disney",
+    price: 299.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 330,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "HASH_AAEE57",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/159244/71012_detail1.jpg?v=636059016032170000", "https://legobrasil.vtexassets.com/arquivos/ids/159242/71012_box_front.jpg?v=636059015733370000", "https://legobrasil.vtexassets.com/arquivos/ids/159243/71012_prod.jpg?v=636059015891300000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/159244/71012_detail1.jpg?v=636059016032170000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "478": {
+    id: "478",
+    name: "Minifiguras - Pacote Série 25",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 136,
+    ages: "8+",
+    pieces: 9,
+    itemNumber: "71045",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184814/71045.jpg?v=638393764195930000", "https://legobrasil.vtexassets.com/arquivos/ids/184815/71045--1-.jpg?v=638393764776130000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184814/71045.jpg?v=638393764195930000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "479": {
+    id: "479",
+    name: "Minifiguras - Pacote Série 25 - 6 unidades",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 266,
+    ages: "8+",
+    pieces: 52,
+    itemNumber: "66763",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184629/66763_alt2.jpg?v=638385866961200000", "https://legobrasil.vtexassets.com/arquivos/ids/184630/66763_alt3.jpg?v=638385867033770000", "https://legobrasil.vtexassets.com/arquivos/ids/184631/66763.jpg?v=638385867187100000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184629/66763_alt2.jpg?v=638385866961200000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "480": {
+    id: "480",
+    name: "Minifiguras - Batman Movie",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 248,
+    ages: "8+",
+    pieces: 7,
+    itemNumber: "HASH_D8A504",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/159494/71017_box_front.jpg?v=636166206687700000", "https://legobrasil.vtexassets.com/arquivos/ids/159495/71017_prod.jpg?v=636166206784770000", "https://legobrasil.vtexassets.com/arquivos/ids/159496/71017_detail1.jpg?v=636166206892800000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/159494/71017_box_front.jpg?v=636166206687700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "481": {
+    id: "481",
+    name: "DUPLO® - Jardim e Estufa do Vovô Porco",
+    price: 799.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 361,
+    ages: "8+",
+    pieces: 102,
+    itemNumber: "10461",
+    vipPoints: 51,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190509/10461-LEGO-DUPLO-jardim-estufa-vovo-porco-4.png?v=638851714983030000", "https://legobrasil.vtexassets.com/arquivos/ids/190510/10461-LEGO-DUPLO-jardim-estufa-vovo-porco-3.png?v=638851714983070000", "https://legobrasil.vtexassets.com/arquivos/ids/190511/10461_Lifestyle_cons_en-gb.webp?v=638851714983100000", "https://legobrasil.vtexassets.com/arquivos/ids/190512/10461_Lifestyle_build_en-gb.webp?v=638851714983130000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190509/10461-LEGO-DUPLO-jardim-estufa-vovo-porco-4.png?v=638851714983030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "482": {
+    id: "482",
+    name: "DUPLO® - Casa de aniversário da Peppa Pig",
+    price: 379.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 179,
+    ages: "8+",
+    pieces: 59,
+    itemNumber: "10433",
+    vipPoints: 24,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186347/10433.jpg?v=638506197046730000", "https://legobrasil.vtexassets.com/arquivos/ids/186348/10433--1-.jpg?v=638506197152530000", "https://legobrasil.vtexassets.com/arquivos/ids/186349/10433--2-.jpg?v=638506197287900000", "https://legobrasil.vtexassets.com/arquivos/ids/186350/10433--3-.jpg?v=638506197423500000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186347/10433.jpg?v=638506197046730000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "483": {
+    id: "483",
+    name: "DUPLO® - Supermercado Peppa Pig",
+    price: 699.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 398,
+    ages: "8+",
+    pieces: 70,
+    itemNumber: "10434",
+    vipPoints: 45,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186354/10434.jpg?v=638506198224970000", "https://legobrasil.vtexassets.com/arquivos/ids/186355/10434--1-.jpg?v=638506198321770000", "https://legobrasil.vtexassets.com/arquivos/ids/186356/10434--3-.jpg?v=638506198476200000", "https://legobrasil.vtexassets.com/arquivos/ids/186357/10434--2-.jpg?v=638506198573700000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186354/10434.jpg?v=638506198224970000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "484": {
+    id: "484",
+    name: "DUPLO - Dinossauros 3 em 1 sobre rodas",
+    price: 699.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 236,
+    ages: "8+",
+    pieces: 108,
+    itemNumber: "10451",
+    vipPoints: 45,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190353/10451-LEGO-DUPLO-dinossauros-3em1-sobre-rodas -7-.jpg?v=638848144039600000", "https://legobrasil.vtexassets.com/arquivos/ids/190354/10451-LEGO-DUPLO-dinossauros-3em1-sobre-rodas -6-.jpg?v=638848144039630000", "https://legobrasil.vtexassets.com/arquivos/ids/190355/10451-LEGO-DUPLO-dinossauros-3em1-sobre-rodas -5-.jpg?v=638848144039670000", "https://legobrasil.vtexassets.com/arquivos/ids/190356/10451-LEGO-DUPLO-dinossauros-3em1-sobre-rodas -4-.jpg?v=638848144039700000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190353/10451-LEGO-DUPLO-dinossauros-3em1-sobre-rodas -7-.jpg?v=638848144039600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "485": {
+    id: "485",
+    name: "DUPLO - Festa do Castelo de Frozen de Anna e Elsa",
+    price: 599.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 258,
+    ages: "8+",
+    pieces: 54,
+    itemNumber: "10455",
+    vipPoints: 38,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190493/10455-LEGO-DUPLO-festa-do-castelo-de-frozen-anna-e-elsa-1.png?v=638851712588470000", "https://legobrasil.vtexassets.com/arquivos/ids/190494/10455-LEGO-DUPLO-festa-do-castelo-de-frozen-anna-e-elsa-4.png?v=638851712588530000", "https://legobrasil.vtexassets.com/arquivos/ids/190495/10455-LEGO-DUPLO-festa-do-castelo-de-frozen-anna-e-elsa-3.png?v=638851712588570000", "https://legobrasil.vtexassets.com/arquivos/ids/190496/10455_Lifestyle_build_en-gb.webp?v=638851712588630000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190493/10455-LEGO-DUPLO-festa-do-castelo-de-frozen-anna-e-elsa-1.png?v=638851712588470000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "486": {
+    id: "486",
+    name: "DUPLO® - Base de construção verde",
+    price: 129.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 441,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "10460",
+    vipPoints: 8,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188369/10460.jpg?v=638705784273600000", "https://legobrasil.vtexassets.com/arquivos/ids/188370/10460--1-.jpg?v=638705784388070000", "https://legobrasil.vtexassets.com/arquivos/ids/188371/10460--2-.jpg?v=638705784480670000", "https://legobrasil.vtexassets.com/arquivos/ids/188372/10460--3-.jpg?v=638705784574000000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188369/10460.jpg?v=638705784273600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "487": {
+    id: "487",
+    name: "Disney - Mickey Mouse Clubhouse e carro",
+    price: 199.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 134,
+    ages: "8+",
+    pieces: 27,
+    itemNumber: "10454",
+    vipPoints: 12,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189070/10454.jpg?v=638738554373400000", "https://legobrasil.vtexassets.com/arquivos/ids/189071/10454--1-.jpg?v=638738554520530000", "https://legobrasil.vtexassets.com/arquivos/ids/189072/10454--2-.jpg?v=638738554663630000", "https://legobrasil.vtexassets.com/arquivos/ids/189073/10454--3-.jpg?v=638738554961870000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189070/10454.jpg?v=638738554373400000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "488": {
+    id: "488",
+    name: "DUPLO® - Famílias de animais selvagens: pinguins e leões",
+    price: 99.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 230,
+    ages: "8+",
+    pieces: 10,
+    itemNumber: "10442",
+    vipPoints: 6,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188340/10442.jpg?v=638705778800830000", "https://legobrasil.vtexassets.com/arquivos/ids/188341/10442--1-.jpg?v=638705778890330000", "https://legobrasil.vtexassets.com/arquivos/ids/188342/10442--2-.jpg?v=638705779016130000", "https://legobrasil.vtexassets.com/arquivos/ids/188343/10442--3-.jpg?v=638705779282370000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188340/10442.jpg?v=638705778800830000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "489": {
+    id: "489",
+    name: "DUPLO® - Conjunto de Expansão de Ponte e Trilhos de Trem",
+    price: 379.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 262,
+    ages: "8+",
+    pieces: 42,
+    itemNumber: "10426",
+    vipPoints: 24,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187804/10426.jpg?v=638670420233070000", "https://legobrasil.vtexassets.com/arquivos/ids/187805/10426--1-.jpg?v=638670420417830000", "https://legobrasil.vtexassets.com/arquivos/ids/187806/10426--2-.jpg?v=638670420657000000", "https://legobrasil.vtexassets.com/arquivos/ids/187807/10426--3-.jpg?v=638670420783600000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187804/10426.jpg?v=638670420233070000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "490": {
+    id: "490",
+    name: "DUPLO® - Grande Trem Comunitário Interativo",
+    price: 1399.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 132,
+    ages: "8+",
+    pieces: 103,
+    itemNumber: "10428",
+    vipPoints: 90,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187810/10428.jpg?v=638670421957200000", "https://legobrasil.vtexassets.com/arquivos/ids/187811/10428--1-.jpg?v=638670422038500000", "https://legobrasil.vtexassets.com/arquivos/ids/187812/10428--2-.jpg?v=638670422166770000", "https://legobrasil.vtexassets.com/arquivos/ids/187813/10428--3-.jpg?v=638670422696030000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187810/10428.jpg?v=638670421957200000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "491": {
+    id: "491",
+    name: "DUPLO® - Caixa de Peças",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 245,
+    ages: "8+",
+    pieces: 65,
+    itemNumber: "HASH_86F621",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/170361/10913_prod.jpg?v=637151407827930000", "https://legobrasil.vtexassets.com/arquivos/ids/170362/10913_front_01_02.jpg?v=637151408068100000", "https://legobrasil.vtexassets.com/arquivos/ids/170363/10913_back_01_01.jpg?v=637151408259000000", "https://legobrasil.vtexassets.com/arquivos/ids/170364/10913_lifestyle_cons.jpg?v=637151408817230000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/170361/10913_prod.jpg?v=637151407827930000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "492": {
+    id: "492",
+    name: "DUPLO - 3 em 1 Animais sobre Rodas",
+    price: 349.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 257,
+    ages: "8+",
+    pieces: 58,
+    itemNumber: "10448",
+    vipPoints: 22,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190361/10448-LEGO-DUPLO-3em1-animais-sobre-rodas -5-.jpg?v=638848145575470000", "https://legobrasil.vtexassets.com/arquivos/ids/190362/10448-LEGO-DUPLO-3em1-animais-sobre-rodas -4-.jpg?v=638848145575500000", "https://legobrasil.vtexassets.com/arquivos/ids/190363/10448-LEGO-DUPLO-3em1-animais-sobre-rodas -3-.jpg?v=638848145575530000", "https://legobrasil.vtexassets.com/arquivos/ids/190364/10448-LEGO-DUPLO-3em1-animais-sobre-rodas -2-.jpg?v=638848145575570000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190361/10448-LEGO-DUPLO-3em1-animais-sobre-rodas -5-.jpg?v=638848145575470000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "493": {
+    id: "493",
+    name: "DUPLO - Classificador de Formas: Casa de Filhotes",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 398,
+    ages: "8+",
+    pieces: 17,
+    itemNumber: "10441",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190367/10441-LEGO-DUPLO-classificador-de-formas-casa-de-filhotes -4-.jpg?v=638848147479000000", "https://legobrasil.vtexassets.com/arquivos/ids/190368/10441-LEGO-DUPLO-classificador-de-formas-casa-de-filhotes -3-.jpg?v=638848147479030000", "https://legobrasil.vtexassets.com/arquivos/ids/190369/10441-LEGO-DUPLO-classificador-de-formas-casa-de-filhotes -2-.jpg?v=638848147479070000", "https://legobrasil.vtexassets.com/arquivos/ids/190370/10441-LEGO-DUPLO-classificador-de-formas-casa-de-filhotes -1-.jpg?v=638848147479100000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190367/10441-LEGO-DUPLO-classificador-de-formas-casa-de-filhotes -4-.jpg?v=638848147479000000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "494": {
+    id: "494",
+    name: "DUPLO - Jogo do Castelo de Hopsy",
+    price: 399.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 228,
+    ages: "8+",
+    pieces: 47,
+    itemNumber: "10450",
+    vipPoints: 25,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189995/Hopsy-s-Castle-Game-7.jpg?v=638844808946070000", "https://legobrasil.vtexassets.com/arquivos/ids/189996/Hopsy-s-Castle-Game-2.jpg?v=638844808946130000", "https://legobrasil.vtexassets.com/arquivos/ids/189997/Hopsy-s-Castle-Game-6.jpg?v=638844808946170000", "https://legobrasil.vtexassets.com/arquivos/ids/189998/Hopsy-s-Castle-Game-3.jpg?v=638844808946200000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189995/Hopsy-s-Castle-Game-7.jpg?v=638844808946070000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "495": {
+    id: "495",
+    name: "DUPLO - Visita de McQueen à Doc's Garage",
+    price: 279.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 495,
+    ages: "8+",
+    pieces: 35,
+    itemNumber: "10456",
+    vipPoints: 18,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190501/10456-LEGO-DUPLO-visita-de-mcqueen-a-docs-garage-2.png?v=638851714109400000", "https://legobrasil.vtexassets.com/arquivos/ids/190502/10456-LEGO-DUPLO-visita-de-mcqueen-a-docs-garage-4.png?v=638851714109430000", "https://legobrasil.vtexassets.com/arquivos/ids/190503/10456-LEGO-DUPLO-visita-de-mcqueen-a-docs-garage-3.png?v=638851714109430000", "https://legobrasil.vtexassets.com/arquivos/ids/190504/10456_Lifestyle_build_en-gb.webp?v=638851714109570000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190501/10456-LEGO-DUPLO-visita-de-mcqueen-a-docs-garage-2.png?v=638851714109400000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "496": {
+    id: "496",
+    name: "DUPLO® - Carros e pilotos da F1®",
+    price: 449.99,
+    originalPrice: null,
+    rating: 4.0,
+    reviews: 120,
+    ages: "8+",
+    pieces: 70,
+    itemNumber: "10445",
+    vipPoints: 29,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188281/10445.jpg?v=638694459006830000", "https://legobrasil.vtexassets.com/arquivos/ids/188282/10445--1-.jpg?v=638694459088170000", "https://legobrasil.vtexassets.com/arquivos/ids/188283/10445--2-.jpg?v=638694459175070000", "https://legobrasil.vtexassets.com/arquivos/ids/188284/10445--3-.jpg?v=638694459300630000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188281/10445.jpg?v=638694459006830000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "497": {
+    id: "497",
+    name: "DUPLO® - Mack na Corrida",
+    price: 199.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 482,
+    ages: "8+",
+    pieces: 14,
+    itemNumber: "10417",
+    vipPoints: 12,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/185306/10417.jpg?v=638436205936800000", "https://legobrasil.vtexassets.com/arquivos/ids/185307/10417--2-.jpg?v=638436206103000000", "https://legobrasil.vtexassets.com/arquivos/ids/185308/10417--3-.jpg?v=638436206259630000", "https://legobrasil.vtexassets.com/arquivos/ids/185309/10417--1-.jpg?v=638436206388700000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185306/10417.jpg?v=638436205936800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "498": {
+    id: "498",
+    name: "DUPLO® - Famílias de animais selvagens: 3 em 1",
+    price: 799.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 176,
+    ages: "8+",
+    pieces: 92,
+    itemNumber: "10446",
+    vipPoints: 51,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188350/10446.jpg?v=638705781107800000", "https://legobrasil.vtexassets.com/arquivos/ids/188351/10446--1-.jpg?v=638705781204870000", "https://legobrasil.vtexassets.com/arquivos/ids/188352/10446--2-.jpg?v=638705781314630000", "https://legobrasil.vtexassets.com/arquivos/ids/188353/10446--3-.jpg?v=638705781412700000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188350/10446.jpg?v=638705781107800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "499": {
+    id: "499",
+    name: "DUPLO® - Caminhão do Alfabeto",
+    price: 379.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 469,
+    ages: "8+",
+    pieces: 36,
+    itemNumber: "10421",
+    vipPoints: 24,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/185055/10421_alt1.jpg?v=638397987588830000", "https://legobrasil.vtexassets.com/arquivos/ids/185056/10421_alt.jpg?v=638397987684000000", "https://legobrasil.vtexassets.com/arquivos/ids/185057/10421_alt5.jpg?v=638397987765230000", "https://legobrasil.vtexassets.com/arquivos/ids/185058/10421_alt4.jpg?v=638397987940370000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185055/10421_alt1.jpg?v=638397987588830000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "500": {
+    id: "500",
+    name: "DUPLO® - A Casa da Árvore 3 em 1",
+    price: 859.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 292,
+    ages: "8+",
+    pieces: 126,
+    itemNumber: "10993",
+    vipPoints: 55,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/182741/10993-lego-duplo-casa-arvore-3em1--4-.jpg?v=638169202163970000", "https://legobrasil.vtexassets.com/arquivos/ids/182742/10993-lego-duplo-casa-arvore-3em1--6-.jpg?v=638169202311700000", "https://legobrasil.vtexassets.com/arquivos/ids/182743/10993-lego-duplo-casa-arvore-3em1--5-.jpg?v=638169202534900000", "https://legobrasil.vtexassets.com/arquivos/ids/182744/10993-lego-duplo-casa-arvore-3em1--3-.jpg?v=638169202770100000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182741/10993-lego-duplo-casa-arvore-3em1--4-.jpg?v=638169202163970000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "501": {
+    id: "501",
+    name: "DUPLO® - Grandes Sensações e Emoções",
+    price: 279.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 340,
+    ages: "8+",
+    pieces: 23,
+    itemNumber: "10415",
+    vipPoints: 18,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/185069/10415_alt1.jpg?v=638397998749470000", "https://legobrasil.vtexassets.com/arquivos/ids/185071/10415_alt6.jpg?v=638397999664270000", "https://legobrasil.vtexassets.com/arquivos/ids/185072/10415_alt5.jpg?v=638397999873400000", "https://legobrasil.vtexassets.com/arquivos/ids/185073/10415_alt4.jpg?v=638397999990600000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185069/10415_alt1.jpg?v=638397998749470000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "502": {
+    id: "502",
+    name: "DUPLO® - Feira de Diversões",
+    price: 499.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 392,
+    ages: "8+",
+    pieces: 53,
+    itemNumber: "10453",
+    vipPoints: 32,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189164/10453.jpg?v=638742885803500000", "https://legobrasil.vtexassets.com/arquivos/ids/189165/10453--2-.jpg?v=638742885938870000", "https://legobrasil.vtexassets.com/arquivos/ids/189166/10453--3-.jpg?v=638742886022630000", "https://legobrasil.vtexassets.com/arquivos/ids/189167/10453--4-.jpg?v=638742886121870000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189164/10453.jpg?v=638742885803500000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "503": {
+    id: "503",
+    name: "Meu Malvado Favorito 4 - Gru e Minions",
+    price: 529.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 209,
+    ages: "8+",
+    pieces: 839,
+    itemNumber: "75582",
+    vipPoints: 34,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186375/75582.jpg?v=638506204339070000", "https://legobrasil.vtexassets.com/arquivos/ids/186376/75582--1-.jpg?v=638506204434670000", "https://legobrasil.vtexassets.com/arquivos/ids/186377/75582--2-.jpg?v=638506204569400000", "https://legobrasil.vtexassets.com/arquivos/ids/186378/75582--3-.jpg?v=638506204703770000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186375/75582.jpg?v=638506204339070000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "504": {
+    id: "504",
+    name: "Meu Malvado Favorito 4 - Ônibus de festa musical dos Minions",
+    price: 379.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 248,
+    ages: "8+",
+    pieces: 379,
+    itemNumber: "75581",
+    vipPoints: 24,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186367/75581.jpg?v=638506202497570000", "https://legobrasil.vtexassets.com/arquivos/ids/186368/75581--1-.jpg?v=638506203098600000", "https://legobrasil.vtexassets.com/arquivos/ids/186369/75581--2-.jpg?v=638506203306030000", "https://legobrasil.vtexassets.com/arquivos/ids/186370/75581--3-.jpg?v=638506203399670000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186367/75581.jpg?v=638506202497570000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "505": {
+    id: "505",
+    name: "Meu Malvado Favorito 4 - Minions e Carro Banana",
+    price: 249.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 497,
+    ages: "8+",
+    pieces: 136,
+    itemNumber: "75580",
+    vipPoints: 16,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186360/75580.jpg?v=638506199437830000", "https://legobrasil.vtexassets.com/arquivos/ids/186361/75580--1-.jpg?v=638506199737330000", "https://legobrasil.vtexassets.com/arquivos/ids/186362/75580--2-.jpg?v=638506199856930000", "https://legobrasil.vtexassets.com/arquivos/ids/186363/75580--3-.jpg?v=638506200040300000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186360/75580.jpg?v=638506199437830000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "506": {
+    id: "506",
+    name: "Meu Malvado Favorito 4 - Mansão da Família Minions e Gru",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 204,
+    ages: "8+",
+    pieces: 868,
+    itemNumber: "75583",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186380/75583.jpg?v=638506205543630000", "https://legobrasil.vtexassets.com/arquivos/ids/186381/75583--1-.jpg?v=638506205736470000", "https://legobrasil.vtexassets.com/arquivos/ids/186382/75583--2-.jpg?v=638506205853630000", "https://legobrasil.vtexassets.com/arquivos/ids/186383/75583--3-.jpg?v=638506206000100000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186380/75583.jpg?v=638506205543630000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "507": {
+    id: "507",
+    name: "Nike - Dunk Trickshot",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 109,
+    ages: "8+",
+    pieces: 454,
+    itemNumber: "43021",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/191171/43021-LEGO-nike-dunk-trickshot -7-.jpg?v=638906052666870000", "https://legobrasil.vtexassets.com/arquivos/ids/191172/43021-LEGO-nike-dunk-trickshot -6-.jpg?v=638906052667000000", "https://legobrasil.vtexassets.com/arquivos/ids/191173/43021-LEGO-nike-dunk-trickshot -5-.jpg?v=638906052667030000", "https://legobrasil.vtexassets.com/arquivos/ids/191174/43021-LEGO-nike-dunk-trickshot -4-.jpg?v=638906052667070000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191171/43021-LEGO-nike-dunk-trickshot -7-.jpg?v=638906052666870000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "508": {
+    id: "508",
+    name: "Nike - Slam Dunk",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 386,
+    ages: "8+",
+    pieces: 809,
+    itemNumber: "43010",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/191161/43010-LEGO-nike-slam-dunk -9-.jpg?v=638906048473000000", "https://legobrasil.vtexassets.com/arquivos/ids/191162/43010-LEGO-nike-slam-dunk -8-.jpg?v=638906048473130000", "https://legobrasil.vtexassets.com/arquivos/ids/191163/43010-LEGO-nike-slam-dunk -7-.jpg?v=638906048473200000", "https://legobrasil.vtexassets.com/arquivos/ids/191164/43010-LEGO-nike-slam-dunk -6-.jpg?v=638906048473230000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191161/43010-LEGO-nike-slam-dunk -9-.jpg?v=638906048473000000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "509": {
+    id: "509",
+    name: "Nike - Conjunto Nike Dunk x",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 433,
+    ages: "8+",
+    pieces: 1180,
+    itemNumber: "43008",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190235/43008-LEGO-nike-conjunto-nike-dunk-lego--10-.jpg?v=638899379773500000", "https://legobrasil.vtexassets.com/arquivos/ids/190236/43008-LEGO-nike-conjunto-nike-dunk-lego--9-.jpg?v=638899379773570000", "https://legobrasil.vtexassets.com/arquivos/ids/190237/43008-LEGO-nike-conjunto-nike-dunk-lego--8-.jpg?v=638899379773600000", "https://legobrasil.vtexassets.com/arquivos/ids/190238/43008-LEGO-nike-conjunto-nike-dunk-lego--7-.jpg?v=638899379773630000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190235/43008-LEGO-nike-conjunto-nike-dunk-lego--10-.jpg?v=638899379773500000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "510": {
+    id: "510",
+    name: "One Piece - O Restaurante Flutuante Baratie",
+    price: 2999.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 112,
+    ages: "8+",
+    pieces: 3402,
+    itemNumber: "75640",
+    vipPoints: 194,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190401/75640-LEGO-one-piece-restaurante-flutuante-baratie.jpg?v=638848307808900000", "https://legobrasil.vtexassets.com/arquivos/ids/190417/75640-LEGO-one-piece-restaurante-flutuante-baratie--8-.jpg?v=638905204421470000", "https://legobrasil.vtexassets.com/arquivos/ids/190418/75640-LEGO-one-piece-restaurante-flutuante-baratie--7-.jpg?v=638905204421670000", "https://legobrasil.vtexassets.com/arquivos/ids/190419/75640-LEGO-one-piece-restaurante-flutuante-baratie--6-.jpg?v=638905204421700000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190401/75640-LEGO-one-piece-restaurante-flutuante-baratie.jpg?v=638848307808900000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "511": {
+    id: "511",
+    name: "One Piece - O navio pirata Going Merry",
+    price: 1299.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 77,
+    ages: "8+",
+    pieces: 1376,
+    itemNumber: "75639",
+    vipPoints: 84,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190402/75639-LEGO-one-piece-o-navio-pirata-going-merry.jpg?v=638848308093030000", "https://legobrasil.vtexassets.com/arquivos/ids/190408/75639-LEGO-one-piece-o-navio-pirata-going-merry--9-.jpg?v=638899379635900000", "https://legobrasil.vtexassets.com/arquivos/ids/190409/75639-LEGO-one-piece-o-navio-pirata-going-merry--8-.jpg?v=638899379636070000", "https://legobrasil.vtexassets.com/arquivos/ids/190410/75639-LEGO-one-piece-o-navio-pirata-going-merry--7-.jpg?v=638899379636100000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190402/75639-LEGO-one-piece-o-navio-pirata-going-merry.jpg?v=638848308093030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "512": {
+    id: "512",
+    name: "One Piece - Batalha no Parque Arlong",
+    price: 799.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 424,
+    ages: "8+",
+    pieces: 926,
+    itemNumber: "75638",
+    vipPoints: 51,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190406/75638-LEGO-one-piece-batalha-no-parque-arlong.jpg?v=638848309052400000", "https://legobrasil.vtexassets.com/arquivos/ids/190451/75638-LEGO-one-piece-batalha-no-parque-arlong--9-.jpg?v=638905204542770000", "https://legobrasil.vtexassets.com/arquivos/ids/190452/75638-LEGO-one-piece-batalha-no-parque-arlong--8-.jpg?v=638905204542800000", "https://legobrasil.vtexassets.com/arquivos/ids/190453/75638-LEGO-one-piece-batalha-no-parque-arlong--7-.jpg?v=638905204542800000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190406/75638-LEGO-one-piece-batalha-no-parque-arlong.jpg?v=638848309052400000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "513": {
+    id: "513",
+    name: "One Piece - Tenda de Circo do Palhaço Buggy",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 186,
+    ages: "8+",
+    pieces: 573,
+    itemNumber: "75637",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190438/75637-LEGO-one-piece-tenda-de-circo-do-palhaco-buggy.jpg?v=638848326498700000", "https://legobrasil.vtexassets.com/arquivos/ids/190439/75637-LEGO-one-piece-tenda-de-circo-do-palhaco-buggy--5-.jpg?v=638905204646030000", "https://legobrasil.vtexassets.com/arquivos/ids/190440/75637-LEGO-one-piece-tenda-de-circo-do-palhaco-buggy--7-.jpg?v=638905204646070000", "https://legobrasil.vtexassets.com/arquivos/ids/190441/75637-LEGO-one-piece-tenda-de-circo-do-palhaco-buggy--6-.jpg?v=638905204646100000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190438/75637-LEGO-one-piece-tenda-de-circo-do-palhaco-buggy.jpg?v=638848326498700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "514": {
+    id: "514",
+    name: "BrickHeadz - Palhaço Buggy",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 355,
+    ages: "8+",
+    pieces: 176,
+    itemNumber: "40800",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190405/40800-LEGO-one-piece-palhaco-buggy.jpg?v=638848308810900000", "https://legobrasil.vtexassets.com/arquivos/ids/190446/40800-LEGO-one-piece-palhaco-buggy -5-.jpg?v=638848330088930000", "https://legobrasil.vtexassets.com/arquivos/ids/190447/40800-LEGO-one-piece-palhaco-buggy -4-.jpg?v=638848330088970000", "https://legobrasil.vtexassets.com/arquivos/ids/190448/40800-LEGO-one-piece-palhaco-buggy -3-.jpg?v=638848330089000000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190405/40800-LEGO-one-piece-palhaco-buggy.jpg?v=638848308810900000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "515": {
+    id: "515",
+    name: "Brickheadz - Monkey D. Luffy",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 102,
+    ages: "8+",
+    pieces: 136,
+    itemNumber: "40799",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190424/40799-LEGO-one-piece-figura-de-monkey-dluffy.jpg?v=638848321775830000", "https://legobrasil.vtexassets.com/arquivos/ids/190425/40799-LEGO-one-piece-figura-de-monkey-dluffy -5-.jpg?v=638848321776000000", "https://legobrasil.vtexassets.com/arquivos/ids/190426/40799-LEGO-one-piece-figura-de-monkey-dluffy -4-.jpg?v=638848321776030000", "https://legobrasil.vtexassets.com/arquivos/ids/190427/40799-LEGO-one-piece-figura-de-monkey-dluffy -3-.jpg?v=638848321776070000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190424/40799-LEGO-one-piece-figura-de-monkey-dluffy.jpg?v=638848321775830000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "516": {
+    id: "516",
+    name: "Ninjago® - Jet Mech de Lloyd",
+    price: 999.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 389,
+    ages: "8+",
+    pieces: 1112,
+    itemNumber: "71845",
+    vipPoints: 64,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190123/71845-LEGO-Ninjago-jet-mech-de-lloyd.jpg?v=638846408040500000", "https://legobrasil.vtexassets.com/arquivos/ids/190124/71845-LEGO-Ninjago-jet-mech-de-lloyd -1-.jpg?v=638846408040600000", "https://legobrasil.vtexassets.com/arquivos/ids/190125/71845-LEGO-Ninjago-jet-mech-de-lloyd -2-.jpg?v=638846408040630000", "https://legobrasil.vtexassets.com/arquivos/ids/190126/71845-LEGO-Ninjago-jet-mech-de-lloyd -4-.jpg?v=638846408040670000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190123/71845-LEGO-Ninjago-jet-mech-de-lloyd.jpg?v=638846408040500000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "517": {
+    id: "517",
+    name: "Ninjago - Robô Cavaleiro Dragão do Rogue",
+    price: 699.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 475,
+    ages: "8+",
+    pieces: 584,
+    itemNumber: "71843",
+    vipPoints: 45,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190140/71843-LEGO-Ninjago-robo-cavaleiro-dragao-do-rogue.jpg?v=638846409621200000", "https://legobrasil.vtexassets.com/arquivos/ids/190141/71843-LEGO-Ninjago-robo-cavaleiro-dragao-do-rogue--4-.jpg?v=638846409656100000", "https://legobrasil.vtexassets.com/arquivos/ids/190142/71843-LEGO-Ninjago-robo-cavaleiro-dragao-do-rogue--3-.jpg?v=638846409656270000", "https://legobrasil.vtexassets.com/arquivos/ids/190143/71843-LEGO-Ninjago-robo-cavaleiro-dragao-do-rogue--1-.jpg?v=638846409656300000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190140/71843-LEGO-Ninjago-robo-cavaleiro-dragao-do-rogue.jpg?v=638846409621200000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "518": {
+    id: "518",
+    name: "Ninjago® - Dragão do Caos Thunderfang",
+    price: 699.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 156,
+    ages: "8+",
+    pieces: 668,
+    itemNumber: "71832",
+    vipPoints: 45,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188965/71832.jpg?v=638731634339100000", "https://legobrasil.vtexassets.com/arquivos/ids/188966/71832--1-.jpg?v=638731634429970000", "https://legobrasil.vtexassets.com/arquivos/ids/188967/71832--2-.jpg?v=638731634535900000", "https://legobrasil.vtexassets.com/arquivos/ids/188968/71832--3-.jpg?v=638731634643570000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188965/71832.jpg?v=638731634339100000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "519": {
+    id: "519",
+    name: "Ninjago® - Mercados da Cidade de Ninjago",
+    price: 3699.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 456,
+    ages: "8+",
+    pieces: 6163,
+    itemNumber: "71799",
+    vipPoints: 240,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/182960/71799-lego-ninjago-mercados-da-cidade-ninjago.jpg?v=638200335123170000", "https://legobrasil.vtexassets.com/arquivos/ids/182961/71799-lego-ninjago-mercados-da-cidade-ninjago--1-.jpg?v=638200336116430000", "https://legobrasil.vtexassets.com/arquivos/ids/182962/71799-lego-ninjago-mercados-da-cidade-ninjago--2-.jpg?v=638200336296600000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182960/71799-lego-ninjago-mercados-da-cidade-ninjago.jpg?v=638200335123170000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "520": {
+    id: "520",
+    name: "Ninjago® - Torneio da Cidade do Templo",
+    price: 2499.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 323,
+    ages: "8+",
+    pieces: 3489,
+    itemNumber: "71814",
+    vipPoints: 162,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186459/71814.jpg?v=638507832954030000", "https://legobrasil.vtexassets.com/arquivos/ids/186460/71814--3-.jpg?v=638507833175170000", "https://legobrasil.vtexassets.com/arquivos/ids/186461/71814--1-.jpg?v=638507833395770000", "https://legobrasil.vtexassets.com/arquivos/ids/186462/71814--2-.jpg?v=638507833523300000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186459/71814.jpg?v=638507832954030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "521": {
+    id: "521",
+    name: "Ninjago® - Mech Dragão Titã de Cole",
+    price: 959.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 148,
+    ages: "8+",
+    pieces: 1055,
+    itemNumber: "71821",
+    vipPoints: 62,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186983/71821.jpg?v=638525158843170000", "https://legobrasil.vtexassets.com/arquivos/ids/186984/71821--1-.jpg?v=638525158933130000", "https://legobrasil.vtexassets.com/arquivos/ids/186985/71821--2-.jpg?v=638525159072470000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186983/71821.jpg?v=638525158843170000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "522": {
+    id: "522",
+    name: "Ninjago® - Egalt o Dragão Mestre",
+    price: 699.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 80,
+    ages: "8+",
+    pieces: 532,
+    itemNumber: "71809",
+    vipPoints: 45,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184791/71809.jpg?v=638393036160300000", "https://legobrasil.vtexassets.com/arquivos/ids/184792/71809--1-.jpg?v=638393036309170000", "https://legobrasil.vtexassets.com/arquivos/ids/184793/71809--2-.jpg?v=638393036908000000", "https://legobrasil.vtexassets.com/arquivos/ids/184794/71809--3-.jpg?v=638393037484900000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184791/71809.jpg?v=638393036160300000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "523": {
+    id: "523",
+    name: "Ninjago® - Meca Cavaleiro da Tempestade do Kai",
+    price: 479.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 52,
+    ages: "8+",
+    pieces: 333,
+    itemNumber: "71830",
+    vipPoints: 31,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188795/71830.jpg?v=638709251253800000", "https://legobrasil.vtexassets.com/arquivos/ids/188796/71830--1-.jpg?v=638709251347770000", "https://legobrasil.vtexassets.com/arquivos/ids/188797/71830--2-.jpg?v=638709251427700000", "https://legobrasil.vtexassets.com/arquivos/ids/188798/71830--3-.jpg?v=638709251526230000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188795/71830.jpg?v=638709251253800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "524": {
+    id: "524",
+    name: "Ninjago® - Criatura Dragão de Gelo do Zane",
+    price: 959.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 339,
+    ages: "8+",
+    pieces: 973,
+    itemNumber: "71786",
+    vipPoints: 62,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/182037/71786_prod.png?v=638088138185430000", "https://legobrasil.vtexassets.com/arquivos/ids/182038/71786_web_lineup_nobg.png?v=638088138378400000", "https://legobrasil.vtexassets.com/arquivos/ids/182039/71786_web_sec01_nobg.png?v=638088139392100000", "https://legobrasil.vtexassets.com/arquivos/ids/182040/71786_lifestyle_cons_2.png?v=638088139528470000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182037/71786_prod.png?v=638088138185430000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "525": {
+    id: "525",
+    name: "Ninjago® - Dragão Elementar vs O Robô da Imperatriz",
+    price: 1199.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 223,
+    ages: "8+",
+    pieces: 1038,
+    itemNumber: "71796",
+    vipPoints: 77,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/182973/71796-lego-ninjago-dragao-elementar-robo-da-imperatriz.jpg?v=638200365678830000", "https://legobrasil.vtexassets.com/arquivos/ids/182974/71796-lego-ninjago-dragao-elementar-robo-da-imperatriz--1-.jpg?v=638200365756130000", "https://legobrasil.vtexassets.com/arquivos/ids/182975/71796-lego-ninjago-dragao-elementar-robo-da-imperatriz--2-.jpg?v=638200365839600000", "https://legobrasil.vtexassets.com/arquivos/ids/182976/71796-lego-ninjago-dragao-elementar-robo-da-imperatriz--3-.jpg?v=638200365928600000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182973/71796-lego-ninjago-dragao-elementar-robo-da-imperatriz.jpg?v=638200365678830000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "526": {
+    id: "526",
+    name: "Ninjago® - Lançador Spinjitzu: Jay",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 273,
+    ages: "8+",
+    pieces: 72,
+    itemNumber: "HASH_199A5D",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/166454/70682_prod.jpg?v=636989091363930000", "https://legobrasil.vtexassets.com/arquivos/ids/166455/70682_back_03.jpg?v=636989091467700000", "https://legobrasil.vtexassets.com/arquivos/ids/166456/70682_front_02.jpg?v=636989091549970000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/166454/70682_prod.jpg?v=636989091363930000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "527": {
+    id: "527",
+    name: "Ninjago® - Lançador Spinjitzu: Zane",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 406,
+    ages: "8+",
+    pieces: 63,
+    itemNumber: "HASH_AC17AA",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/166457/70683_prod.jpg?v=636989092802830000", "https://legobrasil.vtexassets.com/arquivos/ids/166458/70683_back_03.jpg?v=636989092896800000", "https://legobrasil.vtexassets.com/arquivos/ids/166459/70683_back_01.jpg?v=636989092977100000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/166457/70683_prod.jpg?v=636989092802830000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "528": {
+    id: "528",
+    name: "Ninjago® - Lançador Spinjitzu: Lloyd",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 91,
+    ages: "8+",
+    pieces: 70,
+    itemNumber: "HASH_98D75A",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/166450/70681_prod.jpg?v=636989089756900000", "https://legobrasil.vtexassets.com/arquivos/ids/166451/70681_side_04.jpg?v=636989089853630000", "https://legobrasil.vtexassets.com/arquivos/ids/166452/70681_back_03.jpg?v=636989090055230000", "https://legobrasil.vtexassets.com/arquivos/ids/166453/70681_side_03.jpg?v=636989090169570000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/166450/70681_prod.jpg?v=636989089756900000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "529": {
+    id: "529",
+    name: "Ninjago® - Mosteiro de Spinjitzu",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 191,
+    ages: "8+",
+    pieces: 1070,
+    itemNumber: "HASH_9E7D9D",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/169886/70670_prod.jpg?v=637081513169000000", "https://legobrasil.vtexassets.com/arquivos/ids/169887/70670_front_02.jpg?v=637081513426130000", "https://legobrasil.vtexassets.com/arquivos/ids/169888/70670_front_01.jpg?v=637081513535300000", "https://legobrasil.vtexassets.com/arquivos/ids/169889/70670_back_01.jpg?v=637081513629100000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/169886/70670_prod.jpg?v=637081513169000000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "530": {
+    id: "530",
+    name: "Ninjago® - Carro off-road ninja de Arin",
+    price: 299.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 90,
+    ages: "8+",
+    pieces: 267,
+    itemNumber: "71811",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186070/71811.jpg?v=638446578810570000", "https://legobrasil.vtexassets.com/arquivos/ids/186071/71811--4-.jpg?v=638446579097130000", "https://legobrasil.vtexassets.com/arquivos/ids/186072/71811--3-.jpg?v=638446579191430000", "https://legobrasil.vtexassets.com/arquivos/ids/186073/71811--5-.jpg?v=638446579471930000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186070/71811.jpg?v=638446578810570000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "531": {
+    id: "531",
+    name: "Ninjago® - Motos de Kai e Zane",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 137,
+    ages: "8+",
+    pieces: 376,
+    itemNumber: "HASH_52B97D",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/163419/70667_prod.jpg?v=636836969746700000", "https://legobrasil.vtexassets.com/arquivos/ids/163420/70667_top_01.jpg?v=636836969930030000", "https://legobrasil.vtexassets.com/arquivos/ids/163421/70667_back_01.jpg?v=636836970022470000", "https://legobrasil.vtexassets.com/arquivos/ids/163422/70667_back_08.jpg?v=636836970092370000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163419/70667_prod.jpg?v=636836969746700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "532": {
+    id: "532",
+    name: "Sonic the Hedgehog™ - Robô Guardião de Knuckles",
+    price: 349.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 84,
+    ages: "8+",
+    pieces: 276,
+    itemNumber: "76996",
+    vipPoints: 22,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184730/76996.jpg?v=638385885673530000", "https://legobrasil.vtexassets.com/arquivos/ids/184731/76996_alt3.jpg?v=638385885744170000", "https://legobrasil.vtexassets.com/arquivos/ids/184732/76996_alt2.jpg?v=638385885849500000", "https://legobrasil.vtexassets.com/arquivos/ids/184733/76996_alt5.jpg?v=638385885935300000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184730/76996.jpg?v=638385885673530000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "533": {
+    id: "533",
+    name: "Sonic the Hedgehog™ - Super Sonic vs. Egg Drillster",
+    price: 799.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 404,
+    ages: "8+",
+    pieces: 590,
+    itemNumber: "76999",
+    vipPoints: 51,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186573/76999--3-.jpg?v=638513681767730000", "https://legobrasil.vtexassets.com/arquivos/ids/186574/76999--4-.jpg?v=638513681873500000", "https://legobrasil.vtexassets.com/arquivos/ids/186575/76999--5-.jpg?v=638513681971770000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186573/76999--3-.jpg?v=638513681767730000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "534": {
+    id: "534",
+    name: "Sonic the Hedgehog™ - Shadow",
+    price: 699.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 389,
+    ages: "8+",
+    pieces: 720,
+    itemNumber: "77000",
+    vipPoints: 45,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187733/77000.jpg?v=638647000336300000", "https://legobrasil.vtexassets.com/arquivos/ids/187734/77000--1-.jpg?v=638647000428200000", "https://legobrasil.vtexassets.com/arquivos/ids/187735/77000--2-.jpg?v=638647000519470000", "https://legobrasil.vtexassets.com/arquivos/ids/187736/77000--3-.jpg?v=638647000633630000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187733/77000.jpg?v=638647000336300000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "535": {
+    id: "535",
+    name: "Sonic the Hedgehog™ - Fuga do Shadow",
+    price: 199.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 472,
+    ages: "8+",
+    pieces: 196,
+    itemNumber: "76995",
+    vipPoints: 12,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/185156/76995.jpg?v=638400830249730000", "https://legobrasil.vtexassets.com/arquivos/ids/185157/76995--1-.jpg?v=638400830330670000", "https://legobrasil.vtexassets.com/arquivos/ids/185158/76995--3-.jpg?v=638400830435400000", "https://legobrasil.vtexassets.com/arquivos/ids/185159/76995--2-.jpg?v=638400830503870000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185156/76995.jpg?v=638400830249730000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "536": {
+    id: "536",
+    name: "Sonic the Hedgehog™ - Cyclone vs Metal Sonic",
+    price: 279.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 380,
+    ages: "8+",
+    pieces: 290,
+    itemNumber: "77002",
+    vipPoints: 18,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187909/77002.jpg?v=638683286830600000", "https://legobrasil.vtexassets.com/arquivos/ids/187910/77002--1-.jpg?v=638756572956600000", "https://legobrasil.vtexassets.com/arquivos/ids/187911/77002--2-.jpg?v=638756572956600000", "https://legobrasil.vtexassets.com/arquivos/ids/187912/77002--3-.jpg?v=638756572956600000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187909/77002.jpg?v=638683286830600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "537": {
+    id: "537",
+    name: "Sonic the Hedgehog™ - Knuckles e o Santuário Mestre Esmeralda",
+    price: 329.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 202,
+    ages: "8+",
+    pieces: 325,
+    itemNumber: "76998",
+    vipPoints: 21,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186533/76998.jpg?v=638507868134900000", "https://legobrasil.vtexassets.com/arquivos/ids/186534/76998--1-.jpg?v=638507868252030000", "https://legobrasil.vtexassets.com/arquivos/ids/186535/76998--2-.jpg?v=638507868351400000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186533/76998.jpg?v=638507868134900000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "538": {
+    id: "538",
+    name: "Sonic the Hedgehog™ - Barco de aventura do Tails",
+    price: 529.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 93,
+    ages: "8+",
+    pieces: 393,
+    itemNumber: "76997",
+    vipPoints: 34,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186531/76997.jpg?v=638507866556400000", "https://legobrasil.vtexassets.com/arquivos/ids/186532/76997--1-.jpg?v=638847480242200000", "https://legobrasil.vtexassets.com/arquivos/ids/186541/76997_box.jpg?v=638847480242400000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186531/76997.jpg?v=638507866556400000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "539": {
+    id: "539",
+    name: "Sonic the Hedgehog™ - Super Shadow vs Biolizard",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 148,
+    ages: "8+",
+    pieces: 419,
+    itemNumber: "77003",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187906/77003.jpg?v=638683284317170000", "https://legobrasil.vtexassets.com/arquivos/ids/187907/77003--1-.jpg?v=638756573340770000", "https://legobrasil.vtexassets.com/arquivos/ids/187908/77003--2-.jpg?v=638756573340770000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187906/77003.jpg?v=638683284317170000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "540": {
+    id: "540",
+    name: "Sonic the Hedgehog™ - Knuckles vs Robô do Dr Eggman",
+    price: 379.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 305,
+    ages: "8+",
+    pieces: 350,
+    itemNumber: "77005",
+    vipPoints: 24,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190561/77005-lego-sonic-the-hedgehog-knuckles-robo-dr-eggman -7-.jpg?v=638851792434400000", "https://legobrasil.vtexassets.com/arquivos/ids/190562/77005-lego-sonic-the-hedgehog-knuckles-robo-dr-eggman -6-.jpg?v=638851792434430000", "https://legobrasil.vtexassets.com/arquivos/ids/190563/77005-lego-sonic-the-hedgehog-knuckles-robo-dr-eggman -5-.jpg?v=638851792434470000", "https://legobrasil.vtexassets.com/arquivos/ids/190564/77005-lego-sonic-the-hedgehog-knuckles-robo-dr-eggman -4-.jpg?v=638851792434500000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190561/77005-lego-sonic-the-hedgehog-knuckles-robo-dr-eggman -7-.jpg?v=638851792434400000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "541": {
+    id: "541",
+    name: "Sonic the Hedgehog™ - Green Hill Zone",
+    price: 799.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 177,
+    ages: "8+",
+    pieces: 1125,
+    itemNumber: "HASH_A95470",
+    vipPoints: 51,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/177795/lego_21331_ideas_sonic_the_hedgehog_green_hill_zone_01.jpg?v=637789999353300000", "https://legobrasil.vtexassets.com/arquivos/ids/177796/lego_21331_ideas_sonic_the_hedgehog_green_hill_zone_02.jpg?v=637789999503930000", "https://legobrasil.vtexassets.com/arquivos/ids/177797/lego_21331_ideas_sonic_the_hedgehog_green_hill_zone_03.jpg?v=637789999617370000", "https://legobrasil.vtexassets.com/arquivos/ids/177798/lego_21331_ideas_sonic_the_hedgehog_green_hill_zone_04.jpg?v=637790000553730000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/177795/lego_21331_ideas_sonic_the_hedgehog_green_hill_zone_01.jpg?v=637789999353300000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "542": {
+    id: "542",
+    name: "Sonic the Hedgehog™ - Chaveiro Shadow",
+    price: 54.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 200,
+    ages: "8+",
+    pieces: 6,
+    itemNumber: "854302",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190839/854302-lego-sonic-the-hedgehog-chaveiro-shadow.jpg?v=638875041741600000", "https://legobrasil.vtexassets.com/arquivos/ids/190840/854302-lego-sonic-the-hedgehog-chaveiro-shadow--1-.jpg?v=638875057957470000", "https://legobrasil.vtexassets.com/arquivos/ids/190841/854302-lego-sonic-the-hedgehog-chaveiro-shadow--2-.jpg?v=638875057957530000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190839/854302-lego-sonic-the-hedgehog-chaveiro-shadow.jpg?v=638875041741600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "543": {
+    id: "543",
+    name: "City - Quartel com Caminhão dos Bombeiros",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 229,
+    ages: "8+",
+    pieces: 843,
+    itemNumber: "60414",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184864/60414.jpg?v=638394698998030000", "https://legobrasil.vtexassets.com/arquivos/ids/184865/60414--1-.jpg?v=638394699161870000", "https://legobrasil.vtexassets.com/arquivos/ids/184866/60414--2-.jpg?v=638394699271430000", "https://legobrasil.vtexassets.com/arquivos/ids/184867/60414--3-.jpg?v=638394699429070000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184864/60414.jpg?v=638394698998030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "544": {
+    id: "544",
+    name: "CITY - Caminhão transportador de carros com carros esportivos",
+    price: 959.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 68,
+    ages: "8+",
+    pieces: 998,
+    itemNumber: "60408",
+    vipPoints: 62,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186930/60408.jpg?v=638525142721170000", "https://legobrasil.vtexassets.com/arquivos/ids/186931/60408--1-.jpg?v=638525142803070000", "https://legobrasil.vtexassets.com/arquivos/ids/186932/60408--2-.jpg?v=638525142915500000", "https://legobrasil.vtexassets.com/arquivos/ids/186933/60408--3-.jpg?v=638525143017730000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186930/60408.jpg?v=638525142721170000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "545": {
+    id: "545",
+    name: "CITY - Guindaste de construção móvel amarelo",
+    price: 1099.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 102,
+    ages: "8+",
+    pieces: 1116,
+    itemNumber: "60409",
+    vipPoints: 71,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186694/60409.jpg?v=638515615183430000", "https://legobrasil.vtexassets.com/arquivos/ids/186695/60409--1-.jpg?v=638515615291400000", "https://legobrasil.vtexassets.com/arquivos/ids/186696/60409--2-.jpg?v=638515615398270000", "https://legobrasil.vtexassets.com/arquivos/ids/186697/60409--3-.jpg?v=638515615496000000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186694/60409.jpg?v=638515615183430000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "546": {
+    id: "546",
+    name: "City - Caminhão e Laboratório Móvel de Exploração Ártica",
+    price: 659.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 202,
+    ages: "8+",
+    pieces: 489,
+    itemNumber: "60378",
+    vipPoints: 42,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189206/60378.jpg?v=638756591779030000", "https://legobrasil.vtexassets.com/arquivos/ids/189207/60378--1-.jpg?v=638756591855930000", "https://legobrasil.vtexassets.com/arquivos/ids/189208/60378--2-.jpg?v=638756591947230000", "https://legobrasil.vtexassets.com/arquivos/ids/189209/60378--3-.jpg?v=638756592033100000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189206/60378.jpg?v=638756591779030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "547": {
+    id: "547",
+    name: "City - Nave espacial galáctica modular",
+    price: 799.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 347,
+    ages: "8+",
+    pieces: 717,
+    itemNumber: "60446",
+    vipPoints: 51,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188631/60446.jpg?v=638709209668430000", "https://legobrasil.vtexassets.com/arquivos/ids/188632/60446--1-.jpg?v=638709209976930000", "https://legobrasil.vtexassets.com/arquivos/ids/188633/60446--2-.jpg?v=638709210082000000", "https://legobrasil.vtexassets.com/arquivos/ids/188634/60446--3-.jpg?v=638709210180530000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188631/60446.jpg?v=638709209668430000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "548": {
+    id: "548",
+    name: "City - Helicóptero Jungle Explorer no acampamento base",
+    price: 959.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 497,
+    ages: "8+",
+    pieces: 881,
+    itemNumber: "60437",
+    vipPoints: 62,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186969/60437.jpg?v=638525155064700000", "https://legobrasil.vtexassets.com/arquivos/ids/186970/60437--1-.jpg?v=638525155152530000", "https://legobrasil.vtexassets.com/arquivos/ids/186971/60437--2-.jpg?v=638525155346600000", "https://legobrasil.vtexassets.com/arquivos/ids/186972/60437--3-.jpg?v=638525155466400000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186969/60437.jpg?v=638525155064700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "549": {
+    id: "549",
+    name: "City - Caminhão de Lixo",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 448,
+    ages: "8+",
+    pieces: 90,
+    itemNumber: "HASH_4D129A",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/163149/60220_prod.jpg?v=636832640673100000", "https://legobrasil.vtexassets.com/arquivos/ids/163150/60220_elementoverview_01.jpg?v=636832640822100000", "https://legobrasil.vtexassets.com/arquivos/ids/163151/60220_back_02.jpg?v=636832640933130000", "https://legobrasil.vtexassets.com/arquivos/ids/163152/60220_front_02.jpg?v=636832641049800000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163149/60220_prod.jpg?v=636832640673100000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "550": {
+    id: "550",
+    name: "City - Monster Truck Azul",
+    price: 149.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 333,
+    ages: "8+",
+    pieces: 148,
+    itemNumber: "60402",
+    vipPoints: 9,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184901/60402.jpg?v=638394739006570000", "https://legobrasil.vtexassets.com/arquivos/ids/184902/60402--1-.jpg?v=638394739419470000", "https://legobrasil.vtexassets.com/arquivos/ids/184903/60402--2-.jpg?v=638394739556630000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184901/60402.jpg?v=638394739006570000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "551": {
+    id: "551",
+    name: "City - Caminhão off-road do explorador da selva",
+    price: 329.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 431,
+    ages: "8+",
+    pieces: 314,
+    itemNumber: "60426",
+    vipPoints: 21,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186963/60426.jpg?v=638525153911600000", "https://legobrasil.vtexassets.com/arquivos/ids/186964/60426--1-.jpg?v=638525153997130000", "https://legobrasil.vtexassets.com/arquivos/ids/186965/60426--2-.jpg?v=638525154123930000", "https://legobrasil.vtexassets.com/arquivos/ids/186966/60426--3-.jpg?v=638525154275200000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186963/60426.jpg?v=638525153911600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "552": {
+    id: "552",
+    name: "City - Centro de Esqui e Alpinismo",
+    price: 1099.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 284,
+    ages: "8+",
+    pieces: 1045,
+    itemNumber: "60366",
+    vipPoints: 71,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/183654/60366-lego-city-centro-de-esqui-e-alpinismo--4-.jpg?v=638241753846770000", "https://legobrasil.vtexassets.com/arquivos/ids/183655/60366-lego-city-centro-de-esqui-e-alpinismo--5-.jpg?v=638241753923800000", "https://legobrasil.vtexassets.com/arquivos/ids/183657/60366-lego-city-centro-de-esqui-e-alpinismo--6-.jpg?v=638241754159900000", "https://legobrasil.vtexassets.com/arquivos/ids/183658/60366-lego-city-centro-de-esqui-e-alpinismo--1-.jpg?v=638241754264230000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183654/60366-lego-city-centro-de-esqui-e-alpinismo--4-.jpg?v=638241753846770000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "553": {
+    id: "553",
+    name: "City - Ambulância de Emergência e Snowboarder",
+    price: 199.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 441,
+    ages: "8+",
+    pieces: 79,
+    itemNumber: "60403",
+    vipPoints: 12,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184897/60403.jpg?v=638394734613100000", "https://legobrasil.vtexassets.com/arquivos/ids/184898/60403--1-.jpg?v=638394734751830000", "https://legobrasil.vtexassets.com/arquivos/ids/184899/60403--2-.jpg?v=638394735126600000", "https://legobrasil.vtexassets.com/arquivos/ids/184900/60403--3-.jpg?v=638394738112770000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184897/60403.jpg?v=638394734613100000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "554": {
+    id: "554",
+    name: "City - Veículo Explorador Espacial e Vida Alienígena",
+    price: 329.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 303,
+    ages: "8+",
+    pieces: 311,
+    itemNumber: "60431",
+    vipPoints: 21,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184832/60431.jpg?v=638394679681700000", "https://legobrasil.vtexassets.com/arquivos/ids/184833/60431--1-.jpg?v=638394679825400000", "https://legobrasil.vtexassets.com/arquivos/ids/184834/60431--2-.jpg?v=638394680164570000", "https://legobrasil.vtexassets.com/arquivos/ids/184835/60431--3-.jpg?v=638394680268970000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184832/60431.jpg?v=638394679681700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "555": {
+    id: "555",
+    name: "City - Bonde e estação do centro",
+    price: 899.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 387,
+    ages: "8+",
+    pieces: 811,
+    itemNumber: "60423",
+    vipPoints: 58,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186456/60423.jpg?v=638507832133170000", "https://legobrasil.vtexassets.com/arquivos/ids/186457/60423--1-.jpg?v=638507832431870000", "https://legobrasil.vtexassets.com/arquivos/ids/186458/60423--2-.jpg?v=638507832524930000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186456/60423.jpg?v=638507832133170000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "556": {
+    id: "556",
+    name: "City - Caminhão de entrega amarelo",
+    price: 959.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 254,
+    ages: "8+",
+    pieces: 1061,
+    itemNumber: "60440",
+    vipPoints: 62,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187010/60440.jpg?v=638525833763400000", "https://legobrasil.vtexassets.com/arquivos/ids/187011/60440--1-.jpg?v=638525833843430000", "https://legobrasil.vtexassets.com/arquivos/ids/187012/60440--2-.jpg?v=638525833962870000", "https://legobrasil.vtexassets.com/arquivos/ids/187013/60440--3-.jpg?v=638525834090700000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187010/60440.jpg?v=638525833763400000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "557": {
+    id: "557",
+    name: "City - Patrulha Aérea",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 257,
+    ages: "8+",
+    pieces: 54,
+    itemNumber: "HASH_7DAB50",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/163169/60206_prod.jpg?v=636833209195270000", "https://legobrasil.vtexassets.com/arquivos/ids/163170/60206_back_04.jpg?v=636833209347570000", "https://legobrasil.vtexassets.com/arquivos/ids/163171/60206_top_01.jpg?v=636833209431170000", "https://legobrasil.vtexassets.com/arquivos/ids/163172/60206_front_02.jpg?v=636833209535630000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163169/60206_prod.jpg?v=636833209195270000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "558": {
+    id: "558",
+    name: "City - Calendário do Advento 2025",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 151,
+    ages: "8+",
+    pieces: 186,
+    itemNumber: "60475",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/191105/60475-LEGO-City-calendario-advento-2025 -6-.jpg?v=638901267164400000", "https://legobrasil.vtexassets.com/arquivos/ids/191106/60475-LEGO-City-calendario-advento-2025 -5-.jpg?v=638901267164500000", "https://legobrasil.vtexassets.com/arquivos/ids/191107/60475-LEGO-City-calendario-advento-2025 -4-.jpg?v=638901267164530000", "https://legobrasil.vtexassets.com/arquivos/ids/191108/60475-LEGO-City-calendario-advento-2025 -3-.jpg?v=638901267164570000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191105/60475-LEGO-City-calendario-advento-2025 -6-.jpg?v=638901267164400000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "559": {
+    id: "559",
+    name: "City - Carro de Corrida Verde",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 368,
+    ages: "8+",
+    pieces: 56,
+    itemNumber: "60399",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184911/60399.jpg?v=638394744991800000", "https://legobrasil.vtexassets.com/arquivos/ids/184912/60399--1-.jpg?v=638394745093300000", "https://legobrasil.vtexassets.com/arquivos/ids/184913/60399--2-.jpg?v=638394745193900000", "https://legobrasil.vtexassets.com/arquivos/ids/184914/60399--3-.jpg?v=638394745348930000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184911/60399.jpg?v=638394744991800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "560": {
+    id: "560",
+    name: "City -  F1® Grid com carros de corrida VCARB e Sauber",
+    price: 299.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 249,
+    ages: "8+",
+    pieces: 313,
+    itemNumber: "60474",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189002/60474.jpg?v=638733471099770000", "https://legobrasil.vtexassets.com/arquivos/ids/189003/60474--1-.jpg?v=638733471232330000", "https://legobrasil.vtexassets.com/arquivos/ids/189004/60474--2-.jpg?v=638733471653730000", "https://legobrasil.vtexassets.com/arquivos/ids/189005/60474--3-.jpg?v=638733472733700000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189002/60474.jpg?v=638733471099770000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "561": {
+    id: "561",
+    name: "City - Caminhão de resgate de praia salva-vidas",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 126,
+    ages: "8+",
+    pieces: 214,
+    itemNumber: "60453",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188667/60453.jpg?v=638709219189030000", "https://legobrasil.vtexassets.com/arquivos/ids/188668/60453--1-.jpg?v=638709219570700000", "https://legobrasil.vtexassets.com/arquivos/ids/188669/60453--2-.jpg?v=638709219659500000", "https://legobrasil.vtexassets.com/arquivos/ids/188670/60453--3-.jpg?v=638709219760600000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188667/60453.jpg?v=638709219189030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "562": {
+    id: "562",
+    name: "City - Submarino Explorador de Águas Profundas",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 332,
+    ages: "8+",
+    pieces: 842,
+    itemNumber: "60379",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/183600/60379-lego-city-submarino-explorador-de-aguas-profundas--3-.jpg?v=638240963494270000", "https://legobrasil.vtexassets.com/arquivos/ids/183601/60379-lego-city-submarino-explorador-de-aguas-profundas--1-.jpg?v=638240963629900000", "https://legobrasil.vtexassets.com/arquivos/ids/183602/60379-lego-city-submarino-explorador-de-aguas-profundas--2-.jpg?v=638240963764330000", "https://legobrasil.vtexassets.com/arquivos/ids/183603/60379-lego-city-submarino-explorador-de-aguas-profundas.jpg?v=638240963934970000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183600/60379-lego-city-submarino-explorador-de-aguas-profundas--3-.jpg?v=638240963494270000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "563": {
+    id: "563",
+    name: "City - Trator de Construção",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 398,
+    ages: "8+",
+    pieces: 88,
+    itemNumber: "HASH_58BD13",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/163145/60219_prod.jpg?v=636832639816030000", "https://legobrasil.vtexassets.com/arquivos/ids/163146/60219_back_01.jpg?v=636832639909370000", "https://legobrasil.vtexassets.com/arquivos/ids/163147/60219_back_03.jpg?v=636832640106700000", "https://legobrasil.vtexassets.com/arquivos/ids/163148/60219_box1_v29.jpg?v=636832640188830000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163145/60219_prod.jpg?v=636832639816030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "564": {
+    id: "564",
+    name: "City - Desvios",
+    price: 149.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 66,
+    ages: "8+",
+    pieces: 8,
+    itemNumber: "HASH_7D9303",
+    vipPoints: 9,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/171109/60238_prod.jpg?v=637280031834700000", "https://legobrasil.vtexassets.com/arquivos/ids/171110/60238_box2_v39.jpg?v=637280032153930000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/171109/60238_prod.jpg?v=637280031834700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "565": {
+    id: "565",
+    name: "City - Delegacia de Policia",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 413,
+    ages: "8+",
+    pieces: 668,
+    itemNumber: "60316",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/177250/60316_Prod.jpg?v=637782035483270000", "https://legobrasil.vtexassets.com/arquivos/ids/177251/60316_WEB_PRI_NOBG.jpg?v=637782035608600000", "https://legobrasil.vtexassets.com/arquivos/ids/177252/60316_WEB_SEC01_NOBG.jpg?v=637782038007130000", "https://legobrasil.vtexassets.com/arquivos/ids/177253/60316_WEB_SEC02_NOBG.jpg?v=637782038137030000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/177250/60316_Prod.jpg?v=637782035483270000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "566": {
+    id: "566",
+    name: "Friends - Festa de aniversário de gato e casa na árvore",
+    price: 279.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 165,
+    ages: "8+",
+    pieces: 321,
+    itemNumber: "42666",
+    vipPoints: 18,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190702/42666-LEGO-Friends-festa-aniversario-gato-casa-arvore -4-.jpg?v=638852511738530000", "https://legobrasil.vtexassets.com/arquivos/ids/190703/42666-LEGO-Friends-festa-aniversario-gato-casa-arvore -3-.jpg?v=638852511738570000", "https://legobrasil.vtexassets.com/arquivos/ids/190704/42666-LEGO-Friends-festa-aniversario-gato-casa-arvore -2-.jpg?v=638852511738600000", "https://legobrasil.vtexassets.com/arquivos/ids/190705/42666-LEGO-Friends-festa-aniversario-gato-casa-arvore -1-.jpg?v=638852511738630000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190702/42666-LEGO-Friends-festa-aniversario-gato-casa-arvore -4-.jpg?v=638852511738530000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "567": {
+    id: "567",
+    name: "Friends - Festa à fantasia com unicórnio e fada",
+    price: 379.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 462,
+    ages: "8+",
+    pieces: 261,
+    itemNumber: "42661",
+    vipPoints: 24,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190696/42661-LEGO-Friends-festa-a-fantasia-com-unicornio-e-fada -5-.jpg?v=638852511268670000", "https://legobrasil.vtexassets.com/arquivos/ids/190697/42661-LEGO-Friends-festa-a-fantasia-com-unicornio-e-fada -4-.jpg?v=638852511268770000", "https://legobrasil.vtexassets.com/arquivos/ids/190698/42661-LEGO-Friends-festa-a-fantasia-com-unicornio-e-fada -3-.jpg?v=638852511268800000", "https://legobrasil.vtexassets.com/arquivos/ids/190699/42661-LEGO-Friends-festa-a-fantasia-com-unicornio-e-fada -2-.jpg?v=638852511268800000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190696/42661-LEGO-Friends-festa-a-fantasia-com-unicornio-e-fada -5-.jpg?v=638852511268670000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "568": {
+    id: "568",
+    name: "Friends - Calendário do Advento 2025",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 439,
+    ages: "8+",
+    pieces: 237,
+    itemNumber: "42668",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/191112/42668-LEGO-Friends-calendario-advento-2025 -7-.jpg?v=638901269932930000", "https://legobrasil.vtexassets.com/arquivos/ids/191113/42668-LEGO-Friends-calendario-advento-2025 -6-.jpg?v=638901269932970000", "https://legobrasil.vtexassets.com/arquivos/ids/191114/42668-LEGO-Friends-calendario-advento-2025 -5-.jpg?v=638901269933070000", "https://legobrasil.vtexassets.com/arquivos/ids/191115/42668-LEGO-Friends-calendario-advento-2025 -4-.jpg?v=638901269933170000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191112/42668-LEGO-Friends-calendario-advento-2025 -7-.jpg?v=638901269932930000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "569": {
+    id: "569",
+    name: "Friends - Rancho e Estábulo de Pôneis",
+    price: 699.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 212,
+    ages: "8+",
+    pieces: 727,
+    itemNumber: "42654",
+    vipPoints: 45,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190285/42654-LEGO-Friends-rancho-estabulo-poneis -5-.jpg?v=638847495469700000", "https://legobrasil.vtexassets.com/arquivos/ids/190286/42654-LEGO-Friends-rancho-estabulo-poneis -4-.jpg?v=638847495469730000", "https://legobrasil.vtexassets.com/arquivos/ids/190287/42654-LEGO-Friends-rancho-estabulo-poneis -3-.jpg?v=638847495469770000", "https://legobrasil.vtexassets.com/arquivos/ids/190288/42654-LEGO-Friends-rancho-estabulo-poneis -2-.jpg?v=638847495469800000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190285/42654-LEGO-Friends-rancho-estabulo-poneis -5-.jpg?v=638847495469700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "570": {
+    id: "570",
+    name: "Friends - Calendário do Advento 2024",
+    price: 279.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 464,
+    ages: "8+",
+    pieces: 272,
+    itemNumber: "42637",
+    vipPoints: 18,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186407/42637.jpg?v=638507774283830000", "https://legobrasil.vtexassets.com/arquivos/ids/186408/42637--1-.jpg?v=638876105144170000", "https://legobrasil.vtexassets.com/arquivos/ids/186409/42637--2-.jpg?v=638876105144200000", "https://legobrasil.vtexassets.com/arquivos/ids/186410/42637--3-.jpg?v=638876105144200000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186407/42637.jpg?v=638507774283830000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "571": {
+    id: "571",
+    name: "Friends - Apartamentos e lojas em Heartlake City",
+    price: 1699.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 214,
+    ages: "8+",
+    pieces: 2040,
+    itemNumber: "42670",
+    vipPoints: 110,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188548/42670.jpg?v=638708272707600000", "https://legobrasil.vtexassets.com/arquivos/ids/188549/42670--1-.jpg?v=638708272783500000", "https://legobrasil.vtexassets.com/arquivos/ids/188550/42670--2-.jpg?v=638708272871330000", "https://legobrasil.vtexassets.com/arquivos/ids/188551/42670--3-.jpg?v=638708272991200000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188548/42670.jpg?v=638708272707600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "572": {
+    id: "572",
+    name: "Friends - Clínica veterinária para cavalos e animais de estimação",
+    price: 479.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 153,
+    ages: "8+",
+    pieces: 428,
+    itemNumber: "42651",
+    vipPoints: 31,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188506/42651.jpg?v=638708256321970000", "https://legobrasil.vtexassets.com/arquivos/ids/188507/42651--1-.jpg?v=638708256427970000", "https://legobrasil.vtexassets.com/arquivos/ids/188508/42651--2-.jpg?v=638708256509000000", "https://legobrasil.vtexassets.com/arquivos/ids/188509/42651--3-.jpg?v=638708256737530000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188506/42651.jpg?v=638708256321970000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "573": {
+    id: "573",
+    name: "Friends - Loja Criativa de Tuning",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 291,
+    ages: "8+",
+    pieces: 413,
+    itemNumber: "HASH_BC8EE5",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/162603/41351_prod.jpg?v=636759207493700000", "https://legobrasil.vtexassets.com/arquivos/ids/162604/41351_back_09.jpg?v=636759207781600000", "https://legobrasil.vtexassets.com/arquivos/ids/162605/41351_front_08.jpg?v=636759209632330000", "https://legobrasil.vtexassets.com/arquivos/ids/162606/41351_side_02.jpg?v=636759209826970000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/162603/41351_prod.jpg?v=636759207493700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "574": {
+    id: "574",
+    name: "Friends - Estábulo da Mia",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 305,
+    ages: "8+",
+    pieces: 118,
+    itemNumber: "HASH_426D5E",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/163628/41361_prod.jpg?v=636843826477930000", "https://legobrasil.vtexassets.com/arquivos/ids/163629/41361_back_14.jpg?v=636843827031170000", "https://legobrasil.vtexassets.com/arquivos/ids/163630/41361_front_03.jpg?v=636843827189900000", "https://legobrasil.vtexassets.com/arquivos/ids/163631/41361_back_01.jpg?v=636843827276630000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/163628/41361_prod.jpg?v=636843826477930000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "575": {
+    id: "575",
+    name: "Friends - Lojinha de Acessórios",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 143,
+    ages: "8+",
+    pieces: 129,
+    itemNumber: "42608",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184573/42608_alt1.jpg?v=638385854430200000", "https://legobrasil.vtexassets.com/arquivos/ids/184574/42608_alt5.jpg?v=638385854584930000", "https://legobrasil.vtexassets.com/arquivos/ids/184575/42608_alt6.jpg?v=638385854687600000", "https://legobrasil.vtexassets.com/arquivos/ids/184576/42608_alt3.jpg?v=638385854958730000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184573/42608_alt1.jpg?v=638385854430200000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "576": {
+    id: "576",
+    name: "Friends - Aeroporto e avião de Heartlake City",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 104,
+    ages: "8+",
+    pieces: 958,
+    itemNumber: "42656",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188172/42656--8-.jpg?v=638693757764900000", "https://legobrasil.vtexassets.com/arquivos/ids/188173/42656--9-.jpg?v=638693757855370000", "https://legobrasil.vtexassets.com/arquivos/ids/188174/42656--10-.jpg?v=638693757959870000", "https://legobrasil.vtexassets.com/arquivos/ids/188175/42656--11-.jpg?v=638693758093670000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188172/42656--8-.jpg?v=638693757764900000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "577": {
+    id: "577",
+    name: "Friends - Carro para cuidar de cães",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.0,
+    reviews: 160,
+    ages: "8+",
+    pieces: 60,
+    itemNumber: "42635",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186900/42635.jpg?v=638525090500470000", "https://legobrasil.vtexassets.com/arquivos/ids/186901/42635--1-.jpg?v=638525090584400000", "https://legobrasil.vtexassets.com/arquivos/ids/186902/42635--2-.jpg?v=638525090720170000", "https://legobrasil.vtexassets.com/arquivos/ids/186903/42635--3-.jpg?v=638525090800330000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186900/42635.jpg?v=638525090500470000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "578": {
+    id: "578",
+    name: "Friends - Barraca de Algodão-doce e Motocicleta",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.0,
+    reviews: 348,
+    ages: "8+",
+    pieces: 110,
+    itemNumber: "42643",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188457/42643.jpg?v=638708159328000000", "https://legobrasil.vtexassets.com/arquivos/ids/188458/42643--1-.jpg?v=638708159459700000", "https://legobrasil.vtexassets.com/arquivos/ids/188459/42643--2-.jpg?v=638708159615770000", "https://legobrasil.vtexassets.com/arquivos/ids/188460/42643--3-.jpg?v=638708159873270000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188457/42643.jpg?v=638708159328000000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "579": {
+    id: "579",
+    name: "Friends - Resort de praia para férias em família",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 486,
+    ages: "8+",
+    pieces: 1140,
+    itemNumber: "42673",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190707/42673-LEGO-Friends-Resort-de-praia-para-ferias-em-familia -6-.jpg?v=638852512242900000", "https://legobrasil.vtexassets.com/arquivos/ids/190708/42673-LEGO-Friends-Resort-de-praia-para-ferias-em-familia -5-.jpg?v=638852512242930000", "https://legobrasil.vtexassets.com/arquivos/ids/190709/42673-LEGO-Friends-Resort-de-praia-para-ferias-em-familia -4-.jpg?v=638852512242970000", "https://legobrasil.vtexassets.com/arquivos/ids/190710/42673-LEGO-Friends-Resort-de-praia-para-ferias-em-familia -3-.jpg?v=638852512243000000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190707/42673-LEGO-Friends-Resort-de-praia-para-ferias-em-familia -6-.jpg?v=638852512242900000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "580": {
+    id: "580",
+    name: "Friends - Veículo de Acampamento para Observação de Estrelas",
+    price: 279.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 263,
+    ages: "8+",
+    pieces: 364,
+    itemNumber: "42603",
+    vipPoints: 18,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184959/42603.jpg?v=638394763666370000", "https://legobrasil.vtexassets.com/arquivos/ids/184960/42603--3-.jpg?v=638394763838970000", "https://legobrasil.vtexassets.com/arquivos/ids/184961/42603--2-.jpg?v=638394763953770000", "https://legobrasil.vtexassets.com/arquivos/ids/184962/42603--1-.jpg?v=638394764104930000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184959/42603.jpg?v=638394763666370000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "581": {
+    id: "581",
+    name: "Friends - Salão de Cabeleireiro e Loja de Acessórios",
+    price: 429.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 381,
+    ages: "8+",
+    pieces: 347,
+    itemNumber: "42662",
+    vipPoints: 27,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188526/42662.jpg?v=638708262050530000", "https://legobrasil.vtexassets.com/arquivos/ids/188527/42662--1-.jpg?v=638708267073630000", "https://legobrasil.vtexassets.com/arquivos/ids/188528/42662--2-.jpg?v=638708267303900000", "https://legobrasil.vtexassets.com/arquivos/ids/188529/42662--3-.jpg?v=638708267461270000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188526/42662.jpg?v=638708262050530000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "582": {
+    id: "582",
+    name: "Friends - Dia de Adoção de Animais de Estimação",
+    price: 429.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 205,
+    ages: "8+",
+    pieces: 400,
+    itemNumber: "42615",
+    vipPoints: 27,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184943/42615.jpg?v=638394756636900000", "https://legobrasil.vtexassets.com/arquivos/ids/184944/42615--1-.jpg?v=638394756765100000", "https://legobrasil.vtexassets.com/arquivos/ids/184945/42615--2-.jpg?v=638394756942600000", "https://legobrasil.vtexassets.com/arquivos/ids/184946/42615--3-.jpg?v=638394757023770000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184943/42615.jpg?v=638394756636900000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "583": {
+    id: "583",
+    name: "Friends - Casa Minúscula Móvel",
+    price: 619.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 472,
+    ages: "8+",
+    pieces: 785,
+    itemNumber: "41735",
+    vipPoints: 40,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/181803/41735_prod.jpg?v=638084673501270000", "https://legobrasil.vtexassets.com/arquivos/ids/181804/41735_web_sec04_nobg.png?v=638084674733630000", "https://legobrasil.vtexassets.com/arquivos/ids/181805/41735_web_sec03_nobg.png?v=638084677084870000", "https://legobrasil.vtexassets.com/arquivos/ids/181806/41735_Box1_v29.jpg?v=638084678066300000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181803/41735_prod.jpg?v=638084673501270000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "584": {
+    id: "584",
+    name: "Friends - Centro de Resgate Marítimo",
+    price: 459.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 307,
+    ages: "8+",
+    pieces: 376,
+    itemNumber: "41736",
+    vipPoints: 29,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/183075/41736-lego-friends-centro-de-resgate-maritimo.jpg?v=638222801252970000", "https://legobrasil.vtexassets.com/arquivos/ids/183076/41736-lego-friends-centro-de-resgate-maritimo--1-.jpg?v=638222801334330000", "https://legobrasil.vtexassets.com/arquivos/ids/183077/41736-lego-friends-centro-de-resgate-maritimo--2-.jpg?v=638222801434370000", "https://legobrasil.vtexassets.com/arquivos/ids/183078/41736-lego-friends-centro-de-resgate-maritimo--3-.jpg?v=638222801521200000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183075/41736-lego-friends-centro-de-resgate-maritimo.jpg?v=638222801252970000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "585": {
+    id: "585",
+    name: "Friends - A Casa da Mia",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 217,
+    ages: "8+",
+    pieces: 715,
+    itemNumber: "HASH_DEDAFB",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/169850/41369_prod.jpg?v=637081502583030000", "https://legobrasil.vtexassets.com/arquivos/ids/169851/41369_back_09.jpg?v=637081502686570000", "https://legobrasil.vtexassets.com/arquivos/ids/169852/41369_top_01.jpg?v=637081502806770000", "https://legobrasil.vtexassets.com/arquivos/ids/169853/41369_side_01.jpg?v=637081502917700000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/169850/41369_prod.jpg?v=637081502583030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "586": {
+    id: "586",
+    name: "Friends - Ônibus de Heartlake City",
+    price: 459.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 477,
+    ages: "8+",
+    pieces: 480,
+    itemNumber: "41759",
+    vipPoints: 29,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/182852/41759-lego-friends-onibus-de-heartlake-city--2-.jpg?v=638199260072930000", "https://legobrasil.vtexassets.com/arquivos/ids/182853/41759-lego-friends-onibus-de-heartlake-city--3-.jpg?v=638199260153900000", "https://legobrasil.vtexassets.com/arquivos/ids/182854/41759-lego-friends-onibus-de-heartlake-city--1-.jpg?v=638199260242430000", "https://legobrasil.vtexassets.com/arquivos/ids/182855/41759-lego-friends-onibus-de-heartlake-city.jpg?v=638199260328770000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182852/41759-lego-friends-onibus-de-heartlake-city--2-.jpg?v=638199260072930000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "587": {
+    id: "587",
+    name: "Animal Crossing - Casa aconchegante da Goldie",
+    price: 179.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 339,
+    ages: "8+",
+    pieces: 149,
+    itemNumber: "77058",
+    vipPoints: 11,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190335/77058-lego-animal-crossing-casa-aconchegante-da-goldie -3-.jpg?v=638848139276700000", "https://legobrasil.vtexassets.com/arquivos/ids/190336/77058-lego-animal-crossing-casa-aconchegante-da-goldie -2-.jpg?v=638848139276900000", "https://legobrasil.vtexassets.com/arquivos/ids/190337/77058-lego-animal-crossing-casa-aconchegante-da-goldie -1-.jpg?v=638848139276930000", "https://legobrasil.vtexassets.com/arquivos/ids/190338/77058-lego-animal-crossing-casa-aconchegante-da-goldie.jpg?v=638848139277030000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190335/77058-lego-animal-crossing-casa-aconchegante-da-goldie -3-.jpg?v=638848139276700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "588": {
+    id: "588",
+    name: "Animal Crossing™ - Admirando de estrelas com Celeste",
+    price: 89.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 358,
+    ages: "8+",
+    pieces: 78,
+    itemNumber: "77053",
+    vipPoints: 5,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187903/77053.jpg?v=638683283529830000", "https://legobrasil.vtexassets.com/arquivos/ids/187904/77053--1-.jpg?v=638683283680270000", "https://legobrasil.vtexassets.com/arquivos/ids/187905/77053--2-.jpg?v=638683283783400000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187903/77053.jpg?v=638683283529830000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "589": {
+    id: "589",
+    name: "Animal Crossing™ - Passeio de barco do Kapp'n",
+    price: 279.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 346,
+    ages: "8+",
+    pieces: 233,
+    itemNumber: "77048",
+    vipPoints: 18,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/185249/77048.jpg?v=638429303827500000", "https://legobrasil.vtexassets.com/arquivos/ids/185250/77048--1-.jpg?v=638429304074270000", "https://legobrasil.vtexassets.com/arquivos/ids/185251/77048--2-.jpg?v=638429304419500000", "https://legobrasil.vtexassets.com/arquivos/ids/185252/77048--3-.jpg?v=638429304635500000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185249/77048.jpg?v=638429303827500000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "590": {
+    id: "590",
+    name: "Animal Crossing™ - Voe com Dodo Airlines",
+    price: 349.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 225,
+    ages: "8+",
+    pieces: 292,
+    itemNumber: "77051",
+    vipPoints: 22,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187492/77051.jpg?v=638618512510900000", "https://legobrasil.vtexassets.com/arquivos/ids/187493/77051--1-.jpg?v=638618512597970000", "https://legobrasil.vtexassets.com/arquivos/ids/187494/77051--2-.jpg?v=638618512686030000", "https://legobrasil.vtexassets.com/arquivos/ids/187495/77051--5-.jpg?v=638618512816770000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187492/77051.jpg?v=638618512510900000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "591": {
+    id: "591",
+    name: "Animal Crossing™ - Trailer e loja de jardinagem do Leif",
+    price: 279.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 297,
+    ages: "8+",
+    pieces: 263,
+    itemNumber: "77054",
+    vipPoints: 18,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188155/77054.jpg?v=638693676981670000", "https://legobrasil.vtexassets.com/arquivos/ids/188156/77054--1-.jpg?v=638693677115700000", "https://legobrasil.vtexassets.com/arquivos/ids/188157/77054--2-.jpg?v=638693677234800000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188155/77054.jpg?v=638693676981670000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "592": {
+    id: "592",
+    name: "Animal Crossing™ - Acampamento da Bunnie",
+    price: 199.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 479,
+    ages: "8+",
+    pieces: 164,
+    itemNumber: "77047",
+    vipPoints: 12,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/185242/77047.jpg?v=638429300665370000", "https://legobrasil.vtexassets.com/arquivos/ids/185243/77047--1-.jpg?v=638429300774470000", "https://legobrasil.vtexassets.com/arquivos/ids/185244/77047--2-.jpg?v=638429300885030000", "https://legobrasil.vtexassets.com/arquivos/ids/185245/77047--3-.jpg?v=638429302656700000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185242/77047.jpg?v=638429300665370000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "593": {
+    id: "593",
+    name: "Animal Crossing™ - Visita de Isabelle",
+    price: 379.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 54,
+    ages: "8+",
+    pieces: 389,
+    itemNumber: "77049",
+    vipPoints: 24,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/185256/77049.jpg?v=638429307299430000", "https://legobrasil.vtexassets.com/arquivos/ids/185257/77049--1-.jpg?v=638429307713030000", "https://legobrasil.vtexassets.com/arquivos/ids/185258/77049--3-.jpg?v=638429307982030000", "https://legobrasil.vtexassets.com/arquivos/ids/185259/77049--4-.jpg?v=638429308093430000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185256/77049.jpg?v=638429307299430000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "594": {
+    id: "594",
+    name: "Animal Crossing™ - Festa de aniversario do Julian",
+    price: 149.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 492,
+    ages: "8+",
+    pieces: 170,
+    itemNumber: "77046",
+    vipPoints: 9,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/185237/77046.jpg?v=638429298870770000", "https://legobrasil.vtexassets.com/arquivos/ids/185238/77046--1-.jpg?v=638429299083200000", "https://legobrasil.vtexassets.com/arquivos/ids/185239/77046--2-.jpg?v=638429299818170000", "https://legobrasil.vtexassets.com/arquivos/ids/185240/77046--3-.jpg?v=638429299950600000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185237/77046.jpg?v=638429298870770000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "595": {
+    id: "595",
+    name: "Animal Crossing™ - Butique das irmãs Able",
+    price: 379.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 278,
+    ages: "8+",
+    pieces: 322,
+    itemNumber: "77055",
+    vipPoints: 24,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188158/77055.jpg?v=638693677917030000", "https://legobrasil.vtexassets.com/arquivos/ids/188159/77055--1-.jpg?v=638693678043200000", "https://legobrasil.vtexassets.com/arquivos/ids/188160/77055--2-.jpg?v=638693678141800000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188158/77055.jpg?v=638693677917030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "596": {
+    id: "596",
+    name: "Animal Crossing™ - Nook's Cranny e Casa de Rosie",
+    price: 699.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 458,
+    ages: "8+",
+    pieces: 535,
+    itemNumber: "77050",
+    vipPoints: 45,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/185263/77050.jpg?v=638429308941130000", "https://legobrasil.vtexassets.com/arquivos/ids/185264/77050--1-.jpg?v=638429309140830000", "https://legobrasil.vtexassets.com/arquivos/ids/185265/77050--2-.jpg?v=638429309298570000", "https://legobrasil.vtexassets.com/arquivos/ids/185266/77050--3-.jpg?v=638429310171000000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185263/77050.jpg?v=638429308941130000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "597": {
+    id: "597",
+    name: "Animal Crossing™ - Concerto de K.K. na praça",
+    price: 799.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 63,
+    ages: "8+",
+    pieces: 550,
+    itemNumber: "77052",
+    vipPoints: 51,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187498/77052.jpg?v=638618513559400000", "https://legobrasil.vtexassets.com/arquivos/ids/187499/77052--1-.jpg?v=638907816244870000", "https://legobrasil.vtexassets.com/arquivos/ids/187500/77052--2-.jpg?v=638907816245030000", "https://legobrasil.vtexassets.com/arquivos/ids/187501/77052--3-.jpg?v=638907816245030000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187498/77052.jpg?v=638618513559400000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "598": {
+    id: "598",
+    name: "Animal Crossing™ - Coleção do Museu Blathers",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 124,
+    ages: "8+",
+    pieces: 543,
+    itemNumber: "77056",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190339/77056-lego-animal-crossing-colecao-museu-blathers -3-.jpg?v=638848141065530000", "https://legobrasil.vtexassets.com/arquivos/ids/190340/77056-lego-animal-crossing-colecao-museu-blathers -2-.jpg?v=638848141065600000", "https://legobrasil.vtexassets.com/arquivos/ids/190341/77056-lego-animal-crossing-colecao-museu-blathers -1-.jpg?v=638848141065630000", "https://legobrasil.vtexassets.com/arquivos/ids/190342/77056-lego-animal-crossing-colecao-museu-blathers.jpg?v=638848141065730000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190339/77056-lego-animal-crossing-colecao-museu-blathers -3-.jpg?v=638848141065530000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "599": {
+    id: "599",
+    name: "Architecture - Fontana di Trevi",
+    price: 1599.99,
+    originalPrice: null,
+    rating: 4.0,
+    reviews: 69,
+    ages: "8+",
+    pieces: 1880,
+    itemNumber: "21062",
+    vipPoints: 103,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188971/21062.jpg?v=638731743690100000", "https://legobrasil.vtexassets.com/arquivos/ids/188972/21062--1-.jpg?v=638731743776870000", "https://legobrasil.vtexassets.com/arquivos/ids/188973/21062--2-.jpg?v=638731743872400000", "https://legobrasil.vtexassets.com/arquivos/ids/188974/21062--3-.jpg?v=638731743973730000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188971/21062.jpg?v=638731743690100000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "600": {
+    id: "600",
+    name: "Architecture - Estátua da Liberdade",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 190,
+    ages: "8+",
+    pieces: 1685,
+    itemNumber: "HASH_54EF58",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/162368/21042_Prod.jpg?v=636707064740170000", "https://legobrasil.vtexassets.com/arquivos/ids/162369/21042_Prod_2.jpg?v=636707065249600000", "https://legobrasil.vtexassets.com/arquivos/ids/162370/21042_Prod_3.jpg?v=636707065385100000", "https://legobrasil.vtexassets.com/arquivos/ids/162371/21042_Prod_1.jpg?v=636707065531130000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/162368/21042_Prod.jpg?v=636707064740170000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "601": {
+    id: "601",
+    name: "Architecture - Castelo Himeji",
+    price: 1499.99,
+    originalPrice: null,
+    rating: 4.0,
+    reviews: 366,
+    ages: "8+",
+    pieces: 2125,
+    itemNumber: "21060",
+    vipPoints: 97,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/183649/21060-lego-architecture-castelo-himeji--4-.jpg?v=638240979902800000", "https://legobrasil.vtexassets.com/arquivos/ids/183650/21060-lego-architecture-castelo-himeji--1-.jpg?v=638240980440330000", "https://legobrasil.vtexassets.com/arquivos/ids/183651/21060-lego-architecture-castelo-himeji--2-.jpg?v=638240980591370000", "https://legobrasil.vtexassets.com/arquivos/ids/183652/21060-lego-architecture-castelo-himeji--3-.jpg?v=638240980693300000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183649/21060-lego-architecture-castelo-himeji--4-.jpg?v=638240979902800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "602": {
+    id: "602",
+    name: "Architecture - Paris",
+    price: 499.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 382,
+    ages: "8+",
+    pieces: 649,
+    itemNumber: "HASH_37FF6A",
+    vipPoints: 32,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/164902/21044_prod.jpg?v=636910430416430000", "https://legobrasil.vtexassets.com/arquivos/ids/164903/21044_back_01.jpg?v=636910430524870000", "https://legobrasil.vtexassets.com/arquivos/ids/164904/21044_front_01.jpg?v=636910430606400000", "https://legobrasil.vtexassets.com/arquivos/ids/164905/21044_box1_v29.jpg?v=636910430696830000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/164902/21044_prod.jpg?v=636910430416430000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "603": {
+    id: "603",
+    name: "Architecture - Castelo de Neuschwanstein",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 147,
+    ages: "8+",
+    pieces: 3455,
+    itemNumber: "21063",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190765/21063-LEGO-Architecture-castelo-de-neuschwanstein--4-.jpg?v=638907749045030000", "https://legobrasil.vtexassets.com/arquivos/ids/190766/21063-LEGO-Architecture-castelo-de-neuschwanstein--3-.jpg?v=638907749045200000", "https://legobrasil.vtexassets.com/arquivos/ids/190767/21063-LEGO-Architecture-castelo-de-neuschwanstein--2-.jpg?v=638907749045230000", "https://legobrasil.vtexassets.com/arquivos/ids/190768/21063-LEGO-Architecture-castelo-de-neuschwanstein.jpg?v=638871623325800000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190765/21063-LEGO-Architecture-castelo-de-neuschwanstein--4-.jpg?v=638907749045030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "604": {
+    id: "604",
+    name: "Architecture - Notre Dame de Paris",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 246,
+    ages: "8+",
+    pieces: 4383,
+    itemNumber: "21061",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186648/21061.jpg?v=638514867414900000", "https://legobrasil.vtexassets.com/arquivos/ids/186649/21061--1-.jpg?v=638514867510770000", "https://legobrasil.vtexassets.com/arquivos/ids/186650/21061--2-.jpg?v=638514867595100000", "https://legobrasil.vtexassets.com/arquivos/ids/186651/21061--3-.jpg?v=638514867710300000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186648/21061.jpg?v=638514867414900000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "605": {
+    id: "605",
+    name: "Architecture - Londres",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 125,
+    ages: "8+",
+    pieces: 468,
+    itemNumber: "HASH_31AEE9",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/161142/21034_prod.jpg?v=636561160081500000", "https://legobrasil.vtexassets.com/arquivos/ids/161143/21034_detail1.jpg?v=636561160211330000", "https://legobrasil.vtexassets.com/arquivos/ids/161881/21034_box.jpg?v=636656054132670000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/161142/21034_prod.jpg?v=636561160081500000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "606": {
+    id: "606",
+    name: "Architecture - Grande Pirâmide de Gizé",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.0,
+    reviews: 93,
+    ages: "8+",
+    pieces: 1476,
+    itemNumber: "HASH_965BC1",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/180001/21058_Lego_Architecture_Grande_Piramide_de_Gize_01.jpg?v=637968803462270000", "https://legobrasil.vtexassets.com/arquivos/ids/180002/21058_Lego_Architecture_Grande_Piramide_de_Gize_02.jpg?v=637968803565030000", "https://legobrasil.vtexassets.com/arquivos/ids/180003/21058_Lego_Architecture_Grande_Piramide_de_Gize_03.jpg?v=637968803741800000", "https://legobrasil.vtexassets.com/arquivos/ids/180004/21058_Lego_Architecture_Grande_Piramide_de_Gize_04.jpg?v=637968803842670000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/180001/21058_Lego_Architecture_Grande_Piramide_de_Gize_01.jpg?v=637968803462270000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "607": {
+    id: "607",
+    name: "Architecture - Cidade de Nova Iorque",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 253,
+    ages: "8+",
+    pieces: 598,
+    itemNumber: "HASH_86BA17",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/161122/21028_prod.jpg?v=636561147973230000", "https://legobrasil.vtexassets.com/arquivos/ids/161123/21028_detail1.jpg?v=636561148136800000", "https://legobrasil.vtexassets.com/arquivos/ids/161124/21028_detail2.jpg?v=636561148285900000", "https://legobrasil.vtexassets.com/arquivos/ids/161884/21028_box.jpg?v=636656189431670000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/161122/21028_prod.jpg?v=636561147973230000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "608": {
+    id: "608",
+    name: "Architecture - A Casa Branca",
+    price: 299.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 391,
+    ages: "8+",
+    pieces: 1483,
+    itemNumber: "HASH_61011C",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/171285/lego_architecture_a_casa_branca_01.jpg?v=637344922037630000", "https://legobrasil.vtexassets.com/arquivos/ids/171286/lego_architecture_a_casa_branca_02.jpg?v=637344922305670000", "https://legobrasil.vtexassets.com/arquivos/ids/171287/lego_architecture_a_casa_branca_03.jpg?v=637344922486130000", "https://legobrasil.vtexassets.com/arquivos/ids/171288/lego_architecture_a_casa_branca_04.jpg?v=637344923479400000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/171285/lego_architecture_a_casa_branca_01.jpg?v=637344922037630000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "609": {
+    id: "609",
+    name: "Architecture - Museu Solomon R. Guggenheim",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 166,
+    ages: "8+",
+    pieces: 744,
+    itemNumber: "HASH_1875E9",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/161145/21035_prod.jpg?v=636561164296770000", "https://legobrasil.vtexassets.com/arquivos/ids/161146/21035_detail1.jpg?v=636561164422230000", "https://legobrasil.vtexassets.com/arquivos/ids/161147/21035_detail2.jpg?v=636561164523700000", "https://legobrasil.vtexassets.com/arquivos/ids/161738/21035_box_front.jpg?v=636649160742570000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/161145/21035_prod.jpg?v=636561164296770000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "610": {
+    id: "610",
+    name: "Art - Coleção Fauna - Tigre",
+    price: 559.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 256,
+    ages: "8+",
+    pieces: 744,
+    itemNumber: "31217",
+    vipPoints: 36,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189577/31217-LEGO-Art-colecao-fauna-tigre.jpg?v=638829178919970000", "https://legobrasil.vtexassets.com/arquivos/ids/189578/31217-LEGO-Art-colecao-fauna-tigre--1-.jpg?v=638829179087200000", "https://legobrasil.vtexassets.com/arquivos/ids/189579/31217-LEGO-Art-colecao-fauna-tigre--2-.jpg?v=638829179194700000", "https://legobrasil.vtexassets.com/arquivos/ids/189580/31217-LEGO-Art-colecao-fauna-tigre--3-.jpg?v=638829179384030000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189577/31217-LEGO-Art-colecao-fauna-tigre.jpg?v=638829178919970000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "611": {
+    id: "611",
+    name: "Art - Keith Haring – Figuras Dançantes",
+    price: 1179.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 361,
+    ages: "8+",
+    pieces: 1773,
+    itemNumber: "31216",
+    vipPoints: 76,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189524/31216-lego-art-keith-haring-figuras-dancantes.jpg?v=638828284181100000", "https://legobrasil.vtexassets.com/arquivos/ids/189525/31216-lego-art-keith-haring-figuras-dancantes--1-.jpg?v=638844560323030000", "https://legobrasil.vtexassets.com/arquivos/ids/189526/31216-lego-art-keith-haring-figuras-dancantes--2-.jpg?v=638844560323200000", "https://legobrasil.vtexassets.com/arquivos/ids/189527/31216-lego-art-keith-haring-figuras-dancantes--3-.jpg?v=638844560323230000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189524/31216-lego-art-keith-haring-figuras-dancantes.jpg?v=638828284181100000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "612": {
+    id: "612",
+    name: "Art - Vincent van Gogh – Girassóis",
+    price: 1999.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 93,
+    ages: "8+",
+    pieces: 2615,
+    itemNumber: "31215",
+    vipPoints: 129,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189103/31215.jpg?v=638739503887230000", "https://legobrasil.vtexassets.com/arquivos/ids/189104/31215--1-.jpg?v=638739503956770000", "https://legobrasil.vtexassets.com/arquivos/ids/189105/31215--2-.jpg?v=638739504074400000", "https://legobrasil.vtexassets.com/arquivos/ids/189106/31215--3-.jpg?v=638739504203900000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189103/31215.jpg?v=638739503887230000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "613": {
+    id: "613",
+    name: "Art - A Via Láctea",
+    price: 1999.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 62,
+    ages: "8+",
+    pieces: 3091,
+    itemNumber: "31212",
+    vipPoints: 129,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186317/31212.jpg?v=638496676066770000", "https://legobrasil.vtexassets.com/arquivos/ids/186318/31212--1-.jpg?v=638496676193070000", "https://legobrasil.vtexassets.com/arquivos/ids/186319/31212--2-.jpg?v=638496676290900000", "https://legobrasil.vtexassets.com/arquivos/ids/186320/31212--3-.jpg?v=638496676434200000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186317/31212.jpg?v=638496676066770000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "614": {
+    id: "614",
+    name: "Art - LOVE",
+    price: 799.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 437,
+    ages: "8+",
+    pieces: 791,
+    itemNumber: "31214",
+    vipPoints: 51,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187825/31214.jpg?v=638670460696070000", "https://legobrasil.vtexassets.com/arquivos/ids/187826/31214--1-.jpg?v=638670460769130000", "https://legobrasil.vtexassets.com/arquivos/ids/187827/31214--2-.jpg?v=638670460841530000", "https://legobrasil.vtexassets.com/arquivos/ids/187828/31214--3-.jpg?v=638670460931600000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187825/31214.jpg?v=638670460696070000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "615": {
+    id: "615",
+    name: "Art - Mona Lisa",
+    price: 959.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 215,
+    ages: "8+",
+    pieces: 1503,
+    itemNumber: "31213",
+    vipPoints: 62,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186544/31213.jpg?v=638513255810800000", "https://legobrasil.vtexassets.com/arquivos/ids/186545/31213--1-.jpg?v=638513256433900000", "https://legobrasil.vtexassets.com/arquivos/ids/186546/31213--2-.jpg?v=638513256592430000", "https://legobrasil.vtexassets.com/arquivos/ids/186547/31213--3-.jpg?v=638513256728130000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186544/31213.jpg?v=638513255810800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "616": {
+    id: "616",
+    name: "Art - Hokusai: A Grande Onda",
+    price: 959.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 96,
+    ages: "8+",
+    pieces: 1810,
+    itemNumber: "31208",
+    vipPoints: 62,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/181758/31208_prod.jpg?v=638084651109830000", "https://legobrasil.vtexassets.com/arquivos/ids/181759/31208_lifestyle_016.jpg?v=638084651215830000", "https://legobrasil.vtexassets.com/arquivos/ids/181760/31208_lifestyle_021.jpg?v=638084651318100000", "https://legobrasil.vtexassets.com/arquivos/ids/181761/31208_box1_v29.png?v=638084651432130000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181758/31208_prod.jpg?v=638084651109830000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "617": {
+    id: "617",
+    name: "Art - Papagaio Arara",
+    price: 559.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 285,
+    ages: "8+",
+    pieces: 644,
+    itemNumber: "31211",
+    vipPoints: 36,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/185014/31211.jpg?v=638394780204470000", "https://legobrasil.vtexassets.com/arquivos/ids/185015/31211--3-.jpg?v=638394780368530000", "https://legobrasil.vtexassets.com/arquivos/ids/185016/31211--4-.jpg?v=638394780521030000", "https://legobrasil.vtexassets.com/arquivos/ids/185017/31211--1-.jpg?v=638394780655070000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185014/31211.jpg?v=638394780204470000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "618": {
+    id: "618",
+    name: "Art - Mapa do Mundo",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 489,
+    ages: "8+",
+    pieces: 11,
+    itemNumber: "HASH_A4A24F",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/173617/lego_31203_art_mapa_do_mundo_01.jpg?v=637576618700730000", "https://legobrasil.vtexassets.com/arquivos/ids/173618/lego_31203_art_mapa_do_mundo_02.jpg?v=637576618790770000", "https://legobrasil.vtexassets.com/arquivos/ids/173619/lego_31203_art_mapa_do_mundo_03.jpg?v=637576618899630000", "https://legobrasil.vtexassets.com/arquivos/ids/173620/lego_31203_art_mapa_do_mundo_04.jpg?v=637576619005100000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/173617/lego_31203_art_mapa_do_mundo_01.jpg?v=637576618700730000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "619": {
+    id: "619",
+    name: "Art - Arte Moderna",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 499,
+    ages: "8+",
+    pieces: 805,
+    itemNumber: "31210",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/183669/31210-lego-art-arte-moderna--3-.jpg?v=638241757310600000", "https://legobrasil.vtexassets.com/arquivos/ids/183670/31210-lego-art-arte-moderna.jpg?v=638241757451600000", "https://legobrasil.vtexassets.com/arquivos/ids/183671/31210-lego-art-arte-moderna--1-.jpg?v=638241757536700000", "https://legobrasil.vtexassets.com/arquivos/ids/183672/31210-lego-art-arte-moderna--2-.jpg?v=638241757621830000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183669/31210-lego-art-arte-moderna--3-.jpg?v=638241757310600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "620": {
+    id: "620",
+    name: "Avatar - Toruk Makto e Árvore das Almas",
+    price: 1199.99,
+    originalPrice: null,
+    rating: 4.0,
+    reviews: 290,
+    ages: "8+",
+    pieces: 1212,
+    itemNumber: "75574",
+    vipPoints: 77,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/181319/Sem-titulo-2.jpg?v=638031775572700000", "https://legobrasil.vtexassets.com/arquivos/ids/181320/Sem-titulo-1.jpg?v=638031775769500000", "https://legobrasil.vtexassets.com/arquivos/ids/181321/Sem-titulo-3.jpg?v=638031775875300000", "https://legobrasil.vtexassets.com/arquivos/ids/181322/Sem-titulo-5.jpg?v=638031775998400000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181319/Sem-titulo-2.jpg?v=638031775572700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "621": {
+    id: "621",
+    name: "Avatar - O Primeiro Voo em Banshee de Jake e Neytiri",
+    price: 499.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 253,
+    ages: "8+",
+    pieces: 572,
+    itemNumber: "75572",
+    vipPoints: 32,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/181330/75572_prod.jpg?v=638031951649300000", "https://legobrasil.vtexassets.com/arquivos/ids/181331/75572_web_sec03_nobg.jpg?v=638031951877000000", "https://legobrasil.vtexassets.com/arquivos/ids/181332/75572_web_pri_nobg.jpg?v=638031952047530000", "https://legobrasil.vtexassets.com/arquivos/ids/181333/75572_lifestyle_cons_crop.jpg?v=638031952230330000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181330/75572_prod.jpg?v=638031951649300000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "622": {
+    id: "622",
+    name: "Avatar - Aventura com Skimwing",
+    price: 329.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 125,
+    ages: "8+",
+    pieces: 259,
+    itemNumber: "75576",
+    vipPoints: 21,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/182069/75576_prod.jpg?v=638088155719730000", "https://legobrasil.vtexassets.com/arquivos/ids/182070/75576_web_lineup_nobg.png?v=638088156055270000", "https://legobrasil.vtexassets.com/arquivos/ids/182071/75576_web_pri_nobg.png?v=638088156609070000", "https://legobrasil.vtexassets.com/arquivos/ids/182072/75576_lifestyle_cons_2.png?v=638088157220770000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182069/75576_prod.jpg?v=638088155719730000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "623": {
+    id: "623",
+    name: "Avatar - Montanhas Flutuantes: Site 26 e RDA Samson",
+    price: 599.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 258,
+    ages: "8+",
+    pieces: 887,
+    itemNumber: "75573",
+    vipPoints: 38,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/181324/75573_prod.jpg?v=638031949476430000", "https://legobrasil.vtexassets.com/arquivos/ids/181325/75573_web_sec01_nobg.png?v=638031949654070000", "https://legobrasil.vtexassets.com/arquivos/ids/181326/75573_web_sec05_nobg.jpg?v=638031950149630000", "https://legobrasil.vtexassets.com/arquivos/ids/181327/75573_web_pri_nobg.jpg?v=638031950319900000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181324/75573_prod.jpg?v=638031949476430000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "624": {
+    id: "624",
+    name: "Avatar - Descoberta de Ilu",
+    price: 229.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 500,
+    ages: "8+",
+    pieces: 179,
+    itemNumber: "75575",
+    vipPoints: 14,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/182064/75575_prod.jpg?v=638088154201830000", "https://legobrasil.vtexassets.com/arquivos/ids/182065/75575_web_lineup_nobg.png?v=638088154305900000", "https://legobrasil.vtexassets.com/arquivos/ids/182066/75575_web_sec01_nobg.png?v=638088154507400000", "https://legobrasil.vtexassets.com/arquivos/ids/182067/75575_lifestyle_cons.png?v=638088154621930000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182064/75575_prod.jpg?v=638088154201830000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "625": {
+    id: "625",
+    name: "Bluey - Viagem de carro em família e praia de Bluey",
+    price: 279.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 412,
+    ages: "8+",
+    pieces: 133,
+    itemNumber: "11202",
+    vipPoints: 18,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189322/11202.jpg?v=638772322257330000", "https://legobrasil.vtexassets.com/arquivos/ids/189323/11202--1-.jpg?v=638772322379030000", "https://legobrasil.vtexassets.com/arquivos/ids/189324/11202--2-.jpg?v=638772322528830000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189322/11202.jpg?v=638772322257330000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "626": {
+    id: "626",
+    name: "Bluey - Casa da Família Bluey com Jogo da Memória",
+    price: 679.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 360,
+    ages: "8+",
+    pieces: 83,
+    itemNumber: "10459",
+    vipPoints: 44,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189328/10459.jpg?v=638773974725770000", "https://legobrasil.vtexassets.com/arquivos/ids/189329/10459--1-.jpg?v=638773975013530000", "https://legobrasil.vtexassets.com/arquivos/ids/189330/10459--2-.jpg?v=638773975108400000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189328/10459.jpg?v=638773974725770000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "627": {
+    id: "627",
+    name: "Bluey - Casa da família de Bluey",
+    price: 699.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 340,
+    ages: "8+",
+    pieces: 382,
+    itemNumber: "11203",
+    vipPoints: 45,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189319/11203.jpg?v=638772320753870000", "https://legobrasil.vtexassets.com/arquivos/ids/189320/11203--1-.jpg?v=638772320851470000", "https://legobrasil.vtexassets.com/arquivos/ids/189321/11203--2-.jpg?v=638772320996530000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189319/11203.jpg?v=638772320753870000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "628": {
+    id: "628",
+    name: "Bluey - Viagem do sorvete com Bluey",
+    price: 279.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 141,
+    ages: "8+",
+    pieces: 22,
+    itemNumber: "10458",
+    vipPoints: 18,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189313/10458.jpg?v=638772289801300000", "https://legobrasil.vtexassets.com/arquivos/ids/189314/10458--1-.jpg?v=638772290680900000", "https://legobrasil.vtexassets.com/arquivos/ids/189315/10458--2-.jpg?v=638772291270230000", "https://legobrasil.vtexassets.com/arquivos/ids/189316/10458--3-.jpg?v=638772291451130000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189313/10458.jpg?v=638772289801300000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "629": {
+    id: "629",
+    name: "Bluey - Diversão no parquinho com Bluey e Chloe",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 238,
+    ages: "8+",
+    pieces: 104,
+    itemNumber: "11201",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189325/11201.jpg?v=638772323336930000", "https://legobrasil.vtexassets.com/arquivos/ids/189326/11201--1-.jpg?v=638772323438200000", "https://legobrasil.vtexassets.com/arquivos/ids/189327/11201--2-.jpg?v=638772323540400000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189325/11201.jpg?v=638772323336930000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "630": {
+    id: "630",
+    name: "Brickheadz - A vingança dos heróis e vilões Sith™",
+    price: 479.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 381,
+    ages: "8+",
+    pieces: 656,
+    itemNumber: "40796",
+    vipPoints: 31,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189385/40796-lego-brickheadz-vinganca-dos-herois-e-viloes-sith.jpg?v=638805360308470000", "https://legobrasil.vtexassets.com/arquivos/ids/189386/40796-lego-brickheadz-vinganca-dos-herois-e-viloes-sith--1-.jpg?v=638805360462070000", "https://legobrasil.vtexassets.com/arquivos/ids/189387/40796-lego-brickheadz-vinganca-dos-herois-e-viloes-sith--2-.jpg?v=638805360626200000", "https://legobrasil.vtexassets.com/arquivos/ids/189388/40796-lego-brickheadz-vinganca-dos-herois-e-viloes-sith--3-.jpg?v=638805360820400000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189385/40796-lego-brickheadz-vinganca-dos-herois-e-viloes-sith.jpg?v=638805360308470000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "631": {
+    id: "631",
+    name: "Brickheadz - Luke Skywalker™ (Piloto Rebelde)",
+    price: 99.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 386,
+    ages: "8+",
+    pieces: 138,
+    itemNumber: "40795",
+    vipPoints: 6,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189390/40795-lego-brickheadz-luke-skywalker-piloto-rebelde.jpg?v=638805361688600000", "https://legobrasil.vtexassets.com/arquivos/ids/189391/40795-lego-brickheadz-luke-skywalker-piloto-rebelde--1-.jpg?v=638805361774900000", "https://legobrasil.vtexassets.com/arquivos/ids/189392/40795-lego-brickheadz-luke-skywalker-piloto-rebelde--2-.jpg?v=638805361870170000", "https://legobrasil.vtexassets.com/arquivos/ids/189393/40795-lego-brickheadz-luke-skywalker-piloto-rebelde--3-.jpg?v=638805361983500000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189390/40795-lego-brickheadz-luke-skywalker-piloto-rebelde.jpg?v=638805361688600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "632": {
+    id: "632",
+    name: "Brickheadz - Dumbo",
+    price: 99.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 442,
+    ages: "8+",
+    pieces: 176,
+    itemNumber: "40792",
+    vipPoints: 6,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188904/40792.jpg?v=638730008135600000", "https://legobrasil.vtexassets.com/arquivos/ids/188905/40792--1-.jpg?v=638750687759600000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188904/40792.jpg?v=638730008135600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "633": {
+    id: "633",
+    name: "BrickHeadz - Carl, Russel e Kevin",
+    price: 199.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 358,
+    ages: "8+",
+    pieces: 308,
+    itemNumber: "40752",
+    vipPoints: 12,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187704/40752.jpg?v=638646993838430000", "https://legobrasil.vtexassets.com/arquivos/ids/187705/40752--2-.jpg?v=638646994106470000", "https://legobrasil.vtexassets.com/arquivos/ids/187706/40752--3-.jpg?v=638646994261100000", "https://legobrasil.vtexassets.com/arquivos/ids/187707/40752--4-.jpg?v=638646994379670000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187704/40752.jpg?v=638646993838430000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "634": {
+    id: "634",
+    name: "BrickHeadz - Homem de Ferro MK5",
+    price: 99.99,
+    originalPrice: null,
+    rating: 4.0,
+    reviews: 117,
+    ages: "8+",
+    pieces: 101,
+    itemNumber: "40669",
+    vipPoints: 6,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187669/40669.jpg?v=638646981523600000", "https://legobrasil.vtexassets.com/arquivos/ids/187670/40669--1-.jpg?v=638646981769570000", "https://legobrasil.vtexassets.com/arquivos/ids/187671/40669--2-.jpg?v=638646981877270000", "https://legobrasil.vtexassets.com/arquivos/ids/187672/40669--3-.jpg?v=638646981984730000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187669/40669.jpg?v=638646981523600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "635": {
+    id: "635",
+    name: "Brickheadz - Bisonho",
+    price: 99.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 454,
+    ages: "8+",
+    pieces: 156,
+    itemNumber: "40797",
+    vipPoints: 6,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188906/40797.jpg?v=638730012023970000", "https://legobrasil.vtexassets.com/arquivos/ids/188907/40797--1-.jpg?v=638750687386700000", "https://legobrasil.vtexassets.com/arquivos/ids/188908/40797--2-.jpg?v=638750687386700000", "https://legobrasil.vtexassets.com/arquivos/ids/188909/40797--3-.jpg?v=638750687386700000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188906/40797.jpg?v=638730012023970000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "636": {
+    id: "636",
+    name: "Brickheadz - Tom e Jerry",
+    price: 149.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 320,
+    ages: "8+",
+    pieces: 212,
+    itemNumber: "40793",
+    vipPoints: 9,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188063/40793.jpg?v=638689312234970000", "https://legobrasil.vtexassets.com/arquivos/ids/188064/40793--1-.jpg?v=638689312317800000", "https://legobrasil.vtexassets.com/arquivos/ids/188065/40793--2-.jpg?v=638689312407970000", "https://legobrasil.vtexassets.com/arquivos/ids/188066/40793--3-.jpg?v=638689312525170000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188063/40793.jpg?v=638689312234970000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "637": {
+    id: "637",
+    name: "Brickheadz - Optimus Prime Robô e Veículo",
+    price: 199.99,
+    originalPrice: null,
+    rating: 4.0,
+    reviews: 344,
+    ages: "8+",
+    pieces: 237,
+    itemNumber: "40803",
+    vipPoints: 12,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189190/40803.jpg?v=638754022137070000", "https://legobrasil.vtexassets.com/arquivos/ids/189191/40803--1-.jpg?v=638754022682130000", "https://legobrasil.vtexassets.com/arquivos/ids/189192/40803--2-.jpg?v=638754022781770000", "https://legobrasil.vtexassets.com/arquivos/ids/189193/40803--3-.jpg?v=638754022889500000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189190/40803.jpg?v=638754022137070000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "638": {
+    id: "638",
+    name: "BrickHeadz - Batman™ 8 em 1",
+    price: 249.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 285,
+    ages: "8+",
+    pieces: 325,
+    itemNumber: "40748",
+    vipPoints: 16,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187683/40748.jpg?v=638646989212400000", "https://legobrasil.vtexassets.com/arquivos/ids/187684/40748--1-.jpg?v=638646989330200000", "https://legobrasil.vtexassets.com/arquivos/ids/187685/40748--2-.jpg?v=638646989429930000", "https://legobrasil.vtexassets.com/arquivos/ids/187686/40748--3-.jpg?v=638646989545600000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187683/40748.jpg?v=638646989212400000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "639": {
+    id: "639",
+    name: "Brickheadz - Bumblebee Robô e veículo",
+    price: 199.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 241,
+    ages: "8+",
+    pieces: 253,
+    itemNumber: "40804",
+    vipPoints: 12,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189197/40804.jpg?v=638754055808200000", "https://legobrasil.vtexassets.com/arquivos/ids/189198/40804--1-.jpg?v=638754055935970000", "https://legobrasil.vtexassets.com/arquivos/ids/189199/40804--2-.jpg?v=638754056056600000", "https://legobrasil.vtexassets.com/arquivos/ids/189200/40804--3-.jpg?v=638754056184730000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189197/40804.jpg?v=638754055808200000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "640": {
+    id: "640",
+    name: "Brickheadz - Panda Vermelho Mei",
+    price: 99.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 215,
+    ages: "8+",
+    pieces: 121,
+    itemNumber: "40798",
+    vipPoints: 6,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188912/40798.jpg?v=638730014039030000", "https://legobrasil.vtexassets.com/arquivos/ids/188913/40798--1-.jpg?v=638750688122270000", "https://legobrasil.vtexassets.com/arquivos/ids/188914/40798--2-.jpg?v=638750688122400000", "https://legobrasil.vtexassets.com/arquivos/ids/188915/40798--3-.jpg?v=638750688122400000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188912/40798.jpg?v=638730014039030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "641": {
+    id: "641",
+    name: "Wednesday - Wandinha e Enid",
+    price: 199.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 491,
+    ages: "8+",
+    pieces: 239,
+    itemNumber: "40750",
+    vipPoints: 12,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187407/40750.jpg?v=638618341138100000", "https://legobrasil.vtexassets.com/arquivos/ids/187430/40750--4-.jpg?v=638618357063400000", "https://legobrasil.vtexassets.com/arquivos/ids/187431/40750--3-.jpg?v=638618357154670000", "https://legobrasil.vtexassets.com/arquivos/ids/187432/40750--2-.jpg?v=638618357232300000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187407/40750.jpg?v=638618341138100000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "642": {
+    id: "642",
+    name: "BrickHeadz - Stitch",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 344,
+    ages: "8+",
+    pieces: 152,
+    itemNumber: "40674",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/185165/40674.jpg?v=638423112726130000", "https://legobrasil.vtexassets.com/arquivos/ids/185166/40674--1-.jpg?v=638423112810100000", "https://legobrasil.vtexassets.com/arquivos/ids/185167/40674--2-.jpg?v=638423112913130000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185165/40674.jpg?v=638423112726130000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "643": {
+    id: "643",
+    name: "Brick Headz - Festival da Primavera do Mickey Mouse",
+    price: 299.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 446,
+    ages: "8+",
+    pieces: 120,
+    itemNumber: "40673",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/185011/40673.jpg?v=638394777961230000", "https://legobrasil.vtexassets.com/arquivos/ids/185012/40673--2-.jpg?v=638394779626800000", "https://legobrasil.vtexassets.com/arquivos/ids/185013/40673--1-.jpg?v=638394779723270000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/185011/40673.jpg?v=638394777961230000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "644": {
+    id: "644",
+    name: "BrickHeadz - Mirabel Madrigal",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.0,
+    reviews: 421,
+    ages: "8+",
+    pieces: 179,
+    itemNumber: "40753",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187709/40753.jpg?v=638646995105030000", "https://legobrasil.vtexassets.com/arquivos/ids/187710/40753--1-.jpg?v=638646995207670000", "https://legobrasil.vtexassets.com/arquivos/ids/187711/40753--2-.jpg?v=638646995318570000", "https://legobrasil.vtexassets.com/arquivos/ids/187712/40753--3-.jpg?v=638646995439500000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187709/40753.jpg?v=638646995105030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "645": {
+    id: "645",
+    name: "Chaveiro da Menina Cogumelo",
+    price: 54.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 415,
+    ages: "8+",
+    pieces: 6,
+    itemNumber: "854306",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190845/854306-lego-chaveiro-da-menina-cogumelo.jpg?v=638875055402070000", "https://legobrasil.vtexassets.com/arquivos/ids/190846/854306-lego-chaveiro-da-menina-cogumelo--1-.jpg?v=638875057329830000", "https://legobrasil.vtexassets.com/arquivos/ids/190847/854306-lego-chaveiro-da-menina-cogumelo--2-.jpg?v=638875057329870000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190845/854306-lego-chaveiro-da-menina-cogumelo.jpg?v=638875055402070000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "646": {
+    id: "646",
+    name: "Chaveiro de Minifigura Prateada",
+    price: 54.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 425,
+    ages: "8+",
+    pieces: 6,
+    itemNumber: "854305",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190848/854305-lego-chaveiro-minifigura-prateada.jpg?v=638875056709200000", "https://legobrasil.vtexassets.com/arquivos/ids/190849/854305-lego-chaveiro-minifigura-prateada--1-.jpg?v=638875057063500000", "https://legobrasil.vtexassets.com/arquivos/ids/190850/854305-lego-chaveiro-minifigura-prateada--2-.jpg?v=638875057063670000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190848/854305-lego-chaveiro-minifigura-prateada.jpg?v=638875056709200000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "647": {
+    id: "647",
+    name: "Chaveiro - Minifigura Dourada",
+    price: 29.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 203,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "850807",
+    vipPoints: 1,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/181564/850807_box4.jpg?v=638060334181730000", "https://legobrasil.vtexassets.com/arquivos/ids/181565/850807_box_keychain-minifigure-gold-with-ht.jpg?v=638060334292600000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181564/850807_box4.jpg?v=638060334181730000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "648": {
+    id: "648",
+    name: "Chaveiro Star Wars - Yoda",
+    price: 29.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 317,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "HASH_47F8FA",
+    vipPoints: 1,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/160065/853449_prod2.jpg?v=636296011657670000", "https://legobrasil.vtexassets.com/arquivos/ids/159599/853449.jpg?v=636220823642900000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/160065/853449_prod2.jpg?v=636296011657670000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "649": {
+    id: "649",
+    name: "Chaveiro - Batman",
+    price: 59.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 89,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "854235",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/183469/854235-lego-chaveiro-batman.jpg?v=638240927667000000", "https://legobrasil.vtexassets.com/arquivos/ids/183470/854235-lego-chaveiro-batman--1-.jpg?v=638240927727330000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183469/854235-lego-chaveiro-batman.jpg?v=638240927667000000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "650": {
+    id: "650",
+    name: "Harry Potter™ - Chaveiro Harry Potter™",
+    price: 59.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 443,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "854114",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184292/854114-lego-harry-potter-chaveiro-harry-potter.jpg?v=638333367182800000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/cfb2e083-be89-48fa-86dc-2b48c252a415___22ec7efce42775beb939cf848a62aa50.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184292/854114-lego-harry-potter-chaveiro-harry-potter.jpg?v=638333367182800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "651": {
+    id: "651",
+    name: "Disney - Chaveiro Pateta",
+    price: 59.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 62,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "854196",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/182206/854196_Lego_Disney_Chaveiro_Pateta_01.jpg?v=638104455948230000", "https://legobrasil.vtexassets.com/arquivos/ids/182207/854196_Lego_Disney_Chaveiro_Pateta_02.jpg?v=638104456016770000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182206/854196_Lego_Disney_Chaveiro_Pateta_01.jpg?v=638104455948230000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "652": {
+    id: "652",
+    name: "Star Wars™ - Chaveiro Stormtrooper",
+    price: 59.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 370,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "853946",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184296/853946-lego-star-wars-chaveiro-stormtrooper.jpg?v=638333370397800000", "https://legobrasil.vtexassets.com/arquivos/ids/184297/853946-lego-star-wars-chaveiro-stormtrooper--1-.jpg?v=638333370471500000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184296/853946-lego-star-wars-chaveiro-stormtrooper.jpg?v=638333370397800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "653": {
+    id: "653",
+    name: "Chaveiro - Tubarão",
+    price: 59.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 244,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "HASH_6A26EF",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/170311/853666_prod_shark-suit-guy-keychain.jpg?v=637116701639630000", "https://legobrasil.vtexassets.com/arquivos/ids/170312/853666_box1_shark-suit-guy-keychain.jpg?v=637116701752900000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/170311/853666_prod_shark-suit-guy-keychain.jpg?v=637116701639630000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "654": {
+    id: "654",
+    name: "Chaveiro - Cachorro-Quente",
+    price: 59.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 255,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "HASH_8C6779",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/170309/853571_prod_keychain-hot-dog-guy.jpg?v=637116701109830000", "https://legobrasil.vtexassets.com/arquivos/ids/170310/853571_box1_keychain-hot-dog-guy.jpg?v=637116701215730000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/170309/853571_prod_keychain-hot-dog-guy.jpg?v=637116701109830000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "655": {
+    id: "655",
+    name: "Chaveiro - Menina Pimenta",
+    price: 59.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 462,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "854234",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184301/854234-lego-chaveiro-menina-pimenta.jpg?v=638333373298470000", "https://legobrasil.vtexassets.com/arquivos/ids/184302/854234-lego-chaveiro-menina-pimenta--1-.jpg?v=638333373396200000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184301/854234-lego-chaveiro-menina-pimenta.jpg?v=638333373298470000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "656": {
+    id: "656",
+    name: "Chaveiro - Pato Donald",
+    price: 59.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 101,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "HASH_1BCF98",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/179300/854111_Lego_Disney_Pato_Donald_01.jpg?v=637909052179770000", "https://legobrasil.vtexassets.com/arquivos/ids/179301/854111_Lego_Disney_Pato_Donald_02.jpg?v=637909052268430000", "https://legobrasil.vtexassets.com/arquivos/ids/179302/854111_Lego_Disney_Pato_Donald_03.jpg?v=637909052400630000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/179300/854111_Lego_Disney_Pato_Donald_01.jpg?v=637909052179770000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "657": {
+    id: "657",
+    name: "Marvel - Chaveiro do Rocket Raccoon",
+    price: 54.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 144,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "854296",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187753/854296--2-.jpg?v=638647006393400000", "https://legobrasil.vtexassets.com/arquivos/ids/187751/854296.jpg?v=638647006229230000", "https://legobrasil.vtexassets.com/arquivos/ids/187752/854296--1-.jpg?v=638647006308830000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187753/854296--2-.jpg?v=638647006393400000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "658": {
+    id: "658",
+    name: "Star Wars™ - Chaveiro Darth Maul",
+    price: 59.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 284,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "854188",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/182193/854188_Lego_Star_Wars_Chaveiro_Darth_Maul_01.jpg?v=638104385340300000", "https://legobrasil.vtexassets.com/arquivos/ids/182194/854188_Lego_Star_Wars_Chaveiro_Darth_Maul_02.jpg?v=638104385631070000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182193/854188_Lego_Star_Wars_Chaveiro_Darth_Maul_01.jpg?v=638104385340300000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "659": {
+    id: "659",
+    name: "Marvel - Chaveiro do Homem de Ferro",
+    price: 59.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 437,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "854240",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/183116/854240-lego-chaveiro-homem-de-ferro.jpg?v=638223789966270000", "https://legobrasil.vtexassets.com/arquivos/ids/183117/854240-lego-chaveiro-homem-de-ferro--1-.jpg?v=638223790053530000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183116/854240-lego-chaveiro-homem-de-ferro.jpg?v=638223789966270000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "660": {
+    id: "660",
+    name: "Chaveiro - Ursinho Pooh",
+    price: 59.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 233,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "854191",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/182195/854191_Disney_Chaveiro_Ursinho_Pooh_01.jpg?v=638104394610330000", "https://legobrasil.vtexassets.com/arquivos/ids/182196/854191_Disney_Chaveiro_Ursinho_Pooh_02.jpg?v=638104394677470000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/182195/854191_Disney_Chaveiro_Ursinho_Pooh_01.jpg?v=638104394610330000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "661": {
+    id: "661",
+    name: "Chaveiro - Menina Borboleta",
+    price: 59.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 397,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "HASH_50E0B7",
+    vipPoints: 3,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/170313/853795_prod.jpg?v=637116702080570000", "https://legobrasil.vtexassets.com/arquivos/ids/170314/853795_box1.jpg?v=637116702180700000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/170313/853795_prod.jpg?v=637116702080570000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "662": {
+    id: "662",
+    name: "Chaveiro Super Heroes - Caçador Marciano",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 161,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "HASH_226A7A",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/160556/853456_prod2.jpg?v=636470316137200000", "https://legobrasil.vtexassets.com/arquivos/ids/159984/853456_box-front.jpg?v=636245663289170000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/160556/853456_prod2.jpg?v=636470316137200000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "663": {
+    id: "663",
+    name: "Chaveiro - Elfo",
+    price: 39.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 254,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "854204",
+    vipPoints: 2,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184300/854204-lego-chaveiro-elfo.jpg?v=638333372548770000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/cfb2e083-be89-48fa-86dc-2b48c252a415___22ec7efce42775beb939cf848a62aa50.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184300/854204-lego-chaveiro-elfo.jpg?v=638333372548770000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "664": {
+    id: "664",
+    name: "Chaveiro - Papai Noel",
+    price: 24.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 177,
+    ages: "8+",
+    pieces: 1,
+    itemNumber: "850150",
+    vipPoints: 1,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/181463/WhatsApp-Image-2022-12-02-at-01.06.59.jpg?v=638055516895600000", "https://legobrasil.vtexassets.com/arquivos/ids/181464/WhatsApp-Image-2022-12-02-at-01.06.58.jpg?v=638876110087770000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/16e36f8f-a4d7-48eb-bb82-fd43e25a0a69___0009b5d8b72ce64e21c67a0b168c4451.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181463/WhatsApp-Image-2022-12-02-at-01.06.59.jpg?v=638055516895600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "665": {
+    id: "665",
+    name: "DC - Batman: Fuga do Charada",
+    price: 299.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 193,
+    ages: "8+",
+    pieces: 59,
+    itemNumber: "HASH_4184D7",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/166504/76137_prod.jpg?v=636989174337800000", "https://legobrasil.vtexassets.com/arquivos/ids/166505/76137_1to1_mf_01_v2.jpg?v=636989174430000000", "https://legobrasil.vtexassets.com/arquivos/ids/166506/76137_back_06.jpg?v=636989174536970000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/166504/76137_prod.jpg?v=636989174337800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "666": {
+    id: "666",
+    name: "DC - O Assalto do Charada",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 379,
+    ages: "8+",
+    pieces: 489,
+    itemNumber: "HASH_3E940F",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/166491/76120_prod.jpg?v=636989168509730000", "https://legobrasil.vtexassets.com/arquivos/ids/166492/76120_1to1_mf_02.jpg?v=636989168625530000", "https://legobrasil.vtexassets.com/arquivos/ids/166493/76120_front_01.jpg?v=636989168754470000", "https://legobrasil.vtexassets.com/arquivos/ids/166494/76120_back_01.jpg?v=636989168846430000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/166491/76120_prod.jpg?v=636989168509730000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "667": {
+    id: "667",
+    name: "DC - Batmóvel™: A Perseguição do Pinguim",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 195,
+    ages: "8+",
+    pieces: 392,
+    itemNumber: "HASH_61F7F7",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/176912/lego_76181_Super_Heroes_Batmovel_A_Perseguicao_do_Pinguim_01.jpg?v=637732736310830000", "https://legobrasil.vtexassets.com/arquivos/ids/176913/lego_76181_Super_Heroes_Batmovel_A_Perseguicao_do_Pinguim_02.jpg?v=637732736322570000", "https://legobrasil.vtexassets.com/arquivos/ids/176914/lego_76181_Super_Heroes_Batmovel_A_Perseguicao_do_Pinguim_03.jpg?v=637732736328200000", "https://legobrasil.vtexassets.com/arquivos/ids/176915/lego_76181_Super_Heroes_Batmovel_A_Perseguicao_do_Pinguim_04.jpg?v=637732736336670000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/176912/lego_76181_Super_Heroes_Batmovel_A_Perseguicao_do_Pinguim_01.jpg?v=637732736310830000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "668": {
+    id: "668",
+    name: "DC - BatCiclo: Batalha com Senhor Frio",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 273,
+    ages: "8+",
+    pieces: 200,
+    itemNumber: "HASH_7FFE6D",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/166481/76118_prod.jpg?v=636989163873430000", "https://legobrasil.vtexassets.com/arquivos/ids/166482/76118_1to1_mf_01_v2.jpg?v=636989163991630000", "https://legobrasil.vtexassets.com/arquivos/ids/166483/76118_front_04.jpg?v=636989164112930000", "https://legobrasil.vtexassets.com/arquivos/ids/166484/76118_front_01.jpg?v=636989164199430000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/166481/76118_prod.jpg?v=636989163873430000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "669": {
+    id: "669",
+    name: "DC - A Batcaverna™ com Batman™, Batgirl™ e o Coringa™",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 402,
+    ages: "8+",
+    pieces: 184,
+    itemNumber: "76272",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186504/76272.jpg?v=638507847158100000", "https://legobrasil.vtexassets.com/arquivos/ids/186505/76272--1-.jpg?v=638507847297300000", "https://legobrasil.vtexassets.com/arquivos/ids/186506/76272--3-.jpg?v=638507847411600000", "https://legobrasil.vtexassets.com/arquivos/ids/186507/76272--2-.jpg?v=638507847704870000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186504/76272.jpg?v=638507847158100000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "670": {
+    id: "670",
+    name: "DC - Robô do Superman vs Lex Luthor",
+    price: 149.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 146,
+    ages: "8+",
+    pieces: 120,
+    itemNumber: "76302",
+    vipPoints: 9,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188840/76302.jpg?v=638709259751870000", "https://legobrasil.vtexassets.com/arquivos/ids/188841/76302--1-.jpg?v=638709259822470000", "https://legobrasil.vtexassets.com/arquivos/ids/188842/76302--2-.jpg?v=638709259957370000", "https://legobrasil.vtexassets.com/arquivos/ids/188843/76302--3-.jpg?v=638709260042530000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188840/76302.jpg?v=638709259751870000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "671": {
+    id: "671",
+    name: "DC - Batman: a série animada Gotham City™",
+    price: 2999.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 479,
+    ages: "8+",
+    pieces: 4210,
+    itemNumber: "76271",
+    vipPoints: 194,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186189/76271.jpg?v=638466435088330000", "https://legobrasil.vtexassets.com/arquivos/ids/186190/76271--2-.jpg?v=638466435189670000", "https://legobrasil.vtexassets.com/arquivos/ids/186191/76271--1-.jpg?v=638466435288130000", "https://legobrasil.vtexassets.com/arquivos/ids/186192/76271--4-.jpg?v=638466435721800000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186189/76271.jpg?v=638466435088330000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "672": {
+    id: "672",
+    name: "DC - Batman™: O Batmóvel Clássico da Série de TV™",
+    price: 1499.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 233,
+    ages: "8+",
+    pieces: 1822,
+    itemNumber: "76328",
+    vipPoints: 97,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187557/76328.jpg?v=638621859967430000", "https://legobrasil.vtexassets.com/arquivos/ids/187558/76328--1-.jpg?v=638621860072570000", "https://legobrasil.vtexassets.com/arquivos/ids/187559/76328--2-.jpg?v=638621860212900000", "https://legobrasil.vtexassets.com/arquivos/ids/187560/76328--3-.jpg?v=638621860349070000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187557/76328.jpg?v=638621859967430000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "673": {
+    id: "673",
+    name: "DC - Figura do Batman™ e bicicleta Bat-Pod",
+    price: 649.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 312,
+    ages: "8+",
+    pieces: 713,
+    itemNumber: "76273",
+    vipPoints: 42,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186726/76273.jpg?v=638515620746200000", "https://legobrasil.vtexassets.com/arquivos/ids/186727/76273--1-.jpg?v=638515620815900000", "https://legobrasil.vtexassets.com/arquivos/ids/186728/76273--2-.jpg?v=638515620898170000", "https://legobrasil.vtexassets.com/arquivos/ids/186729/76273--3-.jpg?v=638515621159770000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186726/76273.jpg?v=638515620746200000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "674": {
+    id: "674",
+    name: "DC - Batman™ Batmóvel Tumbler",
+    price: 2799.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 478,
+    ages: "8+",
+    pieces: 2049,
+    itemNumber: "HASH_01A493",
+    vipPoints: 181,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186197/76240.jpg?v=638478325842030000", "https://legobrasil.vtexassets.com/arquivos/ids/176975/lego_76240_Super_Heroes_LEGO_Batman_Batmovel_02.jpg?v=637732736819430000", "https://legobrasil.vtexassets.com/arquivos/ids/176976/lego_76240_Super_Heroes_LEGO_Batman_Batmovel_03.jpg?v=637732736824470000", "https://legobrasil.vtexassets.com/arquivos/ids/176977/lego_76240_Super_Heroes_LEGO_Batman_Batmovel_04.jpg?v=637732736829000000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186197/76240.jpg?v=638478325842030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "675": {
+    id: "675",
+    name: "DC - Batman™ com o Batmóvel™ vs. Harley Quinn™ e Mr. Freeze™",
+    price: 559.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 215,
+    ages: "8+",
+    pieces: 435,
+    itemNumber: "76274",
+    vipPoints: 36,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186508/76274.jpg?v=638507852629700000", "https://legobrasil.vtexassets.com/arquivos/ids/186509/76274--2-.jpg?v=638507852723530000", "https://legobrasil.vtexassets.com/arquivos/ids/186510/76274--1-.jpg?v=638507852871470000", "https://legobrasil.vtexassets.com/arquivos/ids/186511/76274--5-.jpg?v=638507853108430000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186508/76274.jpg?v=638507852629700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "676": {
+    id: "676",
+    name: "DC - Robô do Batman™",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 313,
+    ages: "8+",
+    pieces: 140,
+    itemNumber: "76270",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186498/76270.jpg?v=638507845614030000", "https://legobrasil.vtexassets.com/arquivos/ids/186499/76270--1-.jpg?v=638507845692230000", "https://legobrasil.vtexassets.com/arquivos/ids/186500/76270--2-.jpg?v=638507845794770000", "https://legobrasil.vtexassets.com/arquivos/ids/186501/76270--5-.jpg?v=638507846114900000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186498/76270.jpg?v=638507845614030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "677": {
+    id: "677",
+    name: "DC - Batman Forever™ Batmobile™",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.0,
+    reviews: 73,
+    ages: "8+",
+    pieces: 909,
+    itemNumber: "76304",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189925/76304-LEGO-DC-batman-forever-batmobile.jpg?v=638842389803970000", "https://legobrasil.vtexassets.com/arquivos/ids/189926/76304-LEGO-DC-batman-forever-batmobile -1-.jpg?v=638842389804070000", "https://legobrasil.vtexassets.com/arquivos/ids/189927/76304-LEGO-DC-batman-forever-batmobile -2-.jpg?v=638842389804100000", "https://legobrasil.vtexassets.com/arquivos/ids/189928/76304-LEGO-DC-batman-forever-batmobile -3-.jpg?v=638842389804130000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189925/76304-LEGO-DC-batman-forever-batmobile.jpg?v=638842389803970000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "678": {
+    id: "678",
+    name: "DOTS - Extra - Brilhar e Cintilar",
+    price: 29.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 462,
+    ages: "8+",
+    pieces: 115,
+    itemNumber: "41803",
+    vipPoints: 1,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/181851/41803_prod.jpg?v=638087408128700000", "https://legobrasil.vtexassets.com/arquivos/ids/181852/41803_lifestyle_cons_crop.jpg?v=638087408214130000", "https://legobrasil.vtexassets.com/arquivos/ids/181853/41803_box1_v29.png?v=638087408315570000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181851/41803_prod.jpg?v=638087408128700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "679": {
+    id: "679",
+    name: "DOTS Extra - Série 7 - ESPORTE",
+    price: 19.99,
+    originalPrice: null,
+    rating: 4.0,
+    reviews: 187,
+    ages: "8+",
+    pieces: 115,
+    itemNumber: "HASH_8CDB89",
+    vipPoints: 1,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/180935/41958_Lego_Dots_Extra_Serie_7_Esporte_01.jpg?v=637992791420000000", "https://legobrasil.vtexassets.com/arquivos/ids/180936/41958_Lego_Dots_Extra_Serie_7_Esporte_02.jpg?v=637992791665800000", "https://legobrasil.vtexassets.com/arquivos/ids/180937/41958_Lego_Dots_Extra_Serie_7_Esporte_03.jpg?v=637992791747300000", "https://legobrasil.vtexassets.com/arquivos/ids/180938/41958_Lego_Dots_Extra_Serie_7_Esporte_04.jpg?v=637992791841530000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/180935/41958_Lego_Dots_Extra_Serie_7_Esporte_01.jpg?v=637992791420000000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "680": {
+    id: "680",
+    name: "DOTS - Extra - Série 6",
+    price: 19.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 381,
+    ages: "8+",
+    pieces: 118,
+    itemNumber: "HASH_BBCA4E",
+    vipPoints: 1,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/177715/41946_Prod.jpg?v=637783153220100000", "https://legobrasil.vtexassets.com/arquivos/ids/177716/41946_WEB_PRI_NOBG.jpg?v=637783153315370000", "https://legobrasil.vtexassets.com/arquivos/ids/177717/41946_Lifestyle_envr_crop.jpg?v=637783153596400000", "https://legobrasil.vtexassets.com/arquivos/ids/177718/41946_Lifestyle_cons_crop.jpg?v=637783153774030000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/177715/41946_Prod.jpg?v=637783153220100000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "681": {
+    id: "681",
+    name: "DREAMZzz™ - Carro Espacial do Senhor Oz",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 297,
+    ages: "8+",
+    pieces: 350,
+    itemNumber: "71475",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184665/71475.jpg?v=638385874646170000", "https://legobrasil.vtexassets.com/arquivos/ids/184666/71475_alt4.jpg?v=638385874736930000", "https://legobrasil.vtexassets.com/arquivos/ids/184667/71475_alt2.jpg?v=638385874858900000", "https://legobrasil.vtexassets.com/arquivos/ids/184668/71475_alt3.jpg?v=638385874974100000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184665/71475.jpg?v=638385874646170000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "682": {
+    id: "682",
+    name: "DREAMZzz™ - Aventuras com Robôs e Veículos de Z-Blob",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 410,
+    ages: "8+",
+    pieces: 121,
+    itemNumber: "71487",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188719/71487.jpg?v=638709233107930000", "https://legobrasil.vtexassets.com/arquivos/ids/188720/71487--1-.jpg?v=638709233215570000", "https://legobrasil.vtexassets.com/arquivos/ids/188721/71487--2-.jpg?v=638709233334530000", "https://legobrasil.vtexassets.com/arquivos/ids/188722/71487--3-.jpg?v=638709233456270000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188719/71487.jpg?v=638709233107930000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "683": {
+    id: "683",
+    name: "DREAMZzz - Submarino Nightmare Shark",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 247,
+    ages: "8+",
+    pieces: 1413,
+    itemNumber: "71500",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189941/71500.jpg?v=638842391242900000", "https://legobrasil.vtexassets.com/arquivos/ids/189942/71500 -1-.jpg?v=638842391243030000", "https://legobrasil.vtexassets.com/arquivos/ids/189943/71500 -2-.jpg?v=638842391243070000", "https://legobrasil.vtexassets.com/arquivos/ids/189944/71500 -3-.jpg?v=638842391243100000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189941/71500.jpg?v=638842391242900000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "684": {
+    id: "684",
+    name: "DREAMZzz™ - Os animais dos sonhos de Izzie",
+    price: 379.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 56,
+    ages: "8+",
+    pieces: 328,
+    itemNumber: "71481",
+    vipPoints: 24,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186285/71481.jpg?v=638495672722770000", "https://legobrasil.vtexassets.com/arquivos/ids/186286/71481--3-.jpg?v=638495672843270000", "https://legobrasil.vtexassets.com/arquivos/ids/186287/71481--4-.jpg?v=638495672972470000", "https://legobrasil.vtexassets.com/arquivos/ids/186288/71481--5-.jpg?v=638495673103070000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186285/71481.jpg?v=638495672722770000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "685": {
+    id: "685",
+    name: "DREAMZzz™ - Zoey e Zian o Gato-Coruja",
+    price: 479.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 305,
+    ages: "8+",
+    pieces: 437,
+    itemNumber: "71476",
+    vipPoints: 31,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184672/71476_alt1.jpg?v=638385875672170000", "https://legobrasil.vtexassets.com/arquivos/ids/184673/71476_alt5.jpg?v=638385875755300000", "https://legobrasil.vtexassets.com/arquivos/ids/184675/71476_alt2.jpg?v=638385875858470000", "https://legobrasil.vtexassets.com/arquivos/ids/184676/71476_alt3.jpg?v=638385875958800000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184672/71476_alt1.jpg?v=638385875672170000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "686": {
+    id: "686",
+    name: "DREAMZzz™ - Guardião das Sombras, o Monstro da Jaula",
+    price: 329.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 229,
+    ages: "8+",
+    pieces: 274,
+    itemNumber: "71455",
+    vipPoints: 21,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/183374/71455-lego-dreamzzz-guardiao-das-sombras-monstro-da-jaula.jpg?v=638234011422470000", "https://legobrasil.vtexassets.com/arquivos/ids/183375/71455-lego-dreamzzz-guardiao-das-sombras-monstro-da-jaula--1-.jpg?v=638234011521830000", "https://legobrasil.vtexassets.com/arquivos/ids/183376/71455-lego-dreamzzz-guardiao-das-sombras-monstro-da-jaula--2-.jpg?v=638234011606570000", "https://legobrasil.vtexassets.com/arquivos/ids/183377/71455-lego-dreamzzz-guardiao-das-sombras-monstro-da-jaula--3-.jpg?v=638234011696670000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183374/71455-lego-dreamzzz-guardiao-das-sombras-monstro-da-jaula.jpg?v=638234011422470000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "687": {
+    id: "687",
+    name: "DREAMZzz™ - O Corvo da Meia-Noite da Bruxa Nunca",
+    price: 959.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 332,
+    ages: "8+",
+    pieces: 1203,
+    itemNumber: "71478",
+    vipPoints: 62,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187063/71478.jpg?v=638530394250770000", "https://legobrasil.vtexassets.com/arquivos/ids/187064/71478--1-.jpg?v=638530394374600000", "https://legobrasil.vtexassets.com/arquivos/ids/187065/71478--2-.jpg?v=638530394711700000", "https://legobrasil.vtexassets.com/arquivos/ids/187066/71478--3-.jpg?v=638530394931670000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187063/71478.jpg?v=638530394250770000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "688": {
+    id: "688",
+    name: "DREAMZzz™ - Logan, o Poderoso Panda",
+    price: 279.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 108,
+    ages: "8+",
+    pieces: 342,
+    itemNumber: "71480",
+    vipPoints: 18,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186279/71480.jpg?v=638495671165070000", "https://legobrasil.vtexassets.com/arquivos/ids/186280/71480--3-.jpg?v=638495671281070000", "https://legobrasil.vtexassets.com/arquivos/ids/186281/71480--4-.jpg?v=638495671387000000", "https://legobrasil.vtexassets.com/arquivos/ids/186282/71480--5-.jpg?v=638495671532000000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186279/71480.jpg?v=638495671165070000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "689": {
+    id: "689",
+    name: "DREAMZzz™ - A Torre do Sandman",
+    price: 899.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 110,
+    ages: "8+",
+    pieces: 723,
+    itemNumber: "71477",
+    vipPoints: 58,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184806/71477.jpg?v=638393756891300000", "https://legobrasil.vtexassets.com/arquivos/ids/184810/71477--2-.jpg?v=638393761983970000", "https://legobrasil.vtexassets.com/arquivos/ids/184811/71477--1-.jpg?v=638393762111000000", "https://legobrasil.vtexassets.com/arquivos/ids/184812/71477--4-.jpg?v=638393762239570000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184806/71477.jpg?v=638393756891300000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "690": {
+    id: "690",
+    name: "DREAMZzz™ - Castelo Noturno",
+    price: 1999.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 433,
+    ages: "8+",
+    pieces: 1742,
+    itemNumber: "71486",
+    vipPoints: 129,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186297/71486.jpg?v=638495675153430000", "https://legobrasil.vtexassets.com/arquivos/ids/186298/71486--3-.jpg?v=638495675267100000", "https://legobrasil.vtexassets.com/arquivos/ids/186299/71486--4-.jpg?v=638495675359100000", "https://legobrasil.vtexassets.com/arquivos/ids/186300/71486--2-.jpg?v=638495675488000000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186297/71486.jpg?v=638495675153430000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "691": {
+    id: "691",
+    name: "DREAMZzz™ - Tigre Robô do Cooper e Carro Hot Rod de Zero",
+    price: 959.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 290,
+    ages: "8+",
+    pieces: 1006,
+    itemNumber: "71497",
+    vipPoints: 62,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188750/71497.jpg?v=638709243945430000", "https://legobrasil.vtexassets.com/arquivos/ids/188751/71497--1-.jpg?v=638709244045770000", "https://legobrasil.vtexassets.com/arquivos/ids/188752/71497--2-.jpg?v=638709244198570000", "https://legobrasil.vtexassets.com/arquivos/ids/188753/71497--3-.jpg?v=638709244307100000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188750/71497.jpg?v=638709243945430000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "692": {
+    id: "692",
+    name: "DREAMZzz™ - Mateo e Z-Blob, o Robô Cavaleiro Battle",
+    price: 1299.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 363,
+    ages: "8+",
+    pieces: 1333,
+    itemNumber: "71485",
+    vipPoints: 84,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187075/71485.jpg?v=638530398049600000", "https://legobrasil.vtexassets.com/arquivos/ids/187076/71485--1-.jpg?v=638530398246000000", "https://legobrasil.vtexassets.com/arquivos/ids/187077/71485--2-.jpg?v=638530398401130000", "https://legobrasil.vtexassets.com/arquivos/ids/187078/71485--3-.jpg?v=638530398587630000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187075/71485.jpg?v=638530398049600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "693": {
+    id: "693",
+    name: "DREAMZzz™ - As criaturas do pesadelo da Bruxa do Nunca",
+    price: 429.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 197,
+    ages: "8+",
+    pieces: 457,
+    itemNumber: "71483",
+    vipPoints: 27,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186302/71483.jpg?v=638495676450600000", "https://legobrasil.vtexassets.com/arquivos/ids/186303/71483--3-.jpg?v=638495676557800000", "https://legobrasil.vtexassets.com/arquivos/ids/186304/71483--4-.jpg?v=638495676655630000", "https://legobrasil.vtexassets.com/arquivos/ids/186305/71483--5-.jpg?v=638495676828970000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186302/71483.jpg?v=638495676450600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "694": {
+    id: "694",
+    name: "DREAMZzz™ - Carro Crocodilo",
+    price: 499.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 68,
+    ages: "8+",
+    pieces: 494,
+    itemNumber: "71458",
+    vipPoints: 32,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/183357/71458-lego-dreamzzz-carro-crocodilo.jpg?v=638234007069700000", "https://legobrasil.vtexassets.com/arquivos/ids/183358/71458-lego-dreamzzz-carro-crocodilo--1-.jpg?v=638234007150630000", "https://legobrasil.vtexassets.com/arquivos/ids/183359/71458-lego-dreamzzz-carro-crocodilo--2-.jpg?v=638234007235170000", "https://legobrasil.vtexassets.com/arquivos/ids/183360/71458-lego-dreamzzz-carro-crocodilo--3-.jpg?v=638234007419200000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183357/71458-lego-dreamzzz-carro-crocodilo.jpg?v=638234007069700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "695": {
+    id: "695",
+    name: "DREAMZzz™ - Izzie e Bunchurro, o coelho gamer",
+    price: 179.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 388,
+    ages: "8+",
+    pieces: 252,
+    itemNumber: "71490",
+    vipPoints: 11,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188736/71490.jpg?v=638709241674200000", "https://legobrasil.vtexassets.com/arquivos/ids/188737/71490--1-.jpg?v=638709241766100000", "https://legobrasil.vtexassets.com/arquivos/ids/188738/71490--2-.jpg?v=638709241867370000", "https://legobrasil.vtexassets.com/arquivos/ids/188739/71490--3-.jpg?v=638709241961700000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188736/71490.jpg?v=638709241674200000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "696": {
+    id: "696",
+    name: "DREAMZzz™ - Mateo e o carro de corrida de ação Z-Blob",
+    price: 479.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 201,
+    ages: "8+",
+    pieces: 485,
+    itemNumber: "71491",
+    vipPoints: 31,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188743/71491.jpg?v=638709242581470000", "https://legobrasil.vtexassets.com/arquivos/ids/188744/71491--1-.jpg?v=638709242666600000", "https://legobrasil.vtexassets.com/arquivos/ids/188745/71491--2-.jpg?v=638709242794100000", "https://legobrasil.vtexassets.com/arquivos/ids/188746/71491--3-.jpg?v=638709242879100000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188743/71491.jpg?v=638709242581470000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "697": {
+    id: "697",
+    name: "DREAMZzz™ - Motocicleta do gato de Zoey",
+    price: 199.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 447,
+    ages: "8+",
+    pieces: 226,
+    itemNumber: "71479",
+    vipPoints: 12,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186272/71479.jpg?v=638495669619970000", "https://legobrasil.vtexassets.com/arquivos/ids/186273/71479--3-.jpg?v=638495669762170000", "https://legobrasil.vtexassets.com/arquivos/ids/186274/71479--4-.jpg?v=638495669876430000", "https://legobrasil.vtexassets.com/arquivos/ids/186275/71479--5-.jpg?v=638495669984700000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186272/71479.jpg?v=638495669619970000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "698": {
+    id: "698",
+    name: "DREAMZzz™ - Aventuras Criativas de Animais de Bunchu",
+    price: 89.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 251,
+    ages: "8+",
+    pieces: 143,
+    itemNumber: "71488",
+    vipPoints: 5,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188724/71488.jpg?v=638709236764900000", "https://legobrasil.vtexassets.com/arquivos/ids/188725/71488--1-.jpg?v=638709238033430000", "https://legobrasil.vtexassets.com/arquivos/ids/188726/71488--2-.jpg?v=638709238657870000", "https://legobrasil.vtexassets.com/arquivos/ids/188727/71488--3-.jpg?v=638709238767270000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188724/71488.jpg?v=638709236764900000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "699": {
+    id: "699",
+    name: "DREAMZzz™ - Aldeia dos Sonhos",
+    price: 279.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 424,
+    ages: "8+",
+    pieces: 434,
+    itemNumber: "40657",
+    vipPoints: 18,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184413/40657-lego-dreamzzz-aldeia-dos-sonhos.jpg?v=638368057335270000", "https://legobrasil.vtexassets.com/arquivos/ids/184414/40657-lego-dreamzzz-aldeia-dos-sonhos--1-.jpg?v=638368057403570000", "https://legobrasil.vtexassets.com/arquivos/ids/184415/40657-lego-dreamzzz-aldeia-dos-sonhos--2-.jpg?v=638368057495330000", "https://legobrasil.vtexassets.com/arquivos/ids/184416/40657-lego-dreamzzz-aldeia-dos-sonhos--3-.jpg?v=638368057585030000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184413/40657-lego-dreamzzz-aldeia-dos-sonhos.jpg?v=638368057335270000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "700": {
+    id: "700",
+    name: "DREAMZzz™ - Controle de Videogame a Jato do Cooper",
+    price: 179.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 241,
+    ages: "8+",
+    pieces: 266,
+    itemNumber: "71489",
+    vipPoints: 11,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/188729/71489.jpg?v=638709240644830000", "https://legobrasil.vtexassets.com/arquivos/ids/188730/71489--1-.jpg?v=638709240725300000", "https://legobrasil.vtexassets.com/arquivos/ids/188731/71489--2-.jpg?v=638709240886130000", "https://legobrasil.vtexassets.com/arquivos/ids/188732/71489--3-.jpg?v=638709241001900000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188729/71489.jpg?v=638709240644830000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "701": {
+    id: "701",
+    name: "DREAMZzz™ - Coruja do Tempo de Zoey",
+    price: 279.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 284,
+    ages: "8+",
+    pieces: 359,
+    itemNumber: "71494",
+    vipPoints: 18,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189949/71494-LEGO-DREAMZzz-coruja-do-tempo-de-zoey.jpg?v=638842391867900000", "https://legobrasil.vtexassets.com/arquivos/ids/189950/71494-LEGO-DREAMZzz-coruja-do-tempo-de-zoey -1-.jpg?v=638842391867970000", "https://legobrasil.vtexassets.com/arquivos/ids/189951/71494-LEGO-DREAMZzz-coruja-do-tempo-de-zoey -2-.jpg?v=638842391868000000", "https://legobrasil.vtexassets.com/arquivos/ids/189952/71494-LEGO-DREAMZzz-coruja-do-tempo-de-zoey -3-.jpg?v=638842391868000000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189949/71494-LEGO-DREAMZzz-coruja-do-tempo-de-zoey.jpg?v=638842391867900000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "702": {
+    id: "702",
+    name: "DREAMZzz - Caminhão de tinta spray do Mateo",
+    price: 999.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 125,
+    ages: "8+",
+    pieces: 929,
+    itemNumber: "71499",
+    vipPoints: 64,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190531/71499-LEGO-DREAMZzz-caminhao-de-tinta-spray-do-mateo -5-.jpg?v=638851783009770000", "https://legobrasil.vtexassets.com/arquivos/ids/190532/71499-LEGO-DREAMZzz-caminhao-de-tinta-spray-do-mateo -4-.jpg?v=638851783009970000", "https://legobrasil.vtexassets.com/arquivos/ids/190533/71499-LEGO-DREAMZzz-caminhao-de-tinta-spray-do-mateo -3-.jpg?v=638851783010000000", "https://legobrasil.vtexassets.com/arquivos/ids/190534/71499-LEGO-DREAMZzz-caminhao-de-tinta-spray-do-mateo -2-.jpg?v=638851783010030000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190531/71499-LEGO-DREAMZzz-caminhao-de-tinta-spray-do-mateo -5-.jpg?v=638851783009770000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "703": {
+    id: "703",
+    name: "DREAMZzz - Mateo vs Cyber Brain Mech",
+    price: 279.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 400,
+    ages: "8+",
+    pieces: 368,
+    itemNumber: "71495",
+    vipPoints: 18,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190522/71495-LEGO-DREAMZzz-mateo-cyber-brain-mech -6-.jpg?v=638851780902700000", "https://legobrasil.vtexassets.com/arquivos/ids/190523/71495-LEGO-DREAMZzz-mateo-cyber-brain-mech -5-.jpg?v=638851780902870000", "https://legobrasil.vtexassets.com/arquivos/ids/190524/71495-LEGO-DREAMZzz-mateo-cyber-brain-mech -4-.jpg?v=638851780902900000", "https://legobrasil.vtexassets.com/arquivos/ids/190525/71495-LEGO-DREAMZzz-mateo-cyber-brain-mech -3-.jpg?v=638851780902900000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190522/71495-LEGO-DREAMZzz-mateo-cyber-brain-mech -6-.jpg?v=638851780902700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "704": {
+    id: "704",
+    name: "DREAMZzz™ - Camaleão de Fogo do Mateo",
+    price: 479.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 89,
+    ages: "8+",
+    pieces: 443,
+    itemNumber: "71492",
+    vipPoints: 31,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190516/71492-LEGO-DREAMZzz-camaleao-de-fogo-do-mateo -5-.jpg?v=638851778286100000", "https://legobrasil.vtexassets.com/arquivos/ids/190517/71492-LEGO-DREAMZzz-camaleao-de-fogo-do-mateo -4-.jpg?v=638851778286270000", "https://legobrasil.vtexassets.com/arquivos/ids/190518/71492-LEGO-DREAMZzz-camaleao-de-fogo-do-mateo -3-.jpg?v=638851778286300000", "https://legobrasil.vtexassets.com/arquivos/ids/190519/71492-LEGO-DREAMZzz-camaleao-de-fogo-do-mateo -2-.jpg?v=638851778286330000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190516/71492-LEGO-DREAMZzz-camaleao-de-fogo-do-mateo -5-.jpg?v=638851778286100000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "705": {
+    id: "705",
+    name: "Fortnite® - Ônibus de batalha",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 237,
+    ages: "8+",
+    pieces: 954,
+    itemNumber: "77073",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187222/77073.jpg?v=638573650129030000", "https://legobrasil.vtexassets.com/arquivos/ids/187223/77073--1-.jpg?v=638573650498130000", "https://legobrasil.vtexassets.com/arquivos/ids/187224/77073--2-.jpg?v=638573650588300000", "https://legobrasil.vtexassets.com/arquivos/ids/187225/77073--3-.jpg?v=638573650684930000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187222/77073.jpg?v=638573650129030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "706": {
+    id: "706",
+    name: "Fortnite® - Klombo",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 405,
+    ages: "8+",
+    pieces: 1084,
+    itemNumber: "77077",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189622/77077-LEGO-Fortnite-klombo.jpg?v=638829190513930000", "https://legobrasil.vtexassets.com/arquivos/ids/189623/77077-LEGO-Fortnite-klombo--1-.jpg?v=638829190659970000", "https://legobrasil.vtexassets.com/arquivos/ids/189624/77077-LEGO-Fortnite-klombo--2-.jpg?v=638829190757770000", "https://legobrasil.vtexassets.com/arquivos/ids/189625/77077-LEGO-Fortnite-klombo--3-.jpg?v=638829190855230000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189622/77077-LEGO-Fortnite-klombo.jpg?v=638829190513930000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "707": {
+    id: "707",
+    name: "Fortnite® - Restaurante Durrr Burger",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 134,
+    ages: "8+",
+    pieces: 546,
+    itemNumber: "77076",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189615/77076-LEGO-Fortnite-restaurante-durrr-burger.jpg?v=638829188250970000", "https://legobrasil.vtexassets.com/arquivos/ids/189616/77076-LEGO-Fortnite-restaurante-durrr-burger--1-.jpg?v=638829188329170000", "https://legobrasil.vtexassets.com/arquivos/ids/189617/77076-LEGO-Fortnite-restaurante-durrr-burger--2-.jpg?v=638829188417300000", "https://legobrasil.vtexassets.com/arquivos/ids/189618/77076-LEGO-Fortnite-restaurante-durrr-burger--3-.jpg?v=638829188521700000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189615/77076-LEGO-Fortnite-restaurante-durrr-burger.jpg?v=638829188250970000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "708": {
+    id: "708",
+    name: "Fortnite - Robô Líder da Equipe",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 197,
+    ages: "8+",
+    pieces: 2503,
+    itemNumber: "77078",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189844/77078-LEGO-Fortnite-robo-lider-da-equipe.jpg?v=638841267785300000", "https://legobrasil.vtexassets.com/arquivos/ids/189845/77078-LEGO-Fortnite-robo-lider-da-equipe -1-.jpg?v=638841267785530000", "https://legobrasil.vtexassets.com/arquivos/ids/189846/77078-LEGO-Fortnite-robo-lider-da-equipe -2-.jpg?v=638841267785570000", "https://legobrasil.vtexassets.com/arquivos/ids/189847/77078-LEGO-Fortnite-robo-lider-da-equipe -3-.jpg?v=638841267785600000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189844/77078-LEGO-Fortnite-robo-lider-da-equipe.jpg?v=638841267785300000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "709": {
+    id: "709",
+    name: "Fortnite® - Embananosso",
+    price: 959.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 228,
+    ages: "8+",
+    pieces: 1414,
+    itemNumber: "77072",
+    vipPoints: 62,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187201/77072.jpg?v=638573642045430000", "https://legobrasil.vtexassets.com/arquivos/ids/187202/77072--1-.jpg?v=638573642164900000", "https://legobrasil.vtexassets.com/arquivos/ids/187203/77072--2-.jpg?v=638573642256270000", "https://legobrasil.vtexassets.com/arquivos/ids/187204/77072--3-.jpg?v=638573642374830000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187201/77072.jpg?v=638573642045430000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "710": {
+    id: "710",
+    name: "Fortnite® - Lhama",
+    price: 379.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 231,
+    ages: "8+",
+    pieces: 691,
+    itemNumber: "77071",
+    vipPoints: 24,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187215/77071.jpg?v=638573647269200000", "https://legobrasil.vtexassets.com/arquivos/ids/187216/77071--1-.jpg?v=638573647597400000", "https://legobrasil.vtexassets.com/arquivos/ids/187217/77071--2-.jpg?v=638573647681170000", "https://legobrasil.vtexassets.com/arquivos/ids/187218/77071--3-.jpg?v=638573647785900000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187215/77071.jpg?v=638573647269200000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "711": {
+    id: "711",
+    name: "Fortnite® - Durrr Burguer",
+    price: 149.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 450,
+    ages: "8+",
+    pieces: 193,
+    itemNumber: "77070",
+    vipPoints: 9,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187208/77070.jpg?v=638573644656030000", "https://legobrasil.vtexassets.com/arquivos/ids/187209/77070--1-.jpg?v=638573644737830000", "https://legobrasil.vtexassets.com/arquivos/ids/187210/77070--2-.jpg?v=638573644827970000", "https://legobrasil.vtexassets.com/arquivos/ids/187211/77070--3-.jpg?v=638573645173570000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187208/77070.jpg?v=638573644656030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "712": {
+    id: "712",
+    name: "Fortnite® - Acampamento de Peely e Sparkplug",
+    price: 179.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 138,
+    ages: "8+",
+    pieces: 250,
+    itemNumber: "77075",
+    vipPoints: 11,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189627/77075-LEGO-Fortnite-Acampamento-Peely-Sparkplug.jpg?v=638829191353700000", "https://legobrasil.vtexassets.com/arquivos/ids/189628/77075-LEGO-Fortnite-Acampamento-Peely-Sparkplug--1-.jpg?v=638829191431130000", "https://legobrasil.vtexassets.com/arquivos/ids/189629/77075-LEGO-Fortnite-Acampamento-Peely-Sparkplug--2-.jpg?v=638829191519630000", "https://legobrasil.vtexassets.com/arquivos/ids/189630/77075-LEGO-Fortnite-Acampamento-Peely-Sparkplug--3-.jpg?v=638829191663330000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189627/77075-LEGO-Fortnite-Acampamento-Peely-Sparkplug.jpg?v=638829191353700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "713": {
+    id: "713",
+    name: "Gabby's Dollhouse - Salão de festas da Gabby",
+    price: 479.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 293,
+    ages: "8+",
+    pieces: 252,
+    itemNumber: "10797",
+    vipPoints: 31,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186642/10797.jpg?v=638514862644200000", "https://legobrasil.vtexassets.com/arquivos/ids/186643/10797--1-.jpg?v=638514862781770000", "https://legobrasil.vtexassets.com/arquivos/ids/186644/10797--2-.jpg?v=638514863400300000", "https://legobrasil.vtexassets.com/arquivos/ids/186645/10797--3-.jpg?v=638514863631170000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186642/10797.jpg?v=638514862644200000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "714": {
+    id: "714",
+    name: "Gabby's Dollhouse - Festa no Jardim da Kitty Fada",
+    price: 329.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 496,
+    ages: "8+",
+    pieces: 130,
+    itemNumber: "10787",
+    vipPoints: 21,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/183282/10787-lego-gabbys-dollhouse-festa-jardim-kitty-fada--4-.jpg?v=638231566526700000", "https://legobrasil.vtexassets.com/arquivos/ids/183283/10787-lego-gabbys-dollhouse-festa-jardim-kitty-fada--5-.jpg?v=638231566661800000", "https://legobrasil.vtexassets.com/arquivos/ids/183284/10787-lego-gabbys-dollhouse-festa-jardim-kitty-fada--3-.jpg?v=638231566788500000", "https://legobrasil.vtexassets.com/arquivos/ids/183285/10787-lego-gabbys-dollhouse-festa-jardim-kitty-fada--2-.jpg?v=638231566858530000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183282/10787-lego-gabbys-dollhouse-festa-jardim-kitty-fada--4-.jpg?v=638231566526700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "715": {
+    id: "715",
+    name: "Gabby's Dollhouse - Artesanato com Baby Box",
+    price: 149.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 183,
+    ages: "8+",
+    pieces: 60,
+    itemNumber: "10795",
+    vipPoints: 9,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186632/10795.jpg?v=638514857911800000", "https://legobrasil.vtexassets.com/arquivos/ids/186633/10795--1-.jpg?v=638514858037500000", "https://legobrasil.vtexassets.com/arquivos/ids/186634/10795--2-.jpg?v=638514858231870000", "https://legobrasil.vtexassets.com/arquivos/ids/186635/10795--3-.jpg?v=638514858336000000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186632/10795.jpg?v=638514857911800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "716": {
+    id: "716",
+    name: "Gabby's Dollhouse - Orelha de gatinho da Gabby",
+    price: 379.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 80,
+    ages: "8+",
+    pieces: 165,
+    itemNumber: "10796",
+    vipPoints: 24,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186637/10796.jpg?v=638514861181500000", "https://legobrasil.vtexassets.com/arquivos/ids/186639/10796--1-.jpg?v=638514861343300000", "https://legobrasil.vtexassets.com/arquivos/ids/186640/10796--2-.jpg?v=638514861454130000", "https://legobrasil.vtexassets.com/arquivos/ids/186641/10796--3-.jpg?v=638514861579570000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186637/10796.jpg?v=638514861181500000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "717": {
+    id: "717",
+    name: "Gabby's Dollhouse - Casa Magica da Gabby",
+    price: 759.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 61,
+    ages: "8+",
+    pieces: 498,
+    itemNumber: "10788",
+    vipPoints: 49,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/183277/10788-lego-gabbys-dollhouse-casa-magica-da-gabby--4-.jpg?v=638231565575100000", "https://legobrasil.vtexassets.com/arquivos/ids/183278/10788-lego-gabbys-dollhouse-casa-magica-da-gabby--1-.jpg?v=638231565664630000", "https://legobrasil.vtexassets.com/arquivos/ids/183279/10788-lego-gabbys-dollhouse-casa-magica-da-gabby--2-.jpg?v=638231565755400000", "https://legobrasil.vtexassets.com/arquivos/ids/183280/10788-lego-gabbys-dollhouse-casa-magica-da-gabby--3-.jpg?v=638231565861800000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183277/10788-lego-gabbys-dollhouse-casa-magica-da-gabby--4-.jpg?v=638231565575100000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "718": {
+    id: "718",
+    name: "Gabby's Dollhouse - Sweet Treat Mountain e Kitty Garden",
+    price: 479.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 260,
+    ages: "8+",
+    pieces: 263,
+    itemNumber: "11205",
+    vipPoints: 31,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190343/11205-lego-gabbys-dollhouse-sweet-treat-mountain-kitty-garden--6-.jpg?v=638848142401600000", "https://legobrasil.vtexassets.com/arquivos/ids/190344/11205-lego-gabbys-dollhouse-sweet-treat-mountain-kitty-garden--5-.jpg?v=638848142401800000", "https://legobrasil.vtexassets.com/arquivos/ids/190345/11205-lego-gabbys-dollhouse-sweet-treat-mountain-kitty-garden--4-.jpg?v=638848142401800000", "https://legobrasil.vtexassets.com/arquivos/ids/190346/11205-lego-gabbys-dollhouse-sweet-treat-mountain-kitty-garden--3-.jpg?v=638848142401830000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190343/11205-lego-gabbys-dollhouse-sweet-treat-mountain-kitty-garden--6-.jpg?v=638848142401600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "719": {
+    id: "719",
+    name: "Gabby's Dollhouse - Aventura no Aquário da Sereia Gabby",
+    price: 179.99,
+    originalPrice: null,
+    rating: 4.0,
+    reviews: 81,
+    ages: "8+",
+    pieces: 103,
+    itemNumber: "11204",
+    vipPoints: 11,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190350/11204-lego-gabbys-dollhouse-aventura-no-aquario-da-sereia -2-.jpg?v=638848143442300000", "https://legobrasil.vtexassets.com/arquivos/ids/190351/11204-lego-gabbys-dollhouse-aventura-no-aquario-da-sereia -1-.jpg?v=638848143442330000", "https://legobrasil.vtexassets.com/arquivos/ids/190352/11204-lego-gabbys-dollhouse-aventura-no-aquario-da-sereia.jpg?v=638848143442430000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190350/11204-lego-gabbys-dollhouse-aventura-no-aquario-da-sereia -2-.jpg?v=638848143442300000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "720": {
+    id: "720",
+    name: "Super Mario™ - Conjunto de Expansão - Árvore Frutífera do Yoshi Amarelo",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 111,
+    ages: "8+",
+    pieces: 46,
+    itemNumber: "30509",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186139/30509.jpg?v=638448152045470000", "https://legobrasil.vtexassets.com/arquivos/ids/186140/30509--2-.jpg?v=638448152156830000", "https://legobrasil.vtexassets.com/arquivos/ids/186141/30509--1-.jpg?v=638448152264130000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186139/30509.jpg?v=638448152045470000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "721": {
+    id: "721",
+    name: "Super Mario™ - Pacote de Expansão - Rambi, o Rinoceronte",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 435,
+    ages: "8+",
+    pieces: 106,
+    itemNumber: "71420",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/183395/71420-lego-super-mario-pacote-de-expansao-rambi-rinoceronte.jpg?v=638234015476100000", "https://legobrasil.vtexassets.com/arquivos/ids/183396/71420-lego-super-mario-pacote-de-expansao-rambi-rinoceronte--1-.jpg?v=638234015574600000", "https://legobrasil.vtexassets.com/arquivos/ids/183397/71420-lego-super-mario-pacote-de-expansao-rambi-rinoceronte--2-.jpg?v=638234015713730000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/183395/71420-lego-super-mario-pacote-de-expansao-rambi-rinoceronte.jpg?v=638234015476100000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "722": {
+    id: "722",
+    name: "Super Mario™ - Pacote de Expansão - Traje Mario de Gelo e Mundo Gelado",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 148,
+    ages: "8+",
+    pieces: 105,
+    itemNumber: "71415",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/181995/71415_prod.jpg?v=638088118450070000", "https://legobrasil.vtexassets.com/arquivos/ids/181996/71415_feature1.jpg?v=638088118586600000", "https://legobrasil.vtexassets.com/arquivos/ids/181997/71415_box1_v29.png?v=638088118704400000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181995/71415_prod.jpg?v=638088118450070000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "723": {
+    id: "723",
+    name: "Super Mario™ - Aventuras com Luigi - Pacote Inicial",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 447,
+    ages: "8+",
+    pieces: 280,
+    itemNumber: "HASH_94BBCA",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/173820/lego_71387_super_mario_aventuras_com_luigi_inicio_01.jpg?v=637602500045770000", "https://legobrasil.vtexassets.com/arquivos/ids/173821/lego_71387_super_mario_aventuras_com_luigi_inicio_02.jpg?v=637602500207670000", "https://legobrasil.vtexassets.com/arquivos/ids/173822/lego_71387_super_mario_aventuras_com_luigi_inicio_03.jpg?v=637602500295000000", "https://legobrasil.vtexassets.com/arquivos/ids/173823/lego_71387_super_mario_aventuras_com_luigi_inicio_04.jpg?v=637602500373500000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/173820/lego_71387_super_mario_aventuras_com_luigi_inicio_01.jpg?v=637602500045770000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "724": {
+    id: "724",
+    name: "Super Mario™ - Conjunto de Expansão de Aventura do Naufrágio Afundado de Dorrie",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 320,
+    ages: "8+",
+    pieces: 500,
+    itemNumber: "71432",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184643/71432_prod.jpg?v=638385870681600000", "https://legobrasil.vtexassets.com/arquivos/ids/184644/71432_alt1.jpg?v=638385870789970000", "https://legobrasil.vtexassets.com/arquivos/ids/184645/71432_alt3.jpg?v=638385870887600000", "https://legobrasil.vtexassets.com/arquivos/ids/184646/71432_alt4.jpg?v=638385870960930000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184643/71432_prod.jpg?v=638385870681600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "725": {
+    id: "725",
+    name: "Super Mario™ - Mario Kart™ – Busca de Power-Ups da Planta Piranha",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 316,
+    ages: "8+",
+    pieces: 588,
+    itemNumber: "72044",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/191024/72044-lego-super-mario-kart-busca-powerup-planta-piranha -8-.jpg?v=638900839795530000", "https://legobrasil.vtexassets.com/arquivos/ids/191025/72044-lego-super-mario-kart-busca-powerup-planta-piranha -7-.jpg?v=638900839795570000", "https://legobrasil.vtexassets.com/arquivos/ids/191026/72044-lego-super-mario-kart-busca-powerup-planta-piranha -6-.jpg?v=638900839795600000", "https://legobrasil.vtexassets.com/arquivos/ids/191027/72044-lego-super-mario-kart-busca-powerup-planta-piranha -5-.jpg?v=638900839795630000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191024/72044-lego-super-mario-kart-busca-powerup-planta-piranha -8-.jpg?v=638900839795530000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "726": {
+    id: "726",
+    name: "Super Mario - Festa na Casa do Toad",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 376,
+    ages: "8+",
+    pieces: 276,
+    itemNumber: "72041",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190107/72041-lego-super-mario-festa-na-casa-do-toad.jpg?v=638846401975070000", "https://legobrasil.vtexassets.com/arquivos/ids/190108/72041-lego-super-mario-festa-na-casa-do-toad -1-.jpg?v=638846401975370000", "https://legobrasil.vtexassets.com/arquivos/ids/190109/72041-lego-super-mario-festa-na-casa-do-toad -2-.jpg?v=638846401975400000", "https://legobrasil.vtexassets.com/arquivos/ids/190110/72041-lego-super-mario-festa-na-casa-do-toad -3-.jpg?v=638846401975470000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190107/72041-lego-super-mario-festa-na-casa-do-toad.jpg?v=638846401975070000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "727": {
+    id: "727",
+    name: "Super Mario - Mario Kart™ – Wario & King Boo",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 435,
+    ages: "8+",
+    pieces: 512,
+    itemNumber: "72038",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190685/72038-lego-super-mario-kart-wario-king-boo -3-.jpg?v=638852510106870000", "https://legobrasil.vtexassets.com/arquivos/ids/190686/72038-lego-super-mario-kart-wario-king-boo -2-.jpg?v=638852510107070000", "https://legobrasil.vtexassets.com/arquivos/ids/190687/72038-lego-super-mario-kart-wario-king-boo -1-.jpg?v=638852510107100000", "https://legobrasil.vtexassets.com/arquivos/ids/190688/72038-lego-super-mario-kart-wario-king-boo.jpg?v=638852510107200000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190685/72038-lego-super-mario-kart-wario-king-boo -3-.jpg?v=638852510106870000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "728": {
+    id: "728",
+    name: "Super Mario - Príncipe Florian e Castelo Bowser",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 101,
+    ages: "8+",
+    pieces: 1251,
+    itemNumber: "72042",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189956/72042-lego-super-mario-principe-florian-castelo-bowser.jpg?v=638842392473930000", "https://legobrasil.vtexassets.com/arquivos/ids/189957/72042-lego-super-mario-principe-florian-castelo-bowser -1-.jpg?v=638842392474030000", "https://legobrasil.vtexassets.com/arquivos/ids/189958/72042-lego-super-mario-principe-florian-castelo-bowser -2-.jpg?v=638842392474070000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189956/72042-lego-super-mario-principe-florian-castelo-bowser.jpg?v=638842392473930000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "729": {
+    id: "729",
+    name: "Super Mario - Mario Kart™ – Mario™ interativo e kart padrão",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 109,
+    ages: "8+",
+    pieces: 278,
+    itemNumber: "72043",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190680/72043-lego-super-mario-kart-mario-interativo-e-kart-padrao -4-.jpg?v=638852509525200000", "https://legobrasil.vtexassets.com/arquivos/ids/190681/72043-lego-super-mario-kart-mario-interativo-e-kart-padrao -3-.jpg?v=638852509525270000", "https://legobrasil.vtexassets.com/arquivos/ids/190682/72043-lego-super-mario-kart-mario-interativo-e-kart-padrao -2-.jpg?v=638852509525300000", "https://legobrasil.vtexassets.com/arquivos/ids/190683/72043-lego-super-mario-kart-mario-interativo-e-kart-padrao -1-.jpg?v=638852509525330000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190680/72043-lego-super-mario-kart-mario-interativo-e-kart-padrao -4-.jpg?v=638852509525200000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "730": {
+    id: "730",
+    name: "Game Boy™",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 451,
+    ages: "8+",
+    pieces: 421,
+    itemNumber: "72046",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190946/72046-lego-game-boy -13-.jpg?v=638889610653400000", "https://legobrasil.vtexassets.com/arquivos/ids/190947/72046-lego-game-boy -12-.jpg?v=638889610653630000", "https://legobrasil.vtexassets.com/arquivos/ids/190948/72046-lego-game-boy -11-.jpg?v=638889610653700000", "https://legobrasil.vtexassets.com/arquivos/ids/190949/72046-lego-game-boy -10-.jpg?v=638889610653730000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190946/72046-lego-game-boy -13-.jpg?v=638889610653400000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "731": {
+    id: "731",
+    name: "Super Mario™ - Parque dos Goombas",
+    price: 149.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 116,
+    ages: "8+",
+    pieces: 173,
+    itemNumber: "71433",
+    vipPoints: 9,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187048/71433.jpg?v=638530389075870000", "https://legobrasil.vtexassets.com/arquivos/ids/187049/71433--1-.jpg?v=638530389253370000", "https://legobrasil.vtexassets.com/arquivos/ids/187050/71433--2-.jpg?v=638530389389630000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187048/71433.jpg?v=638530389075870000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "732": {
+    id: "732",
+    name: "Super Mario™ - Curso Iniciação Aventuras com Peach",
+    price: 599.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 172,
+    ages: "8+",
+    pieces: 354,
+    itemNumber: "71403",
+    vipPoints: 38,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/180704/71403_Lego_Super_Mario_Curso_de_Iniciacao_-Aventuras_com_Peach_01.jpg?v=637986922119030000", "https://legobrasil.vtexassets.com/arquivos/ids/180705/71403_Lego_Super_Mario_Curso_de_Iniciacao_-Aventuras_com_Peach_02.jpg?v=637986922213670000", "https://legobrasil.vtexassets.com/arquivos/ids/180706/71403_Lego_Super_Mario_Curso_de_Iniciacao_-Aventuras_com_Peach_03.jpg?v=637986922478230000", "https://legobrasil.vtexassets.com/arquivos/ids/180707/71403_Lego_Super_Mario_Curso_de_Iniciacao_-Aventuras_com_Peach_04.jpg?v=637986922861770000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/180704/71403_Lego_Super_Mario_Curso_de_Iniciacao_-Aventuras_com_Peach_01.jpg?v=637986922119030000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "733": {
+    id: "733",
+    name: "Super Mario™ - Piquenique na Casa do Mario",
+    price: 329.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 336,
+    ages: "8+",
+    pieces: 259,
+    itemNumber: "71422",
+    vipPoints: 21,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184140/71422-lego-super-mario-conjunto-de-expansao-piquenique-na-casa-do-mario.jpg?v=638279011878470000", "https://legobrasil.vtexassets.com/arquivos/ids/184141/71422-lego-super-mario-conjunto-de-expansao-piquenique-na-casa-do-mario--1-.jpg?v=638279016716500000", "https://legobrasil.vtexassets.com/arquivos/ids/184142/71422-lego-super-mario-conjunto-de-expansao-piquenique-na-casa-do-mario--2-.jpg?v=638279016899300000", "https://legobrasil.vtexassets.com/arquivos/ids/184143/71422-lego-super-mario-conjunto-de-expansao-piquenique-na-casa-do-mario--3-.jpg?v=638279017037330000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184140/71422-lego-super-mario-conjunto-de-expansao-piquenique-na-casa-do-mario.jpg?v=638279011878470000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "734": {
+    id: "734",
+    name: "Super Mario™ - Mario Kart™ – Baby Peach e conjunto Grand Prix",
+    price: 799.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 165,
+    ages: "8+",
+    pieces: 823,
+    itemNumber: "72036",
+    vipPoints: 51,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187900/72036.jpg?v=638683278258800000", "https://legobrasil.vtexassets.com/arquivos/ids/187901/72036--1-.jpg?v=638683278365200000", "https://legobrasil.vtexassets.com/arquivos/ids/187902/72036--2-.jpg?v=638683278469530000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187900/72036.jpg?v=638683278258800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "735": {
+    id: "735",
+    name: "Super Mario™ - Mario Kart™ – Garagem do Toad",
+    price: 379.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 430,
+    ages: "8+",
+    pieces: 390,
+    itemNumber: "72035",
+    vipPoints: 24,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187917/72035.jpg?v=638683288605570000", "https://legobrasil.vtexassets.com/arquivos/ids/187918/72035--2-.jpg?v=638683288741230000", "https://legobrasil.vtexassets.com/arquivos/ids/187919/72035--1-.jpg?v=638683288843630000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187917/72035.jpg?v=638683288605570000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "736": {
+    id: "736",
+    name: "Super Mario™ - Trem expresso do Bowser",
+    price: 1179.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 155,
+    ages: "8+",
+    pieces: 1392,
+    itemNumber: "71437",
+    vipPoints: 76,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187520/71437.jpg?v=638618528878730000", "https://legobrasil.vtexassets.com/arquivos/ids/187521/71437--1-.jpg?v=638618529339800000", "https://legobrasil.vtexassets.com/arquivos/ids/187522/71437--2-.jpg?v=638618529494130000", "https://legobrasil.vtexassets.com/arquivos/ids/187523/71437--3-.jpg?v=638618529585900000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187520/71437.jpg?v=638618528878730000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "737": {
+    id: "737",
+    name: "Super Mario™ - Mansão Assombrada do Rei Boo",
+    price: 699.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 268,
+    ages: "8+",
+    pieces: 932,
+    itemNumber: "71436",
+    vipPoints: 45,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186224/71436.jpg?v=638482055699600000", "https://legobrasil.vtexassets.com/arquivos/ids/186225/71436--1-.jpg?v=638482056795570000", "https://legobrasil.vtexassets.com/arquivos/ids/186226/71436--2-.jpg?v=638482056915930000", "https://legobrasil.vtexassets.com/arquivos/ids/186227/71436--3-.jpg?v=638482057034230000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186224/71436.jpg?v=638482055699600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "738": {
+    id: "738",
+    name: "Super Mario™ - Aventuras com Mario - Início",
+    price: 629.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 441,
+    ages: "8+",
+    pieces: 231,
+    itemNumber: "HASH_CD00A3",
+    vipPoints: 40,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/171178/0071360_Back_01_01-min.jpg?v=637308728653800000", "https://legobrasil.vtexassets.com/arquivos/ids/171179/0171360_Back_03_01-min.jpg?v=637308728787700000", "https://legobrasil.vtexassets.com/arquivos/ids/171180/0271360_BI_02_01_03-min.jpg?v=637308729049670000", "https://legobrasil.vtexassets.com/arquivos/ids/171181/0571360_Front_01-min.jpg?v=637308729783100000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/171178/0071360_Back_01_01-min.jpg?v=637308728653800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "739": {
+    id: "739",
+    name: "Super Mario™ - Aventuras com  Peach™ interativo",
+    price: 479.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 491,
+    ages: "8+",
+    pieces: 208,
+    itemNumber: "71441",
+    vipPoints: 31,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187060/71441.jpg?v=638530393220700000", "https://legobrasil.vtexassets.com/arquivos/ids/187061/71441--1-.jpg?v=638530393491170000", "https://legobrasil.vtexassets.com/arquivos/ids/187062/71441--2-.jpg?v=638530393637430000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187060/71441.jpg?v=638530393220700000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "740": {
+    id: "740",
+    name: "Super Mario™ - Conjunto Soda Jungle Maker",
+    price: 529.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 83,
+    ages: "8+",
+    pieces: 598,
+    itemNumber: "71434",
+    vipPoints: 34,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187051/71434.jpg?v=638530390202900000", "https://legobrasil.vtexassets.com/arquivos/ids/187052/71434--1-.jpg?v=638530390465730000", "https://legobrasil.vtexassets.com/arquivos/ids/187053/71434--2-.jpg?v=638530390596030000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187051/71434.jpg?v=638530390202900000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "741": {
+    id: "741",
+    name: "Super Mario™ - Aventuras com  Luigi™ interativo",
+    price: 479.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 362,
+    ages: "8+",
+    pieces: 210,
+    itemNumber: "71440",
+    vipPoints: 31,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187057/71440.jpg?v=638530392231000000", "https://legobrasil.vtexassets.com/arquivos/ids/187058/71440--1-.jpg?v=638530392346370000", "https://legobrasil.vtexassets.com/arquivos/ids/187059/71440--2-.jpg?v=638530392494170000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187057/71440.jpg?v=638530392231000000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "742": {
+    id: "742",
+    name: "Super Mario™ - Batalha com Roy no Castelo de Peach",
+    price: 649.99,
+    originalPrice: null,
+    rating: 4.3,
+    reviews: 447,
+    ages: "8+",
+    pieces: 738,
+    itemNumber: "71435",
+    vipPoints: 42,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/186220/71435.jpg?v=638482048476570000", "https://legobrasil.vtexassets.com/arquivos/ids/186221/71435--1-.jpg?v=638482048593600000", "https://legobrasil.vtexassets.com/arquivos/ids/186222/71435--2-.jpg?v=638482054383630000", "https://legobrasil.vtexassets.com/arquivos/ids/186223/71435--3-.jpg?v=638482054609330000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/186220/71435.jpg?v=638482048476570000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "743": {
+    id: "743",
+    name: "Super Mario™ - Mario Kart™ – Baby Mario vs Baby Luigi",
+    price: 279.99,
+    originalPrice: null,
+    rating: 4.0,
+    reviews: 233,
+    ages: "8+",
+    pieces: 321,
+    itemNumber: "72034",
+    vipPoints: 18,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187897/72034.jpg?v=638683123680970000", "https://legobrasil.vtexassets.com/arquivos/ids/187898/72034--1-.jpg?v=638683123764930000", "https://legobrasil.vtexassets.com/arquivos/ids/187899/72034--2-.jpg?v=638683123855200000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187897/72034.jpg?v=638683123680970000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "744": {
+    id: "744",
+    name: "Super Mario™ - Aventuras com  Mario™ interativo",
+    price: 479.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 232,
+    ages: "8+",
+    pieces: 218,
+    itemNumber: "71439",
+    vipPoints: 31,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187054/71439.jpg?v=638530391509970000", "https://legobrasil.vtexassets.com/arquivos/ids/187055/71439--1-.jpg?v=638530391661830000", "https://legobrasil.vtexassets.com/arquivos/ids/187056/71439--2-.jpg?v=638530391777430000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187054/71439.jpg?v=638530391509970000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "745": {
+    id: "745",
+    name: "Super Mario™ - Mario Kart™ – Moto Yoshi",
+    price: 149.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 495,
+    ages: "8+",
+    pieces: 133,
+    itemNumber: "72031",
+    vipPoints: 9,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187894/72031.jpg?v=638683104074270000", "https://legobrasil.vtexassets.com/arquivos/ids/187895/72031--1-.jpg?v=638683104178200000", "https://legobrasil.vtexassets.com/arquivos/ids/187896/72031--2-.jpg?v=638683104266570000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187894/72031.jpg?v=638683104074270000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "746": {
+    id: "746",
+    name: "Super Mario™ - Mario Kart padrão",
+    price: 179.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 136,
+    ages: "8+",
+    pieces: 174,
+    itemNumber: "72032",
+    vipPoints: 11,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187888/72032.jpg?v=638682554103500000", "https://legobrasil.vtexassets.com/arquivos/ids/187889/72032--1-.jpg?v=638682554243670000", "https://legobrasil.vtexassets.com/arquivos/ids/187890/72032--2-.jpg?v=638682554382900000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187888/72032.jpg?v=638682554103500000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "747": {
+    id: "747",
+    name: "Super Mario™ - O Poderoso Bowser",
+    price: 2299.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 143,
+    ages: "8+",
+    pieces: 2807,
+    itemNumber: "HASH_81F814",
+    vipPoints: 149,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/181285/71411_prod.png?v=638022266516130000", "https://legobrasil.vtexassets.com/arquivos/ids/181286/Sem-Titulo-1_0000s_0008_71411_web_sec02_nobg.jpg?v=638022266994470000", "https://legobrasil.vtexassets.com/arquivos/ids/181287/Sem-Titulo-1_0000s_0003_71411_feature6.jpg?v=638022267440300000", "https://legobrasil.vtexassets.com/arquivos/ids/181288/Sem-Titulo-1_0000s_0007_71411_Lifestyle_06.jpg?v=638022268243870000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/181285/71411_prod.png?v=638022266516130000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "748": {
+    id: "748",
+    name: "Super Mario™ - Mario Kart™ – Donkey Kong & DK Jumbo",
+    price: 329.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 338,
+    ages: "8+",
+    pieces: 387,
+    itemNumber: "72033",
+    vipPoints: 21,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187891/72033.jpg?v=638682554891500000", "https://legobrasil.vtexassets.com/arquivos/ids/187892/72033--1-.jpg?v=638682555010330000", "https://legobrasil.vtexassets.com/arquivos/ids/187893/72033--2-.jpg?v=638682555142470000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187891/72033.jpg?v=638682554891500000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "749": {
+    id: "749",
+    name: "Super Mario™ - Mario & Yoshi",
+    price: 1299.99,
+    originalPrice: null,
+    rating: 4.1,
+    reviews: 66,
+    ages: "8+",
+    pieces: 1215,
+    itemNumber: "71438",
+    vipPoints: 84,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187434/71438.jpg?v=638618402700200000", "https://legobrasil.vtexassets.com/arquivos/ids/187435/71438--1-.jpg?v=638847260035900000", "https://legobrasil.vtexassets.com/arquivos/ids/187436/71438--2-.jpg?v=638847260036100000", "https://legobrasil.vtexassets.com/arquivos/ids/187437/71438--3-.jpg?v=638847260036130000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187434/71438.jpg?v=638618402700200000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "750": {
+    id: "750",
+    name: "Super Mario™ - Planta Piranha",
+    price: 559.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 318,
+    ages: "8+",
+    pieces: 540,
+    itemNumber: "71426",
+    vipPoints: 36,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/184374/71426-lego-super-mario-planta-piranha.jpg?v=638362595282530000", "https://legobrasil.vtexassets.com/arquivos/ids/184375/71426-lego-super-mario-planta-piranha--1-.jpg?v=638362595401370000", "https://legobrasil.vtexassets.com/arquivos/ids/184376/71426-lego-super-mario-planta-piranha--2-.jpg?v=638362595546600000", "https://legobrasil.vtexassets.com/arquivos/ids/184377/71426-lego-super-mario-planta-piranha--3-.jpg?v=638362595643400000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/184374/71426-lego-super-mario-planta-piranha.jpg?v=638362595282530000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "751": {
+    id: "751",
+    name: "Super Mário™ - Mario Kart™: Mario e Kart Padrão",
+    price: 1699.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 447,
+    ages: "8+",
+    pieces: 1972,
+    itemNumber: "72037",
+    vipPoints: 110,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189302/72037.jpg?v=638772277113200000", "https://legobrasil.vtexassets.com/arquivos/ids/189303/72037--1-.jpg?v=638772277205200000", "https://legobrasil.vtexassets.com/arquivos/ids/189304/72037--2-.jpg?v=638772277284970000", "https://legobrasil.vtexassets.com/arquivos/ids/189305/72037--3-.jpg?v=638772277393400000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189302/72037.jpg?v=638772277113200000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "752": {
+    id: "752",
+    name: "Super Mario - Acampamento do Capitão Toad",
+    price: 149.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 404,
+    ages: "8+",
+    pieces: 159,
+    itemNumber: "72040",
+    vipPoints: 9,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/190111/72040-lego-super-mario-acampamento-do-capitao-toad.jpg?v=638846402645800000", "https://legobrasil.vtexassets.com/arquivos/ids/190112/72040-lego-super-mario-acampamento-do-capitao-toad -1-.jpg?v=638846402645900000", "https://legobrasil.vtexassets.com/arquivos/ids/190113/72040-lego-super-mario-acampamento-do-capitao-toad -3-.jpg?v=638846402645930000", "https://legobrasil.vtexassets.com/arquivos/ids/190114/72040-lego-super-mario-acampamento-do-capitao-toad -2-.jpg?v=638846402645970000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/190111/72040-lego-super-mario-acampamento-do-capitao-toad.jpg?v=638846402645800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "753": {
+    id: "753",
+    name: "Wednesday - Figura da Wandinha Addams",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 89,
+    ages: "8+",
+    pieces: 702,
+    itemNumber: "76780",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187409/76780.jpg?v=638618342542670000", "https://legobrasil.vtexassets.com/arquivos/ids/187410/76780--6-.jpg?v=638618353446270000", "https://legobrasil.vtexassets.com/arquivos/ids/187411/76780--7-.jpg?v=638618353531430000", "https://legobrasil.vtexassets.com/arquivos/ids/187412/76780--8-.jpg?v=638618353707830000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187409/76780.jpg?v=638618342542670000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "754": {
+    id: "754",
+    name: "Wednesday - Apartamento do Mãozinha",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 420,
+    ages: "8+",
+    pieces: 828,
+    itemNumber: "76785",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/191141/76785-LEGO-Wednesday-apartamento-do-maozinha -10-.jpg?v=638902791154800000", "https://legobrasil.vtexassets.com/arquivos/ids/191142/76785-LEGO-Wednesday-apartamento-do-maozinha -9-.jpg?v=638902791155000000", "https://legobrasil.vtexassets.com/arquivos/ids/191143/76785-LEGO-Wednesday-apartamento-do-maozinha -8-.jpg?v=638902791155030000", "https://legobrasil.vtexassets.com/arquivos/ids/191144/76785-LEGO-Wednesday-apartamento-do-maozinha -7-.jpg?v=638902791155070000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191141/76785-LEGO-Wednesday-apartamento-do-maozinha -10-.jpg?v=638902791154800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "755": {
+    id: "755",
+    name: "Wednesday - Casa da Mortícia",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 348,
+    ages: "8+",
+    pieces: 1002,
+    itemNumber: "76786",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/191152/76786-LEGO-Wednesday-casa-da-morticia -8-.jpg?v=638902791449800000", "https://legobrasil.vtexassets.com/arquivos/ids/191153/76786-LEGO-Wednesday-casa-da-morticia -7-.jpg?v=638902791449830000", "https://legobrasil.vtexassets.com/arquivos/ids/191154/76786-LEGO-Wednesday-casa-da-morticia -6-.jpg?v=638902791449870000", "https://legobrasil.vtexassets.com/arquivos/ids/191155/76786-LEGO-Wednesday-casa-da-morticia -5-.jpg?v=638902791449900000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191152/76786-LEGO-Wednesday-casa-da-morticia -8-.jpg?v=638902791449800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "756": {
+    id: "756",
+    name: "Wednesday - Flor Dália Negra",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 190,
+    ages: "8+",
+    pieces: 358,
+    itemNumber: "76784",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189857/76784-LEGO-Wednesday-flor-dalia-negra.jpg?v=638842378489570000", "https://legobrasil.vtexassets.com/arquivos/ids/189858/76784-LEGO-Wednesday-flor-dalia-negra -1-.jpg?v=638842378489800000", "https://legobrasil.vtexassets.com/arquivos/ids/189859/76784-LEGO-Wednesday-flor-dalia-negra -2-.jpg?v=638842378489830000", "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189857/76784-LEGO-Wednesday-flor-dalia-negra.jpg?v=638842378489570000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "757": {
+    id: "757",
+    name: "Wednesday - Wandinha e o dormitório de Enid",
+    price: 899.99,
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 434,
+    ages: "8+",
+    pieces: 750,
+    itemNumber: "76781",
+    vipPoints: 58,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187408/76781.jpg?v=638618342069730000", "https://legobrasil.vtexassets.com/arquivos/ids/187419/76781--7-.jpg?v=638618355044700000", "https://legobrasil.vtexassets.com/arquivos/ids/187420/76781--11-.jpg?v=638618355190000000", "https://legobrasil.vtexassets.com/arquivos/ids/187421/76781--10-.jpg?v=638618355366870000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187408/76781.jpg?v=638618342069730000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "758": {
+    id: "758",
+    name: "Wicked - Retiro de Elphaba",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 349,
+    ages: "8+",
+    pieces: 228,
+    itemNumber: "75687",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/191050/75687-LEGO-Wicked-retiro-elphaba -4-.jpg?v=638901218246070000", "https://legobrasil.vtexassets.com/arquivos/ids/191051/75687-LEGO-Wicked-retiro-elphaba -3-.jpg?v=638901218246100000", "https://legobrasil.vtexassets.com/arquivos/ids/191052/75687-LEGO-Wicked-retiro-elphaba -2-.jpg?v=638901218246130000", "https://legobrasil.vtexassets.com/arquivos/ids/191053/75687-LEGO-Wicked-retiro-elphaba -1-.jpg?v=638901218246170000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191050/75687-LEGO-Wicked-retiro-elphaba -4-.jpg?v=638901218246070000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "759": {
+    id: "759",
+    name: "Wicked - Dia do casamento da Glinda",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 175,
+    ages: "8+",
+    pieces: 476,
+    itemNumber: "75688",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/191043/75688-LEGO-Wicked-dia-do-casamento-da-glinda -6-.jpg?v=638901214496730000", "https://legobrasil.vtexassets.com/arquivos/ids/191044/75688-LEGO-Wicked-dia-do-casamento-da-glinda -5-.jpg?v=638901214496870000", "https://legobrasil.vtexassets.com/arquivos/ids/191045/75688-LEGO-Wicked-dia-do-casamento-da-glinda -4-.jpg?v=638901214496900000", "https://legobrasil.vtexassets.com/arquivos/ids/191046/75688-LEGO-Wicked-dia-do-casamento-da-glinda -3-.jpg?v=638901214496930000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191043/75688-LEGO-Wicked-dia-do-casamento-da-glinda -6-.jpg?v=638901214496730000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "760": {
+    id: "760",
+    name: "Wicked - Figuras da Elphaba e Glinda",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 116,
+    ages: "8+",
+    pieces: 325,
+    itemNumber: "40794",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/191055/40794-LEGO-wicked-figuras-elphaba-glinda -3-.jpg?v=638901221257300000", "https://legobrasil.vtexassets.com/arquivos/ids/191056/40794-LEGO-wicked-figuras-elphaba-glinda -2-.jpg?v=638901221257370000", "https://legobrasil.vtexassets.com/arquivos/ids/191057/40794-LEGO-wicked-figuras-elphaba-glinda -1-.jpg?v=638901221257400000", "https://legobrasil.vtexassets.com/arquivos/ids/191058/40794-LEGO-wicked-figuras-elphaba-glinda.jpg?v=638901221257500000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191055/40794-LEGO-wicked-figuras-elphaba-glinda -3-.jpg?v=638901221257300000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "761": {
+    id: "761",
+    name: "Wicked - Glinda e Elphaba visitam Munchkinland",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.0,
+    reviews: 189,
+    ages: "8+",
+    pieces: 744,
+    itemNumber: "75690",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/191096/75690-LEGO-Wicked-glinda-elphaba-visitam-munchkinland--8-.jpg?v=638901251260900000", "https://legobrasil.vtexassets.com/arquivos/ids/191097/75690-LEGO-Wicked-glinda-elphaba-visitam-munchkinland--7-.jpg?v=638901251261070000", "https://legobrasil.vtexassets.com/arquivos/ids/191098/75690-LEGO-Wicked-glinda-elphaba-visitam-munchkinland--6-.jpg?v=638901251261100000", "https://legobrasil.vtexassets.com/arquivos/ids/191099/75690-LEGO-Wicked-glinda-elphaba-visitam-munchkinland--5-.jpg?v=638901251261100000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191096/75690-LEGO-Wicked-glinda-elphaba-visitam-munchkinland--8-.jpg?v=638901251260900000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "762": {
+    id: "762",
+    name: "Wicked - Cidade das Esmeraldas e Castelo Kiamo Ko",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.2,
+    reviews: 197,
+    ages: "8+",
+    pieces: 860,
+    itemNumber: "75689",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/191068/75689-LEGO-Wicked-cidade-das-esmeraldas-castelo-kiamo-ko -5-.jpg?v=638901231844500000", "https://legobrasil.vtexassets.com/arquivos/ids/191069/75689-LEGO-Wicked-cidade-das-esmeraldas-castelo-kiamo-ko -3-.jpg?v=638901231844530000", "https://legobrasil.vtexassets.com/arquivos/ids/191070/75689-LEGO-Wicked-cidade-das-esmeraldas-castelo-kiamo-ko -2-.jpg?v=638901231844600000", "https://legobrasil.vtexassets.com/arquivos/ids/191071/75689-LEGO-Wicked-cidade-das-esmeraldas-castelo-kiamo-ko -4-.jpg?v=638901231844670000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191068/75689-LEGO-Wicked-cidade-das-esmeraldas-castelo-kiamo-ko -5-.jpg?v=638901231844500000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "763": {
+    id: "763",
+    name: "Wicked - Arte de parede da Cidade Esmeralda",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 129,
+    ages: "8+",
+    pieces: 1518,
+    itemNumber: "75685",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/191090/75685-LEGO-Wicked-arte-de-parede-cidade-esmeralda -5-.jpg?v=638901246591470000", "https://legobrasil.vtexassets.com/arquivos/ids/191091/75685-LEGO-Wicked-arte-de-parede-cidade-esmeralda -4-.jpg?v=638901246591600000", "https://legobrasil.vtexassets.com/arquivos/ids/191092/75685-LEGO-Wicked-arte-de-parede-cidade-esmeralda -3-.jpg?v=638901246591600000", "https://legobrasil.vtexassets.com/arquivos/ids/191093/75685-LEGO-Wicked-arte-de-parede-cidade-esmeralda -2-.jpg?v=638901246591630000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191090/75685-LEGO-Wicked-arte-de-parede-cidade-esmeralda -5-.jpg?v=638901246591470000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "764": {
+    id: "764",
+    name: "Wicked - Cantinho do livro: Glinda e Elphaba",
+    price: 299.99,
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 297,
+    ages: "8+",
+    pieces: 1327,
+    itemNumber: "75691",
+    vipPoints: 19,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/191059/75691-LEGO-Wicked-cantinho-do-livro-glinda-e-elphaba -8-.jpg?v=638901227592600000", "https://legobrasil.vtexassets.com/arquivos/ids/191060/75691-LEGO-Wicked-cantinho-do-livro-glinda-e-elphaba -7-.jpg?v=638901227592700000", "https://legobrasil.vtexassets.com/arquivos/ids/191061/75691-LEGO-Wicked-cantinho-do-livro-glinda-e-elphaba -6-.jpg?v=638901227592730000", "https://legobrasil.vtexassets.com/arquivos/ids/191062/75691-LEGO-Wicked-cantinho-do-livro-glinda-e-elphaba -5-.jpg?v=638901227592770000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/191059/75691-LEGO-Wicked-cantinho-do-livro-glinda-e-elphaba -8-.jpg?v=638901227592600000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "765": {
+    id: "765",
+    name: "Wicked - Bem-vindo à Cidade Esmeralda",
+    price: 959.99,
+    originalPrice: null,
+    rating: 4.7,
+    reviews: 378,
+    ages: "8+",
+    pieces: 945,
+    itemNumber: "75684",
+    vipPoints: 62,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187577/75684.jpg?v=638624775040800000", "https://legobrasil.vtexassets.com/arquivos/ids/187596/75684--1-.jpg?v=638627190635370000", "https://legobrasil.vtexassets.com/arquivos/ids/187597/75684--2-.jpg?v=638627191131930000", "https://legobrasil.vtexassets.com/arquivos/ids/187598/75684--3-.jpg?v=638627191301270000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187577/75684.jpg?v=638624775040800000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "766": {
+    id: "766",
+    name: "Wicked - Figuras de Elphaba e Glinda",
+    price: 529.99,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 473,
+    ages: "8+",
+    pieces: 558,
+    itemNumber: "75682",
+    vipPoints: 34,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187575/75682.jpg?v=638624773777400000", "https://legobrasil.vtexassets.com/arquivos/ids/187579/75682--5-.jpg?v=638627186137400000", "https://legobrasil.vtexassets.com/arquivos/ids/187580/75682--6-.jpg?v=638627186237130000", "https://legobrasil.vtexassets.com/arquivos/ids/187581/75682--7-.jpg?v=638627186382000000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187575/75682.jpg?v=638624773777400000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "767": {
+    id: "767",
+    name: "Wicked - Dormitório de Glinda e Elphaba",
+    price: 699.99,
+    originalPrice: null,
+    rating: 4.4,
+    reviews: 412,
+    ages: "8+",
+    pieces: 740,
+    itemNumber: "75683",
+    vipPoints: 45,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187576/75683.jpg?v=638624774590830000", "https://legobrasil.vtexassets.com/arquivos/ids/187586/75683--6-.jpg?v=638627188883830000", "https://legobrasil.vtexassets.com/arquivos/ids/187587/75683--9-.jpg?v=638627189184900000", "https://legobrasil.vtexassets.com/arquivos/ids/187588/75683--10-.jpg?v=638627189277100000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187576/75683.jpg?v=638624774590830000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
+  },
+  "768": {
+    id: "768",
+    name: "Wicked - Glinda, Elphaba e Nessarose na Universidade Shiz",
+    price: 279.99,
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 322,
+    ages: "8+",
+    pieces: 304,
+    itemNumber: "75681",
+    vipPoints: 18,
+    images: ["https://legobrasil.vtexassets.com/arquivos/ids/187567/75681.jpg?v=638624772159570000", "https://legobrasil.vtexassets.com/arquivos/ids/187568/75681--1-.jpg?v=638624772256800000", "https://legobrasil.vtexassets.com/arquivos/ids/187569/75681--2-.jpg?v=638624772342570000", "https://legobrasil.vtexassets.com/arquivos/ids/187570/75681--3-.jpg?v=638624772478470000"],
+    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    features: [],
+    inStock: true,
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187567/75681.jpg?v=638624772159570000",
+    puzzleTimeLimit: 300,
+    puzzleDiscount: 70,
+    categories: ["todos"]
   },
 }
 
