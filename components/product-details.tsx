@@ -128,7 +128,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
             <img
               src={product.images[currentImageIndex] || "/placeholder.svg"}
               alt={product.name}
-              className="w-full h-64 sm:h-80 lg:h-96 object-cover"
+              className="object-cover"
+              style={{ width: "293px", height: "370px" }}
             />
             <Button
               variant="ghost"
