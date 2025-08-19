@@ -11,12 +11,24 @@ import { useState } from "react"
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false)
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     if (searchQuery.trim()) {
       // TODO: Implement search functionality
       console.log("Searching for:", searchQuery)
+    }
+  }
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setSearchQuery(value)
+
+    // Busca automática após 2 caracteres
+    if (value.trim().length >= 2) {
+      console.log("Auto searching for:", value)
+      // TODO: Implement auto search functionality
     }
   }
 
@@ -75,12 +87,7 @@ export function Header() {
                 variant="ghost"
                 size="icon"
                 className="md:hidden text-black"
-                onClick={() => {
-                  const searchInput = document.querySelector('input[placeholder="Buscar..."]') as HTMLInputElement
-                  if (searchInput) {
-                    searchInput.focus()
-                  }
-                }}
+                onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
               >
                 <Search className="w-5 h-5" />
               </Button>
@@ -91,7 +98,7 @@ export function Header() {
                   placeholder="Buscar..."
                   className="pl-10 w-60 lg:w-80 bg-white border-gray-300"
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={handleSearchChange}
                 />
               </form>
 
@@ -107,27 +114,45 @@ export function Header() {
               </Button>
             </div>
           </div>
+
+          {isMobileSearchOpen && (
+            <div className="md:hidden py-3 border-t border-yellow-500">
+              <form onSubmit={handleSearch} className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-4 h-4" />
+                <Input
+                  placeholder="Buscar produtos..."
+                  className="pl-10 w-full bg-white border-gray-300"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  autoFocus
+                />
+              </form>
+            </div>
+          )}
         </div>
       </header>
 
-      {/* Overlay */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          className="fixed inset-0 bg-black bg-opacity-20 z-40 md:hidden"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
 
-      {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full w-80 bg-white z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed top-0 left-0 h-full w-80 bg-yellow-400 z-50 transform transition-transform duration-300 ease-in-out md:hidden border-r-4 border-red-600 ${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="p-4">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold text-black">MENU</h2>
-            <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(false)} className="text-black">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-black hover:bg-yellow-300"
+            >
               <X className="w-5 h-5" />
             </Button>
           </div>
@@ -136,7 +161,7 @@ export function Header() {
             <Link href="/categoria/novos" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant="ghost"
-                className="w-full justify-start text-black font-semibold hover:bg-gray-100 text-lg py-6"
+                className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
               >
                 NOVOS
               </Button>
@@ -144,7 +169,7 @@ export function Header() {
             <Link href="/categoria/exclusivos" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant="ghost"
-                className="w-full justify-start text-black font-semibold hover:bg-gray-100 text-lg py-6"
+                className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
               >
                 EXCLUSIVOS
               </Button>
@@ -152,7 +177,7 @@ export function Header() {
             <Link href="/categoria/ofertas" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant="ghost"
-                className="w-full justify-start text-black font-semibold hover:bg-gray-100 text-lg py-6"
+                className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
               >
                 OFERTAS
               </Button>
@@ -164,9 +189,9 @@ export function Header() {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-4 h-4" />
               <Input
                 placeholder="Buscar produtos..."
-                className="pl-10 w-full bg-gray-50 border-gray-300"
+                className="pl-10 w-full bg-white border-2 border-black rounded-lg"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleSearchChange}
               />
             </form>
           </div>
