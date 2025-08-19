@@ -223,9 +223,9 @@ export default function CheckoutPage() {
     if (deliveryMethod === "RETIRAR") {
       const bairro = address?.district || "Centro"
       const storeOption = {
-        type: `Centro de Distribuição LEGO}`,
+        type: `Centro de Distribuição LEGO`,
         distance: "3.1km",
-        address: "${bairro}",
+        address: `${bairro}`,
         price: onlyFreeItems ? 0 : 0,
       }
       setShippingOptions([storeOption])
