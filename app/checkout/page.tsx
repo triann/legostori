@@ -943,30 +943,25 @@ export default function CheckoutPage() {
 
               {/* PIX - única opção disponível */}
               <button
-  onClick={() => setSelectedPaymentMethod("pix")}
-  className={`w-full border-2 rounded-lg p-4 transition-colors ${
-    selectedPaymentMethod === "pix"
-      ? "border-blue-600 bg-white"
-      : "border-gray-200 bg-white hover:border-gray-300"
-  }`}
->
-  <div className="flex items-center justify-between">
-    <span
-      className={`font-medium ${
-        selectedPaymentMethod === "pix" ? "text-blue-600" : "text-gray-900"
-      }`}
-    >
-      Pix
-    </span>
-    <div className="w-10 h-6 flex items-center justify-center">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png"
-        alt="Pix Logo"
-        className="h-full object-contain"
-      />
-    </div>
-  </div>
-</button>
+                onClick={() => setSelectedPaymentMethod("pix")}
+                className={`w-full border-2 rounded-lg p-4 transition-colors ${
+                  selectedPaymentMethod === "pix"
+                    ? "border-blue-600 bg-white"
+                    : "border-gray-200 bg-white hover:border-gray-300"
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span
+                    className={`font-medium ${selectedPaymentMethod === "pix" ? "text-blue-600" : "text-gray-900"}`}
+                  >
+                    Pix
+                  </span>
+                  <div className="w-10 h-6 flex items-center justify-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png" alt="pix logo" className="h-full object contain"></img>
+                  </div>
+                </div>
+              </button>
+            </div>
 
             {/* Resumo do pedido */}
             <div className="mb-6">
