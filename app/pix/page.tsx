@@ -179,9 +179,6 @@ export default function PixPage() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <p className="text-gray-600 mb-4">Carregando dados do pagamento...</p>
-          <Link href="/checkout" className="text-orange-500 hover:underline">
-            Voltar ao checkout
-          </Link>
         </div>
       </div>
     )
@@ -194,9 +191,6 @@ export default function PixPage() {
       <div className="max-w-md mx-auto bg-white min-h-screen">
         <div className="p-4 border-b">
           <h1 className="text-xl font-semibold text-gray-900 text-center">Pagamento PIX</h1>
-          <Link href="/checkout" className="text-sm text-orange-500 hover:underline">
-            Voltar para o checkout
-          </Link>
         </div>
 
         <div className="p-6">
@@ -217,19 +211,10 @@ export default function PixPage() {
                 <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                 <span className="text-green-800 font-medium text-sm">Pagamento confirmado!</span>
               </div>
-              <p className="text-green-700 text-xs mt-2">Redirecionando para a página inicial...</p>
             </div>
           )}
 
           <div className="text-center">
-            <div className="w-24 h-24 mx-auto mb-6 bg-white rounded-lg flex items-center justify-center border-2 border-gray-200">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png"
-                alt="Logo PIX"
-                className="w-20 h-12 object-contain"
-              />
-            </div>
-
             <h2 className="text-lg font-semibold text-gray-900 mb-2">Escaneie o código QR para pagar</h2>
             <p className="text-sm text-gray-600 mb-6">Use o app do seu banco ou carteira digital</p>
 
