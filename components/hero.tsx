@@ -18,7 +18,7 @@ export function Hero() {
             <div className="text-center space-y-4 md:space-y-6">
               <h1 className="text-xl md:text-3xl font-bold">Nova promoção Lego disponível!</h1>
               <p className="text-sm md:text-lg text-gray-300">
-                Escolha o LEGO que você deseja e descubra o quebra-cabeça exclusivo daquele set. Complete o desafio, gire a roleta e ganhe prêmios incríveis: descontos de 15% a 70% ou até o LEGO totalmente grátis! Receba em casa em até 3 dias úteis ou retire diretamente na loja. Cada peça montada é uma chance de transformar diversão em recompensa – não perca a sua!
+                Escolha o LEGO que você deseja e descubra o quebra-cabeça exclusivo daquele set. Complete o desafio, gire a roleta e ganhe prêmios incríveis. Cada peça montada é uma chance de transformar diversão em recompensa – não perca a sua!
               </p>
             </div>
           </div>
