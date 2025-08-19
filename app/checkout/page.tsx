@@ -652,10 +652,7 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="/placeholder.svg?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
-            <img src="/placeholder.svg?height=24&width=40&text=VISA" alt="Visa" className="h-6" />
-            <img src="/placeholder.svg?height=24&width=40&text=MC" alt="Mastercard" className="h-6" />
-            <img src="/placeholder.svg?height=24&width=40&text=AMEX" alt="American Express" className="h-6" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
           </div>
         </div>
       </div>
@@ -857,10 +854,7 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="/placeholder.svg?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
-            <img src="/placeholder.svg?height=24&width=40&text=VISA" alt="Visa" className="h-6" />
-            <img src="/placeholder.svg?height=24&width=40&text=MC" alt="Mastercard" className="h-6" />
-            <img src="/placeholder.svg?height=24&width=40&text=AMEX" alt="American Express" className="h-6" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
           </div>
         </div>
       </div>
@@ -1034,10 +1028,7 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="/placeholder.svg?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
-            <img src="/placeholder.svg?height=24&width=40&text=VISA" alt="Visa" className="h-6" />
-            <img src="/placeholder.svg?height=24&width=40&text=MC" alt="Mastercard" className="h-6" />
-            <img src="/placeholder.svg?height=24&width=40&text=AMEX" alt="American Express" className="h-6" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
           </div>
         </div>
       </div>
@@ -1168,10 +1159,7 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="/placeholder.svg?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
-            <img src="/placeholder.svg?height=24&width=40&text=VISA" alt="Visa" className="h-6" />
-            <img src="/placeholder.svg?height=24&width=40&text=MC" alt="Mastercard" className="h-6" />
-            <img src="/placeholder.svg?height=24&width=40&text=AMEX" alt="American Express" className="h-6" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
           </div>
         </div>
       </div>
