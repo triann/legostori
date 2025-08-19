@@ -124,12 +124,14 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       <div className="grid lg:grid-cols-2 gap-6 lg:gap-12">
         {/* Product Images */}
         <div className="space-y-4">
-          <div className="relative bg-gray-50 rounded-lg overflow-hidden">
+          <div
+            className="relative bg-gray-50 rounded-lg overflow-hidden flex items-center justify-center"
+            style={{ width: "293px", height: "370px" }}
+          >
             <img
               src={product.images[currentImageIndex] || "/placeholder.svg"}
               alt={product.name}
-              className="object-cover"
-              style={{ width: "293px", height: "370px" }}
+              className="object-contain max-w-full max-h-full"
             />
             <Button
               variant="ghost"
