@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Heart, Star, ChevronLeft, ChevronRight } from "lucide-react"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Link from "next/link"
 
 const categories = [
@@ -21,10 +21,31 @@ const categories = [
       "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/dbba9da0-fef8-4752-8da3-4dd10e5fdae4___dff3250cc485e56c1e8392f20b546919.jpg",
     href: "/categoria/exclusivos", // adicionando navegação para página específica
   },
-  { name: "Ofertas", color: "bg-red-600", image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Offers.jpg", href: "/categoria/ofertas" }, // adicionando navegação
-  { name: "Todos os sets", color: "bg-red-700", image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Allsets.jpg", href: "/categoria/todos-os-sets" }, // adicionando navegação
-  { name: "LEGO ONE PIECE", color: "bg-blue-600", image: "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/f5bd9554-1255-45fb-bcd4-b0b1b117a1cd___a9b2be72ae844ee84b2cd24199a88fbf.jpg", href: "/categoria/one-piece" }, // adicionando navegação
-  { name: "Presentes", color: "bg-green-600", image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-forkids.jpg", href: "/categoria/presentes" }, // adicionando navegação
+  {
+    name: "Ofertas",
+    color: "bg-red-600",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Offers.jpg",
+    href: "/categoria/ofertas",
+  }, // adicionando navegação
+  {
+    name: "Todos os sets",
+    color: "bg-red-700",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Allsets.jpg",
+    href: "/categoria/todos-os-sets",
+  }, // adicionando navegação
+  {
+    name: "LEGO ONE PIECE",
+    color: "bg-blue-600",
+    image:
+      "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/f5bd9554-1255-45fb-bcd4-b0b1b117a1cd___a9b2be72ae844ee84b2cd24199a88fbf.jpg",
+    href: "/categoria/one-piece",
+  }, // adicionando navegação
+  {
+    name: "Presentes",
+    color: "bg-green-600",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-forkids.jpg",
+    href: "/categoria/presentes",
+  }, // adicionando navegação
   {
     name: "Volta às Aulas",
     color: "bg-teal-600",
@@ -148,7 +169,8 @@ const products = [
     reviews: 445,
     ages: "7+",
     pieces: 913,
-    image: "https://legobrasil.vtexassets.com/arquivos/ids/184072/60367-lego-city-aviao-de-passageiros.jpg?v=638276417925400000",
+    image:
+      "https://legobrasil.vtexassets.com/arquivos/ids/184072/60367-lego-city-aviao-de-passageiros.jpg?v=638276417925400000",
     isNew: false,
     href: "/product/9",
   },
@@ -156,6 +178,7 @@ const products = [
 
 export function ProductGrid() {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const categoriesScrollRef = useRef<HTMLDivElement>(null)
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % products.length)
@@ -163,6 +186,18 @@ export function ProductGrid() {
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + products.length) % products.length)
+  }
+
+  const scrollCategoriesLeft = () => {
+    if (categoriesScrollRef.current) {
+      categoriesScrollRef.current.scrollBy({ left: -200, behavior: "smooth" })
+    }
+  }
+
+  const scrollCategoriesRight = () => {
+    if (categoriesScrollRef.current) {
+      categoriesScrollRef.current.scrollBy({ left: 200, behavior: "smooth" })
+    }
   }
 
   return (
@@ -175,100 +210,54 @@ export function ProductGrid() {
           <span className="text-gray-500 text-sm md:text-base whitespace-nowrap">Idade</span>
         </div>
 
-        <div className="relative flex justify-center">
-          <div
-            className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide pb-2 cursor-grab active:cursor-grabbing"
-            style={{
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
-              scrollBehavior: "smooth",
-            }}
-            onMouseDown={(e) => {
-              const slider = e.currentTarget
-              let isDown = false
-              let startX = 0
-              let scrollLeft = 0
-
-              const handleMouseDown = (e: MouseEvent) => {
-                isDown = true
-                slider.classList.add("active:cursor-grabbing")
-                startX = e.pageX - slider.offsetLeft
-                scrollLeft = slider.scrollLeft
-              }
-
-              const handleMouseLeave = () => {
-                isDown = false
-                slider.classList.remove("active:cursor-grabbing")
-              }
-
-              const handleMouseUp = () => {
-                isDown = false
-                slider.classList.remove("active:cursor-grabbing")
-              }
-
-              const handleMouseMove = (e: MouseEvent) => {
-                if (!isDown) return
-                e.preventDefault()
-                const x = e.pageX - slider.offsetLeft
-                const walk = (x - startX) * 2
-                slider.scrollLeft = scrollLeft - walk
-              }
-
-              slider.addEventListener("mousedown", handleMouseDown)
-              slider.addEventListener("mouseleave", handleMouseLeave)
-              slider.addEventListener("mouseup", handleMouseUp)
-              slider.addEventListener("mousemove", handleMouseMove)
-
-              return () => {
-                slider.removeEventListener("mousedown", handleMouseDown)
-                slider.removeEventListener("mouseleave", handleMouseLeave)
-                slider.removeEventListener("mouseup", handleMouseUp)
-                slider.removeEventListener("mousemove", handleMouseMove)
-              }
-            }}
-            onTouchStart={(e) => {
-              const slider = e.currentTarget
-              let startX = 0
-              let scrollLeft = 0
-
-              const handleTouchStart = (e: TouchEvent) => {
-                startX = e.touches[0].pageX - slider.offsetLeft
-                scrollLeft = slider.scrollLeft
-              }
-
-              const handleTouchMove = (e: TouchEvent) => {
-                const x = e.touches[0].pageX - slider.offsetLeft
-                const walk = (x - startX) * 2
-                slider.scrollLeft = scrollLeft - walk
-              }
-
-              slider.addEventListener("touchstart", handleTouchStart)
-              slider.addEventListener("touchmove", handleTouchMove)
-
-              return () => {
-                slider.removeEventListener("touchstart", handleTouchStart)
-                slider.removeEventListener("touchmove", handleTouchMove)
-              }
-            }}
+        <div className="relative">
+          <Button
+            variant="outline"
+            size="icon"
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white z-10 w-8 h-8"
+            onClick={scrollCategoriesLeft}
           >
-            {categories.map((category, index) => (
-              <Link key={index} href={category.href}>
-                <Card
-                  className={`cursor-pointer hover:opacity-90 transition-opacity flex-shrink-0 w-24 md:w-32 relative overflow-hidden p-0 border-0 mx-auto`}
-                >
-                  <div className="w-full" style={{ aspectRatio: "5/7" }}>
-                    <img
-                      src={category.image || "/placeholder.svg"}
-                      alt={category.name}
-                      className="w-full h-full object-contain bg-gray-100"
-                    />
-                  </div>
-                  <div className="absolute top-2 left-0 right-0 text-center">
-                    <p className="text-white text-xs md:text-sm font-semibold drop-shadow-lg">{category.name}</p>
-                  </div>
-                </Card>
-              </Link>
-            ))}
+            <ChevronLeft className="w-4 h-4" />
+          </Button>
+
+          <Button
+            variant="outline"
+            size="icon"
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white z-10 w-8 h-8"
+            onClick={scrollCategoriesRight}
+          >
+            <ChevronRight className="w-4 h-4" />
+          </Button>
+
+          <div className="mx-8">
+            <div
+              ref={categoriesScrollRef}
+              className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide pb-2"
+              style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+                scrollBehavior: "smooth",
+              }}
+            >
+              {categories.map((category, index) => (
+                <Link key={index} href={category.href}>
+                  <Card
+                    className={`cursor-pointer hover:opacity-90 transition-opacity flex-shrink-0 w-24 md:w-32 relative overflow-hidden p-0 border-0`}
+                  >
+                    <div className="w-full" style={{ aspectRatio: "5/7" }}>
+                      <img
+                        src={category.image || "/placeholder.svg"}
+                        alt={category.name}
+                        className="w-full h-full object-contain bg-gray-100"
+                      />
+                    </div>
+                    <div className="absolute top-2 left-0 right-0 text-center">
+                      <p className="text-white text-xs md:text-sm font-semibold drop-shadow-lg">{category.name}</p>
+                    </div>
+                  </Card>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
