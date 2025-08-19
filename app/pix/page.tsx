@@ -26,7 +26,16 @@ export default function PixPage() {
     // Carregar dados do PIX do localStorage
     const savedPixData = localStorage.getItem("pixPayment")
     if (savedPixData) {
-      setPixData(JSON.parse(savedPixData))
+      const parsedData = JSON.parse(savedPixData)
+      console.log("[v0] Dados PIX recuperados do localStorage:", parsedData)
+
+      if (parsedData.amount > 1000) {
+        // Se o valor for maior que 1000, provavelmente está em centavos
+        parsedData.amount = parsedData.amount / 100
+        console.log("[v0] Valor convertido de centavos para reais:", parsedData.amount)
+      }
+
+      setPixData(parsedData)
     }
   }, [])
 
