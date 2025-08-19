@@ -21,21 +21,15 @@ const categories = [
       "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/dbba9da0-fef8-4752-8da3-4dd10e5fdae4___dff3250cc485e56c1e8392f20b546919.jpg",
     href: "/categoria/exclusivos", // adicionando navegação para página específica
   },
-  { name: "Ofertas", color: "bg-red-600", image: "/lego-discount.png", href: "/categoria/ofertas" }, // adicionando navegação
-  { name: "Todos os sets", color: "bg-red-700", image: "/lego-collection.png", href: "/categoria/todos-os-sets" }, // adicionando navegação
-  { name: "LEGO ONE PIECE", color: "bg-blue-600", image: "/lego-one-piece-set.png", href: "/categoria/one-piece" }, // adicionando navegação
-  { name: "Presentes", color: "bg-green-600", image: "/lego-gift-sets.png", href: "/categoria/presentes" }, // adicionando navegação
+  { name: "Ofertas", color: "bg-red-600", image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Offers.jpg", href: "/categoria/ofertas" }, // adicionando navegação
+  { name: "Todos os sets", color: "bg-red-700", image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Allsets.jpg", href: "/categoria/todos-os-sets" }, // adicionando navegação
+  { name: "LEGO ONE PIECE", color: "bg-blue-600", image: "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/f5bd9554-1255-45fb-bcd4-b0b1b117a1cd___a9b2be72ae844ee84b2cd24199a88fbf.jpg", href: "/categoria/one-piece" }, // adicionando navegação
+  { name: "Presentes", color: "bg-green-600", image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-forkids.jpg", href: "/categoria/presentes" }, // adicionando navegação
   {
     name: "Volta às Aulas",
     color: "bg-teal-600",
     image: "/colorful-brick-backpack.png",
     href: "/categoria/volta-as-aulas",
-  }, // adicionando navegação
-  {
-    name: "Desbloqueie Recompensas",
-    color: "bg-purple-700",
-    image: "/lego-vip-rewards.png",
-    href: "/categoria/recompensas",
   }, // adicionando navegação
 ]
 
@@ -115,7 +109,7 @@ const products = [
     reviews: 445,
     ages: "7+",
     pieces: 617,
-    image: "https://legobrasil.vtexassets.com/arquivos/ids/187718/76934.jpg?v=638646997377600000",
+    image: "https://legobrasil.vtexassets.com/arquivos/ids/188029/76443.jpg?v=638689283624800000",
     isNew: false,
     href: "/product/6",
   },
