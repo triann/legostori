@@ -7,6 +7,10 @@ from urllib.parse import urljoin
 import sys
 import random
 
+# Configure aqui a categoria que será aplicada a todos os produtos desta execução
+# Opções: ["novos"], ["exclusivos"], ["ofertas"], ["novos", "ofertas"], etc.
+CATEGORIA_PRODUTOS = ["novos", "ofertas"]  # Altere esta linha antes de executar o script
+
 class LegoScraper:
     def __init__(self):
         self.session = requests.Session()
@@ -49,6 +53,8 @@ class LegoScraper:
             rating = round(random.uniform(4.0, 5.0), 1)
             reviews = random.randint(50, 500)
             
+            categories = self.get_categories_input(name)
+            
             product_data = {
                 "id": str(self.product_counter),
                 "name": name,
@@ -66,7 +72,8 @@ class LegoScraper:
                 "inStock": True,  # Sempre em estoque
                 "puzzleImage": images[0] if images else "/placeholder.svg?height=400&width=400&text=LEGO+Product",  # Primeira imagem como puzzle
                 "puzzleTimeLimit": 300,  # Tempo limite do puzzle
-                "puzzleDiscount": 70     # Desconto padrão do puzzle
+                "puzzleDiscount": 70,     # Desconto padrão do puzzle
+                "categories": categories  # Adicionada propriedade categories
             }
             
             self.product_counter += 1
@@ -267,7 +274,8 @@ class LegoScraper:
                 f.write(f'    inStock: {str(product["inStock"]).lower()},\n')
                 f.write(f'    puzzleImage: "{product["puzzleImage"]}",\n')
                 f.write(f'    puzzleTimeLimit: {product["puzzleTimeLimit"]},\n')
-                f.write(f'    puzzleDiscount: {product["puzzleDiscount"]}\n')
+                f.write(f'    puzzleDiscount: {product["puzzleDiscount"]},\n')
+                f.write(f'    categories: {json.dumps(product["categories"])}\n')  # Adicionada linha categories
                 
                 # Adicionar vírgula se não for o último item
                 if i < len(products_dict) - 1:
@@ -305,6 +313,11 @@ class LegoScraper:
         
         # Se não encontrar, calcular baseado no preço (aproximadamente 6.5% do preço)
         return int(price * 0.065)
+    
+    def get_categories_input(self, product_name):
+        """Retorna a categoria configurada no topo do arquivo"""
+        print(f"📦 Produto: {product_name} -> Categorias: {CATEGORIA_PRODUTOS}")
+        return CATEGORIA_PRODUTOS
 
 def main():
     # URLs de exemplo - substitua pelas URLs reais
