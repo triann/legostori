@@ -14,36 +14,36 @@ export function CommunitySection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="relative rounded-lg overflow-hidden">
             <img
-              src="/placeholder.svg?height=400&width=600"
+              src="/images/const1.webp"
               alt="LEGO Star Wars AT-AT"
               className="w-full h-64 object-cover"
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <img
-              src="/placeholder.svg?height=200&width=300"
+              src="/images/const2.webp"
               alt="LEGO Pirate Ship"
               className="w-full h-32 object-cover rounded-lg"
             />
             <img
-              src="/placeholder.svg?height=200&width=300"
+              src="/images/const3.webp"
               alt="LEGO Mining Truck"
               className="w-full h-32 object-cover rounded-lg"
             />
             <img
-              src="/placeholder.svg?height=200&width=300"
+              src="/images/const4.webp"
               alt="LEGO Medieval Castle"
               className="w-full h-32 object-cover rounded-lg"
             />
             <img
-              src="/placeholder.svg?height=200&width=300"
+              src="/images/const5.webp"
               alt="LEGO Viking Ship"
               className="w-full h-32 object-cover rounded-lg"
             />
           </div>
           <div className="relative rounded-lg overflow-hidden">
             <img
-              src="/placeholder.svg?height=400&width=600"
+              src="/images/const6.webp"
               alt="LEGO Submarine"
               className="w-full h-64 object-cover"
             />
