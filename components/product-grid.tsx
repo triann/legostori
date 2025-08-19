@@ -47,10 +47,10 @@ const categories = [
     href: "/categoria/starwars",
   }, // adicionando navegação
   {
-    name: "Botanicals",
+    name: "Jurassic World",
     color: "bg-teal-600",
-    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Botanicals.jpg",
-    href: "/categoria/botanicals",
+    image: "https://image.api.playstation.com/cdn/UP1018/CUSA01673_00/oTERelskSGPNIrjp0flCQLUvFnIX09de.png",
+    href: "/categoria/jurassicworld",
   }, // adicionando navegação
 ]
 

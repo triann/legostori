@@ -145,6 +145,11 @@ export function Header() {
                     STAR WARS
                   </Button>
                 </Link>
+                <Link href="/categoria/jurassicworld">
+                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
+                    JURASSIC WORLD
+                  </Button>
+                </Link>
               </nav>
             </div>
 
