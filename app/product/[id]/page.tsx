@@ -4436,7 +4436,7 @@ const products = {
     puzzleTimeLimit: 300,
     puzzleDiscount: 70,
     categories: ["minecraft"]
-  }
+  },
   "218": {
     id: "218",
     name: "Star Wars - Robô Darth Maul™",
