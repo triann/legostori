@@ -34,11 +34,11 @@ const categories = [
     href: "/categoria/marvel",
   }, // adicionando navegação
   {
-    name: "Icons",
+    name: "Minecraft",
     color: "bg-blue-600",
     image:
-      "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Icons-2.jpg",
-    href: "/categoria/icons",
+      "https://www.lego.com/cdn/cs/set/assets/bltb94e6c3b7b65ad09/minecraft-characters-steve.jpg?fit=crop&format=jpg&quality=80&width=800&height=426&dpr=1",
+    href: "/categoria/minecraft",
   }, // adicionando navegação
   {
     name: "Classic",
