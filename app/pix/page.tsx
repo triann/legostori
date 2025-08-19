@@ -270,14 +270,6 @@ export default function PixPage() {
               </ol>
             </div>
 
-            <div className="text-center mb-4">
-              <button
-                onClick={confirmPayment}
-                className="text-green-500 font-medium text-sm underline hover:text-green-600"
-              >
-                Tudo certo, já paguei!
-              </button>
-            </div>
 
             <Button
               onClick={copyPixCode}
