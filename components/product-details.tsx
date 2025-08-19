@@ -124,35 +124,37 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       <div className="grid lg:grid-cols-2 gap-6 lg:gap-12">
         {/* Product Images */}
         <div className="space-y-4">
-          <div
-            className="relative bg-gray-50 rounded-lg overflow-hidden flex items-center justify-center"
-            style={{ width: "293px", height: "370px" }}
-          >
-            <img
-              src={product.images[currentImageIndex] || "/placeholder.svg"}
-              alt={product.name}
-              className="object-contain max-w-full max-h-full"
-            />
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white"
-              onClick={prevImage}
+          <div className="flex justify-center">
+            <div
+              className="relative bg-gray-50 rounded-lg overflow-hidden flex items-center justify-center mx-auto"
+              style={{ width: "293px", height: "370px" }}
             >
-              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white"
-              onClick={nextImage}
-            >
-              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
-            </Button>
+              <img
+                src={product.images[currentImageIndex] || "/placeholder.svg"}
+                alt={product.name}
+                className="object-contain max-w-full max-h-full"
+              />
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white"
+                onClick={prevImage}
+              >
+                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white"
+                onClick={nextImage}
+              >
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              </Button>
+            </div>
           </div>
 
           {/* Thumbnail images */}
-          <div className="flex gap-2 overflow-x-auto pb-2">
+          <div className="flex gap-2 overflow-x-auto pb-2 justify-center">
             {product.images.map((image, index) => (
               <button
                 key={index}

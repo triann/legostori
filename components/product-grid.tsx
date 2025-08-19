@@ -49,7 +49,8 @@ const products = [
     reviews: 156,
     ages: "18+",
     pieces: 1456,
-    image: "https://legobrasil.vtexassets.com/arquivos/ids/176770/lego_40478_Disney_Mini_Castelo_da_Disney_01.jpg?v=637732735262400000",
+    image:
+      "https://legobrasil.vtexassets.com/arquivos/ids/176770/lego_40478_Disney_Mini_Castelo_da_Disney_01.jpg?v=637732735262400000",
     isNew: true,
     href: "/product/1",
   },
@@ -119,7 +120,7 @@ export function ProductGrid() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-2 md:px-4 py-6 md:py-12">
+    <div className="max-w-7xl mx-auto px-4 py-6 md:py-12">
       {/* Category navigation */}
       <div className="mb-6 md:mb-8">
         <div className="flex items-center gap-2 md:gap-4 mb-4 md:mb-6 overflow-x-auto">
@@ -128,7 +129,7 @@ export function ProductGrid() {
           <span className="text-gray-500 text-sm md:text-base whitespace-nowrap">Idade</span>
         </div>
 
-        <div className="relative">
+        <div className="relative flex justify-center">
           <div
             className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide pb-2 cursor-grab active:cursor-grabbing"
             style={{
@@ -207,7 +208,7 @@ export function ProductGrid() {
             {categories.map((category, index) => (
               <Link key={index} href={category.href}>
                 <Card
-                  className={`cursor-pointer hover:opacity-90 transition-opacity flex-shrink-0 w-24 md:w-32 relative overflow-hidden p-0 border-0`}
+                  className={`cursor-pointer hover:opacity-90 transition-opacity flex-shrink-0 w-24 md:w-32 relative overflow-hidden p-0 border-0 mx-auto`}
                 >
                   <div className="w-full" style={{ aspectRatio: "5/7" }}>
                     <img
@@ -230,9 +231,9 @@ export function ProductGrid() {
       <div className="mb-6 md:mb-8">
         <h2 className="text-xl md:text-2xl font-bold text-center mb-4 md:mb-8">Mais Vendidos </h2>
 
-        <div className="relative">
+        <div className="relative flex justify-center">
           <div
-            className="overflow-hidden cursor-grab active:cursor-grabbing"
+            className="overflow-hidden cursor-grab active:cursor-grabbing max-w-sm mx-auto"
             onTouchStart={(e) => {
               let startX = e.touches[0].clientX
               let moved = false
@@ -268,17 +269,19 @@ export function ProductGrid() {
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
               {products.map((product) => (
-                <div key={product.id} className="w-full flex-shrink-0 px-4">
+                <div key={product.id} className="w-full flex-shrink-0 px-4 flex justify-center">
                   <Card className="group cursor-pointer hover:shadow-lg transition-shadow max-w-sm mx-auto">
                     <CardContent className="p-4 md:p-6">
                       <div className="relative mb-4 md:mb-6">
                         <a href={product.href}>
-                          <img
-                            src={product.image || "/placeholder.svg"}
-                            alt={product.name}
-                            className="w-full object-cover rounded"
-                            style={{ aspectRatio: "277/250" }}
-                          />
+                          <div className="flex justify-center">
+                            <img
+                              src={product.image || "/placeholder.svg"}
+                              alt={product.name}
+                              className="object-cover rounded mx-auto"
+                              style={{ aspectRatio: "277/250", width: "277px", height: "250px" }}
+                            />
+                          </div>
                         </a>
                         <Button
                           variant="ghost"
