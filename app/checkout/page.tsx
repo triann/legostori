@@ -377,7 +377,7 @@ export default function CheckoutPage() {
 
     try {
       const pixData: PixPaymentData = {
-        amount: totalPrice, // Valor em centavos
+        amount: Math.round(totalPrice * 100), // Valor em centavos
         email: formData.email,
         name: `${formData.firstName} ${formData.lastName}`.trim(),
         phone: formData.phone,
