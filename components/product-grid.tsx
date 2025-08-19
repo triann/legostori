@@ -274,12 +274,12 @@ export function ProductGrid() {
                     <CardContent className="p-4 md:p-6">
                       <div className="relative mb-4 md:mb-6">
                         <a href={product.href}>
-                          <div className="flex justify-center">
+                          <div className="flex justify-center items-center bg-gray-50 rounded-lg p-4">
                             <img
                               src={product.image || "/placeholder.svg"}
                               alt={product.name}
-                              className="object-cover rounded mx-auto"
-                              style={{ aspectRatio: "277/250", width: "277px", height: "250px" }}
+                              className="object-contain rounded mx-auto"
+                              style={{ width: "250px", height: "250px" }}
                             />
                           </div>
                         </a>
