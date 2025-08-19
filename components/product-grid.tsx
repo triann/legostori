@@ -19,7 +19,7 @@ const categories = [
     color: "bg-purple-600",
     image:
       "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-HarryPotter.jpg",
-    href: "/categoria/harrypottter", // adicionando navegação para página específica
+    href: "/categoria/harrypotter", // adicionando navegação para página específica
   },
   {
     name: "Disney",
