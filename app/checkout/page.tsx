@@ -380,8 +380,12 @@ export default function CheckoutPage() {
     setIsLoading(true)
 
     try {
+      const totalAmount = calculateTotal()
+      console.log("[v0] Valor total com frete:", totalAmount)
+      console.log("[v0] Valor em centavos:", Math.round(totalAmount * 100))
+
       const pixData: PixPaymentData = {
-        amount: Math.round(totalPrice * 100), // Valor em centavos
+        amount: Math.round(totalAmount * 100), // Valor em centavos incluindo frete
         email: formData.email,
         name: `${formData.firstName} ${formData.lastName}`.trim(),
         phone: formData.phone,
