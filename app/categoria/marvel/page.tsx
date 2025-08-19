@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Heart, Star } from "lucide-react"
 import { products } from "@/app/product/[id]/page"
 
-const novosProducts = Object.values(products).filter((product) => product.categories?.includes("novos"))
+const novosProducts = Object.values(products).filter((product) => product.categories?.includes("marvel"))
 
 export default function NovosPage() {
   return (
