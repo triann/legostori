@@ -225,7 +225,7 @@ export default function CheckoutPage() {
       const storeOption = {
         type: `Centro de Distribuição LEGO`,
         distance: "3.1km",
-        address: `${bairro}`,
+        address: `📍 ${bairro}`,
         price: onlyFreeItems ? 0 : 0,
       }
       setShippingOptions([storeOption])
