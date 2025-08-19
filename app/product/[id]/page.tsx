@@ -7,8 +7,8 @@ import { notFound } from "next/navigation"
 const products = {
   "1": {
     id: "1",
-    name: "Transformers: Soundwave",
-    price: 249.99,
+    name: "Disney - Mini Castelo da Disney",
+    price: 329.99,
     originalPrice: null,
     rating: 4.8,
     reviews: 156,
@@ -17,13 +17,11 @@ const products = {
     itemNumber: "76230",
     vipPoints: 1875,
     images: [
-      "/lego-soundwave.png",
-      "/lego-soundwave-front.png",
-      "/lego-soundwave-side.png",
-      "/lego-soundwave-back.png",
+      "https://legobrasil.vtexassets.com/arquivos/ids/176770/lego_40478_Disney_Mini_Castelo_da_Disney_01.jpg?v=637732735262400000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/176771/lego_40478_Disney_Mini_Castelo_da_Disney_02.jpg?v=637732735276170000",
     ],
     description:
-      "Construa e exiba esta impressionante figura LEGO® Transformers Soundwave. Este modelo detalhado captura o visual icônico do oficial de comunicações Decepticon com detalhes autênticos e articulações móveis.",
+      "Comemore o 50º aniversário do Walt Disney World® Resort com este conjunto LEGO® | Disney Mini Disney Castle (40478)! Os fãs do carro-chefe da Disney Magic Kingdom® Park podem recriar o icônico Walt Disney World® Resort Cinderella Castle, completo com topos de torres douradas peroladas, cones de telhado azul opalescente e uma minifigura de estilo vintage do Mickey Mouse. Esta peça de exibição única é um presente perfeito para aniversários, feriados ou outras comemorações.",
     features: [
       "Figura Soundwave altamente detalhada e articulada",
       "Inclui acessórios de fita cassete",
@@ -32,7 +30,7 @@ const products = {
       "Perfeito para exibição em qualquer coleção",
     ],
     inStock: true,
-    puzzleImage: "/lego-soundwave.png",
+    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/176770/lego_40478_Disney_Mini_Castelo_da_Disney_01.jpg?v=637732735262400000",
     puzzleTimeLimit: 300,
     puzzleDiscount: 25,
   },

@@ -42,14 +42,14 @@ const categories = [
 const products = [
   {
     id: 1,
-    name: "Transformers: Soundwave",
-    price: "R$ 1.249,99",
+    name: "Disney - Mini Castelo da Disney",
+    price: "R$ 329,99",
     originalPrice: null,
     rating: 4.8,
     reviews: 156,
     ages: "18+",
     pieces: 1456,
-    image: "/lego-soundwave.png",
+    image: "https://legobrasil.vtexassets.com/arquivos/ids/176770/lego_40478_Disney_Mini_Castelo_da_Disney_01.jpg?v=637732735262400000",
     isNew: true,
     href: "/product/1",
   },

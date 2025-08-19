@@ -65,7 +65,7 @@ export function CommunitySection() {
           </div>
           <div className="relative">
             <img
-              src="/placeholder.svg?height=400&width=500"
+              src="https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/fb315ef8-801c-4005-bd60-bad8c04a9a50___40b335c2507a85c22fbccd9cc553b126.jpg"
               alt="LEGO Hogwarts Castle"
               className="w-full max-w-md mx-auto"
             />
