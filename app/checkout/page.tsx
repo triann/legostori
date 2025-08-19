@@ -407,7 +407,7 @@ export default function CheckoutPage() {
           JSON.stringify({
             qrcode: pixCode,
             token: pixResponse.token,
-            amount: totalPrice,
+            amount: totalAmount, // Usar valor total com frete ao invés de totalPrice
             productName: product?.name || "Produto LEGO",
             email: formData.email,
             name: `${formData.firstName} ${formData.lastName}`.trim(),
