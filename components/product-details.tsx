@@ -323,18 +323,6 @@ export function ProductDetails({ product }: ProductDetailsProps) {
             </div>
           </div>
 
-          {/* Product Features */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Características do produto</h3>
-            <ul className="space-y-2">
-              {product.features.map((feature, index) => (
-                <li key={index} className="flex items-start gap-2">
-                  <span className="text-green-500 mt-1">✓</span>
-                  <span className="text-gray-700">{feature}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
 
           {/* Description */}
           <div className="space-y-4">
