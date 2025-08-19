@@ -15,6 +15,13 @@ const categories = [
     href: "/categoria/novos", // adicionando navegação para página específica
   },
   {
+    name: "Maletas",
+    color: "bg-purple-600",
+    image:
+      "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Allsets.jpg",
+    href: "/categoria/classic", // adicionando navegação para página específica
+  },
+  {
     name: "Harry Potter",
     color: "bg-purple-600",
     image:
@@ -34,7 +41,7 @@ const categories = [
     href: "/categoria/marvel",
   }, // adicionando navegação
   {
-    name: "Minecraft",
+    name: "",
     color: "bg-blue-600",
     image:
       "https://i.pinimg.com/474x/58/17/13/581713909e52b3e0445de19232b0bf02.jpg",
@@ -52,6 +59,30 @@ const categories = [
     image: "https://preview.redd.it/opinions-on-a-new-jurassic-lego-game-v0-n8tljfeb0khe1.jpg?width=640&crop=smart&auto=webp&s=59c0f558ee9c5198ff3d55d2dbf55a45204be02c",
     href: "/categoria/jurassicworld",
   }, // adicionando navegação
+  {
+    name: "Speed Champions",
+    color: "bg-teal-600",
+    image: "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/39bf9ec1-118f-47e2-92b9-9aa12044bd4b___24a1b11a3bf561b24143485763a0cb1e.jpg",
+    href: "/categoria/speedchampions",
+  },
+  {
+    name: "Botanicals",
+    color: "bg-teal-600",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Botanicals.jpg",
+    href: "/categoria/botanicals",
+  },
+  {
+    name: "Creator",
+    color: "bg-teal-600",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Creator.jpg",
+    href: "/categoria/creator",
+  },
+  {
+    name: "Icons",
+    color: "bg-teal-600",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Classic.jpg",
+    href: "/categoria/icons",
+  },
 ]
 
 const products = [

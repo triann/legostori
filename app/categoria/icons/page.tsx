@@ -5,14 +5,14 @@ import { Button } from "@/components/ui/button"
 import { Heart, Star } from "lucide-react"
 import { products } from "@/app/product/[id]/page"
 
-const novosProducts = Object.values(products).filter((product) => product.categories?.includes("jurassicworld"))
+const novosProducts = Object.values(products).filter((product) => product.categories?.includes("icons"))
 
 export default function NovosPage() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
       <div className="max-w-7xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold text-center mb-8">Jurassic World</h1>
+        <h1 className="text-3xl font-bold text-center mb-8">Icons</h1>
 
         <div className="mb-6">
           <p className="text-gray-600">Exibindo {novosProducts.length} Produtos</p>
@@ -35,7 +35,7 @@ export default function NovosPage() {
                     <Heart className="w-4 h-4" />
                   </Button>
                   <span className="absolute top-2 left-2 bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded">
-                    Jurassic World
+                    Icons
                   </span>
                 </div>
                 <div className="space-y-2 md:space-y-3">

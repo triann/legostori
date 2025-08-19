@@ -120,6 +120,11 @@ export function Header() {
                     NOVOS
                   </Button>
                 </Link>
+                <Link href="/categoria/classic">
+                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
+                    CLASSIC
+                  </Button>
+                </Link>
                 <Link href="/categoria/harrypotter">
                   <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
                     HARRY POTTER
@@ -148,6 +153,26 @@ export function Header() {
                 <Link href="/categoria/jurassicworld">
                   <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
                     JURASSIC WORLD
+                  </Button>
+                </Link>
+                <Link href="/categoria/speedchampions">
+                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
+                    SPEED CHAMPIONS
+                  </Button>
+                </Link>
+                <Link href="/categoria/botanicals">
+                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
+                    BOTANICALS
+                  </Button>
+                </Link>
+                <Link href="/categoria/creator">
+                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
+                    CREATOR
+                  </Button>
+                </Link>
+                <Link href="/categoria/icons">
+                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
+                    ICONS
                   </Button>
                 </Link>
               </nav>
