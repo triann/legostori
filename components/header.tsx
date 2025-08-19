@@ -6,31 +6,56 @@ import { Search, Heart, ShoppingBag, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { products } from "@/app/product/[id]/page"
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false)
+  const [searchResults, setSearchResults] = useState<any[]>([])
+  const [showSearchResults, setShowSearchResults] = useState(false)
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     if (searchQuery.trim()) {
-      // TODO: Implement search functionality
-      console.log("Searching for:", searchQuery)
+      performSearch(searchQuery)
     }
+  }
+
+  const performSearch = (query: string) => {
+    const results = Object.values(products).filter(
+      (product: any) =>
+        product.name.toLowerCase().includes(query.toLowerCase()) ||
+        product.description.toLowerCase().includes(query.toLowerCase()),
+    )
+    setSearchResults(results)
+    setShowSearchResults(true)
+    console.log("Search results:", results)
   }
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setSearchQuery(value)
 
-    // Busca automática após 2 caracteres
     if (value.trim().length >= 2) {
-      console.log("Auto searching for:", value)
-      // TODO: Implement auto search functionality
+      performSearch(value)
+    } else {
+      setShowSearchResults(false)
+      setSearchResults([])
     }
   }
+
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setShowSearchResults(false)
+    }
+
+    if (showSearchResults) {
+      document.addEventListener("click", handleClickOutside)
+      return () => document.removeEventListener("click", handleClickOutside)
+    }
+  }, [showSearchResults])
 
   return (
     <>
@@ -41,7 +66,7 @@ export function Header() {
         </div>
       </div>
 
-      <header className="bg-yellow-400 border-b border-yellow-500">
+      <header className="bg-yellow-400 border-b border-yellow-500 relative z-50">
         <div className="max-w-7xl mx-auto px-2 md:px-4">
           <div className="flex items-center justify-between h-14 md:h-16">
             {/* Logo e menu mobile */}
@@ -92,15 +117,54 @@ export function Header() {
                 <Search className="w-5 h-5" />
               </Button>
 
-              <form onSubmit={handleSearch} className="relative hidden md:block">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-4 h-4" />
-                <Input
-                  placeholder="Buscar..."
-                  className="pl-10 w-60 lg:w-80 bg-white border-gray-300"
-                  value={searchQuery}
-                  onChange={handleSearchChange}
-                />
-              </form>
+              <div className="relative hidden md:block">
+                <form onSubmit={handleSearch} onClick={(e) => e.stopPropagation()}>
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-4 h-4" />
+                  <Input
+                    placeholder="Buscar..."
+                    className="pl-10 w-60 lg:w-80 bg-white border-gray-300"
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                  />
+                </form>
+
+                {showSearchResults && (
+                  <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-b-lg shadow-lg max-h-96 overflow-y-auto z-50 mt-1">
+                    {searchResults.length > 0 ? (
+                      <div className="p-2">
+                        <div className="text-sm text-gray-600 mb-2 px-2">
+                          {searchResults.length} produto(s) encontrado(s)
+                        </div>
+                        {searchResults.map((product) => (
+                          <Link
+                            key={product.id}
+                            href={`/product/${product.id}`}
+                            className="flex items-center gap-3 p-2 hover:bg-gray-100 rounded"
+                            onClick={() => {
+                              setShowSearchResults(false)
+                              setSearchQuery("")
+                            }}
+                          >
+                            <img
+                              src={product.images[0] || "/placeholder.svg"}
+                              alt={product.name}
+                              className="w-12 h-12 object-cover rounded"
+                            />
+                            <div className="flex-1">
+                              <div className="font-medium text-sm text-black">{product.name}</div>
+                              <div className="text-sm text-gray-600">
+                                R$ {product.price.toFixed(2).replace(".", ",")}
+                              </div>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="p-4 text-center text-gray-500">Nenhum produto encontrado</div>
+                    )}
+                  </div>
+                )}
+              </div>
 
               {/* Action buttons */}
               <Button variant="ghost" size="icon" className="text-black hover:bg-yellow-300">
@@ -117,16 +181,53 @@ export function Header() {
 
           {isMobileSearchOpen && (
             <div className="md:hidden py-3 border-t border-yellow-500">
-              <form onSubmit={handleSearch} className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-4 h-4" />
-                <Input
-                  placeholder="Buscar produtos..."
-                  className="pl-10 w-full bg-white border-gray-300"
-                  value={searchQuery}
-                  onChange={handleSearchChange}
-                  autoFocus
-                />
-              </form>
+              <div className="relative">
+                <form onSubmit={handleSearch}>
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-4 h-4" />
+                  <Input
+                    placeholder="Buscar produtos..."
+                    className="pl-10 w-full bg-white border-gray-300"
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                    autoFocus
+                  />
+                </form>
+
+                {showSearchResults && (
+                  <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-b-lg shadow-lg max-h-64 overflow-y-auto z-50 mt-1">
+                    {searchResults.length > 0 ? (
+                      <div className="p-2">
+                        {searchResults.map((product) => (
+                          <Link
+                            key={product.id}
+                            href={`/product/${product.id}`}
+                            className="flex items-center gap-3 p-2 hover:bg-gray-100 rounded"
+                            onClick={() => {
+                              setShowSearchResults(false)
+                              setSearchQuery("")
+                              setIsMobileSearchOpen(false)
+                            }}
+                          >
+                            <img
+                              src={product.images[0] || "/placeholder.svg"}
+                              alt={product.name}
+                              className="w-10 h-10 object-cover rounded"
+                            />
+                            <div className="flex-1">
+                              <div className="font-medium text-sm text-black">{product.name}</div>
+                              <div className="text-sm text-gray-600">
+                                R$ {product.price.toFixed(2).replace(".", ",")}
+                              </div>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="p-4 text-center text-gray-500 text-sm">Nenhum produto encontrado</div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </div>
@@ -134,7 +235,7 @@ export function Header() {
 
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-20 z-40 md:hidden"
+          className="fixed inset-0 bg-black bg-opacity-10 z-40 md:hidden"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
