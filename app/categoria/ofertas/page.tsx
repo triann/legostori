@@ -87,7 +87,7 @@ export default function OfertasPage() {
                     )}
                   </div>
                   <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full text-xs md:text-sm py-2">
-                    Adicionar à sacola
+                    Adicionar ao carrinho
                   </Button>
                 </div>
               </CardContent>

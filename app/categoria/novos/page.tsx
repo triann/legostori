@@ -80,7 +80,7 @@ export default function NovosPage() {
                     <span className="font-bold text-lg md:text-2xl">{product.price}</span>
                   </div>
                   <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full text-xs md:text-sm py-2">
-                    Adicionar à sacola
+                    Adicionar ao carrinho
                   </Button>
                 </div>
               </CardContent>

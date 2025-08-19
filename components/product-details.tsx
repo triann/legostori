@@ -293,7 +293,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               ) : rouletteResult?.type === "free" ? (
                 "Resgatar Produto Grátis"
               ) : (
-                `Adicionar à sacola - R$ ${finalPrice.toFixed(2)}`
+                `Adicionar ao carrinho - R$ ${finalPrice.toFixed(2)}`
               )}
             </Button>
 

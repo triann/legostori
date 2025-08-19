@@ -231,9 +231,9 @@ export function ProductGrid() {
       <div className="mb-6 md:mb-8">
         <h2 className="text-xl md:text-2xl font-bold text-center mb-4 md:mb-8">Mais Vendidos </h2>
 
-        <div className="relative flex justify-center">
+        <div className="relative w-full max-w-md mx-auto">
           <div
-            className="overflow-hidden cursor-grab active:cursor-grabbing w-full max-w-sm mx-auto"
+            className="overflow-hidden cursor-grab active:cursor-grabbing"
             onTouchStart={(e) => {
               let startX = e.touches[0].clientX
               let moved = false
@@ -269,24 +269,24 @@ export function ProductGrid() {
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
               {products.map((product) => (
-                <div key={product.id} className="w-full flex-shrink-0 flex justify-center">
-                  <Card className="group cursor-pointer hover:shadow-lg transition-shadow w-full max-w-xs mx-4">
-                    <CardContent className="p-4 md:p-6">
-                      <div className="relative mb-4 md:mb-6">
+                <div key={product.id} className="w-full flex-shrink-0">
+                  <Card className="group cursor-pointer hover:shadow-lg transition-shadow w-full">
+                    <CardContent className="p-4">
+                      <div className="relative mb-4">
                         <a href={product.href}>
-                          <div className="flex justify-center items-center bg-gray-50 rounded-lg p-4 mx-auto">
+                          <div className="flex justify-center items-center bg-gray-50 rounded-lg p-2">
                             <img
                               src={product.image || "/placeholder.svg"}
                               alt={product.name}
-                              className="object-contain rounded"
-                              style={{ width: "250px", height: "250px" }}
+                              className="object-contain rounded w-full h-auto max-w-[280px]"
+                              style={{ aspectRatio: "1/1" }}
                             />
                           </div>
                         </a>
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="absolute top-2 right-2 bg-white/80 hover:bg-white w-8 h-8 md:w-10 md:h-10"
+                          className="absolute top-2 right-2 bg-white/80 hover:bg-white w-8 h-8"
                         >
                           <Heart className="w-4 h-4" />
                         </Button>
@@ -297,7 +297,7 @@ export function ProductGrid() {
                         )}
                       </div>
 
-                      <div className="space-y-2 md:space-y-3">
+                      <div className="space-y-2">
                         <div className="flex items-center gap-2 text-sm text-gray-600">
                           <span>{product.ages}</span>
                           <span>•</span>
@@ -310,17 +310,17 @@ export function ProductGrid() {
                         </div>
 
                         <a href={product.href}>
-                          <h3 className="font-semibold text-lg md:text-xl hover:text-blue-600">{product.name}</h3>
+                          <h3 className="font-semibold text-lg hover:text-blue-600">{product.name}</h3>
                         </a>
 
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-xl md:text-2xl">{product.price}</span>
+                          <span className="font-bold text-xl">{product.price}</span>
                           {product.originalPrice && (
                             <span className="text-gray-500 line-through text-sm">{product.originalPrice}</span>
                           )}
                         </div>
 
-                        <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full text-sm md:text-base py-3">
+                        <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full text-sm py-3">
                           Adicionar à sacola
                         </Button>
                       </div>
