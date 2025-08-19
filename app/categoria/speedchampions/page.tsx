@@ -34,9 +34,6 @@ export default function NovosPage() {
                   <Button variant="ghost" size="icon" className="absolute top-2 right-2 bg-white/80 hover:bg-white">
                     <Heart className="w-4 h-4" />
                   </Button>
-                  <span className="absolute top-2 left-2 bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded">
-                    Speed Champions
-                  </span>
                 </div>
                 <div className="space-y-2 md:space-y-3">
                   <div className="flex items-center gap-1 md:gap-2 text-xs md:text-sm text-gray-600">
