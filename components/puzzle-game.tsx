@@ -234,8 +234,13 @@ export function PuzzleGame({
       setIsComplete(true)
       setShowConfetti(true)
       createConfetti()
+      window.scrollTo(0, 0)
     }
   }, [pieces, isComplete, timeRemaining, onComplete])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   const handlePieceClick = (pieceId: number) => {
     if (selectedPiece === null) {
@@ -443,6 +448,7 @@ export function PuzzleGame({
 
   const goToRoulette = () => {
     setShowRoulette(true)
+    window.scrollTo(0, 0)
   }
 
   const renderRouletteWheel = () => {
@@ -596,7 +602,6 @@ export function PuzzleGame({
           {showRoulette ? (
             <div className="text-center space-y-3 md:space-y-4">
               <div className="p-3 md:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg">
-                
                 <p className="text-sm text-blue-700 mb-3">
                   Parabéns! Você completou o quebra-cabeça e agora tem direito à Roleta da Sorte!
                 </p>
