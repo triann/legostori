@@ -3,31 +3,9 @@ import { Footer } from "@/components/footer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Heart, Star } from "lucide-react"
+import { products } from "@/app/product/[id]/page"
 
-const novosProducts = [
-  {
-    id: 1,
-    name: "Transformers: Soundwave",
-    price: "R$ 1.249,99",
-    rating: 4.8,
-    reviews: 156,
-    ages: "18+",
-    pieces: 1456,
-    image: "/lego-soundwave.png",
-    href: "/product/1",
-  },
-  {
-    id: 6,
-    name: "LEGO Creator Expert Big Ben",
-    price: "R$ 2.199,99",
-    rating: 4.9,
-    reviews: 89,
-    ages: "16+",
-    pieces: 4163,
-    image: "/placeholder.svg?height=300&width=300",
-    href: "/product/6",
-  },
-]
+const novosProducts = Object.values(products).filter((product) => product.categories?.includes("novos"))
 
 export default function NovosPage() {
   return (
@@ -45,9 +23,9 @@ export default function NovosPage() {
             <Card key={product.id} className="group cursor-pointer hover:shadow-lg transition-shadow">
               <CardContent className="p-3 md:p-6">
                 <div className="relative mb-4 md:mb-6">
-                  <a href={product.href}>
+                  <a href={`/product/${product.id}`}>
                     <img
-                      src={product.image || "/placeholder.svg"}
+                      src={product.images[0] || "/placeholder.svg"}
                       alt={product.name}
                       className="w-full object-cover rounded"
                       style={{ aspectRatio: "277/250" }}
@@ -71,16 +49,18 @@ export default function NovosPage() {
                       <span>{product.rating}</span>
                     </div>
                   </div>
-                  <a href={product.href}>
+                  <a href={`/product/${product.id}`}>
                     <h3 className="font-semibold text-sm md:text-xl hover:text-blue-600 line-clamp-2">
                       {product.name}
                     </h3>
                   </a>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-lg md:text-2xl">{product.price}</span>
+                    <span className="font-bold text-lg md:text-2xl">
+                      R$ {product.price.toFixed(2).replace(".", ",")}
+                    </span>
                   </div>
                   <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full text-xs md:text-sm py-2">
-                    Adicionar ao carrinho
+                    Adicionar à sacola
                   </Button>
                 </div>
               </CardContent>
