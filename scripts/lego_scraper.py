@@ -240,15 +240,42 @@ class LegoScraper:
         return products
     
     def save_to_json(self, products, filename="produtos_lego.json"):
-        """Salva os produtos em arquivo JSON"""
+        """Salva os produtos em arquivo JavaScript com chaves sem aspas"""
         products_dict = {}
         for product in products:
             products_dict[product["id"]] = product
         
         with open(filename, 'w', encoding='utf-8') as f:
             f.write("// Mock product data - in a real app this would come from a database\n")
-            f.write("const products = ")
-            json.dump(products_dict, f, ensure_ascii=False, indent=2)
+            f.write("const products = {\n")
+            
+            for i, (key, product) in enumerate(products_dict.items()):
+                f.write(f'  "{key}": {{\n')
+                f.write(f'    id: "{product["id"]}",\n')
+                f.write(f'    name: "{product["name"]}",\n')
+                f.write(f'    price: {product["price"]},\n')
+                f.write(f'    originalPrice: null,\n')
+                f.write(f'    rating: {product["rating"]},\n')
+                f.write(f'    reviews: {product["reviews"]},\n')
+                f.write(f'    ages: "{product["ages"]}",\n')
+                f.write(f'    pieces: {product["pieces"]},\n')
+                f.write(f'    itemNumber: "{product["itemNumber"]}",\n')
+                f.write(f'    vipPoints: {product["vipPoints"]},\n')
+                f.write(f'    images: {json.dumps(product["images"])},\n')
+                f.write(f'    description: "{product["description"]}",\n')
+                f.write(f'    features: [],\n')
+                f.write(f'    inStock: {str(product["inStock"]).lower()},\n')
+                f.write(f'    puzzleImage: "{product["puzzleImage"]}",\n')
+                f.write(f'    puzzleTimeLimit: {product["puzzleTimeLimit"]},\n')
+                f.write(f'    puzzleDiscount: {product["puzzleDiscount"]}\n')
+                
+                # Adicionar vírgula se não for o último item
+                if i < len(products_dict) - 1:
+                    f.write('  },\n')
+                else:
+                    f.write('  }\n')
+            
+            f.write('};\n')
         
         print(f"\n✓ {len(products)} produtos salvos em {filename}")
 
