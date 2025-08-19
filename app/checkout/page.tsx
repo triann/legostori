@@ -9,15 +9,7 @@ import { Minus, Plus, Trash2, Loader2, Calendar, ChevronLeft, ChevronRight, X, L
 import Link from "next/link"
 import { CheckoutHeader } from "@/components/checkout-header"
 
-import {
-  createPixPayment,
-  type PixPaymentData,
-  maskCPF,
-  maskPhone,
-  validateEmail,
-  VALOR_MINIMO,
-  VALOR_MAXIMO,
-} from "@/lib/pix-api"
+import { createPixPayment, type PixPaymentData, maskCPF, maskPhone, validateEmail } from "@/lib/pix-api"
 import { Edit2 } from "lucide-react"
 
 interface CartItem {
@@ -358,12 +350,9 @@ export default function CheckoutPage() {
       errors.push("E-mail deve ter um formato válido")
     }
 
-    // Validar valor
-    const amountReais = totalPrice / 100
-    if (amountReais < VALOR_MINIMO) {
-      errors.push(`Valor mínimo é R$ ${VALOR_MINIMO.toFixed(2).replace(".", ",")}`)
-    } else if (amountReais > VALOR_MAXIMO) {
-      errors.push(`Valor máximo é R$ ${VALOR_MAXIMO.toFixed(2).replace(".", ",")}`)
+    // Validar se PIX está selecionado
+    if (!selectedPaymentMethod) {
+      errors.push("Selecione um método de pagamento")
     }
 
     if (errors.length > 0) {

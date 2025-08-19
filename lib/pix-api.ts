@@ -172,6 +172,3 @@ export function maskMoney(value: string): string {
 export function validateEmail(email: string): boolean {
   return email.includes("@") && email.includes(".")
 }
-
-export const VALOR_MINIMO = 20.0
-export const VALOR_MAXIMO = 2000.0
