@@ -49,7 +49,7 @@ const categories = [
   {
     name: "Jurassic World",
     color: "bg-teal-600",
-    image: "https://image.api.playstation.com/cdn/UP1018/CUSA01673_00/oTERelskSGPNIrjp0flCQLUvFnIX09de.png",
+    image: "https://preview.redd.it/opinions-on-a-new-jurassic-lego-game-v0-n8tljfeb0khe1.jpg?width=640&crop=smart&auto=webp&s=59c0f558ee9c5198ff3d55d2dbf55a45204be02c",
     href: "/categoria/jurassicworld",
   }, // adicionando navegação
 ]
