@@ -174,11 +174,11 @@ const products = {
     description:
       "Segure firme para o Passeio de Motocicleta de Hagrid™ e Harry (76443) com este brinquedo mágico para meninas, meninos e qualquer fã do Mundo Mágico. Um presente de aniversário legal para crianças de 9 anos ou mais, este conjunto de brincar e exibir LEGO® Harry Potter™ apresenta figuras de brinquedo Harry Potter, Hedwig™ e Rubeus Hagrid integradas e articuladas andando em uma motocicleta e em seu sidecar. As rodas do brinquedo de veículo construído com peças LEGO giram para que as crianças possam encenar cenas icônicas de Harry Potter e as Relíquias da Morte™, ou o modelo pode ser exibido como uma decoração impressionante de quarto de Harry Potter.",
     features: [
-      "Recriação autêntica dos Girassóis de van Gogh",
-      "Inclui moldura decorativa para pendurar na parede",
-      "Técnica única de construção de arte LEGO",
-      "Vem com minifigura de van Gogh",
-      "Livreto de informações sobre história da arte incluído",
+      "Representação cientificamente precisa da galáxia",
+      "Mecanismo de braços espirais rotativos",
+      "Sistema de iluminação LED incluído",
+      "Livreto de informações educacionais",
+      "Base de exibição premium com placa de identificação",
     ],
     inStock: true,
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/188029/76443.jpg?v=638689283624800000",
@@ -277,27 +277,9 @@ const products = {
     puzzleDiscount: 15,
     categories: ["novos"],
   },
-  "10": {
-    id: "10",
-    name: "Mala de Viagem Amarela",
-    price: 149.99,
-    originalPrice: null,
-    rating: 4.5,
-    reviews: 362,
-    ages: "8+",
-    pieces: 184,
-    itemNumber: "40817",
-    vipPoints: 9,
-    images: ["https://legobrasil.vtexassets.com/arquivos/ids/189242/40817.jpg?v=638768033043630000", "https://legobrasil.vtexassets.com/arquivos/ids/189243/40817--1-.jpg?v=638768033204130000", "https://legobrasil.vtexassets.com/arquivos/ids/189244/40817--2-.jpg?v=638768033319000000", "https://legobrasil.vtexassets.com/arquivos/ids/189245/40817--3-.jpg?v=638768033475700000"],
-    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
-    features: [],
-    inStock: true,
-    puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/189242/40817.jpg?v=638768033043630000",
-    puzzleTimeLimit: 300,
-    puzzleDiscount: 70,
-    categories: ["novos", "ofertas"]
-  },
 }
+
+export { products }
 
 interface ProductPageProps {
   params: {
