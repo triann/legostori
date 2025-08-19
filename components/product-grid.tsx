@@ -233,7 +233,7 @@ export function ProductGrid() {
 
         <div className="relative flex justify-center">
           <div
-            className="overflow-hidden cursor-grab active:cursor-grabbing max-w-sm mx-auto"
+            className="overflow-hidden cursor-grab active:cursor-grabbing w-full max-w-sm mx-auto"
             onTouchStart={(e) => {
               let startX = e.touches[0].clientX
               let moved = false
@@ -269,8 +269,8 @@ export function ProductGrid() {
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
               {products.map((product) => (
-                <div key={product.id} className="w-full flex-shrink-0 px-4 flex justify-center">
-                  <Card className="group cursor-pointer hover:shadow-lg transition-shadow max-w-sm mx-auto">
+                <div key={product.id} className="w-full flex-shrink-0">
+                  <Card className="group cursor-pointer hover:shadow-lg transition-shadow w-full">
                     <CardContent className="p-4 md:p-6">
                       <div className="relative mb-4 md:mb-6">
                         <a href={product.href}>
@@ -278,7 +278,7 @@ export function ProductGrid() {
                             <img
                               src={product.image || "/placeholder.svg"}
                               alt={product.name}
-                              className="object-contain rounded mx-auto"
+                              className="object-contain rounded"
                               style={{ width: "250px", height: "250px" }}
                             />
                           </div>
