@@ -140,6 +140,11 @@ export function Header() {
                     MINECRAFT
                   </Button>
                 </Link>
+                <Link href="/categoria/starwars">
+                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
+                    STAR WARS
+                  </Button>
+                </Link>
               </nav>
             </div>
 

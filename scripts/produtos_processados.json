@@ -5614,5 +5614,329 @@
     "categories": [
       "minecraft"
     ]
+  },
+  "218": {
+    "id": "218",
+    "name": "Star Wars - Robô Darth Maul™",
+    "price": 149.99,
+    "originalPrice": null,
+    "rating": 4.3,
+    "reviews": 244,
+    "ages": "8+",
+    "pieces": 143,
+    "itemNumber": "75411",
+    "vipPoints": 9,
+    "images": [
+      "https://legobrasil.vtexassets.com/arquivos/ids/189699/75411-lego-starwars-robo-darth-maul.jpg?v=638832669804600000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/189700/75411-lego-starwars-robo-darth-maul--1-.jpg?v=638832669892400000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/189701/75411-lego-starwars-robo-darth-maul--2-.jpg?v=638832669998300000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/189702/75411-lego-starwars-robo-darth-maul--3-.jpg?v=638832670173070000"
+    ],
+    "description": "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    "features": [],
+    "inStock": true,
+    "puzzleImage": "https://legobrasil.vtexassets.com/arquivos/ids/189699/75411-lego-starwars-robo-darth-maul.jpg?v=638832669804600000",
+    "puzzleTimeLimit": 300,
+    "puzzleDiscount": 70,
+    "categories": [
+      "starwars"
+    ]
+  },
+  "219": {
+    "id": "219",
+    "name": "Star Wars™ - A Criança",
+    "price": 299.99,
+    "originalPrice": null,
+    "rating": 4.2,
+    "reviews": 435,
+    "ages": "8+",
+    "pieces": 1073,
+    "itemNumber": "HASH_A13504",
+    "vipPoints": 19,
+    "images": [
+      "https://legobrasil.vtexassets.com/arquivos/ids/172345/lego_75318_star_wars_a_crianca_01.jpg?v=637443487347100000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/172346/lego_75318_star_wars_a_crianca_02.jpg?v=637443487511530000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/172347/lego_75318_star_wars_a_crianca_03.jpg?v=637443487760030000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/172348/lego_75318_star_wars_a_crianca_04.jpg?v=637443487975970000"
+    ],
+    "description": "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    "features": [],
+    "inStock": true,
+    "puzzleImage": "https://legobrasil.vtexassets.com/arquivos/ids/172345/lego_75318_star_wars_a_crianca_01.jpg?v=637443487347100000",
+    "puzzleTimeLimit": 300,
+    "puzzleDiscount": 70,
+    "categories": [
+      "starwars"
+    ]
+  },
+  "220": {
+    "id": "220",
+    "name": "Star Wars™ - Agentes do Esquadrão Inferno",
+    "price": 299.99,
+    "originalPrice": null,
+    "rating": 4.2,
+    "reviews": 125,
+    "ages": "8+",
+    "pieces": 118,
+    "itemNumber": "HASH_26A68B",
+    "vipPoints": 19,
+    "images": [
+      "https://legobrasil.vtexassets.com/arquivos/ids/163215/75226_prod.jpg?v=636833291155930000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/163216/75226_back_05.jpg?v=636833291525470000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/163217/75226_front_01.jpg?v=636833293061430000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/163218/75226_back_01.jpg?v=636833293151270000"
+    ],
+    "description": "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    "features": [],
+    "inStock": true,
+    "puzzleImage": "https://legobrasil.vtexassets.com/arquivos/ids/163215/75226_prod.jpg?v=636833291155930000",
+    "puzzleTimeLimit": 300,
+    "puzzleDiscount": 70,
+    "categories": [
+      "starwars"
+    ]
+  },
+  "221": {
+    "id": "221",
+    "name": "Star Wars™ - Pack de Batalha - Snowtrooper™",
+    "price": 299.99,
+    "originalPrice": null,
+    "rating": 4.5,
+    "reviews": 348,
+    "ages": "8+",
+    "pieces": 105,
+    "itemNumber": "HASH_221D74",
+    "vipPoints": 19,
+    "images": [
+      "https://legobrasil.vtexassets.com/arquivos/ids/177535/75320_Prod.jpg?v=637782962464430000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/177536/75320_WEB_PRI_NOBG.jpg?v=637782962654870000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/177537/75320_WEB_Lineup_NOBG.jpg?v=637782962814300000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/177538/75320_WEB_SEC01_NOBG.jpg?v=637782963057630000"
+    ],
+    "description": "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    "features": [],
+    "inStock": true,
+    "puzzleImage": "https://legobrasil.vtexassets.com/arquivos/ids/177535/75320_Prod.jpg?v=637782962464430000",
+    "puzzleTimeLimit": 300,
+    "puzzleDiscount": 70,
+    "categories": [
+      "starwars"
+    ]
+  },
+  "222": {
+    "id": "222",
+    "name": "Star Wars™ - Guardas de Elite Pretoriana",
+    "price": 299.99,
+    "originalPrice": null,
+    "rating": 4.4,
+    "reviews": 285,
+    "ages": "8+",
+    "pieces": 109,
+    "itemNumber": "HASH_F97FAD",
+    "vipPoints": 19,
+    "images": [
+      "https://legobrasil.vtexassets.com/arquivos/ids/163207/75225_prod.jpg?v=636833290034330000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/163208/75225_back_03.jpg?v=636833290162200000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/163209/75225_front_01.jpg?v=636833290255470000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/163210/75225_back_01.jpg?v=636833290339730000"
+    ],
+    "description": "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    "features": [],
+    "inStock": true,
+    "puzzleImage": "https://legobrasil.vtexassets.com/arquivos/ids/163207/75225_prod.jpg?v=636833290034330000",
+    "puzzleTimeLimit": 300,
+    "puzzleDiscount": 70,
+    "categories": [
+      "starwars"
+    ]
+  },
+  "223": {
+    "id": "223",
+    "name": "BrickHeadz - Kylo Ren",
+    "price": 299.99,
+    "originalPrice": null,
+    "rating": 4.6,
+    "reviews": 233,
+    "ages": "8+",
+    "pieces": 130,
+    "itemNumber": "HASH_AD351C",
+    "vipPoints": 19,
+    "images": [
+      "https://legobrasil.vtexassets.com/arquivos/ids/160959/41603_detail1.jpg?v=636546545830300000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/160958/41603_prod.jpg?v=636546545734130000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/161744/41603_box_front.jpg?v=636649177980770000",
+      "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/bccb0368-0ed0-434a-81c1-da5b3be2c19f___bea46133fe2c230a0803fabcdda0b3e9.svg"
+    ],
+    "description": "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    "features": [],
+    "inStock": true,
+    "puzzleImage": "https://legobrasil.vtexassets.com/arquivos/ids/160959/41603_detail1.jpg?v=636546545830300000",
+    "puzzleTimeLimit": 300,
+    "puzzleDiscount": 70,
+    "categories": [
+      "starwars"
+    ]
+  },
+  "224": {
+    "id": "224",
+    "name": "BrickHeadz - Stormtrooper",
+    "price": 299.99,
+    "originalPrice": null,
+    "rating": 4.3,
+    "reviews": 50,
+    "ages": "8+",
+    "pieces": 124,
+    "itemNumber": "HASH_AF46A3",
+    "vipPoints": 19,
+    "images": [
+      "https://legobrasil.vtexassets.com/arquivos/ids/162849/41620_front.jpg?v=636790185068670000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/162848/41620_prod.jpg?v=636790184933170000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/162850/41620_back_01.jpg?v=636790185172300000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/162851/41620_box1_v29.jpg?v=636790185285330000"
+    ],
+    "description": "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    "features": [],
+    "inStock": true,
+    "puzzleImage": "https://legobrasil.vtexassets.com/arquivos/ids/162849/41620_front.jpg?v=636790185068670000",
+    "puzzleTimeLimit": 300,
+    "puzzleDiscount": 70,
+    "categories": [
+      "starwars"
+    ]
+  },
+  "225": {
+    "id": "225",
+    "name": "Star Wars™ - Edição de Aniversario: Clone Walker",
+    "price": 299.99,
+    "originalPrice": null,
+    "rating": 4.8,
+    "reviews": 223,
+    "ages": "8+",
+    "pieces": 250,
+    "itemNumber": "HASH_F04060",
+    "vipPoints": 19,
+    "images": [
+      "https://legobrasil.vtexassets.com/arquivos/ids/165031/75261_prod.jpg?v=636922294734130000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/165032/75261_callout_02.jpg?v=636922294875900000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/165033/75261_front_03.jpg?v=636922295018200000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/165034/75261_callout_01.jpg?v=636922295119000000"
+    ],
+    "description": "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    "features": [],
+    "inStock": true,
+    "puzzleImage": "https://legobrasil.vtexassets.com/arquivos/ids/165031/75261_prod.jpg?v=636922294734130000",
+    "puzzleTimeLimit": 300,
+    "puzzleDiscount": 70,
+    "categories": [
+      "starwars"
+    ]
+  },
+  "226": {
+    "id": "226",
+    "name": "BrickHeadz - Obi-Wan Kenobi™ e Darth Vader™",
+    "price": 299.99,
+    "originalPrice": null,
+    "rating": 4.6,
+    "reviews": 54,
+    "ages": "8+",
+    "pieces": 260,
+    "itemNumber": "40547",
+    "vipPoints": 19,
+    "images": [
+      "https://legobrasil.vtexassets.com/arquivos/ids/181540/40547_prod.jpg?v=638060317069830000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/181541/40547_web_sec01_nobg.png?v=638060317447370000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/181542/40547_lifestyle_envr_2.jpg?v=638060317559730000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/181543/40547_box1_v29.png?v=638060317674330000"
+    ],
+    "description": "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    "features": [],
+    "inStock": true,
+    "puzzleImage": "https://legobrasil.vtexassets.com/arquivos/ids/181540/40547_prod.jpg?v=638060317069830000",
+    "puzzleTimeLimit": 300,
+    "puzzleDiscount": 70,
+    "categories": [
+      "starwars"
+    ]
+  },
+  "227": {
+    "id": "227",
+    "name": "Star Wars™ - Transporte Inquisidor Scythe™",
+    "price": 299.99,
+    "originalPrice": null,
+    "rating": 4.0,
+    "reviews": 235,
+    "ages": "8+",
+    "pieces": 924,
+    "itemNumber": "75336",
+    "vipPoints": 19,
+    "images": [
+      "https://legobrasil.vtexassets.com/arquivos/ids/180799/75336_Lego_Star_Wars_Transporte_Inquisidor_Scythe_01.jpg?v=637989353557800000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/180800/75336_Lego_Star_Wars_Transporte_Inquisidor_Scythe_02.jpg?v=637989353664270000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/180801/75336_Lego_Star_Wars_Transporte_Inquisidor_Scythe_03.jpg?v=637989353856000000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/180802/75336_Lego_Star_Wars_Transporte_Inquisidor_Scythe_04.jpg?v=637989354059270000"
+    ],
+    "description": "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    "features": [],
+    "inStock": true,
+    "puzzleImage": "https://legobrasil.vtexassets.com/arquivos/ids/180799/75336_Lego_Star_Wars_Transporte_Inquisidor_Scythe_01.jpg?v=637989353557800000",
+    "puzzleTimeLimit": 300,
+    "puzzleDiscount": 70,
+    "categories": [
+      "starwars"
+    ]
+  },
+  "228": {
+    "id": "228",
+    "name": "Star Wars™ - A-Wing Starfighter da Resistencia",
+    "price": 299.99,
+    "originalPrice": null,
+    "rating": 5.0,
+    "reviews": 267,
+    "ages": "8+",
+    "pieces": 269,
+    "itemNumber": "HASH_A2DC2A",
+    "vipPoints": 19,
+    "images": [
+      "https://legobrasil.vtexassets.com/arquivos/ids/169987/75248_prod.jpg?v=637084933393530000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/169988/75248_front_01.jpg?v=637084933624230000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/169989/75248_back_01.jpg?v=637084933732530000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/169990/75248_box1_v29.jpg?v=637084933818100000"
+    ],
+    "description": "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    "features": [],
+    "inStock": true,
+    "puzzleImage": "https://legobrasil.vtexassets.com/arquivos/ids/169987/75248_prod.jpg?v=637084933393530000",
+    "puzzleTimeLimit": 300,
+    "puzzleDiscount": 70,
+    "categories": [
+      "starwars"
+    ]
+  },
+  "229": {
+    "id": "229",
+    "name": "Star Wars™ - Y-Wing Starfighter",
+    "price": 299.99,
+    "originalPrice": null,
+    "rating": 5.0,
+    "reviews": 199,
+    "ages": "8+",
+    "pieces": 1967,
+    "itemNumber": "HASH_7CEA4B",
+    "vipPoints": 19,
+    "images": [
+      "https://legobrasil.vtexassets.com/arquivos/ids/170115/75181_prod.jpg?v=637104792950400000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/170116/75181_front_01.jpg?v=637104793069670000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/170117/75181_back_01.jpg?v=637104793173930000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/170122/75181_ama3955.jpg?v=637104833787530000"
+    ],
+    "description": "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    "features": [],
+    "inStock": true,
+    "puzzleImage": "https://legobrasil.vtexassets.com/arquivos/ids/170115/75181_prod.jpg?v=637104792950400000",
+    "puzzleTimeLimit": 300,
+    "puzzleDiscount": 70,
+    "categories": [
+      "starwars"
+    ]
   }
 }

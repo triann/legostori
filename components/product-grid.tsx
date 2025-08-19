@@ -41,10 +41,10 @@ const categories = [
     href: "/categoria/minecraft",
   }, // adicionando navegação
   {
-    name: "Classic",
+    name: "Star Wars",
     color: "bg-green-600",
-    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Classic.jpg",
-    href: "/categoria/classic",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Icons-2.jpg",
+    href: "/categoria/starwars",
   }, // adicionando navegação
   {
     name: "Botanicals",
