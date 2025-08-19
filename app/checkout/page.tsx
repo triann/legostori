@@ -112,7 +112,11 @@ export default function CheckoutPage() {
   }
 
   const calculateTotal = () => {
-    return calculateSubtotal() + calculateShipping()
+    const subtotal = calculateSubtotal()
+    const shipping = calculateShipping()
+    const total = subtotal + shipping
+    console.log("[v0] Cálculo do total:", { subtotal, shipping, total })
+    return total
   }
 
   const formatCep = (value: string) => {
@@ -470,6 +474,63 @@ export default function CheckoutPage() {
       return
     }
     setCurrentStep("payment")
+  }
+
+  const handleFinalizePurchase = async () => {
+    if (!selectedPaymentMethod) {
+      showNotification("Selecione um método de pagamento")
+      return
+    }
+
+    setIsLoading(true)
+
+    try {
+      const totalAmount = calculateTotal()
+      console.log("[v0] Valor total calculado:", totalAmount)
+      console.log("[v0] Valor em centavos:", Math.round(totalAmount * 100))
+
+      const pixData: PixPaymentData = {
+        amount: Math.round(totalAmount * 100), // Valor em centavos incluindo frete
+        email: formData.email,
+        name: `${formData.firstName} ${formData.lastName}`.trim(),
+        phone: formData.phone,
+        cpf: formData.cpf,
+        description: `Compra LEGO - ${product?.name || "Produto"}`,
+      }
+
+      console.log("📤 Enviando dados PIX:", pixData)
+
+      // Criar pagamento PIX via API
+      const pixResponse = await createPixPayment(pixData)
+
+      if (pixResponse.success && (pixResponse.qrcode || pixResponse.pixCopiaECola) && pixResponse.token) {
+        const pixCode = pixResponse.qrcode || pixResponse.pixCopiaECola || ""
+
+        // Salvar dados do PIX no localStorage para a página PIX
+        localStorage.setItem(
+          "pixPayment",
+          JSON.stringify({
+            qrcode: pixCode,
+            token: pixResponse.token,
+            amount: totalAmount, // Usar valor total com frete
+            productName: product?.name || "Produto LEGO",
+            email: formData.email,
+            name: `${formData.firstName} ${formData.lastName}`.trim(),
+          }),
+        )
+
+        console.log("🔄 Redirecionando para PIX...")
+        // Redirecionar para página PIX
+        window.location.href = "/pix"
+      } else {
+        throw new Error(pixResponse.error || "Erro ao gerar PIX")
+      }
+    } catch (error) {
+      console.error("❌ Erro ao processar pagamento:", error)
+      alert("Erro ao processar pagamento: " + (error as Error).message)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   if (currentStep === "personal") {

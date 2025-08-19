@@ -20,6 +20,7 @@ export default function PixPage() {
   const [pixData, setPixData] = useState<PixPaymentData | null>(null)
   const [paymentStatus, setPaymentStatus] = useState<"pending" | "approved" | "rejected">("pending")
   const [copied, setCopied] = useState(false)
+  let interval: NodeJS.Timeout | null = null
 
   useEffect(() => {
     // Carregar dados do PIX do localStorage
@@ -97,7 +98,8 @@ export default function PixPage() {
       const status = await checkPaymentStatus(pixData.token)
       if (status.success && status.status === "APPROVED") {
         setPaymentStatus("approved")
-        showToast("Pagamento confirmado! Obrigado pela sua contribuição.", "success")
+        if (interval) clearInterval(interval)
+        showToast("Pagamento confirmado! Redirecionando...", "success")
 
         // Redirecionar após 3 segundos
         setTimeout(() => {
@@ -105,7 +107,7 @@ export default function PixPage() {
         }, 3000)
       } else if (status.status === "REJECTED") {
         setPaymentStatus("rejected")
-        showToast("Pagamento rejeitado. Tente novamente.", "error")
+        if (interval) clearInterval(interval)
       } else {
         showToast("Pagamento ainda está sendo processado.", "warning")
       }
@@ -118,14 +120,14 @@ export default function PixPage() {
   useEffect(() => {
     if (!pixData?.token) return
 
-    const interval = setInterval(async () => {
+    interval = setInterval(async () => {
       try {
         console.log("Verificando status para transação:", pixData.token)
         const status = await checkPaymentStatus(pixData.token)
 
         if (status.success && status.status === "APPROVED") {
           setPaymentStatus("approved")
-          clearInterval(interval)
+          if (interval) clearInterval(interval)
           showToast("Pagamento confirmado! Redirecionando...", "success")
 
           // Redirecionar após 3 segundos
@@ -134,7 +136,7 @@ export default function PixPage() {
           }, 3000)
         } else if (status.status === "REJECTED") {
           setPaymentStatus("rejected")
-          clearInterval(interval)
+          if (interval) clearInterval(interval)
         } else {
           console.log("Pagamento ainda pendente")
         }
@@ -145,11 +147,13 @@ export default function PixPage() {
 
     // Parar verificação após 15 minutos
     setTimeout(() => {
-      clearInterval(interval)
+      if (interval) clearInterval(interval)
       console.log("Verificação automática interrompida após 15 minutos")
     }, 900000)
 
-    return () => clearInterval(interval)
+    return () => {
+      if (interval) clearInterval(interval)
+    }
   }, [pixData])
 
   const copyPixCode = () => {
@@ -209,15 +213,12 @@ export default function PixPage() {
           )}
 
           <div className="text-center">
-            <div className="w-24 h-24 mx-auto mb-6 bg-teal-500 rounded-lg flex items-center justify-center">
-              <svg width="48" height="24" viewBox="0 0 120 60" fill="none">
-                <rect width="120" height="60" rx="8" fill="white" />
-                <path d="M20 20h15l8 8-8 8H20l8-8-8-8z" fill="#32BCAD" />
-                <path d="M85 20h15l-8 8 8 8H85l-8-8 8-8z" fill="#32BCAD" />
-                <text x="60" y="35" textAnchor="middle" fill="#32BCAD" fontSize="12" fontWeight="bold">
-                  PIX
-                </text>
-              </svg>
+            <div className="w-24 h-24 mx-auto mb-6 bg-white rounded-lg flex items-center justify-center border-2 border-gray-200">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png"
+                alt="Logo PIX"
+                className="w-20 h-12 object-contain"
+              />
             </div>
 
             <h2 className="text-lg font-semibold text-gray-900 mb-2">Escaneie o código QR para pagar</h2>
@@ -239,7 +240,7 @@ export default function PixPage() {
                   <strong>Produto:</strong> {pixData.productName}
                 </div>
                 <div>
-                  <strong>Valor:</strong> R$ {pixData.amount.toFixed(2)}
+                  <strong>Valor:</strong> R$ {pixData.amount.toFixed(2).replace(".", ",")}
                 </div>
                 <div>
                   <strong>Cliente:</strong> {pixData.name}
