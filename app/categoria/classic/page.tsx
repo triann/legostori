@@ -12,7 +12,7 @@ export default function NovosPage() {
     <div className="min-h-screen bg-white">
       <Header />
       <div className="max-w-7xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold text-center mb-8">Classic</h1>
+        <h1 className="text-3xl font-bold text-center mb-8">Maletas</h1>
 
         <div className="mb-6">
           <p className="text-gray-600">Exibindo {novosProducts.length} Produtos</p>
@@ -35,7 +35,7 @@ export default function NovosPage() {
                     <Heart className="w-4 h-4" />
                   </Button>
                   <span className="absolute top-2 left-2 bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded">
-                    Classic
+                    Maletas
                   </span>
                 </div>
                 <div className="space-y-2 md:space-y-3">
