@@ -765,7 +765,7 @@ export function PuzzleGame({
                           <button
                             key={position}
                             onClick={() => piece && handlePieceClick(piece.id)}
-                            className={`w-20 h-20 border-2 rounded overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-lg ${
+                            className={`w-18 h-18 border-2 rounded overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-lg ${
                               selectedPiece === piece?.id
                                 ? "border-blue-500 ring-2 ring-blue-200 scale-105"
                                 : isCorrect
