@@ -81,7 +81,7 @@ export default function CheckoutPage() {
           isFree: item.isFree,
           image: item.image,
           quantity: 1,
-          description: "Produto fornecido e entregue por legobrasi",
+          description: "Produto fornecido e entregue por legobrasil",
         },
       ])
       setTotalPrice(item.finalPrice)
@@ -1456,11 +1456,6 @@ export default function CheckoutPage() {
               Fechar pedido
             </Button>
 
-            <div className="text-center">
-              <Link href="/" className="text-sm text-blue-600 hover:underline">
-                Escolher mais produtos
-              </Link>
-            </div>
           </div>
         </div>
 

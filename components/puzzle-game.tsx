@@ -608,10 +608,9 @@ export function PuzzleGame({
                     <span className="font-semibold text-sm text-gray-800">{"Você pode receber:"}</span>
                   </div>
                   <div className="text-xs text-gray-700 space-y-1">
-                    <p>• Descontos de 15% até 70% </p>
-                    <p>• Produto completamente Grátis</p>
-                    <p>• Frete completamente Grát  </p>
-                    <p>• Desconto de 15%</p>
+                    <p>• Descontos de 15% até 70%;</p>
+                    <p>• Produto completamente Grátis;</p>
+                    <p>• Frete completamente Grátis.</p>
                   </div>
 
                   <div className="flex items-center justify-center gap-2 mt-2">

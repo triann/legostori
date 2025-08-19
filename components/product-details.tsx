@@ -117,7 +117,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     <div className="max-w-7xl mx-auto px-4 py-8 overflow-x-hidden">
       {/* Breadcrumb */}
       <nav className="text-sm text-gray-600 mb-6">
-        <span>Início</span> / <span>Loja</span> / <span>Transformers</span> /{" "}
+        <span>Início</span> / <span>Loja</span> / <span>Mais Vendidos</span> /{" "}
         <span className="text-black">{product.name}</span>
       </nav>
 
