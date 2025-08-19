@@ -225,8 +225,8 @@ export function ProductGrid() {
       <div className="mb-6 md:mb-8">
         <div className="flex items-center gap-2 md:gap-4 mb-4 md:mb-6 overflow-x-auto">
           <h2 className="text-base md:text-lg font-semibold whitespace-nowrap">Em Alta</h2>
-          <span className="text-gray-500 text-sm md:text-base whitespace-nowrap">Temas</span>
-          <span className="text-gray-500 text-sm md:text-base whitespace-nowrap">Idade</span>
+          {/*<span className="text-gray-500 text-sm md:text-base whitespace-nowrap">Temas</span>
+          <span className="text-gray-500 text-sm md:text-base whitespace-nowrap">Idade</span>*/}
         </div>
 
         <div
