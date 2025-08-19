@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Heart, Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { useState } from "react"
+import Link from "next/link"
 
 const categories = [
   {
@@ -11,19 +12,31 @@ const categories = [
     color: "bg-amber-600",
     image:
       "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/4feeb981-fba7-46b5-8b9d-72991831c64d___433bd283e0146251ce864d0b90e9039b.jpg",
+    href: "/categoria/novos", // adicionando navegação para página específica
   },
   {
     name: "Exclusivos",
     color: "bg-purple-600",
     image:
       "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/dbba9da0-fef8-4752-8da3-4dd10e5fdae4___dff3250cc485e56c1e8392f20b546919.jpg",
+    href: "/categoria/exclusivos", // adicionando navegação para página específica
   },
-  { name: "Ofertas", color: "bg-red-600", image: "/lego-discount.png" },
-  { name: "Todos os sets", color: "bg-red-700", image: "/lego-collection.png" },
-  { name: "LEGO ONE PIECE", color: "bg-blue-600", image: "/lego-one-piece-set.png" },
-  { name: "Presentes", color: "bg-green-600", image: "/lego-gift-sets.png" },
-  { name: "Volta às Aulas", color: "bg-teal-600", image: "/colorful-brick-backpack.png" },
-  { name: "Desbloqueie Recompensas", color: "bg-purple-700", image: "/lego-vip-rewards.png" },
+  { name: "Ofertas", color: "bg-red-600", image: "/lego-discount.png", href: "/categoria/ofertas" }, // adicionando navegação
+  { name: "Todos os sets", color: "bg-red-700", image: "/lego-collection.png", href: "/categoria/todos-os-sets" }, // adicionando navegação
+  { name: "LEGO ONE PIECE", color: "bg-blue-600", image: "/lego-one-piece-set.png", href: "/categoria/one-piece" }, // adicionando navegação
+  { name: "Presentes", color: "bg-green-600", image: "/lego-gift-sets.png", href: "/categoria/presentes" }, // adicionando navegação
+  {
+    name: "Volta às Aulas",
+    color: "bg-teal-600",
+    image: "/colorful-brick-backpack.png",
+    href: "/categoria/volta-as-aulas",
+  }, // adicionando navegação
+  {
+    name: "Desbloqueie Recompensas",
+    color: "bg-purple-700",
+    image: "/lego-vip-rewards.png",
+    href: "/categoria/recompensas",
+  }, // adicionando navegação
 ]
 
 const products = [
@@ -192,21 +205,22 @@ export function ProductGrid() {
             }}
           >
             {categories.map((category, index) => (
-              <Card
-                key={index}
-                className={`cursor-pointer hover:opacity-90 transition-opacity flex-shrink-0 w-24 md:w-32 relative overflow-hidden p-0 border-0`}
-              >
-                <div className="w-full" style={{ aspectRatio: "5/7" }}>
-                  <img
-                    src={category.image || "/placeholder.svg"}
-                    alt={category.name}
-                    className="w-full h-full object-contain bg-gray-100"
-                  />
-                </div>
-                <div className="absolute top-2 left-0 right-0 text-center">
-                  <p className="text-white text-xs md:text-sm font-semibold drop-shadow-lg">{category.name}</p>
-                </div>
-              </Card>
+              <Link key={index} href={category.href}>
+                <Card
+                  className={`cursor-pointer hover:opacity-90 transition-opacity flex-shrink-0 w-24 md:w-32 relative overflow-hidden p-0 border-0`}
+                >
+                  <div className="w-full" style={{ aspectRatio: "5/7" }}>
+                    <img
+                      src={category.image || "/placeholder.svg"}
+                      alt={category.name}
+                      className="w-full h-full object-contain bg-gray-100"
+                    />
+                  </div>
+                  <div className="absolute top-2 left-0 right-0 text-center">
+                    <p className="text-white text-xs md:text-sm font-semibold drop-shadow-lg">{category.name}</p>
+                  </div>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
