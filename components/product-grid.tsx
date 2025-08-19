@@ -269,8 +269,8 @@ export function ProductGrid() {
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
               {products.map((product) => (
-                <div key={product.id} className="w-full flex-shrink-0 flex justify-center px-4">
-                  <Card className="group cursor-pointer hover:shadow-lg transition-shadow w-full max-w-xs">
+                <div key={product.id} className="w-full flex-shrink-0 flex justify-center">
+                  <Card className="group cursor-pointer hover:shadow-lg transition-shadow w-full max-w-xs mx-4">
                     <CardContent className="p-4 md:p-6">
                       <div className="relative mb-4 md:mb-6">
                         <a href={product.href}>
