@@ -29,16 +29,38 @@ html {
   --font-mono: ${GeistMono.variable};
 }
         `}</style>
-      </head>
-      <body>
-        {children}
+
+        <Script
+          id="utm-capture"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  // Importar e inicializar o UTM Manager
+                  if (typeof window !== 'undefined') {
+                    // Aguardar o carregamento do módulo
+                    setTimeout(function() {
+                      if (window.UTMManager) {
+                        window.UTMManager.getInstance();
+                        console.log('[UTM] Sistema de captura inicializado');
+                      }
+                    }, 100);
+                  }
+                } catch (error) {
+                  console.error('[UTM] Erro ao inicializar captura:', error);
+                }
+              })();
+            `,
+          }}
+        />
 
         <Script
           id="utmify-pixel"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              window.pixelId = "68a54ecdee66c77cb798c51c";
+              window.pixelId = "689d6967a9b91cc128240c1f";
               var a = document.createElement("script");
               a.setAttribute("async", "");
               a.setAttribute("defer", "");
@@ -48,15 +70,9 @@ html {
           }}
         />
 
-        <Script
-          src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-          strategy="afterInteractive"
-          data-utmify-prevent-xcod-sck=""
-          data-utmify-prevent-subids=""
-          async
-          defer
-        />
-      </body>
+        <Script src="https://cdn.utmify.com.br/scripts/utms/latest.js" strategy="afterInteractive" async defer />
+      </head>
+      <body>{children}</body>
     </html>
   )
 }

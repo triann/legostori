@@ -3,6 +3,8 @@ const API_CONFIG = {
   FRONTEND_URL: "https://legostore.online", // Adicionado baseado no config funcional
 }
 
+import { getUTMParams } from "./utm-manager"
+
 export interface PixPaymentData {
   amount: number
   email: string
@@ -48,19 +50,7 @@ export interface PaymentStatus {
 }
 
 export function getUtmParams() {
-  if (typeof window === "undefined") return {}
-
-  const urlParams = new URLSearchParams(window.location.search)
-  return {
-    utm_source: urlParams.get("utm_source"),
-    utm_medium: urlParams.get("utm_medium"),
-    utm_campaign: urlParams.get("utm_campaign"),
-    utm_content: urlParams.get("utm_content"),
-    utm_term: urlParams.get("utm_term"),
-    xcod: urlParams.get("xcod"),
-    sck: urlParams.get("sck"),
-    utm_id: urlParams.get("utm_id"),
-  }
+  return getUTMParams()
 }
 
 export async function createPixPayment(data: PixPaymentData): Promise<PixResponse> {

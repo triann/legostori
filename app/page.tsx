@@ -3,6 +3,7 @@ import { Hero } from "@/components/hero"
 import { ProductGrid } from "@/components/product-grid"
 import { CommunitySection } from "@/components/community-section"
 import { Footer } from "@/components/footer"
+import { UTMDebug } from "@/components/utm-debug"
 
 export default function HomePage() {
   return (
@@ -12,6 +13,7 @@ export default function HomePage() {
       <ProductGrid />
       <CommunitySection />
       <Footer />
+      <UTMDebug />
     </div>
   )
 }
