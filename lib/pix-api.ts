@@ -20,11 +20,49 @@ export interface PixPaymentData {
   utm_id?: string
 }
 
+export interface CardPaymentData {
+  amount: number
+  paymentMethod: "credit_card"
+  card: {
+    number: string
+    holderName: string
+    expirationMonth: number
+    expirationYear: number
+    cvv: string
+    installments: number
+  }
+  customer: {
+    name: string
+    email: string
+    document: {
+      type: "cpf"
+      number: string
+    }
+    phone: string
+    ip: string
+  }
+  items: Array<{
+    id: string
+    title: string
+    quantity: number
+    unitPrice: number
+    tangible: boolean
+  }>
+  postbackUrl?: string
+}
+
 export interface PixResponse {
   success: boolean
   qrcode?: string
   pixCopiaECola?: string
   pixCode?: string
+  token?: string
+  message?: string
+  error?: string
+}
+
+export interface CardResponse {
+  success: boolean
   token?: string
   message?: string
   error?: string
@@ -101,6 +139,54 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
     }
   } catch (error) {
     console.error("❌ Erro na API PIX:", error)
+    return {
+      success: false,
+      error: "Erro de conexão com a API",
+    }
+  }
+}
+
+export async function createCardPayment(data: CardPaymentData): Promise<CardResponse> {
+  try {
+    console.log("💳 Iniciando processo de pagamento com cartão...")
+
+    // Capturar parâmetros UTM
+    const utmParams = getUtmParams()
+
+    // Preparar dados para o cartão seguindo a mesma estrutura do PIX
+    const paymentData = {
+      ...utmParams,
+      ...data,
+    }
+
+    console.log("📤 Enviando dados do cartão para API:", paymentData)
+
+    // Fazer requisição usando a mesma base URL do PIX
+    const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento.php`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(paymentData),
+    })
+
+    const result = await response.json()
+    console.log("📥 Resposta da API do cartão:", result)
+
+    if (result.success) {
+      return {
+        success: true,
+        token: result.token,
+        message: result.message,
+      }
+    } else {
+      return {
+        success: false,
+        error: result.message || result.error || "Erro ao processar pagamento com cartão",
+      }
+    }
+  } catch (error) {
+    console.error("❌ Erro na API do cartão:", error)
     return {
       success: false,
       error: "Erro de conexão com a API",

@@ -8,7 +8,15 @@ import { Input } from "@/components/ui/input"
 import { Minus, Plus, Trash2, Loader2, Calendar, ChevronLeft, ChevronRight, X, Lock, Home } from "lucide-react"
 import { CheckoutHeader } from "@/components/checkout-header"
 
-import { createPixPayment, type PixPaymentData, maskCPF, maskPhone, validateEmail } from "@/lib/pix-api"
+import {
+  createPixPayment,
+  createCardPayment,
+  type PixPaymentData,
+  type CardPaymentData,
+  maskCPF,
+  maskPhone,
+  validateEmail,
+} from "@/lib/pix-api"
 import { Edit2 } from "lucide-react"
 
 interface CartItem {
@@ -238,7 +246,7 @@ export default function CheckoutPage() {
       setShippingOptions([storeOption])
     } else {
       if (onlyFreeItems) {
-        setShippingOptions([{ type: "Correios Pac", price: 25.91, days: "de 5-7 dias úteis" }])
+        setShippingOptions([{ type: "Correios Pac", price: 8.00, days: "de 5-7 dias úteis" }])
       } else {
         setShippingOptions([
           { type: "Correios Pac", price: 0, days: "de 5-7 dias úteis." },
@@ -426,7 +434,7 @@ export default function CheckoutPage() {
           throw new Error(pixResponse.error || "Erro ao gerar PIX")
         }
       } else if (selectedPaymentMethod === "credit_card") {
-        const cardPaymentData = {
+        const cardPaymentData: CardPaymentData = {
           amount: Math.round(totalAmount * 100),
           paymentMethod: "credit_card",
           card: {
@@ -461,15 +469,7 @@ export default function CheckoutPage() {
 
         console.log("💳 Enviando dados do cartão:", cardPaymentData)
 
-        const response = await fetch("/api-hostinger/pagamento.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(cardPaymentData),
-        })
-
-        const cardResponse = await response.json()
+        const cardResponse = await createCardPayment(cardPaymentData)
 
         if (cardResponse.success) {
           localStorage.setItem(
@@ -486,7 +486,7 @@ export default function CheckoutPage() {
 
           window.location.href = "/success"
         } else {
-          throw new Error(cardResponse.message || "Erro ao processar pagamento com cartão")
+          throw new Error(cardResponse.error || "Erro ao processar pagamento com cartão")
         }
       }
     } catch (error) {
