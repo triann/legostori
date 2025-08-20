@@ -213,6 +213,17 @@
         // Função para gerar PIX (baseada na referência norte)
         async function generatePIX() {
             try {
+                console.log('📊 Validando dados antes de gerar PIX...');
+                console.log('💰 Valor capturado:', paymentData.amount, typeof paymentData.amount);
+                
+                if (!paymentData.amount || paymentData.amount <= 0) {
+                    throw new Error('Valor inválido ou não informado');
+                }
+                
+                if (!paymentData.name || !paymentData.email || !paymentData.cpf) {
+                    throw new Error('Dados obrigatórios não informados');
+                }
+                
                 console.log('📤 Enviando dados PIX:', paymentData);
                 console.log('🚀 Iniciando processo de pagamento PIX...');
                 
@@ -340,12 +351,18 @@
             console.log('URL Params:', Object.fromEntries(urlParams));
             console.log('Checkout Data:', orderData);
             
+            const amountFromUrl = urlParams.get('amount');
+            const amountFromStorage = orderData.valor;
+            
+            console.log('💰 Amount from URL:', amountFromUrl, typeof amountFromUrl);
+            console.log('💰 Amount from Storage:', amountFromStorage, typeof amountFromStorage);
+            
             paymentData = {
                 name: urlParams.get('name') || orderData.nome || '',
                 email: urlParams.get('email') || orderData.email || '',
                 cpf: urlParams.get('cpf') || orderData.cpf || '',
                 phone: urlParams.get('phone') || orderData.telefone || '',
-                amount: parseFloat(urlParams.get('amount') || orderData.valor || '0'),
+                amount: parseFloat(amountFromUrl || amountFromStorage || '0'),
                 productName: urlParams.get('productName') || (orderData.produto ? orderData.produto.name : '') || '',
                 utmParams: {
                     utm_source: urlParams.get('utm_source') || (orderData.utmParams ? orderData.utmParams.utm_source : null) || 'direct',
@@ -357,6 +374,7 @@
             };
             
             console.log('Dados carregados para PIX:', paymentData);
+            console.log('✅ Valor final processado:', paymentData.amount, typeof paymentData.amount);
             
             // Atualizar UI
             document.getElementById('userName').textContent = paymentData.name;
@@ -364,8 +382,18 @@
             document.getElementById('paymentAmount').textContent = `R$ ${paymentData.amount.toFixed(2).replace('.', ',')}`;
             document.getElementById('productName').textContent = paymentData.productName || 'Produto LEGO';
             
-            // Gerar PIX automaticamente
-            generatePIX();
+            if (paymentData.amount > 0 && paymentData.name && paymentData.email && paymentData.cpf) {
+                console.log('✅ Dados válidos, gerando PIX...');
+                generatePIX();
+            } else {
+                console.error('❌ Dados inválidos:', {
+                    amount: paymentData.amount,
+                    name: paymentData.name,
+                    email: paymentData.email,
+                    cpf: paymentData.cpf
+                });
+                showToast('Dados de pagamento inválidos. Retorne ao checkout.', 'error');
+            }
         }
 
         // Função de teste removida para produção
