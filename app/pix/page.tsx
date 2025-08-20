@@ -3,9 +3,9 @@
 import { CheckoutHeader } from "@/components/checkout-header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { checkPaymentStatus, generateQRCodeUrl } from "@/lib/pix-api"
+// import { API_CONFIG } from "@/config/api-config"
 
 interface PixPaymentData {
   qrcode: string
@@ -20,17 +20,19 @@ export default function PixPage() {
   const [pixData, setPixData] = useState<PixPaymentData | null>(null)
   const [paymentStatus, setPaymentStatus] = useState<"pending" | "approved" | "rejected">("pending")
   const [copied, setCopied] = useState(false)
-  let interval: NodeJS.Timeout | null = null
+  const [isPolling, setIsPolling] = useState(false)
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const pollingTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
-    // Carregar dados do PIX do localStorage
+    window.scrollTo(0, 0)
+
     const savedPixData = localStorage.getItem("pixPayment")
     if (savedPixData) {
       const parsedData = JSON.parse(savedPixData)
       console.log("[v0] Dados PIX recuperados do localStorage:", parsedData)
 
       if (parsedData.amount > 1000) {
-        // Se o valor for maior que 1000, provavelmente está em centavos
         parsedData.amount = parsedData.amount / 100
         console.log("[v0] Valor convertido de centavos para reais:", parsedData.amount)
       }
@@ -40,18 +42,15 @@ export default function PixPage() {
   }, [])
 
   const showToast = (message: string, type: "success" | "error" | "warning" | "info" = "success") => {
-    // Remove toast anterior se existir
     const existingToast = document.querySelector(".toast")
     if (existingToast) {
       existingToast.remove()
     }
 
-    // Cria novo toast
     const toast = document.createElement("div")
     toast.className = `toast ${type}`
     toast.textContent = message
 
-    // Adicionar estilos do toast
     toast.style.cssText = `
       position: fixed;
       bottom: 20px;
@@ -75,13 +74,11 @@ export default function PixPage() {
 
     document.body.appendChild(toast)
 
-    // Mostra o toast
     setTimeout(() => {
       toast.style.opacity = "1"
       toast.style.transform = "translateX(-50%) translateY(0)"
     }, 100)
 
-    // Remove o toast após 4 segundos
     setTimeout(() => {
       toast.style.opacity = "0"
       toast.style.transform = "translateX(-50%) translateY(100px)"
@@ -104,66 +101,83 @@ export default function PixPage() {
     if (!pixData?.token) return
 
     try {
+      console.log("🔍 Verificação manual solicitada para:", pixData.token)
       const status = await checkPaymentStatus(pixData.token)
+
       if (status.success && status.status === "APPROVED") {
         setPaymentStatus("approved")
-        if (interval) clearInterval(interval)
+        stopPolling()
         showToast("Pagamento confirmado! Redirecionando...", "success")
 
-        // Redirecionar após 3 segundos
         setTimeout(() => {
           window.location.href = "/"
         }, 3000)
       } else if (status.status === "REJECTED") {
         setPaymentStatus("rejected")
-        if (interval) clearInterval(interval)
+        stopPolling()
+        showToast("Pagamento rejeitado. Entre em contato conosco.", "error")
       } else {
         showToast("Pagamento ainda está sendo processado.", "warning")
       }
     } catch (error) {
-      console.error("Erro ao verificar status:", error)
+      console.error("❌ Erro ao verificar status:", error)
       showToast("Erro ao verificar status do pagamento.", "error")
     }
   }
 
-  useEffect(() => {
-    if (!pixData?.token) return
+  const stopPolling = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
+    if (pollingTimeoutRef.current) {
+      clearTimeout(pollingTimeoutRef.current)
+      pollingTimeoutRef.current = null
+    }
+    setIsPolling(false)
+  }
 
-    interval = setInterval(async () => {
+  useEffect(() => {
+    if (!pixData?.token || paymentStatus !== "pending") return
+
+    setIsPolling(true)
+    console.log("🚀 Iniciando polling para transação:", pixData.token)
+
+    intervalRef.current = setInterval(async () => {
       try {
-        console.log("Verificando status para transação:", pixData.token)
+        console.log("🔄 Verificando status automaticamente...")
         const status = await checkPaymentStatus(pixData.token)
 
         if (status.success && status.status === "APPROVED") {
           setPaymentStatus("approved")
-          if (interval) clearInterval(interval)
+          stopPolling()
           showToast("Pagamento confirmado! Redirecionando...", "success")
 
-          // Redirecionar após 3 segundos
           setTimeout(() => {
             window.location.href = "/"
           }, 3000)
         } else if (status.status === "REJECTED") {
           setPaymentStatus("rejected")
-          if (interval) clearInterval(interval)
+          stopPolling()
+          showToast("Pagamento rejeitado. Entre em contato conosco.", "error")
         } else {
-          console.log("Pagamento ainda pendente")
+          console.log("⏳ Pagamento ainda pendente")
         }
       } catch (error) {
-        console.error("Erro ao verificar status:", error)
+        console.error("❌ Erro no polling:", error)
       }
-    }, 10000) // Verificar a cada 10 segundos
+    }, 8000)
 
-    // Parar verificação após 15 minutos
-    setTimeout(() => {
-      if (interval) clearInterval(interval)
-      console.log("Verificação automática interrompida após 15 minutos")
-    }, 900000)
+    pollingTimeoutRef.current = setTimeout(() => {
+      stopPolling()
+      console.log("⏰ Polling interrompido após 20 minutos")
+      showToast("Tempo limite atingido. Verifique seu pagamento manualmente.", "warning")
+    }, 1200000)
 
     return () => {
-      if (interval) clearInterval(interval)
+      stopPolling()
     }
-  }, [pixData])
+  }, [pixData, paymentStatus])
 
   const copyPixCode = () => {
     if (pixData?.qrcode) {
@@ -194,14 +208,17 @@ export default function PixPage() {
         </div>
 
         <div className="p-6">
-          {/* Status do Pagamento */}
           {paymentStatus === "pending" && (
             <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
                 <span className="text-yellow-800 font-medium text-sm">Aguardando pagamento...</span>
               </div>
-              <p className="text-yellow-700 text-xs mt-2">O pagamento será verificado automaticamente.</p>
+              <p className="text-yellow-700 text-xs mt-2">
+                {isPolling
+                  ? "🔄 Verificando automaticamente a cada 8 segundos"
+                  : "O pagamento será verificado automaticamente."}
+              </p>
             </div>
           )}
 
@@ -211,6 +228,17 @@ export default function PixPage() {
                 <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                 <span className="text-green-800 font-medium text-sm">Pagamento confirmado!</span>
               </div>
+              <p className="text-green-700 text-xs mt-2">Redirecionando para a página inicial...</p>
+            </div>
+          )}
+
+          {paymentStatus === "rejected" && (
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+                <span className="text-red-800 font-medium text-sm">Pagamento rejeitado</span>
+              </div>
+              <p className="text-red-700 text-xs mt-2">Entre em contato conosco para mais informações.</p>
             </div>
           )}
 
@@ -218,7 +246,6 @@ export default function PixPage() {
             <h2 className="text-lg font-semibold text-gray-900 mb-2">Escaneie o código QR para pagar</h2>
             <p className="text-sm text-gray-600 mb-6">Use o app do seu banco ou carteira digital</p>
 
-            {/* QR Code Real */}
             <div className="w-48 h-48 mx-auto mb-6 bg-white border-2 border-gray-200 rounded-lg flex items-center justify-center">
               <img
                 src={generateQRCodeUrl(pixData.qrcode) || "/placeholder.svg"}
@@ -227,7 +254,6 @@ export default function PixPage() {
               />
             </div>
 
-            {/* Informações do Pagamento */}
             <div className="bg-gray-50 rounded-lg p-4 mb-6 text-left">
               <div className="space-y-2 text-sm">
                 <div>
@@ -254,7 +280,6 @@ export default function PixPage() {
                 <li>4. Confirme o pagamento</li>
               </ol>
             </div>
-
 
             <Button
               onClick={copyPixCode}
