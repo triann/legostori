@@ -124,7 +124,16 @@
 
                     <!-- QR Code com design idêntico ao React -->
                     <div class="w-48 h-48 mx-auto mb-6 bg-white border-2 border-gray-200 rounded-lg flex items-center justify-center">
-                        <img id="qrCodeImage" src="/placeholder.svg?height=176&width=176" alt="QR Code PIX" class="w-44 h-44 rounded">
+                        <!-- Melhorando placeholder e feedback visual do QR code -->
+                        <div id="qrCodeContainer" class="w-44 h-44 rounded flex items-center justify-center">
+                            <div id="qrCodePlaceholder" class="text-center text-gray-400">
+                                <div class="animate-pulse">
+                                    <div class="w-32 h-32 bg-gray-200 rounded mb-2 mx-auto"></div>
+                                    <p class="text-xs">Gerando QR Code...</p>
+                                </div>
+                            </div>
+                            <img id="qrCodeImage" src="/placeholder.svg" alt="QR Code PIX" class="w-44 h-44 rounded hidden">
+                        </div>
                     </div>
 
                     <!-- Informações do pagamento com design idêntico ao React -->
@@ -265,17 +274,29 @@
                     currentTransactionId = data.token;
                     pixCode = data.pixCopiaECola || data.pixCode;
                     
-                    // Atualizar QR Code usando gerador simples
-                    const qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?' + 
-                        'size=200x200' +
-                        '&data=' + encodeURIComponent(pixCode) +
-                        '&ecc=M' +
-                        '&color=000000' +
-                        '&bgcolor=FFFFFF' +
-                        '&qzone=2' +
-                        '&format=png';
-                    
-                    document.getElementById('qrCodeImage').src = qrCodeUrl;
+                    if (pixCode) {
+                        console.log('🎯 PIX Code recebido:', pixCode.substring(0, 50) + '...');
+                        
+                        // Atualizar QR Code usando gerador confiável
+                        const qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?' + 
+                            'size=200x200' +
+                            '&data=' + encodeURIComponent(pixCode) +
+                            '&ecc=M' +
+                            '&color=000000' +
+                            '&bgcolor=FFFFFF' +
+                            '&qzone=2' +
+                            '&format=png';
+                        
+                        // Esconder placeholder e mostrar QR code real
+                        document.getElementById('qrCodePlaceholder').style.display = 'none';
+                        const qrImage = document.getElementById('qrCodeImage');
+                        qrImage.src = qrCodeUrl;
+                        qrImage.classList.remove('hidden');
+                        
+                        console.log('✅ QR Code atualizado com sucesso');
+                    } else {
+                        throw new Error('PIX code não recebido da API');
+                    }
                     
                     // Iniciar verificação de status
                     if (statusCheckInterval) clearInterval(statusCheckInterval);
@@ -288,6 +309,14 @@
 
             } catch (error) {
                 console.error('❌ Erro ao gerar PIX:', error);
+                document.getElementById('qrCodePlaceholder').innerHTML = `
+                    <div class="text-center text-red-400">
+                        <div class="w-32 h-32 bg-red-100 rounded mb-2 mx-auto flex items-center justify-center">
+                            <span class="text-red-500 text-2xl">⚠️</span>
+                        </div>
+                        <p class="text-xs">Erro ao gerar QR Code</p>
+                    </div>
+                `;
                 showToast('Erro ao processar pagamento: ' + error.message, 'error');
             }
         }
@@ -395,6 +424,26 @@
                     cpf: paymentData.cpf
                 });
                 showToast('Dados de pagamento inválidos. Retorne ao checkout.', 'error');
+            }
+        }
+
+        // Função para copiar código PIX
+        function copyPixCode() {
+            if (pixCode) {
+                navigator.clipboard.writeText(pixCode).then(() => {
+                    showToast('Código PIX copiado!', 'success');
+                }).catch(() => {
+                    // Fallback para navegadores mais antigos
+                    const textArea = document.createElement('textarea');
+                    textArea.value = pixCode;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    showToast('Código PIX copiado!', 'success');
+                });
+            } else {
+                showToast('Código PIX ainda não foi gerado', 'error');
             }
         }
 
