@@ -88,6 +88,20 @@ const categories = [
 const products = [
   {
     id: 1,
+    name: "Icons - McLaren MP4/4 e Ayrton Senna",
+    price: "R$ 799,99",
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 156,
+    ages: "18+",
+    pieces: 693,
+    image:
+      "https://legobrasil.vtexassets.com/arquivos/ids/185200/10330.jpg?v=638424969949830000",
+    isNew: true,
+    href: "/product/1",
+  },
+  {
+    id: 2,
     name: "Disney - Mini Castelo da Disney",
     price: "R$ 329,99",
     originalPrice: null,
@@ -98,19 +112,6 @@ const products = [
     image:
       "https://legobrasil.vtexassets.com/arquivos/ids/176770/lego_40478_Disney_Mini_Castelo_da_Disney_01.jpg?v=637732735262400000",
     isNew: true,
-    href: "/product/1",
-  },
-  {
-    id: 2,
-    name: "Disney - Casa de Praia Lilo e Stitch",
-    price: "R$ 899,99",
-    originalPrice: null,
-    rating: 4.9,
-    reviews: 203,
-    ages: "18+",
-    pieces: 834,
-    image: "https://legobrasil.vtexassets.com/arquivos/ids/188946/43268.jpg?v=638731528542870000",
-    isNew: false,
     href: "/product/2",
   },
   {
