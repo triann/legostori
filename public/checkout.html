@@ -527,8 +527,87 @@
             showToast('Produtos gratuitos não podem ser retirados na loja. Selecione a opção "Receber".', 'error');
         }
 
+        function updatePaymentSummary() {
+            if (!productData) return;
+            
+            const shippingCost = deliveryMethod === 'RETIRAR' ? 0 : (selectedShipping?.price || 0);
+            const total = productData.finalPrice + shippingCost;
+            
+            document.getElementById('orderSummary').innerHTML = `
+                <div class="border rounded-lg p-4 mb-4">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                            <img src="${productData.image}" alt="${productData.name}" class="w-10 h-10 object-cover rounded">
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-900">${productData.name}</h4>
+                            <p class="text-sm text-gray-600">Quantidade: 1</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-semibold">R$ ${productData.finalPrice.toFixed(2).replace('.', ',')}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between">
+                        <span>Subtotal:</span>
+                        <span>R$ ${productData.finalPrice.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Entrega:</span>
+                        <span>${shippingCost === 0 ? 'Grátis' : 'R$ ' + shippingCost.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                    <div class="border-t pt-2 flex justify-between font-semibold">
+                        <span>Total:</span>
+                        <span>R$ ${total.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function saveFormData() {
+            const currentFormData = {
+                email: document.getElementById('email-step')?.value || formData.email,
+                firstName: document.getElementById('firstName')?.value || formData.firstName,
+                lastName: document.getElementById('lastName')?.value || formData.lastName,
+                cpf: document.getElementById('cpf')?.value || formData.cpf,
+                phone: document.getElementById('phone')?.value || formData.phone,
+                cep: document.getElementById('cep')?.value || formData.cep,
+                addressNumber: document.getElementById('addressNumber')?.value || formData.addressNumber,
+                complement: document.getElementById('complement')?.value || formData.complement,
+                pickupDate: formData.pickupDate,
+                deliveryMethod: deliveryMethod,
+                selectedShipping: selectedShipping
+            };
+            
+            localStorage.setItem('checkoutFormData', JSON.stringify(currentFormData));
+        }
+
+        function loadFormData() {
+            const savedData = localStorage.getItem('checkoutFormData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                formData = { ...formData, ...data };
+                deliveryMethod = data.deliveryMethod || 'RECEBER';
+                selectedShipping = data.selectedShipping;
+                
+                // Preencher campos do formulário
+                if (data.email) document.getElementById('email-step').value = data.email;
+                if (data.firstName) document.getElementById('firstName').value = data.firstName;
+                if (data.lastName) document.getElementById('lastName').value = data.lastName;
+                if (data.cpf) document.getElementById('cpf').value = data.cpf;
+                if (data.phone) document.getElementById('phone').value = data.phone;
+                if (data.cep) document.getElementById('cep').value = data.cep;
+                if (data.addressNumber) document.getElementById('addressNumber').value = data.addressNumber;
+                if (data.complement) document.getElementById('complement').value = data.complement;
+            }
+        }
+
         // Step navigation
         function goToStep(step) {
+            saveFormData();
+            
             document.querySelectorAll('.step-content').forEach(el => el.classList.add('hidden'));
             document.getElementById(`step-${step}`).classList.remove('hidden');
             document.getElementById(`step-${step}`).classList.add('animate-slide-in');
@@ -887,18 +966,42 @@
         });
 
         document.getElementById('finalizeBtn').addEventListener('click', function() {
+            if (!formData.email || !formData.firstName || !formData.lastName || !formData.cpf || !formData.phone) {
+                showToast('Por favor, preencha todos os dados pessoais.', 'error');
+                return;
+            }
+            
+            if (!selectedShipping && deliveryMethod === 'RECEBER') {
+                showToast('Por favor, selecione uma opção de entrega.', 'error');
+                return;
+            }
+            
+            if (deliveryMethod === 'RETIRAR' && !formData.pickupDate) {
+                showToast('Por favor, selecione uma data para retirada.', 'error');
+                return;
+            }
+            
             // Preparar dados para envio
             const orderData = {
-                ...formData,
-                product: productData,
-                shipping: selectedShipping,
-                deliveryMethod: deliveryMethod,
-                utmParams: getUtmParams(),
-                total: productData.finalPrice + (deliveryMethod === 'RETIRAR' ? 0 : (selectedShipping?.price || 0))
+                nome: `${formData.firstName} ${formData.lastName}`,
+                email: formData.email,
+                cpf: formData.cpf,
+                telefone: formData.phone,
+                valor: productData.finalPrice + (deliveryMethod === 'RETIRAR' ? 0 : (selectedShipping?.price || 0)),
+                produto: productData,
+                entrega: selectedShipping,
+                metodoEntrega: deliveryMethod,
+                dataRetirada: formData.pickupDate,
+                utmParams: getUtmParams()
             };
+            
+            console.log('Dados do pedido:', orderData);
             
             // Salvar no localStorage para a página PIX
             localStorage.setItem('orderData', JSON.stringify(orderData));
+            
+            // Limpar dados do formulário após finalizar
+            localStorage.removeItem('checkoutFormData');
             
             // Redirecionar para página PIX
             window.location.href = '/pix.html';
@@ -1078,17 +1181,7 @@
             document.getElementById('continueAddressBtn').disabled = true;
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('✅ LEGO Checkout Multi-Step carregado');
-            console.log('📊 UTM Params:', getUtmParams());
-            
-            // Start with email step
-            productData = getProductData();
-            if (!productData) return; // Se não há produto, já redirecionou
-            
-            console.log('🛍️ Dados do produto:', productData);
-            
-            // Aplicar máscaras nos campos
+        function setupMasks() {
             const cpfField = document.getElementById('cpf');
             const phoneField = document.getElementById('phone');
             const cepField = document.getElementById('cep');
@@ -1104,6 +1197,37 @@
             cepField.addEventListener('input', function(e) {
                 e.target.value = maskCEP(e.target.value);
             });
+        }
+
+        function setupCalendar() {
+            document.getElementById('retirarBtn').addEventListener('click', function() {
+                if (hasOnlyFreeItems()) {
+                    showTemporaryNotification();
+                    return;
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            productData = getProductData();
+            if (!productData) return;
+            
+            // Carregar dados salvos do formulário
+            loadFormData();
+            
+            // Atualizar resumo inicial
+            updatePaymentSummary();
+            
+            // Configurar máscaras
+            setupMasks();
+            
+            // Configurar calendário
+            setupCalendar();
+            
+            console.log('✅ LEGO Checkout Multi-Step carregado');
+            console.log('📊 UTM Params:', getUtmParams());
+            
+            console.log('🛍️ Dados do produto:', productData);
             
             goToStep('email');
         });
