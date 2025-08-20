@@ -6,7 +6,7 @@
     <title>Finalizar Compra - LEGO Store Brasil</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="config.js"></script>
+    
     <!-- Adicionando scripts UTMify no head conforme layout React -->
     <script>
         window.pixelId = "689d6967a9b91cc128240c1f";
@@ -105,7 +105,7 @@
     <!-- Header idêntico ao CheckoutHeader React com banner azul e logo LEGO -->
     <div class="bg-blue-600 text-white text-center py-2 text-xs md:text-sm">
         <div class="flex items-center justify-center gap-2 px-2">
-            <span class="text-center">Resgate único por CPF.</span>
+            <span class="text-center">A semana favorita de todo bruxo está quase chegando</span>
             <button class="underline hidden md:inline">Saiba mais</button>
         </div>
     </div>
@@ -704,7 +704,7 @@
                         <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                         </svg>
-                        <h3 class="font-medium text-gray-900">Escolha a data de retirada</h3>
+                        <h3 class="font-medium text-gray-900">Escolha a data de início</h3>
                     </div>
 
                     <!-- Navegação do mês -->
@@ -849,7 +849,8 @@
             formData.pickupDate = dateString;
             updateCalendarDisplay();
             
-
+            const selectedDateObj = new Date(dateString);
+            showToast(`Data selecionada: ${selectedDateObj.toLocaleDateString('pt-BR')}`, 'success');
         }
 
         // Toast notifications
@@ -980,17 +981,31 @@
                 return;
             }
             
-            // Preparar dados para envio
             const orderData = {
                 nome: `${formData.firstName} ${formData.lastName}`,
                 email: formData.email,
                 cpf: formData.cpf,
                 telefone: formData.phone,
                 valor: productData.finalPrice + (deliveryMethod === 'RETIRAR' ? 0 : (selectedShipping?.price || 0)),
-                produto: productData,
+                produto: {
+                    name: productData.name,
+                    id: productData.id,
+                    price: productData.finalPrice,
+                    image: productData.image
+                },
                 entrega: selectedShipping,
                 metodoEntrega: deliveryMethod,
                 dataRetirada: formData.pickupDate,
+                endereco: deliveryMethod === 'RECEBER' ? {
+                    cep: formData.cep,
+                    rua: formData.street,
+                    numero: formData.addressNumber,
+                    complemento: formData.complement,
+                    bairro: formData.district,
+                    cidade: formData.city,
+                    estado: formData.state,
+                    enderecoCompleto: formData.fullAddress
+                } : null,
                 utmParams: getUtmParams()
             };
             
