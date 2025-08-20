@@ -1,0 +1,28 @@
+# Configuração CORS para legostore.online
+Header always set Access-Control-Allow-Origin "https://legostore.online"
+Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS, PUT, DELETE"
+Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With, Accept, Origin"
+Header always set Access-Control-Allow-Credentials "true"
+Header always set Access-Control-Max-Age "86400"
+
+# Responder a requisições OPTIONS (preflight)
+RewriteEngine On
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ - [R=200,L]
+
+# Configurações de segurança
+Header always set X-Content-Type-Options nosniff
+Header always set X-Frame-Options DENY
+Header always set X-XSS-Protection "1; mode=block"
+
+# Configurações específicas para arquivos PHP
+<Files "*.php">
+    Header always set Access-Control-Allow-Origin "https://legostore.online"
+    Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With, Accept, Origin"
+    Header always set Access-Control-Allow-Credentials "true"
+</Files>
+
+# Forçar CORS em todas as respostas
+Header always set Access-Control-Allow-Origin "https://legostore.online" env=!no_cors
+Header always set Vary "Origin" env=!no_cors

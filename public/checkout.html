@@ -23,62 +23,45 @@
     ></script>
     
     <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
-        }
-        
-        /* Aplicando animações idênticas ao React */
-        @keyframes fade-in {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f9fafb;
         }
 
-        .animate-fade-in {
-            animation: fade-in 0.3s ease-out;
-        }
-
-        @keyframes slide-in-right {
-            from {
-                opacity: 0;
-                transform: translateX(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .animate-slide-in-right {
-            animation: slide-in-right 0.3s ease-out;
-        }
-
-        @keyframes slide-down {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-slide-down {
-            animation: slide-down 0.3s ease-out;
-        }
-
-        /* Container principal com max-width idêntico ao React */
         .container-checkout {
             max-width: 28rem;
             margin: 0 auto;
             background: white;
             min-height: 100vh;
+        }
+
+        /* Adicionando animações e transições suaves */
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .animate-slide-in-right {
+            animation: slideInRight 0.3s ease-out;
+        }
+
+        .animate-slide-down {
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         /* Estados de visibilidade das etapas */
@@ -88,105 +71,304 @@
 
         .step-visible {
             display: block;
+            animation: fadeIn 0.3s ease-in-out;
         }
 
-        /* Botões de método de entrega com estado ativo */
+        /* Melhorando estilo dos botões de método de entrega */
         .delivery-method-btn {
             flex: 1;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 9999px;
             font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s;
+            font-weight: 600;
+            transition: all 0.3s ease;
             color: #6b7280;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
         }
 
         .delivery-method-btn.active {
             background-color: #2563eb;
             color: white;
+            transform: scale(1.02);
         }
 
-        /* Opções de frete com seleção visual */
+        .delivery-method-btn:hover:not(.active) {
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+
+        /* Aprimorando opções de frete com animações */
         .shipping-option {
             border: 2px solid #e5e7eb;
-            border-radius: 0.5rem;
-            padding: 1rem;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             margin-bottom: 0.75rem;
+            background-color: white;
         }
 
         .shipping-option:hover {
             border-color: #d1d5db;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         .shipping-option.selected {
             border-color: #2563eb;
             background-color: #eff6ff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px -5px rgba(37, 99, 235, 0.25);
         }
 
-        /* Inputs com estilo idêntico ao React */
+        /* Melhorando inputs com foco visual */
         .form-input {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.5rem;
+            padding: 0.875rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
             font-size: 1rem;
-            transition: border-color 0.2s;
+            transition: all 0.3s ease;
+            background-color: white;
         }
 
         .form-input:focus {
             outline: none;
             border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            transform: scale(1.01);
         }
 
         .form-input.error {
             border-color: #ef4444;
+            background-color: #fef2f2;
         }
 
-        /* Botões primários com estilo React */
+        /* Aprimorando botões primários */
         .btn-primary {
             width: 100%;
-            background-color: #ea580c;
+            background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
             color: white;
-            padding: 0.75rem;
+            padding: 1rem;
             border-radius: 9999px;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.1rem;
             border: none;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .btn-primary:hover {
-            background-color: #dc2626;
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
         }
 
         .btn-primary:disabled {
-            background-color: #9ca3af;
+            background: #9ca3af;
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
-        /* Indicadores de etapa */
+        /* Melhorando botão de calcular */
+        /* Aplicando CSS idêntico ao React para o carrinho */
+        .btn-calculate {
+            width: 100%;
+            background-color: #dbeafe;
+            color: #2563eb;
+            border: 1px solid #bfdbfe;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-calculate:hover {
+            background-color: #bfdbfe;
+        }
+
+        .btn-gray {
+            width: 100%;
+            background-color: #9ca3af;
+            color: white;
+            border: 1px solid #9ca3af;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gray:hover {
+            background-color: #6b7280;
+        }
+
+        .btn-orange {
+            width: 100%;
+            background-color: #f97316;
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-orange:hover {
+            background-color: #ea580c;
+        }
+
+        /* Estilizando indicadores de etapa */
         .step-indicator {
-            width: 2rem;
-            height: 2rem;
+            width: 2.5rem;
+            height: 2.5rem;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.875rem;
-            font-weight: 600;
+            font-size: 1rem;
+            font-weight: 700;
+            background-color: #e5e7eb;
+            color: #6b7280;
+            transition: all 0.3s ease;
         }
 
         .step-indicator.active {
             background-color: #2563eb;
             color: white;
+            transform: scale(1.1);
         }
 
-        .step-indicator.completed {
-            background-color: #16a34a;
+        /* Adicionando estilo para produtos no carrinho */
+        .cart-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .cart-item:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .quantity-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            border: 2px solid #e5e7eb;
+            background-color: white;
+            color: #374151;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-btn:hover {
+            border-color: #2563eb;
+            color: #2563eb;
+            transform: scale(1.1);
+        }
+
+        /* Melhorando botões secundários */
+        .btn-secondary {
+            width: 100%;
+            background-color: #6b7280;
             color: white;
+            padding: 0.875rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 0.75rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: #4b5563;
+            transform: translateY(-1px);
+        }
+
+        /* Ajustando CSS das opções de entrega para ficar igual ao React */
+        .delivery-option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: white;
+        }
+
+        .delivery-option:hover {
+            background-color: #f9fafb;
+        }
+
+        .delivery-option.selected {
+            border-color: #2563eb;
+            background-color: #eff6ff;
+        }
+
+        .delivery-option input[type="radio"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+            accent-color: #2563eb;
+        }
+
+        .delivery-option label {
+            font-weight: 500;
+            color: #374151;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        #cepInput {
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            width: 100%;
+            transition: border-color 0.2s ease;
+        }
+
+        #cepInput:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        #calculateShippingBtn {
+            background-color: #2563eb;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        #calculateShippingBtn:hover {
+            background-color: #1d4ed8;
         }
     </style>
 
@@ -249,34 +431,65 @@
                             Veja as opções de entrega para seus itens, com todos os prazos e valores.
                         </p>
 
-                        <button id="calculateBtn" class="w-full bg-blue-50 text-blue-600 hover:bg-blue-100 border border-blue-200 py-3 rounded-lg font-semibold mb-4">
+                        <button id="calculateBtn" class="btn-calculate">
                             CALCULAR
                         </button>
+
+                        <!-- Adicionando seção de opções de entrega que aparece após calcular -->
+                        <!-- Ajustando estrutura das opções de entrega para ficar igual ao React -->
+                        <div id="deliveryOptions" class="hidden space-y-4 mb-4">
+                            <div class="space-y-3">
+                                <div class="delivery-option selected" data-method="RECEBER">
+                                    <input type="radio" name="deliveryMethod" value="RECEBER" checked>
+                                    <label>Receber</label>
+                                </div>
+                                <div class="delivery-option" data-method="RETIRAR">
+                                    <input type="radio" name="deliveryMethod" value="RETIRAR">
+                                    <label>Retirar</label>
+                                </div>
+                            </div>
+
+                            <!-- Campo CEP que aparece quando seleciona RECEBER -->
+                            <div id="cepSection" class="space-y-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">CEP de entrega</label>
+                                    <div class="flex gap-3">
+                                        <input type="text" id="cepInput" placeholder="00000-000" maxlength="9">
+                                        <button id="calculateShippingBtn">
+                                            Calcular frete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Botões de código e cupom -->
+                    <!-- Atualizando botões para usar classes CSS do React -->
                     <div class="space-y-3 mb-6">
-                        <button id="vendorCodeBtn" class="w-full bg-gray-400 text-white py-3 rounded-lg font-medium hover:bg-gray-500">
+                        <button class="btn-gray">
                             Adicionar Código de vendedor
                         </button>
-                        <button id="discountCouponBtn" class="w-full bg-gray-400 text-white py-3 rounded-lg font-medium hover:bg-gray-500">
+                        <button class="btn-gray">
                             Adicionar cupom de desconto
                         </button>
                     </div>
 
                     <!-- Resumo de valores -->
+                    <!-- Atualizando seção de totais com estilos do React -->
                     <div class="space-y-2 mb-6">
                         <div class="flex justify-between text-sm">
                             <span>Subtotal</span>
-                            <span id="subtotalValue">R$ 0,00</span>
+                            <span id="subtotal">R$ 0,00</span>
                         </div>
                         <div class="flex justify-between text-lg font-semibold pt-2 border-t">
                             <span>Total</span>
-                            <span id="totalValue">R$ 0,00</span>
+                            <span id="total">R$ 0,00</span>
                         </div>
                     </div>
 
-                    <button id="continueToEmailBtn" class="btn-primary">
+                    <!-- Botão Fechar pedido com estilo laranja arredondado do React -->
+                    <button onclick="goToStep('email')" class="btn-orange mb-4">
                         Fechar pedido
                     </button>
                 </div>
@@ -613,7 +826,7 @@
                                 <span class="font-medium">PIX</span>
                             </div>
                             <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%8commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
                                 alt="PIX"
                                 class="h-6"
                             />
@@ -752,8 +965,8 @@
 
         function updateTotals() {
             if (!cartData || cartData.length === 0) {
-                document.getElementById('subtotalValue').textContent = 'R$ 0,00';
-                document.getElementById('totalValue').textContent = 'R$ 0,00';
+                document.getElementById('subtotal').textContent = 'R$ 0,00';
+                document.getElementById('total').textContent = 'R$ 0,00';
                 return;
             }
 
@@ -761,8 +974,8 @@
             const shipping = selectedShipping ? getShippingCost() : 0;
             const total = subtotal + shipping;
 
-            document.getElementById('subtotalValue').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-            document.getElementById('totalValue').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+            document.getElementById('subtotal').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            document.getElementById('total').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
 
             // Atualizar também nas outras etapas se existirem
             const paymentSubtotal = document.getElementById('paymentSubtotal');
@@ -896,7 +1109,8 @@
 
             // Botão calcular no carrinho
             document.getElementById('calculateBtn').addEventListener('click', function() {
-                goToStep('email');
+                document.getElementById('deliveryOptions').classList.remove('hidden');
+                this.style.display = 'none';
             });
 
             // Botões de código e cupom (placeholder)
@@ -1027,6 +1241,47 @@
                 alert('Redirecionando para PIX...');
                 // Aqui você pode redirecionar para a página do PIX
             });
+
+            document.querySelectorAll('input[name="deliveryMethod"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    selectedDeliveryMethod = this.value;
+                    if (this.value === 'RECEBER') {
+                        document.getElementById('cepSection').classList.remove('hidden');
+                    } else {
+                        document.getElementById('cepSection').classList.add('hidden');
+                        document.getElementById('shippingOptions').classList.add('hidden');
+                    }
+                });
+            });
+
+            document.getElementById('cepInput').addEventListener('input', function() {
+                let value = this.value.replace(/\D/g, '');
+                if (value.length > 5) {
+                    value = value.substring(0, 5) + '-' + value.substring(5, 8);
+                }
+                this.value = value;
+            });
+
+            document.getElementById('calculateShippingBtn').addEventListener('click', function() {
+                const cep = document.getElementById('cepInput').value;
+                if (cep.length === 9) {
+                    document.getElementById('shippingOptions').classList.remove('hidden');
+                } else {
+                    alert('Por favor, insira um CEP válido');
+                }
+            });
+
+            document.querySelectorAll('.shipping-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.shipping-option').forEach(opt => {
+                        opt.classList.remove('border-blue-500', 'bg-blue-50');
+                        opt.classList.add('border-gray-200');
+                    });
+                    this.classList.remove('border-gray-200');
+                    this.classList.add('border-blue-500', 'bg-blue-50');
+                    selectedShipping = this.dataset.shipping;
+                });
+            });
         });
 
         function updateDeliveryMethodButtons() {
@@ -1071,6 +1326,30 @@
 
             return firstName && lastName && cpf.length >= 14 && phone.length >= 14;
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Event listeners para opções de entrega
+            document.querySelectorAll('.delivery-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove seleção de todas as opções
+                    document.querySelectorAll('.delivery-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                        opt.querySelector('input').checked = false;
+                    });
+                    
+                    // Adiciona seleção na opção clicada
+                    this.classList.add('selected');
+                    this.querySelector('input').checked = true;
+                    
+                    const method = this.dataset.method;
+                    if (method === 'RECEBER') {
+                        document.getElementById('cepSection').style.display = 'block';
+                    } else {
+                        document.getElementById('cepSection').style.display = 'none';
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>

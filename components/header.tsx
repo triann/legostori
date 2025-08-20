@@ -115,64 +115,19 @@ export function Header() {
               </Button>
 
               <nav className="hidden md:flex items-center gap-6">
-                <Link href="/categoria/todos">
+                <Link href="/categoria/novos">
                   <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
-                    TODOS OS LEGOS
+                    NOVOS
                   </Button>
                 </Link>
-                <Link href="/categoria/classic">
+                <Link href="/categoria/exclusivos">
                   <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
-                    CLASSIC
+                    EXCLUSIVOS
                   </Button>
                 </Link>
-                <Link href="/categoria/harrypotter">
+                <Link href="/categoria/ofertas">
                   <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
-                    HARRY POTTER
-                  </Button>
-                </Link>
-                <Link href="/categoria/disney">
-                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
-                    DISNEY
-                  </Button>
-                </Link>
-                <Link href="/categoria/marvel">
-                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
-                    MARVEL
-                  </Button>
-                </Link>
-                <Link href="/categoria/minecraft">
-                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
-                    MINECRAFT
-                  </Button>
-                </Link>
-                <Link href="/categoria/starwars">
-                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
-                    STAR WARS
-                  </Button>
-                </Link>
-                <Link href="/categoria/jurassicworld">
-                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
-                    JURASSIC WORLD
-                  </Button>
-                </Link>
-                <Link href="/categoria/speedchampions">
-                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
-                    SPEED CHAMPIONS
-                  </Button>
-                </Link>
-                <Link href="/categoria/botanicals">
-                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
-                    BOTANICALS
-                  </Button>
-                </Link>
-                <Link href="/categoria/creator">
-                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
-                    CREATOR
-                  </Button>
-                </Link>
-                <Link href="/categoria/icons">
-                  <Button variant="ghost" className="text-black font-semibold hover:bg-yellow-300">
-                    ICONS
+                    OFERTAS
                   </Button>
                 </Link>
               </nav>
@@ -323,60 +278,28 @@ export function Header() {
           </div>
 
           <nav className="flex flex-col gap-4">
-            <Link href="/categoria/todos" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link href="/categoria/novos" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant="ghost"
                 className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
               >
-                TODOS OS LEGOS
+                NOVOS
               </Button>
             </Link>
-            <Link href="/categoria/harrypotter" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link href="/categoria/exclusivos" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant="ghost"
                 className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
               >
-                HARRY POTTER
+                EXCLUSIVOS
               </Button>
             </Link>
-            <Link href="/categoria/disney" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link href="/categoria/ofertas" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant="ghost"
                 className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
               >
-                DISNEY
-              </Button>
-            </Link>
-            <Link href="/categoria/marvel" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
-              >
-                MARVEL
-              </Button>
-            </Link>
-            <Link href="/categoria/icons" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
-              >
-                ICONS
-              </Button>
-            </Link>
-            <Link href="/categoria/classic" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
-              >
-                CLASSIC
-              </Button>
-            </Link>
-            <Link href="/categoria/botanicals" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-black font-semibold hover:bg-yellow-300 text-lg py-6 border border-black rounded-lg"
-              >
-                BOTANICALS
+                OFERTAS
               </Button>
             </Link>
           </nav>
