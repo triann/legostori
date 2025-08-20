@@ -52,19 +52,19 @@ export function getUtmParams() {
   }
 }
 
-async function fetchWithRetry(url: string, options: RequestInit, retries = 3, timeout = 30000): Promise<Response> {
-  const controller = new AbortController()
-  const timeoutId = setTimeout(() => controller.abort(), timeout)
-
-  const fetchOptions = {
-    ...options,
-    signal: controller.signal,
-  }
-
+async function fetchWithRetry(url: string, options: RequestInit, retries = 2, timeout = 15000): Promise<Response> {
   for (let i = 0; i < retries; i++) {
     try {
       console.log(`[v0] Tentativa ${i + 1}/${retries} para ${url}`)
-      const response = await fetch(url, fetchOptions)
+
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), timeout)
+
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal,
+      })
+
       clearTimeout(timeoutId)
 
       if (!response.ok) {
@@ -76,18 +76,16 @@ async function fetchWithRetry(url: string, options: RequestInit, retries = 3, ti
       console.error(`[v0] Erro na tentativa ${i + 1}:`, error)
 
       if (i === retries - 1) {
-        clearTimeout(timeoutId)
         throw error
       }
 
-      // Aguardar antes da próxima tentativa (backoff exponencial)
-      const delay = Math.min(1000 * Math.pow(2, i), 5000)
+      // Aguardar antes da próxima tentativa
+      const delay = 1000 * (i + 1)
       console.log(`[v0] Aguardando ${delay}ms antes da próxima tentativa...`)
       await new Promise((resolve) => setTimeout(resolve, delay))
     }
   }
 
-  clearTimeout(timeoutId)
   throw new Error("Todas as tentativas falharam")
 }
 

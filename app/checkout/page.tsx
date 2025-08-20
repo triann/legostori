@@ -6,7 +6,6 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Minus, Plus, Trash2, Loader2, Calendar, ChevronLeft, ChevronRight, X, Lock, Home } from "lucide-react"
-import Link from "next/link"
 import { CheckoutHeader } from "@/components/checkout-header"
 
 import { createPixPayment, type PixPaymentData, maskCPF, maskPhone, validateEmail } from "@/lib/pix-api"
@@ -854,7 +853,7 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png" alt="PIX" className="h-6" />
           </div>
         </div>
       </div>
@@ -1005,16 +1004,45 @@ export default function CheckoutPage() {
               </div>
             </div>
 
+          <div className="mt-8">
             <Button
               onClick={handlePaymentSubmit}
-              disabled={selectedPaymentMethod !== "pix"}
-              className={`w-full py-3 rounded-full font-semibold transition-colors ${
-                selectedPaymentMethod === "pix"
+              disabled={selectedPaymentMethod !== "pix" || isLoading}
+              className={`w-full py-3 rounded-full font-semibold transition-colors flex items-center justify-center gap-2 ${
+                selectedPaymentMethod === "pix" && !isLoading
                   ? "bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
                   : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}
             >
-              🔒 Finalizar compra
+              {isLoading ? (
+                <>
+                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      fill="none"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
+                  </svg>
+                  Finalizando...
+                </>
+              ) : (
+                <>
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                  Finalizar compra
+                </>
+              )}
             </Button>
           </div>
         </div>
@@ -1028,7 +1056,7 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png" alt="PIX" className="h-6" />
           </div>
         </div>
       </div>
@@ -1039,7 +1067,7 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen bg-gray-50 animate-fade-in">
         <CheckoutHeader />
-
+\
         <div className="max-w-md mx-auto bg-white min-h-screen flex items-center justify-center">
           <div className="text-center p-8">
             <div className="bg-green-500 text-white p-4 rounded-lg mb-6 flex items-center gap-3">
@@ -1058,7 +1086,7 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen bg-gray-50 animate-fade-in">
         <CheckoutHeader />
-
+\
         <div className="max-w-md mx-auto bg-white min-h-screen flex items-center justify-center">
           <div className="text-center p-8">
             <div className="bg-green-500 text-white p-6 rounded-lg mb-6">
@@ -1099,7 +1127,7 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen bg-gray-50 animate-fade-in">
         <CheckoutHeader />
-
+\
         <div className="max-w-md mx-auto bg-white min-h-screen transform transition-all duration-500 ease-in-out">
           <div className="p-4 border-b">
             <h1 className="text-xl font-semibold text-gray-900 text-center">Finalizar compra</h1>
@@ -1159,7 +1187,7 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png" alt="PIX" className="h-6" />
           </div>
         </div>
       </div>
@@ -1170,7 +1198,7 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen bg-gray-50 animate-fade-in">
         <CheckoutHeader />
-
+\
         {showNotification && (
           <div className="fixed top-0 left-0 right-0 z-50 animate-slide-down">
             <div className="bg-orange-500 text-white px-4 py-3 text-center text-sm font-medium shadow-lg">
@@ -1241,7 +1269,7 @@ export default function CheckoutPage() {
             ))}
           </div>
 
-          {/* ... existing code for delivery section ... */}
+          {/* ... existing delivery section code ... */}
 
           <div className="px-4 pb-4">
             <h2 className="text-lg font-medium text-gray-700 mb-2">Entrega</h2>
@@ -1457,5 +1485,5 @@ export default function CheckoutPage() {
     )
   }
 
-  return null
+  return null\
 }
