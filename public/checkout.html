@@ -457,173 +457,19 @@
     </div>
 
     <script>
+        // Configuração da API
         const API_BASE_URL = CONFIG.API_BASE_URL;
-        let currentStep = 'email';
-        let formData = {};
-        let selectedShipping = null;
-        let deliveryMethod = 'RECEBER';
-        let productData = null;
+        
+        // LIMITES DE VALOR PIX
+        const VALOR_MINIMO = 20.00;
+        const VALOR_MAXIMO = 2000.00;
 
-        function getProductData() {
-            // Primeiro tenta pegar da URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const productId = urlParams.get('id');
-            const productName = urlParams.get('name');
-            const productPrice = urlParams.get('price');
-            const productImage = urlParams.get('image');
-            const isFree = urlParams.get('isFree') === 'true';
-            
-            if (productId && productName && productPrice) {
-                return {
-                    id: productId,
-                    name: decodeURIComponent(productName),
-                    finalPrice: parseFloat(productPrice),
-                    originalPrice: parseFloat(urlParams.get('originalPrice') || productPrice),
-                    isFree: isFree,
-                    image: productImage ? decodeURIComponent(productImage) : '/placeholder.svg'
-                };
-            }
-            
-            // Fallback para localStorage
-            const checkoutData = localStorage.getItem('checkoutProduct');
-            if (checkoutData) {
-                return JSON.parse(checkoutData);
-            }
-            
-            // Se não encontrar produto, redireciona para home
-            alert('Nenhum produto selecionado. Redirecionando para a página inicial.');
-            window.location.href = '/';
-            return null;
-        }
-
-        async function getAddressFromCep(cep) {
-            try {
-                const cepNumbers = cep.replace(/\D/g, '');
-                const response = await fetch(`https://viacep.com.br/ws/${cepNumbers}/json/`);
-                const data = await response.json();
-
-                if (data.erro) {
-                    throw new Error('CEP não encontrado');
-                }
-
-                return {
-                    street: data.logradouro,
-                    district: data.bairro,
-                    city: data.localidade,
-                    state: data.uf,
-                    fullAddress: `${data.logradouro}, ${data.bairro} - ${data.localidade} - ${data.uf}`
-                };
-            } catch (error) {
-                console.error('Erro ao buscar CEP:', error);
-                return null;
-            }
-        }
-
-        function hasOnlyFreeItems() {
-            return productData && productData.isFree;
-        }
-
-        function showTemporaryNotification() {
-            showToast('Produtos gratuitos não podem ser retirados na loja. Selecione a opção "Receber".', 'error');
-        }
-
-        function updatePaymentSummary() {
-            if (!productData) return;
-            
-            const shippingCost = deliveryMethod === 'RETIRAR' ? 0 : (selectedShipping?.price || 0);
-            const total = productData.finalPrice + shippingCost;
-            
-            document.getElementById('orderSummary').innerHTML = `
-                <div class="border rounded-lg p-4 mb-4">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
-                            <img src="${productData.image}" alt="${productData.name}" class="w-10 h-10 object-cover rounded">
-                        </div>
-                        <div class="flex-1">
-                            <h4 class="font-medium text-gray-900">${productData.name}</h4>
-                            <p class="text-sm text-gray-600">Quantidade: 1</p>
-                        </div>
-                        <div class="text-right">
-                            <p class="font-semibold">R$ ${productData.finalPrice.toFixed(2).replace('.', ',')}</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="space-y-2 text-sm">
-                    <div class="flex justify-between">
-                        <span>Subtotal:</span>
-                        <span>R$ ${productData.finalPrice.toFixed(2).replace('.', ',')}</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Entrega:</span>
-                        <span>${shippingCost === 0 ? 'Grátis' : 'R$ ' + shippingCost.toFixed(2).replace('.', ',')}</span>
-                    </div>
-                    <div class="border-t pt-2 flex justify-between font-semibold">
-                        <span>Total:</span>
-                        <span>R$ ${total.toFixed(2).replace('.', ',')}</span>
-                    </div>
-                </div>
-            `;
-        }
-
-        function saveFormData() {
-            const currentFormData = {
-                email: document.getElementById('email-step')?.value || formData.email,
-                firstName: document.getElementById('firstName')?.value || formData.firstName,
-                lastName: document.getElementById('lastName')?.value || formData.lastName,
-                cpf: document.getElementById('cpf')?.value || formData.cpf,
-                phone: document.getElementById('phone')?.value || formData.phone,
-                cep: document.getElementById('cep')?.value || formData.cep,
-                addressNumber: document.getElementById('addressNumber')?.value || formData.addressNumber,
-                complement: document.getElementById('complement')?.value || formData.complement,
-                pickupDate: formData.pickupDate,
-                deliveryMethod: deliveryMethod,
-                selectedShipping: selectedShipping
-            };
-            
-            localStorage.setItem('checkoutFormData', JSON.stringify(currentFormData));
-        }
-
-        function loadFormData() {
-            const savedData = localStorage.getItem('checkoutFormData');
-            if (savedData) {
-                const data = JSON.parse(savedData);
-                formData = { ...formData, ...data };
-                deliveryMethod = data.deliveryMethod || 'RECEBER';
-                selectedShipping = data.selectedShipping;
-                
-                // Preencher campos do formulário
-                if (data.email) document.getElementById('email-step').value = data.email;
-                if (data.firstName) document.getElementById('firstName').value = data.firstName;
-                if (data.lastName) document.getElementById('lastName').value = data.lastName;
-                if (data.cpf) document.getElementById('cpf').value = data.cpf;
-                if (data.phone) document.getElementById('phone').value = data.phone;
-                if (data.cep) document.getElementById('cep').value = data.cep;
-                if (data.addressNumber) document.getElementById('addressNumber').value = data.addressNumber;
-                if (data.complement) document.getElementById('complement').value = data.complement;
-            }
-        }
-
-        // Step navigation
-        function goToStep(step) {
-            saveFormData();
-            
-            document.querySelectorAll('.step-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById(`step-${step}`).classList.remove('hidden');
-            document.getElementById(`step-${step}`).classList.add('animate-slide-in');
-            currentStep = step;
-            
-            if (step === 'payment') {
-                updatePaymentSummary();
-            }
-        }
-
-        // UTM capture functions
+        // Captura parâmetros UTM da URL
         function getUtmParams() {
             const urlParams = new URLSearchParams(window.location.search);
             return {
-                utm_source: urlParams.get('utm_source') || 'direct',
-                utm_medium: urlParams.get('utm_medium') || 'none',
+                utm_source: urlParams.get('utm_source'),
+                utm_medium: urlParams.get('utm_medium'),
                 utm_campaign: urlParams.get('utm_campaign'),
                 utm_content: urlParams.get('utm_content'),
                 utm_term: urlParams.get('utm_term'),
@@ -633,31 +479,19 @@
             };
         }
 
-        function maskCPF(value) {
-            return value
-                .replace(/\D/g, '')
-                .slice(0, 11)
-                .replace(/(\d{3})(\d)/, '$1.$2')
-                .replace(/(\d{3})(\d)/, '$1.$2')
-                .replace(/(\d{3})(\d{1,2})/, '$1-$2');
+        // Formatação de valores
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(value / 100);
         }
 
-        function maskPhone(value) {
-            return value
-                .replace(/\D/g, '')
-                .slice(0, 11)
-                .replace(/(\d{2})(\d)/, '($1) $2')
-                .replace(/(\d{5})(\d)/, '$1-$2');
+        function parseCurrency(value) {
+            return parseInt(value.replace(/[^\d]/g, '')) || 0;
         }
 
-        function maskCEP(value) {
-            return value
-                .replace(/\D/g, '')
-                .slice(0, 8)
-                .replace(/(\d{5})(\d)/, '$1-$2');
-        }
-
-        // Toast notifications
+        // Sistema de notificações toast
         function showToast(message, type = 'success') {
             const existingToast = document.querySelector('.toast');
             if (existingToast) {
@@ -684,566 +518,67 @@
             }, 4000);
         }
 
-        // Email validation
-        function validateEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        }
-
-        function showCalendar() {
-            // Remove calendário existente se houver
-            const existingCalendar = document.getElementById('pickupCalendar');
-            if (existingCalendar) existingCalendar.remove();
-
-            const calendarDiv = document.createElement('div');
-            calendarDiv.id = 'pickupCalendar';
-            calendarDiv.className = 'mt-4 animate-fade-in';
-            
-            calendarDiv.innerHTML = `
-                <div class="border rounded-lg p-4 bg-white">
-                    <div class="flex items-center gap-2 mb-4">
-                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
-                        <h3 class="font-medium text-gray-900">Escolha a data de início</h3>
-                    </div>
-
-                    <!-- Navegação do mês -->
-                    <div class="flex items-center justify-between mb-4">
-                        <button onclick="navigateMonth('prev')" class="p-1 hover:bg-gray-100 rounded">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                            </svg>
-                        </button>
-                        <h4 id="monthYear" class="font-medium text-gray-900 capitalize"></h4>
-                        <button onclick="navigateMonth('next')" class="p-1 hover:bg-gray-100 rounded">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </button>
-                    </div>
-
-                    <!-- Dias da semana -->
-                    <div class="grid grid-cols-7 gap-1 mb-2">
-                        <div class="text-center text-sm font-medium text-gray-500 py-2">Dom</div>
-                        <div class="text-center text-sm font-medium text-gray-500 py-2">Seg</div>
-                        <div class="text-center text-sm font-medium text-gray-500 py-2">Ter</div>
-                        <div class="text-center text-sm font-medium text-gray-500 py-2">Qua</div>
-                        <div class="text-center text-sm font-medium text-gray-500 py-2">Qui</div>
-                        <div class="text-center text-sm font-medium text-gray-500 py-2">Sex</div>
-                        <div class="text-center text-sm font-medium text-gray-500 py-2">Sáb</div>
-                    </div>
-
-                    <!-- Calendário -->
-                    <div id="calendarGrid" class="grid grid-cols-7 gap-1 mb-4">
-                        <!-- Dias serão gerados dinamicamente -->
-                    </div>
-
-                    <!-- Informações importantes -->
-                    <div class="bg-blue-50 p-3 rounded-lg">
-                        <h4 class="text-sm font-medium text-blue-800 mb-2">Informações importantes:</h4>
-                        <ul class="text-xs text-blue-700 space-y-1">
-                            <li>• Dias úteis e sábados disponíveis</li>
-                            <li>• Seg-Sex: 09:00 às 18:00 | Sáb: 09:00 às 14:00</li>
-                            <li>• Retirada a partir do próximo dia útil</li>
-                            <li>• Produto reservado por até 7 dias</li>
-                        </ul>
-                    </div>
-                </div>
-            `;
-            
-            document.getElementById('shippingList').appendChild(calendarDiv);
-            
-            // Inicializar calendário
-            initializeCalendar();
-        }
-
-        let currentMonth = new Date();
-        let selectedDate = '';
-
-        function generateCalendar() {
-            const year = currentMonth.getFullYear();
-            const month = currentMonth.getMonth();
-
-            const firstDay = new Date(year, month, 1);
-            const lastDay = new Date(year, month + 1, 0);
-            const startDate = new Date(firstDay);
-            startDate.setDate(startDate.getDate() - firstDay.getDay());
-
-            const days = [];
-            const today = new Date();
-
-            for (let i = 0; i < 42; i++) {
-                const date = new Date(startDate);
-                date.setDate(startDate.getDate() + i);
-
-                const isCurrentMonth = date.getMonth() === month;
-                const isPast = date < today;
-                const isToday = date.toDateString() === today.toDateString();
-                const isSunday = date.getDay() === 0;
-                const isAvailable = isCurrentMonth && !isPast && !isSunday && !isToday;
-
-                days.push({
-                    date: date,
-                    day: date.getDate(),
-                    isCurrentMonth,
-                    isAvailable,
-                    dateString: date.toISOString().split("T")[0],
-                });
-            }
-
-            return days;
-        }
-
-        function navigateMonth(direction) {
-            if (direction === 'prev') {
-                currentMonth.setMonth(currentMonth.getMonth() - 1);
-            } else {
-                currentMonth.setMonth(currentMonth.getMonth() + 1);
-            }
-            updateCalendarDisplay();
-        }
-
-        function formatMonthYear(date) {
-            return date.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
-        }
-
-        function initializeCalendar() {
-            currentMonth = new Date();
-            updateCalendarDisplay();
-        }
-
-        function updateCalendarDisplay() {
-            const monthYearElement = document.getElementById('monthYear');
-            const calendarGrid = document.getElementById('calendarGrid');
-            
-            if (!monthYearElement || !calendarGrid) return;
-
-            monthYearElement.textContent = formatMonthYear(currentMonth);
-            
-            const days = generateCalendar();
-            calendarGrid.innerHTML = '';
-
-            days.forEach(day => {
-                const button = document.createElement('button');
-                button.textContent = day.day;
-                button.className = `
-                    h-10 text-sm rounded transition-colors
-                    ${!day.isCurrentMonth ? 'text-gray-300' : ''}
-                    ${day.isAvailable ? 'hover:bg-blue-50 cursor-pointer' : 'cursor-not-allowed'}
-                    ${selectedDate === day.dateString ? 'bg-blue-600 text-white' : ''}
-                    ${!day.isAvailable && day.isCurrentMonth ? 'text-gray-400' : ''}
-                `;
-                
-                if (day.isAvailable) {
-                    button.onclick = () => selectDate(day.dateString);
-                } else {
-                    button.disabled = true;
-                }
-                
-                calendarGrid.appendChild(button);
-            });
-        }
-
-        function selectDate(dateString) {
-            selectedDate = dateString;
-            formData.pickupDate = dateString;
-            updateCalendarDisplay();
-            
-            const selectedDateObj = new Date(dateString);
-            showToast(`Data selecionada: ${selectedDateObj.toLocaleDateString('pt-BR')}`, 'success');
-        }
-
-        // Toast notifications
-        function showToast(message, type = 'success') {
-            const existingToast = document.querySelector('.toast');
-            if (existingToast) {
-                existingToast.remove();
-            }
-
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.textContent = message;
-            
-            document.body.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.classList.add('show');
-            }, 100);
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => {
-                    if (toast.parentNode) {
-                        toast.parentNode.removeChild(toast);
-                    }
-                }, 300);
-            }, 4000);
-        }
-
-        // Email validation
-        function validateEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        }
-
-        // Step 1: Email
-        document.getElementById('continueEmailBtn').addEventListener('click', function() {
-            const email = document.getElementById('email-step').value.trim();
-            const errorEl = document.getElementById('emailStepError');
-            
-            if (!email) {
-                errorEl.textContent = 'E-mail é obrigatório';
-                errorEl.classList.remove('hidden');
-                return;
-            }
-            
-            if (!validateEmail(email)) {
-                errorEl.textContent = 'E-mail deve ter um formato válido';
-                errorEl.classList.remove('hidden');
-                return;
-            }
-            
-            formData.email = email;
-            document.getElementById('email-display').value = email;
-            goToStep('personal');
-        });
-
-        // Step 2: Personal Data
-        document.getElementById('continuePersonalBtn').addEventListener('click', function() {
-            const firstName = document.getElementById('firstName').value.trim();
-            const lastName = document.getElementById('lastName').value.trim();
-            const cpf = document.getElementById('cpf').value.replace(/\D/g, '');
-            const phone = document.getElementById('phone').value.replace(/\D/g, '');
-            
-            if (!firstName || !lastName || !cpf || !phone) {
-                showToast('Por favor, preencha todos os campos obrigatórios.', 'error');
-                return;
-            }
-            
-            if (cpf.length !== 11) {
-                showToast('CPF deve ter 11 dígitos.', 'error');
-                return;
-            }
-            
-            if (phone.length < 10) {
-                showToast('Telefone deve ter pelo menos 10 dígitos.', 'error');
-                return;
-            }
-            
-            formData.firstName = firstName;
-            formData.lastName = lastName;
-            formData.cpf = cpf;
-            formData.phone = phone;
-            
-            // Update summary
-            document.getElementById('personal-summary').innerHTML = `
-                <p>${formData.email}</p>
-                <p>${firstName} ${lastName}</p>
-            `;
-            
-            goToStep('address');
-        });
-
-        document.getElementById('continueAddressBtn').addEventListener('click', function() {
-            if (!selectedShipping) {
-                showToast('Por favor, selecione uma opção de entrega.', 'error');
-                return;
-            }
-            
-            if (deliveryMethod === 'RECEBER') {
-                const addressNumber = document.getElementById('addressNumber').value.trim();
-                if (!addressNumber) {
-                    showToast('Por favor, informe o número do endereço.', 'error');
-                    return;
-                }
-                formData.addressNumber = addressNumber;
-                formData.complement = document.getElementById('complement').value.trim();
-            } else if (deliveryMethod === 'RETIRAR' && !formData.pickupDate) {
-                showToast('Por favor, selecione uma data para retirada.', 'error');
-                return;
-            }
-            
-            goToStep('payment');
-        });
-
-        document.getElementById('finalizeBtn').addEventListener('click', function() {
-            if (!formData.email || !formData.firstName || !formData.lastName || !formData.cpf || !formData.phone) {
-                showToast('Por favor, preencha todos os dados pessoais.', 'error');
-                return;
-            }
-            
-            if (!selectedShipping && deliveryMethod === 'RECEBER') {
-                showToast('Por favor, selecione uma opção de entrega.', 'error');
-                return;
-            }
-            
-            if (deliveryMethod === 'RETIRAR' && !formData.pickupDate) {
-                showToast('Por favor, selecione uma data para retirada.', 'error');
-                return;
-            }
-            
-            const orderData = {
-                nome: `${formData.firstName} ${formData.lastName}`,
-                email: formData.email,
-                cpf: formData.cpf,
-                telefone: formData.phone,
-                valor: productData.finalPrice + (deliveryMethod === 'RETIRAR' ? 0 : (selectedShipping?.price || 0)),
-                produto: {
-                    name: productData.name,
-                    id: productData.id,
-                    price: productData.finalPrice,
-                    image: productData.image
-                },
-                entrega: selectedShipping,
-                metodoEntrega: deliveryMethod,
-                dataRetirada: formData.pickupDate,
-                endereco: deliveryMethod === 'RECEBER' ? {
-                    cep: formData.cep,
-                    rua: formData.street,
-                    numero: formData.addressNumber,
-                    complemento: formData.complement,
-                    bairro: formData.district,
-                    cidade: formData.city,
-                    estado: formData.state,
-                    enderecoCompleto: formData.fullAddress
-                } : null,
-                utmParams: getUtmParams()
-            };
-            
-            console.log('Dados do pedido:', orderData);
-            
-            // Salvar no localStorage para a página PIX
-            localStorage.setItem('orderData', JSON.stringify(orderData));
-            
-            // Limpar dados do formulário após finalizar
-            localStorage.removeItem('checkoutFormData');
-            
-            // Redirecionar para página PIX
-            window.location.href = '/pix.html';
-        });
-
-        document.getElementById('calculateBtn').addEventListener('click', async function() {
-            const cep = document.getElementById('cep').value.replace(/\D/g, '');
-            const cepError = document.getElementById('cepError');
-            
-            if (cep.length !== 8) {
-                cepError.textContent = 'CEP deve ter 8 dígitos';
-                cepError.classList.remove('hidden');
-                return;
-            }
-            
-            cepError.classList.add('hidden');
-            
-            const btn = this;
-            const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<div class="loading-spinner mx-auto"></div>';
-            btn.disabled = true;
-            
+        // Função principal de checkout baseada na referência norte
+        async function processCheckout() {
             try {
-                // Buscar endereço via API
-                const addressData = await getAddressFromCep(cep);
-                if (addressData) {
-                    formData.fullAddress = addressData.fullAddress;
-                    formData.district = addressData.district;
-                    formData.city = addressData.city;
-                    formData.state = addressData.state;
-                    formData.street = addressData.street;
-                }
+                console.log('🚀 Iniciando processo de pagamento LEGO...');
                 
-                setTimeout(() => {
-                    let shippingOptions = [];
-                    
-                    if (deliveryMethod === 'RETIRAR') {
-                        // Verificar se produto é gratuito
-                        if (hasOnlyFreeItems()) {
-                            showTemporaryNotification();
-                            btn.innerHTML = originalHTML;
-                            btn.disabled = false;
-                            return;
-                        }
-                        
-                        // Opção específica para retirada
-                        shippingOptions = [{
-                            type: 'Centro de Distribuição LEGO',
-                            distance: '3.1km',
-                            address: `📍 ${addressData?.district || 'Centro'}`,
-                            price: 0,
-                            isStore: true
-                        }];
-                    } else {
-                        // Opções para entrega baseadas no produto
-                        if (hasOnlyFreeItems()) {
-                            shippingOptions = [
-                                { type: 'Correios PAC', days: 'de 5-7 dias úteis', price: 25.91 }
-                            ];
-                        } else {
-                            shippingOptions = [
-                                { type: 'Correios PAC', days: 'de 5-7 dias úteis', price: 0 },
-                                { type: 'JadLog Transportadora', days: 'Chegará amanhã', price: 25.91 }
-                            ];
-                        }
-                    }
-                    
-                    const shippingList = document.getElementById('shippingList');
-                    shippingList.innerHTML = '';
-                    
-                    if (deliveryMethod === 'RETIRAR') {
-                        const storeOption = shippingOptions[0];
-                        const storeEl = document.createElement('div');
-                        storeEl.className = 'animate-fade-in';
-                        storeEl.innerHTML = `
-                            <button id="storeSelectionBtn" class="w-full flex justify-between items-center p-3 border rounded-lg transition-colors border-gray-200 hover:border-gray-300">
-                                <div class="text-left">
-                                    <p class="font-medium">${storeOption.type}</p>
-                                    <p class="text-sm text-gray-600">${storeOption.distance}</p>
-                                    <p class="text-xs text-gray-500">${storeOption.address}</p>
-                                </div>
-                                <p class="font-semibold text-green-600">Grátis</p>
-                            </button>
-                        `;
-                        
-                        shippingList.appendChild(storeEl);
-                        
-                        document.getElementById('storeSelectionBtn').addEventListener('click', function() {
-                            selectedShipping = storeOption;
-                            this.classList.add('border-green-500', 'bg-green-50');
-                            this.classList.remove('border-gray-200', 'hover:border-gray-300');
-                            
-                            showCalendar();
-                            document.getElementById('continueAddressBtn').disabled = false;
-                        });
-                    } else {
-                        // Interface normal para entrega
-                        shippingOptions.forEach((option, index) => {
-                            const optionEl = document.createElement('label');
-                            optionEl.className = 'flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50 animate-fade-in';
-                            optionEl.innerHTML = `
-                                <input type="radio" name="shipping" value="${index}" class="w-4 h-4 text-blue-600">
-                                <div class="flex-1">
-                                    <p class="font-medium text-sm">${option.type}</p>
-                                    <p class="text-xs text-gray-600">${option.days}</p>
-                                </div>
-                                <p class="font-semibold text-sm">
-                                    ${option.price === 0 ? 'Grátis' : `R$ ${option.price.toFixed(2).replace('.', ',')}`}
-                                </p>
-                            `;
-                            
-                            optionEl.addEventListener('change', function() {
-                                selectedShipping = option;
-                                document.getElementById('continueAddressBtn').disabled = false;
-                                document.getElementById('addressDetails').classList.remove('hidden');
-                            });
-                            
-                            shippingList.appendChild(optionEl);
-                        });
-                    }
-                    
-                    const shippingOptionsEl = document.getElementById('shippingOptions');
-                    shippingOptionsEl.style.opacity = '0';
-                    shippingOptionsEl.classList.remove('hidden');
-                    
-                    // Animação fade-in
-                    setTimeout(() => {
-                        shippingOptionsEl.style.transition = 'opacity 0.5s ease-in-out';
-                        shippingOptionsEl.style.opacity = '1';
-                    }, 50);
-                    
-                    btn.innerHTML = originalHTML;
-                    btn.disabled = false;
-                    
-                }, 1500);
+                // Capturar dados do formulário (adaptado para LEGO)
+                const utmParams = getUtmParams();
+                const orderData = {
+                    nome: document.getElementById('fullName')?.value?.trim() || 'Cliente LEGO',
+                    email: document.getElementById('email')?.value?.trim() || '',
+                    cpf: document.getElementById('cpf')?.value?.replace(/\D/g, '') || '',
+                    telefone: document.getElementById('phone')?.value?.replace(/\D/g, '') || '',
+                    valor: 265.91, // Valor fixo do produto LEGO
+                    produto: {
+                        name: 'Icons - McLaren MP4/4 e Ayrton Senna',
+                        id: 'lego-mclaren-senna',
+                        price: 265.91,
+                        image: '/lego-mclaren-senna.jpg'
+                    },
+                    utmParams: utmParams
+                };
+
+                console.log('📤 Dados do pedido LEGO:', orderData);
+
+                // Salvar no localStorage para a página PIX
+                localStorage.setItem('orderData', JSON.stringify(orderData));
+
+                // Preparar parâmetros para a página PIX (baseado na referência norte)
+                const params = new URLSearchParams({
+                    name: orderData.nome,
+                    email: orderData.email,
+                    cpf: orderData.cpf,
+                    phone: orderData.telefone,
+                    amount: orderData.valor.toString(),
+                    productName: orderData.produto.name,
+                    ...utmParams
+                });
                 
+                console.log('🔄 Redirecionando para PIX LEGO...');
+                window.location.href = `pix.html?${params.toString()}`;
+
             } catch (error) {
-                console.error('Erro ao calcular frete:', error);
-                showToast('Erro ao buscar informações do CEP. Tente novamente.', 'error');
-                btn.innerHTML = originalHTML;
-                btn.disabled = false;
+                console.error('❌ Erro no checkout LEGO:', error);
+                showToast('Erro ao processar pedido: ' + error.message, 'error');
             }
-        });
-
-        document.getElementById('receberBtn').addEventListener('click', function() {
-            deliveryMethod = 'RECEBER';
-            this.classList.add('bg-blue-600', 'text-white');
-            this.classList.remove('text-gray-600');
-            document.getElementById('retirarBtn').classList.remove('bg-blue-600', 'text-white');
-            document.getElementById('retirarBtn').classList.add('text-gray-600');
-            
-            document.getElementById('shippingOptions').classList.add('hidden');
-            document.getElementById('addressDetails').classList.add('hidden');
-            const calendar = document.getElementById('pickupCalendar');
-            if (calendar) calendar.remove();
-            selectedShipping = null;
-            document.getElementById('continueAddressBtn').disabled = true;
-        });
-
-        document.getElementById('retirarBtn').addEventListener('click', function() {
-            if (hasOnlyFreeItems()) {
-                showTemporaryNotification();
-                return;
-            }
-            
-            deliveryMethod = 'RETIRAR';
-            this.classList.add('bg-blue-600', 'text-white');
-            this.classList.remove('text-gray-600');
-            document.getElementById('receberBtn').classList.remove('bg-blue-600', 'text-white');
-            document.getElementById('receberBtn').classList.add('text-gray-600');
-            
-            document.getElementById('shippingOptions').classList.add('hidden');
-            document.getElementById('addressDetails').classList.add('hidden');
-            const calendar = document.getElementById('pickupCalendar');
-            if (calendar) calendar.remove();
-            selectedShipping = null;
-            document.getElementById('continueAddressBtn').disabled = true;
-        });
-
-        function setupMasks() {
-            const cpfField = document.getElementById('cpf');
-            const phoneField = document.getElementById('phone');
-            const cepField = document.getElementById('cep');
-            
-            cpfField.addEventListener('input', function(e) {
-                e.target.value = maskCPF(e.target.value);
-            });
-            
-            phoneField.addEventListener('input', function(e) {
-                e.target.value = maskPhone(e.target.value);
-            });
-            
-            cepField.addEventListener('input', function(e) {
-                e.target.value = maskCEP(e.target.value);
-            });
         }
 
-        function setupCalendar() {
-            document.getElementById('retirarBtn').addEventListener('click', function() {
-                if (hasOnlyFreeItems()) {
-                    showTemporaryNotification();
-                    return;
-                }
-            });
-        }
-
+        // Event listeners para o checkout LEGO
         document.addEventListener('DOMContentLoaded', function() {
-            productData = getProductData();
-            if (!productData) return;
-            
-            // Carregar dados salvos do formulário
-            loadFormData();
-            
-            // Atualizar resumo inicial
-            updatePaymentSummary();
-            
-            // Configurar máscaras
-            setupMasks();
-            
-            // Configurar calendário
-            setupCalendar();
-            
-            console.log('✅ LEGO Checkout Multi-Step carregado');
+            console.log('✅ Checkout LEGO carregado');
+            console.log('🌐 API Base URL:', API_BASE_URL);
             console.log('📊 UTM Params:', getUtmParams());
             
-            console.log('🛍️ Dados do produto:', productData);
-            
-            goToStep('email');
+            // Adicionar event listener para botão de finalizar compra
+            const checkoutBtn = document.getElementById('checkoutBtn') || document.querySelector('[type="submit"]');
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    processCheckout();
+                });
+            }
         });
     </script>
 </body>
