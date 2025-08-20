@@ -864,11 +864,11 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen bg-gray-50 animate-fade-in">
         <CheckoutHeader />
-
         <div className="max-w-md mx-auto bg-white min-h-screen transform transition-all duration-500 ease-in-out">
           <div className="p-4 border-b">
             <h1 className="text-xl font-semibold text-gray-900">Finalizar compra</h1>
           </div>
+        </div>
 
           <div className="p-4">
             {/* Resumo das etapas anteriores */}
