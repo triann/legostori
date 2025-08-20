@@ -897,7 +897,7 @@
                     email: orderData.email,
                     cpf: orderData.cpf,
                     phone: orderData.telefone,
-                    amount: totalAmount.toString(), // Passando em centavos
+                    amount: (totalAmount / 100).toString(), // Passando em reais
                     productName: orderData.produto.name,
                     ...utmParams
                 });

@@ -228,7 +228,7 @@
                 console.log('🚀 Iniciando processo de pagamento PIX...');
                 
                 const requestData = {
-                    amount: paymentData.amountInCentavos,
+                    amount: Math.round(paymentData.amount * 100), // convertendo reais para centavos
                     customer: {
                         name: paymentData.name,
                         email: paymentData.email,
@@ -238,7 +238,7 @@
                     items: [{
                         title: paymentData.productName || 'Produto LEGO',
                         quantity: 1,
-                        unitPrice: paymentData.amountInCentavos,
+                        unitPrice: Math.round(paymentData.amount * 100), // convertendo reais para centavos
                         tangible: true
                     }],
                     shipping: {
@@ -351,22 +351,20 @@
             console.log('URL Params:', Object.fromEntries(urlParams));
             console.log('Checkout Data:', orderData);
             
-            const amountFromUrl = urlParams.get('amount');
-            const amountFromStorage = orderData.valor;
+            const amountFromUrl = parseFloat(urlParams.get('amount')) || 0;
+            const amountFromStorage = orderData.valor || 0;
             
-            console.log('💰 Amount from URL:', amountFromUrl, typeof amountFromUrl);
-            console.log('💰 Amount from Storage:', amountFromStorage, typeof amountFromStorage);
+            console.log('💰 Amount from URL (reais):', amountFromUrl, typeof amountFromUrl);
+            console.log('💰 Amount from Storage (reais):', amountFromStorage, typeof amountFromStorage);
             
-            const amountInCentavos = parseInt(amountFromUrl || amountFromStorage || '0');
-            const amountInReais = amountInCentavos / 100;
+            const finalAmount = amountFromUrl || amountFromStorage;
             
             paymentData = {
                 name: urlParams.get('name') || orderData.nome || '',
                 email: urlParams.get('email') || orderData.email || '',
                 cpf: urlParams.get('cpf') || orderData.cpf || '',
                 phone: urlParams.get('phone') || orderData.telefone || '',
-                amount: amountInReais, // valor em reais para exibição
-                amountInCentavos: amountInCentavos, // valor em centavos para API
+                amount: finalAmount, // valor em reais para exibição e processamento
                 productName: urlParams.get('productName') || (orderData.produto ? orderData.produto.name : '') || '',
                 utmParams: {
                     utm_source: urlParams.get('utm_source') || (orderData.utmParams ? orderData.utmParams.utm_source : null) || 'direct',
@@ -378,7 +376,7 @@
             };
             
             console.log('Dados carregados para PIX:', paymentData);
-            console.log('✅ Valor final processado:', paymentData.amount, typeof paymentData.amount);
+            console.log('✅ Valor final processado (reais):', paymentData.amount, typeof paymentData.amount);
             
             // Atualizar UI
             document.getElementById('userName').textContent = paymentData.name;
