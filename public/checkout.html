@@ -133,11 +133,70 @@
 
     <!-- Main Content -->
     <div class="min-h-screen bg-gray-50 animate-fade-in">
-        <div class="max-w-md mx-auto bg-white min-h-screen transform transition-all duration-500 ease-in-out">
-            
-            <!-- Implementando sistema de steps completo -->
-            <!-- Step 1: Email -->
-            <div id="step-email" class="step-content">
+        <div class="max-w-md mx-auto bg-white min-h-screen">
+            <!-- Reestruturando para começar com carrinho ao invés de email -->
+            <!-- Step 0: Cart (Nova primeira tela) -->
+            <div id="step-cart" class="step-content">
+                <div class="p-4 border-b bg-yellow-400">
+                    <div class="flex items-center justify-between">
+                        <img src="/lego-logo.png" alt="LEGO" class="h-8" onerror="this.style.display='none'">
+                        <div class="flex items-center gap-2 text-sm font-medium">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Checkout seguro
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6">
+                    <h1 class="text-2xl font-bold text-center mb-8">Meu Carrinho</h1>
+                    
+                    <!-- Product Display -->
+                    <div id="cartProduct" class="border rounded-lg p-4 mb-6">
+                        <!-- Will be populated dynamically -->
+                    </div>
+
+                    <!-- Delivery Section -->
+                    <div class="mb-6">
+                        <h2 class="text-lg font-semibold mb-2">Entrega</h2>
+                        <p class="text-sm text-gray-600 mb-4">Veja as opções de entrega para seus itens, com todos os prazos e valores.</p>
+                        
+                        <button id="calculateDeliveryBtn" class="w-full bg-blue-100 text-blue-600 py-3 rounded-lg font-semibold mb-4 hover:bg-blue-200 transition-colors">
+                            CALCULAR
+                        </button>
+                    </div>
+
+                    <!-- Additional Options -->
+                    <div class="space-y-3 mb-6">
+                        <button class="w-full bg-gray-400 text-white py-3 rounded-lg font-medium">
+                            Adicionar Código de vendedor
+                        </button>
+                        <button class="w-full bg-gray-400 text-white py-3 rounded-lg font-medium">
+                            Adicionar cupom de desconto
+                        </button>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div class="border-t pt-4 mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>Subtotal</span>
+                            <span id="cartSubtotal">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between text-xl font-bold">
+                            <span>Total</span>
+                            <span id="cartTotal">R$ 0,00</span>
+                        </div>
+                    </div>
+
+                    <button id="closeOrderBtn" class="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-lg font-bold text-lg transition-colors">
+                        Fechar pedido
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 1: Email (agora segunda tela) -->
+            <div id="step-email" class="step-content hidden">
                 <div class="p-4 border-b">
                     <h1 class="text-xl font-semibold text-gray-900 text-center">Finalizar compra</h1>
                 </div>
@@ -279,6 +338,7 @@
                         </div>
                         <div>
                             <h2 class="text-sm font-medium text-gray-900">Dados pessoais</h2>
+                            <!-- Adicionando email e CPF no resumo -->
                             <p class="text-xs text-gray-500" id="personal-summary"></p>
                         </div>
                     </div>
@@ -312,21 +372,25 @@
                                 maxlength="9"
                                 class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             >
-                            <button id="calculateBtn" class="px-4 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50 bg-transparent">
-                                Calcular
+                            <button id="calculateBtn" class="px-4 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50 bg-transparent flex items-center gap-2">
+                                <!-- Adicionando spinner no botão calcular -->
+                                <span id="calculateBtnText">Calcular</span>
+                                <div id="calculateSpinner" class="hidden w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
                             </button>
                         </div>
                         <div id="cepError" class="hidden text-xs text-red-500 mb-2"></div>
                     </div>
 
+                    <!-- Melhorando animações das opções de frete -->
                     <!-- Shipping Options (will be populated dynamically) -->
-                    <div id="shippingOptions" class="hidden mb-6">
+                    <div id="shippingOptions" class="hidden mb-6 opacity-0 transition-all duration-300">
                         <h3 class="text-sm font-medium text-gray-700 mb-3">Forma de entrega</h3>
                         <div id="shippingList" class="space-y-2"></div>
                     </div>
 
+                    <!-- Melhorando animações dos campos de endereço -->
                     <!-- Address Details -->
-                    <div id="addressDetails" class="hidden mb-6">
+                    <div id="addressDetails" class="hidden mb-6 opacity-0 transition-all duration-300">
                         <h3 class="text-sm font-medium text-gray-700 mb-3">Endereço de entrega</h3>
                         <div class="space-y-4">
                             <input 
@@ -464,7 +528,7 @@
         const VALOR_MINIMO = 20.00;
         const VALOR_MAXIMO = 2000.00;
 
-        let currentStep = 'email';
+        let currentStep = 'cart';
         let formData = {};
 
         function formatCPF(value) {
@@ -544,95 +608,126 @@
             }
         }
 
-        async function calculateShipping() {
-            const cepInput = document.getElementById('cep');
-            const cep = cepInput.value.trim();
+        function calculateShipping() {
+            const cep = document.getElementById('cep').value.replace(/\D/g, '');
+            const calculateBtn = document.getElementById('calculateBtn');
+            const calculateBtnText = document.getElementById('calculateBtnText');
+            const calculateSpinner = document.getElementById('calculateSpinner');
             
-            if (!cep) {
-                showToast('Por favor, informe o CEP', 'error');
-                return;
-            }
-            
-            if (!validateCEP(cep)) {
+            if (cep.length !== 8) {
                 showToast('Por favor, informe um CEP válido', 'error');
                 return;
             }
             
-            const calculateBtn = document.getElementById('calculateBtn');
-            const originalText = calculateBtn.textContent;
+            // Mostrar spinner
+            calculateBtnText.textContent = '';
+            calculateSpinner.classList.remove('hidden');
+            calculateBtn.disabled = true;
             
-            try {
-                // Mostrar loading
-                calculateBtn.innerHTML = '<div class="loading-spinner"></div>';
-                calculateBtn.disabled = true;
-                
-                // Buscar endereço
-                const address = await fetchAddressByCEP(cep);
-                
-                // Salvar dados do endereço
-                formData.address = {
-                    cep: cep,
-                    street: address.logradouro,
-                    neighborhood: address.bairro,
-                    city: address.localidade,
-                    state: address.uf
-                };
-                
-                // Simular opções de frete
-                const shippingOptions = [
-                    { name: 'Correios PAC', price: 1500, days: '7-10 dias úteis' },
-                    { name: 'Correios SEDEX', price: 2500, days: '3-5 dias úteis' }
-                ];
-                
-                // Mostrar opções de frete
-                displayShippingOptions(shippingOptions);
-                
-                // Mostrar campos de endereço
-                document.getElementById('addressDetails').classList.remove('hidden');
-                
-                showToast('Frete calculado com sucesso!', 'success');
-                
-            } catch (error) {
-                showToast(error.message, 'error');
-            } finally {
-                calculateBtn.textContent = originalText;
-                calculateBtn.disabled = false;
-            }
+            // Simular delay de 2 segundos
+            setTimeout(() => {
+                // Buscar endereço via ViaCEP
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.erro) {
+                            throw new Error('CEP não encontrado');
+                        }
+                        
+                        // Preencher campos de endereço
+                        formData.address = {
+                            street: data.logradouro,
+                            neighborhood: data.bairro,
+                            city: data.localidade,
+                            state: data.uf,
+                            zipcode: cep
+                        };
+                        
+                        // Mostrar opções de frete com animação
+                        showShippingOptions();
+                        
+                    })
+                    .catch(error => {
+                        showToast('Erro ao buscar CEP: ' + error.message, 'error');
+                    })
+                    .finally(() => {
+                        // Esconder spinner
+                        calculateBtnText.textContent = 'Calcular';
+                        calculateSpinner.classList.add('hidden');
+                        calculateBtn.disabled = false;
+                    });
+            }, 2000);
         }
 
-        function displayShippingOptions(options) {
+        function showShippingOptions() {
             const shippingOptions = document.getElementById('shippingOptions');
             const shippingList = document.getElementById('shippingList');
             
-            shippingList.innerHTML = '';
+            const options = [
+                { name: 'PAC', price: 1500, days: '8 a 12 dias úteis' },
+                { name: 'SEDEX', price: 2500, days: '3 a 5 dias úteis' },
+                { name: 'Retirada', price: 0, days: 'Disponível hoje' }
+            ];
             
+            let optionsHTML = '';
             options.forEach((option, index) => {
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'border rounded-lg p-3';
-                optionDiv.innerHTML = `
-                    <label class="flex items-center justify-between cursor-pointer">
+                optionsHTML += `
+                    <label class="flex items-center justify-between p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
                         <div class="flex items-center gap-3">
-                            <input type="radio" name="shipping" value="${option.name}" data-price="${option.price}" class="w-4 h-4 text-blue-600">
+                            <input type="radio" name="shipping" value="${option.price}" class="w-4 h-4 text-blue-600" onchange="selectShipping('${option.name}', ${option.price})">
                             <div>
-                                <div class="font-medium text-gray-900">${option.name}</div>
-                                <div class="text-sm text-gray-500">${option.days}</div>
+                                <div class="font-medium">${option.name}</div>
+                                <div class="text-sm text-gray-600">${option.days}</div>
                             </div>
                         </div>
-                        <div class="font-semibold text-gray-900">${formatCurrency(option.price)}</div>
+                        <div class="font-semibold">${option.price === 0 ? 'Grátis' : formatCurrency(option.price)}</div>
                     </label>
                 `;
-                
-                shippingList.appendChild(optionDiv);
             });
             
-            // Adicionar event listeners para as opções de frete
-            document.querySelectorAll('input[name="shipping"]').forEach(radio => {
-                radio.addEventListener('change', function() {
-                    document.getElementById('continueAddressBtn').disabled = false;
-                });
-            });
-            
+            shippingList.innerHTML = optionsHTML;
             shippingOptions.classList.remove('hidden');
+            
+            // Animação de entrada
+            setTimeout(() => {
+                shippingOptions.classList.remove('opacity-0');
+                shippingOptions.classList.add('opacity-100');
+            }, 50);
+        }
+
+        function selectShipping(shippingName, shippingPrice) {
+            formData.shippingName = shippingName;
+            formData.shippingPrice = shippingPrice;
+            
+            // Mostrar campos de endereço com animação apenas se não for retirada
+            if (shippingName !== 'Retirada') {
+                const addressDetails = document.getElementById('addressDetails');
+                addressDetails.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    addressDetails.classList.remove('opacity-0');
+                    addressDetails.classList.add('opacity-100');
+                }, 50);
+            } else {
+                // Esconder campos de endereço se for retirada
+                const addressDetails = document.getElementById('addressDetails');
+                addressDetails.classList.add('hidden', 'opacity-0');
+                addressDetails.classList.remove('opacity-100');
+            }
+            
+            // Habilitar botão de continuar
+            document.getElementById('continueAddressBtn').disabled = false;
+        }
+
+        function updatePersonalSummary() {
+            const personalSummary = document.getElementById('personal-summary');
+            const personalSummaryPayment = document.getElementById('personal-summary-payment');
+            
+            if (formData.firstName && formData.email && formData.cpf) {
+                const summaryText = `${formData.firstName} ${formData.lastName || ''} • ${formData.email} • ${formData.cpf}`;
+                if (personalSummary) personalSummary.textContent = summaryText;
+                if (personalSummaryPayment) personalSummaryPayment.textContent = summaryText;
+            }
         }
 
         // Função para mostrar step específico
@@ -647,6 +742,10 @@
             if (targetStep) {
                 targetStep.classList.remove('hidden');
                 currentStep = stepName;
+            }
+            
+            if (stepName === 'payment') {
+                updatePaymentSummary();
             }
         }
 
@@ -726,7 +825,7 @@
             formData.fullName = `${firstName} ${lastName}`;
             
             // Atualizar resumo
-            document.getElementById('personal-summary').textContent = `${firstName} ${lastName}`;
+            updatePersonalSummary();
             
             // Ir para próximo step
             showStep('address');
@@ -1014,84 +1113,110 @@
             };
         }
 
+        function populateCart() {
+            const productData = getProductData();
+            const cartProductElement = document.getElementById('cartProduct');
+            const cartSubtotalElement = document.getElementById('cartSubtotal');
+            const cartTotalElement = document.getElementById('cartTotal');
+            
+            if (cartProductElement) {
+                let productHTML = `
+                    <div class="flex items-center gap-4">
+                        <img src="${productData.image}" alt="${productData.name}" class="w-16 h-16 rounded object-cover">
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900">${productData.name}</h3>
+                            <p class="text-sm text-gray-600">Produto fornecido e entregue por legobrasil</p>
+                            <div class="flex items-center gap-3 mt-2">
+                                <button class="w-8 h-8 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-50" onclick="updateQuantity(-1)">
+                                    <span class="text-lg">−</span>
+                                </button>
+                                <span id="productQuantity" class="font-medium">1</span>
+                                <button class="w-8 h-8 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-50" onclick="updateQuantity(1)">
+                                    <span class="text-lg">+</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                `;
+                
+                if (productData.discount > 0 && productData.originalPrice) {
+                    productHTML += `
+                        <div class="text-sm text-gray-500 line-through">${formatCurrency(Math.round(productData.originalPrice * 100))}</div>
+                        <div class="text-lg font-bold text-green-600">${formatCurrency(Math.round(productData.price * 100))}</div>
+                        <div class="text-xs text-green-600">-${productData.discount}% OFF</div>
+                    `;
+                } else {
+                    productHTML += `<div class="text-lg font-bold">${formatCurrency(Math.round(productData.price * 100))}</div>`;
+                }
+                
+                productHTML += `
+                        </div>
+                        <button class="text-blue-600 hover:text-blue-800 ml-2" onclick="removeProduct()">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                
+                cartProductElement.innerHTML = productHTML;
+                
+                const price = Math.round(productData.price * 100);
+                cartSubtotalElement.textContent = formatCurrency(price);
+                cartTotalElement.textContent = formatCurrency(price);
+            }
+        }
+
+        function updateQuantity(change) {
+            const quantityElement = document.getElementById('productQuantity');
+            let quantity = parseInt(quantityElement.textContent) + change;
+            if (quantity < 1) quantity = 1;
+            if (quantity > 10) quantity = 10;
+            
+            quantityElement.textContent = quantity;
+            updateCartTotals();
+        }
+
+        function updateCartTotals() {
+            const productData = getProductData();
+            const quantity = parseInt(document.getElementById('productQuantity').textContent);
+            const price = Math.round(productData.price * 100) * quantity;
+            
+            document.getElementById('cartSubtotal').textContent = formatCurrency(price);
+            document.getElementById('cartTotal').textContent = formatCurrency(price);
+        }
+
+        function removeProduct() {
+            if (confirm('Deseja remover este produto do carrinho?')) {
+                // Redirecionar para página inicial ou mostrar carrinho vazio
+                window.location.href = '/';
+            }
+        }
+
+        function continueFromCart() {
+            showStep('email');
+        }
+
         // Event listeners para o checkout LEGO
         document.addEventListener('DOMContentLoaded', function() {
             console.log('✅ Checkout LEGO carregado');
             console.log('🌐 API Base URL:', API_BASE_URL);
-            console.log('📊 UTM Params:', getUtmParams());
             
-            try {
-                if (typeof utmify !== 'undefined') {
-                    utmify('event', 'initiate_checkout', {
-                        value: getProductData().price,
-                        currency: 'BRL',
-                        content_name: getProductData().name,
-                        content_category: 'LEGO Icons',
-                        content_ids: ['lego-mclaren-senna']
-                    });
-                    console.log('📊 Evento initiate_checkout enviado para UTMify');
-                }
-            } catch (error) {
-                console.error('❌ Erro ao enviar evento UTMify:', error);
-            }
+            populateCart();
             
-            // Máscaras de formatação
-            const cpfInput = document.getElementById('cpf');
-            if (cpfInput) {
-                cpfInput.addEventListener('input', function(e) {
-                    e.target.value = formatCPF(e.target.value);
-                });
-            }
+            showStep('cart');
+
+            // Event listeners
+            document.getElementById('continueEmailBtn')?.addEventListener('click', continueFromEmail);
+            document.getElementById('continuePersonalBtn')?.addEventListener('click', continueFromPersonal);
+            document.getElementById('continueAddressBtn')?.addEventListener('click', continueFromAddress);
+            document.getElementById('finalizeBtn')?.addEventListener('click', processCheckout);
+            document.getElementById('calculateBtn')?.addEventListener('click', calculateShipping);
             
-            const phoneInput = document.getElementById('phone');
-            if (phoneInput) {
-                phoneInput.addEventListener('input', function(e) {
-                    e.target.value = formatPhone(e.target.value);
-                });
-            }
-            
-            const cepInput = document.getElementById('cep');
-            if (cepInput) {
-                cepInput.addEventListener('input', function(e) {
-                    e.target.value = formatCEP(e.target.value);
-                });
-            }
-            
-            // Botão calcular frete
-            const calculateBtn = document.getElementById('calculateBtn');
-            if (calculateBtn) {
-                calculateBtn.addEventListener('click', calculateShipping);
-            }
-            
-            // Botão continuar do email
-            const continueEmailBtn = document.getElementById('continueEmailBtn');
-            if (continueEmailBtn) {
-                continueEmailBtn.addEventListener('click', continueFromEmail);
-            }
-            
-            // Botão continuar dos dados pessoais
-            const continuePersonalBtn = document.getElementById('continuePersonalBtn');
-            if (continuePersonalBtn) {
-                continuePersonalBtn.addEventListener('click', continueFromPersonal);
-            }
-            
-            // Botão continuar do endereço
-            const continueAddressBtn = document.getElementById('continueAddressBtn');
-            if (continueAddressBtn) {
-                continueAddressBtn.addEventListener('click', continueFromAddress);
-            }
-            
-            // Botão finalizar compra
-            const finalizeBtn = document.getElementById('finalizeBtn');
-            if (finalizeBtn) {
-                finalizeBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    processCheckout();
-                });
-            }
-            
-            // Mostrar primeiro step
-            showStep('email');
+            document.getElementById('closeOrderBtn')?.addEventListener('click', continueFromCart);
+            document.getElementById('calculateDeliveryBtn')?.addEventListener('click', () => {
+                showStep('email');
+            });
         });
     </script>
 </body>
