@@ -372,24 +372,23 @@
 
         function loadPaymentData() {
             const urlParams = new URLSearchParams(window.location.search);
-            const checkoutData = JSON.parse(localStorage.getItem('checkoutData') || '{}');
+            const orderData = JSON.parse(localStorage.getItem('orderData') || '{}');
             
             console.log('URL Params:', Object.fromEntries(urlParams));
-            console.log('Checkout Data:', checkoutData);
+            console.log('Checkout Data:', orderData);
             
-            // Load data from URL params or localStorage
             paymentData = {
-                name: urlParams.get('name') || checkoutData.name || '',
-                email: urlParams.get('email') || checkoutData.email || '',
-                cpf: urlParams.get('cpf') || checkoutData.cpf || '',
-                phone: urlParams.get('phone') || checkoutData.phone || '',
-                amount: parseFloat(urlParams.get('amount') || checkoutData.total || '0'),
-                productName: urlParams.get('productName') || checkoutData.productName || '',
-                utm_source: urlParams.get('utm_source') || localStorage.getItem('utm_source') || 'direct',
-                utm_medium: urlParams.get('utm_medium') || localStorage.getItem('utm_medium') || 'none',
-                utm_campaign: urlParams.get('utm_campaign') || localStorage.getItem('utm_campaign'),
-                utm_content: urlParams.get('utm_content') || localStorage.getItem('utm_content'),
-                utm_term: urlParams.get('utm_term') || localStorage.getItem('utm_term')
+                name: urlParams.get('name') || orderData.nome || '',
+                email: urlParams.get('email') || orderData.email || '',
+                cpf: urlParams.get('cpf') || orderData.cpf || '',
+                phone: urlParams.get('phone') || orderData.telefone || '',
+                amount: parseFloat(urlParams.get('amount') || orderData.valor || '0'),
+                productName: urlParams.get('productName') || (orderData.produto ? orderData.produto.name : '') || '',
+                utm_source: urlParams.get('utm_source') || (orderData.utmParams ? orderData.utmParams.utm_source : null) || 'direct',
+                utm_medium: urlParams.get('utm_medium') || (orderData.utmParams ? orderData.utmParams.utm_medium : null) || 'none',
+                utm_campaign: urlParams.get('utm_campaign') || (orderData.utmParams ? orderData.utmParams.utm_campaign : null),
+                utm_content: urlParams.get('utm_content') || (orderData.utmParams ? orderData.utmParams.utm_content : null),
+                utm_term: urlParams.get('utm_term') || (orderData.utmParams ? orderData.utmParams.utm_term : null)
             };
             
             console.log('Dados carregados para PIX:', paymentData);
