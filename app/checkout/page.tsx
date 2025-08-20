@@ -6,7 +6,6 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Minus, Plus, Trash2, Loader2, Calendar, ChevronLeft, ChevronRight, X, Lock, Home } from "lucide-react"
-import Link from "next/link"
 import { CheckoutHeader } from "@/components/checkout-header"
 
 import { createPixPayment, type PixPaymentData, maskCPF, maskPhone, validateEmail } from "@/lib/pix-api"
@@ -55,6 +54,14 @@ export default function CheckoutPage() {
   const [currentMonth, setCurrentMonth] = useState(new Date())
   const [showNotification, setShowNotification] = useState(false)
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>("")
+  const [cardData, setCardData] = useState({
+    number: "",
+    holderName: "",
+    expirationMonth: "",
+    expirationYear: "",
+    cvv: "",
+    installments: 1,
+  })
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -368,8 +375,8 @@ export default function CheckoutPage() {
   }
 
   const handlePaymentSubmit = async () => {
-    if (selectedPaymentMethod !== "pix") {
-      alert("Selecione PIX como método de pagamento")
+    if (!selectedPaymentMethod) {
+      alert("Selecione um método de pagamento")
       return
     }
 
@@ -384,41 +391,103 @@ export default function CheckoutPage() {
       console.log("[v0] Valor total com frete:", totalAmount)
       console.log("[v0] Valor em centavos:", Math.round(totalAmount * 100))
 
-      const pixData: PixPaymentData = {
-        amount: Math.round(totalAmount * 100), // Valor em centavos incluindo frete
-        email: formData.email,
-        name: `${formData.firstName} ${formData.lastName}`.trim(),
-        phone: formData.phone,
-        cpf: formData.cpf,
-        description: `Compra LEGO - ${product?.name || "Produto"}`,
-      }
+      if (selectedPaymentMethod === "pix") {
+        const pixData: PixPaymentData = {
+          amount: Math.round(totalAmount * 100),
+          email: formData.email,
+          name: `${formData.firstName} ${formData.lastName}`.trim(),
+          phone: formData.phone,
+          cpf: formData.cpf,
+          description: `Compra LEGO - ${product?.name || "Produto"}`,
+        }
 
-      console.log("📤 Enviando dados PIX:", pixData)
+        console.log("📤 Enviando dados PIX:", pixData)
 
-      // Criar pagamento PIX via API
-      const pixResponse = await createPixPayment(pixData)
+        const pixResponse = await createPixPayment(pixData)
 
-      if (pixResponse.success && (pixResponse.qrcode || pixResponse.pixCopiaECola) && pixResponse.token) {
-        const pixCode = pixResponse.qrcode || pixResponse.pixCopiaECola || ""
+        if (pixResponse.success && (pixResponse.qrcode || pixResponse.pixCopiaECola) && pixResponse.token) {
+          const pixCode = pixResponse.qrcode || pixResponse.pixCopiaECola || ""
 
-        // Salvar dados do PIX no localStorage para a página PIX
-        localStorage.setItem(
-          "pixPayment",
-          JSON.stringify({
-            qrcode: pixCode,
-            token: pixResponse.token,
-            amount: totalAmount, // Usar valor total com frete ao invés de totalPrice
-            productName: product?.name || "Produto LEGO",
-            email: formData.email,
+          localStorage.setItem(
+            "pixPayment",
+            JSON.stringify({
+              qrcode: pixCode,
+              token: pixResponse.token,
+              amount: totalAmount,
+              productName: product?.name || "Produto LEGO",
+              email: formData.email,
+              name: `${formData.firstName} ${formData.lastName}`.trim(),
+            }),
+          )
+
+          console.log("🔄 Redirecionando para PIX...")
+          window.location.href = "/pix"
+        } else {
+          throw new Error(pixResponse.error || "Erro ao gerar PIX")
+        }
+      } else if (selectedPaymentMethod === "credit_card") {
+        const cardPaymentData = {
+          amount: Math.round(totalAmount * 100),
+          paymentMethod: "credit_card",
+          card: {
+            number: cardData.number.replace(/\s/g, ""),
+            holderName: cardData.holderName,
+            expirationMonth: Number.parseInt(cardData.expirationMonth),
+            expirationYear: Number.parseInt(cardData.expirationYear),
+            cvv: cardData.cvv,
+            installments: cardData.installments,
+          },
+          customer: {
             name: `${formData.firstName} ${formData.lastName}`.trim(),
-          }),
-        )
+            email: formData.email,
+            document: {
+              type: "cpf",
+              number: formData.cpf.replace(/\D/g, ""),
+            },
+            phone: formData.phone.replace(/\D/g, ""),
+            ip: "127.0.0.1",
+          },
+          items: [
+            {
+              id: product?.id || "1",
+              title: product?.name || "Produto LEGO",
+              quantity: 1,
+              unitPrice: Math.round(totalAmount * 100),
+              tangible: true,
+            },
+          ],
+          postbackUrl: `${window.location.origin}/api/webhook`,
+        }
 
-        console.log("🔄 Redirecionando para PIX...")
-        // Redirecionar para página PIX
-        window.location.href = "/pix"
-      } else {
-        throw new Error(pixResponse.error || "Erro ao gerar PIX")
+        console.log("💳 Enviando dados do cartão:", cardPaymentData)
+
+        const response = await fetch("/api-hostinger/pagamento.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(cardPaymentData),
+        })
+
+        const cardResponse = await response.json()
+
+        if (cardResponse.success) {
+          localStorage.setItem(
+            "cardPayment",
+            JSON.stringify({
+              transactionId: cardResponse.token,
+              amount: totalAmount,
+              productName: product?.name || "Produto LEGO",
+              email: formData.email,
+              name: `${formData.firstName} ${formData.lastName}`.trim(),
+              installments: cardData.installments,
+            }),
+          )
+
+          window.location.href = "/success"
+        } else {
+          throw new Error(cardResponse.message || "Erro ao processar pagamento com cartão")
+        }
       }
     } catch (error) {
       console.error("❌ Erro ao processar pagamento:", error)
@@ -652,7 +721,11 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
+              alt="PIX"
+              className="h-6"
+            />
           </div>
         </div>
       </div>
@@ -854,7 +927,11 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
+              alt="PIX"
+              className="h-6"
+            />
           </div>
         </div>
       </div>
@@ -935,26 +1012,148 @@ export default function CheckoutPage() {
             <div className="mb-6">
               <h3 className="text-sm font-medium text-gray-700 mb-3">Forma de pagamento</h3>
 
-              {/* PIX - única opção disponível */}
-              <button
-                onClick={() => setSelectedPaymentMethod("pix")}
-                className={`w-full border-2 rounded-lg p-4 transition-colors ${
-                  selectedPaymentMethod === "pix"
-                    ? "border-blue-600 bg-white"
-                    : "border-gray-200 bg-white hover:border-gray-300"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <span
-                    className={`font-medium ${selectedPaymentMethod === "pix" ? "text-blue-600" : "text-gray-900"}`}
-                  >
-                    Pix
-                  </span>
-                  <div className="w-10 h-6 flex items-center justify-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png" alt="pix logo" className="h-full object contain"></img>
+              <div className="space-y-3">
+                {/* PIX */}
+                <button
+                  onClick={() => setSelectedPaymentMethod("pix")}
+                  className={`w-full border-2 rounded-lg p-4 transition-colors ${
+                    selectedPaymentMethod === "pix"
+                      ? "border-blue-600 bg-white"
+                      : "border-gray-200 bg-white hover:border-gray-300"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span
+                      className={`font-medium ${selectedPaymentMethod === "pix" ? "text-blue-600" : "text-gray-900"}`}
+                    >
+                      Pix
+                    </span>
+                    <div className="w-10 h-6 flex items-center justify-center">
+                      <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png"
+                        alt="pix logo"
+                        className="h-full object-contain"
+                      />
+                    </div>
+                  </div>
+                </button>
+
+                {/* Cartão de Crédito */}
+                <button
+                  onClick={() => setSelectedPaymentMethod("credit_card")}
+                  className={`w-full border-2 rounded-lg p-4 transition-colors ${
+                    selectedPaymentMethod === "credit_card"
+                      ? "border-blue-600 bg-white"
+                      : "border-gray-200 bg-white hover:border-gray-300"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span
+                      className={`font-medium ${selectedPaymentMethod === "credit_card" ? "text-blue-600" : "text-gray-900"}`}
+                    >
+                      Cartão de Crédito
+                    </span>
+                    <div className="flex gap-1">
+                      <img src="/placeholder.svg?height=20&width=32&text=VISA" alt="Visa" className="h-5" />
+                      <img src="/placeholder.svg?height=20&width=32&text=MC" alt="Mastercard" className="h-5" />
+                    </div>
+                  </div>
+                </button>
+              </div>
+
+              {selectedPaymentMethod === "credit_card" && (
+                <div className="mt-4 p-4 border rounded-lg bg-gray-50 space-y-4">
+                  <div>
+                    <Input
+                      type="text"
+                      placeholder="Número do cartão"
+                      value={cardData.number}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, "").replace(/(\d{4})(?=\d)/g, "$1 ")
+                        if (value.length <= 19) {
+                          setCardData({ ...cardData, number: value })
+                        }
+                      }}
+                      className="w-full"
+                      maxLength={19}
+                    />
+                  </div>
+
+                  <div>
+                    <Input
+                      type="text"
+                      placeholder="Nome no cartão"
+                      value={cardData.holderName}
+                      onChange={(e) => setCardData({ ...cardData, holderName: e.target.value.toUpperCase() })}
+                      className="w-full"
+                    />
+                  </div>
+
+                  <div className="flex gap-2">
+                    <select
+                      value={cardData.expirationMonth}
+                      onChange={(e) => setCardData({ ...cardData, expirationMonth: e.target.value })}
+                      className="flex-1 p-2 border rounded"
+                    >
+                      <option value="">Mês</option>
+                      {Array.from({ length: 12 }, (_, i) => (
+                        <option key={i + 1} value={String(i + 1).padStart(2, "0")}>
+                          {String(i + 1).padStart(2, "0")}
+                        </option>
+                      ))}
+                    </select>
+
+                    <select
+                      value={cardData.expirationYear}
+                      onChange={(e) => setCardData({ ...cardData, expirationYear: e.target.value })}
+                      className="flex-1 p-2 border rounded"
+                    >
+                      <option value="">Ano</option>
+                      {Array.from({ length: 10 }, (_, i) => {
+                        const year = new Date().getFullYear() + i
+                        return (
+                          <option key={year} value={year}>
+                            {year}
+                          </option>
+                        )
+                      })}
+                    </select>
+
+                    <Input
+                      type="text"
+                      placeholder="CVV"
+                      value={cardData.cvv}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, "")
+                        if (value.length <= 4) {
+                          setCardData({ ...cardData, cvv: value })
+                        }
+                      }}
+                      className="w-20"
+                      maxLength={4}
+                    />
+                  </div>
+
+                  <div>
+                    <select
+                      value={cardData.installments}
+                      onChange={(e) => setCardData({ ...cardData, installments: Number.parseInt(e.target.value) })}
+                      className="w-full p-2 border rounded"
+                    >
+                      <option value={1}>1x de R$ {calculateTotal().toFixed(2).replace(".", ",")}</option>
+                      {Array.from({ length: 11 }, (_, i) => {
+                        const installments = i + 2
+                        const installmentValue = calculateTotal() / installments
+                        return (
+                          <option key={installments} value={installments}>
+                            {installments}x de R$ {installmentValue.toFixed(2).replace(".", ",")}
+                          </option>
+                        )
+                      })}
+                    </select>
                   </div>
                 </div>
-              </button>
+              )}
             </div>
 
             {/* Resumo do pedido */}
@@ -985,8 +1184,6 @@ export default function CheckoutPage() {
                 </div>
               ))}
 
-
-
               <div className="space-y-2 pt-4 border-t">
                 <div className="flex justify-between text-sm">
                   <span>Subtotal</span>
@@ -1007,9 +1204,26 @@ export default function CheckoutPage() {
 
             <Button
               onClick={handlePaymentSubmit}
-              disabled={selectedPaymentMethod !== "pix"}
+              disabled={
+                !selectedPaymentMethod ||
+                (selectedPaymentMethod === "credit_card" &&
+                  (!cardData.number ||
+                    !cardData.holderName ||
+                    !cardData.expirationMonth ||
+                    !cardData.expirationYear ||
+                    !cardData.cvv))
+              }
               className={`w-full py-3 rounded-full font-semibold transition-colors ${
-                selectedPaymentMethod === "pix"
+                selectedPaymentMethod &&
+                (
+                  selectedPaymentMethod === "pix" ||
+                    (selectedPaymentMethod === "credit_card" &&
+                      cardData.number &&
+                      cardData.holderName &&
+                      cardData.expirationMonth &&
+                      cardData.expirationYear &&
+                      cardData.cvv)
+                )
                   ? "bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
                   : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}
@@ -1028,7 +1242,11 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
+              alt="PIX"
+              className="h-6"
+            />
           </div>
         </div>
       </div>
@@ -1159,7 +1377,11 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
+              alt="PIX"
+              className="h-6"
+            />
           </div>
         </div>
       </div>
@@ -1438,7 +1660,6 @@ export default function CheckoutPage() {
             >
               Fechar pedido
             </Button>
-
           </div>
         </div>
 
@@ -1450,7 +1671,11 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png" alt="PIX" className="h-6" />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png"
+              alt="PIX"
+              className="h-6"
+            />
           </div>
         </div>
       </div>
