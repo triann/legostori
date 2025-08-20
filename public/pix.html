@@ -232,7 +232,7 @@
                 console.log('📤 Enviando dados PIX:', paymentData);
                 console.log('🚀 Iniciando processo de pagamento PIX...');
                 
-                const response = await fetch(`${API_BASE_URL}/pagamento.php?valor=${paymentData.amount}`, {
+                const response = await fetch(`${API_BASE_URL}/pagamento.php`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
