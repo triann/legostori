@@ -5,8 +5,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Minus, Plus, Trash2, Loader2, Calendar, ChevronLeft, ChevronRight, X, Lock, Home } from "lucide-react"
-import Link from "next/link"
+import { Minus, Plus, Trash2, Loader2, Calendar, ChevronLeft, ChevronRight, X, Home, Shield } from "lucide-react"
 import { CheckoutHeader } from "@/components/checkout-header"
 
 import { createPixPayment, type PixPaymentData, maskCPF, maskPhone, validateEmail } from "@/lib/pix-api"
@@ -231,7 +230,7 @@ export default function CheckoutPage() {
       setShippingOptions([storeOption])
     } else {
       if (onlyFreeItems) {
-        setShippingOptions([{ type: "Correios Pac", price: 10.00, days: "de 5-7 dias úteis" }])
+        setShippingOptions([{ type: "Correios Pac", price: 25.91, days: "de 5-7 dias úteis" }])
       } else {
         setShippingOptions([
           { type: "Correios Pac", price: 0, days: "de 5-7 dias úteis." },
@@ -652,7 +651,11 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
+              alt="PIX"
+              className="h-6"
+            />
           </div>
         </div>
       </div>
@@ -854,7 +857,11 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
+              alt="PIX"
+              className="h-6"
+            />
           </div>
         </div>
       </div>
@@ -951,7 +958,11 @@ export default function CheckoutPage() {
                     Pix
                   </span>
                   <div className="w-10 h-6 flex items-center justify-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png" alt="pix logo" className="h-full object contain"></img>
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png"
+                      alt="pix logo"
+                      className="h-full object contain"
+                    ></img>
                   </div>
                 </div>
               </button>
@@ -985,8 +996,6 @@ export default function CheckoutPage() {
                 </div>
               ))}
 
-
-
               <div className="space-y-2 pt-4 border-t">
                 <div className="flex justify-between text-sm">
                   <span>Subtotal</span>
@@ -1007,14 +1016,24 @@ export default function CheckoutPage() {
 
             <Button
               onClick={handlePaymentSubmit}
-              disabled={selectedPaymentMethod !== "pix"}
+              disabled={selectedPaymentMethod !== "pix" || isLoading}
               className={`w-full py-3 rounded-full font-semibold transition-colors ${
-                selectedPaymentMethod === "pix"
+                selectedPaymentMethod === "pix" && !isLoading
                   ? "bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
                   : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}
             >
-              🔒 Finalizar compra
+              {isLoading ? (
+                <div className="flex items-center justify-center gap-2">
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <span>Processando...</span>
+                </div>
+              ) : (
+                <div className="flex items-center justify-center gap-2">
+                  <Shield className="w-5 h-5" />
+                  <span>Finalizar compra</span>
+                </div>
+              )}
             </Button>
           </div>
         </div>
@@ -1028,7 +1047,11 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
+              alt="PIX"
+              className="h-6"
+            />
           </div>
         </div>
       </div>
@@ -1043,7 +1066,7 @@ export default function CheckoutPage() {
         <div className="max-w-md mx-auto bg-white min-h-screen flex items-center justify-center">
           <div className="text-center p-8">
             <div className="bg-green-500 text-white p-4 rounded-lg mb-6 flex items-center gap-3">
-              <Lock className="w-5 h-5" />
+              <Shield className="w-5 h-5" />
               <span className="font-medium">Aguarde... Estamos finalizando sua compra.</span>
             </div>
 
@@ -1159,7 +1182,11 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6" />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
+              alt="PIX"
+              className="h-6"
+            />
           </div>
         </div>
       </div>
@@ -1438,7 +1465,6 @@ export default function CheckoutPage() {
             >
               Fechar pedido
             </Button>
-
           </div>
         </div>
 
@@ -1450,7 +1476,11 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png" alt="PIX" className="h-6" />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png"
+              alt="PIX"
+              className="h-6"
+            />
           </div>
         </div>
       </div>
