@@ -217,17 +217,29 @@
                 console.log('🚀 Iniciando processo de pagamento PIX...');
                 
                 const requestData = {
-                    nome: paymentData.name,
-                    email: paymentData.email,
-                    cpf: paymentData.cpf,
-                    telefone: paymentData.phone,
+                    amount: Math.round(paymentData.amount * 100), // valor em centavos
+                    customer: {
+                        name: paymentData.name,
+                        email: paymentData.email,
+                        document: paymentData.cpf.replace(/\D/g, ''), // apenas números
+                        phone: paymentData.phone.replace(/\D/g, '') // apenas números
+                    },
+                    items: [{
+                        title: paymentData.productName || 'Produto LEGO',
+                        quantity: 1,
+                        unitPrice: Math.round(paymentData.amount * 100),
+                        tangible: true
+                    }],
+                    shipping: {
+                        name: paymentData.name,
+                        address: 'Endereço do cliente'
+                    },
                     ...paymentData.utmParams
                 };
                 
                 console.log('📦 Dados da requisição:', requestData);
                 
-                // Chamada para API baseada na referência norte
-                const response = await fetch(`${API_BASE_URL}/pagamento.php?valor=${Math.round(paymentData.amount * 100)}`, {
+                const response = await fetch(`${API_BASE_URL}/pagamento.php`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
