@@ -763,29 +763,38 @@
 
         // Função para atualizar resumo do pagamento
         function updatePaymentSummary() {
-            const personalSummary = document.getElementById('personal-summary-payment');
-            const deliverySummary = document.getElementById('delivery-summary');
             const orderSummary = document.getElementById('orderSummary');
-            
-            if (personalSummary) {
-                personalSummary.textContent = `${formData.fullName} • ${formData.email}`;
-            }
-            
-            if (deliverySummary) {
-                deliverySummary.textContent = `${formData.shippingMethod} • ${formatCurrency(formData.shippingPrice || 0)}`;
-            }
-            
             if (orderSummary) {
                 const productData = getProductData();
                 const productPrice = Math.round(productData.price * 100); // Converter para centavos
                 const shippingPrice = parseInt(formData.shippingPrice || 0);
                 const total = productPrice + shippingPrice;
                 
-                orderSummary.innerHTML = `
-                    <div class="flex justify-between items-center py-2">
-                        <span>${productData.name}</span>
-                        <span>${formatCurrency(productPrice)}</span>
-                    </div>
+                let summaryHTML = '';
+                
+                // Mostrar preço original se houver desconto
+                if (productData.discount > 0 && productData.originalPrice) {
+                    const originalPrice = Math.round(productData.originalPrice * 100);
+                    summaryHTML += `
+                        <div class="flex justify-between items-center py-2">
+                            <span>${productData.name}</span>
+                            <div class="text-right">
+                                <span class="line-through text-gray-500 text-sm">${formatCurrency(originalPrice)}</span>
+                                <br>
+                                <span class="text-green-600 font-semibold">${formatCurrency(productPrice)} (-${productData.discount}%)</span>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    summaryHTML += `
+                        <div class="flex justify-between items-center py-2">
+                            <span>${productData.name}</span>
+                            <span>${formatCurrency(productPrice)}</span>
+                        </div>
+                    `;
+                }
+                
+                summaryHTML += `
                     <div class="flex justify-between items-center py-2">
                         <span>Frete</span>
                         <span>${formatCurrency(shippingPrice)}</span>
@@ -795,6 +804,8 @@
                         <span>${formatCurrency(total)}</span>
                     </div>
                 `;
+                
+                orderSummary.innerHTML = summaryHTML;
             }
         }
 
@@ -859,6 +870,32 @@
 
         // Função principal de checkout baseada na referência norte
         async function processCheckout() {
+            console.log('[v0] Iniciando processo de pagamento LEGO...');
+            
+            const productData = getProductData();
+            const productPrice = Math.round(productData.price * 100); // Converter para centavos
+            const shippingPrice = parseInt(formData.shippingPrice || 0);
+            const totalAmount = productPrice + shippingPrice;
+
+            const requestData = {
+                nome: formData.name,
+                email: formData.email,
+                cpf: formData.cpf,
+                telefone: formData.phone,
+                endereco: formData.address,
+                numero: formData.number,
+                complemento: formData.complement || '',
+                bairro: formData.neighborhood,
+                cidade: formData.city,
+                estado: formData.state,
+                cep: formData.cep,
+                amount: totalAmount,
+                productName: productData.name,
+                productImage: productData.image,
+                discount: productData.discount || 0,
+                ...utmParams
+            };
+
             try {
                 console.log('🚀 Iniciando processo de pagamento LEGO...');
                 
@@ -932,10 +969,42 @@
 
         function getProductData() {
             const urlParams = new URLSearchParams(window.location.search);
+            
+            // Tentar obter dados da URL primeiro
+            let productData = {
+                name: urlParams.get('productName'),
+                price: parseFloat(urlParams.get('price')),
+                image: urlParams.get('image'),
+                discount: parseFloat(urlParams.get('discount')) || 0
+            };
+            
+            // Se não conseguir da URL, tentar localStorage
+            if (!productData.name || !productData.price) {
+                const storedProduct = localStorage.getItem('selectedProduct');
+                if (storedProduct) {
+                    const parsed = JSON.parse(storedProduct);
+                    productData = {
+                        name: parsed.name || productData.name,
+                        price: parsed.price || productData.price,
+                        image: parsed.image || productData.image,
+                        discount: parsed.discount || productData.discount || 0
+                    };
+                }
+            }
+            
+            // Aplicar desconto se houver
+            if (productData.discount > 0) {
+                productData.originalPrice = productData.price;
+                productData.price = productData.price * (1 - productData.discount / 100);
+            }
+            
+            // Fallback para valores padrão apenas se realmente não conseguir obter dados
             return {
-                name: urlParams.get('productName') || 'Produto LEGO',
-                price: parseFloat(urlParams.get('price')) || 265.91,
-                image: urlParams.get('image') || '/placeholder.svg?height=100&width=100'
+                name: productData.name || 'Produto LEGO',
+                price: productData.price || 0,
+                originalPrice: productData.originalPrice,
+                image: productData.image || '/placeholder.svg?height=100&width=100',
+                discount: productData.discount || 0
             };
         }
 
