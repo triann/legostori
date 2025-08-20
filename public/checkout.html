@@ -1376,36 +1376,154 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            console.log("[v0] DOM carregado, adicionando event listeners"); // Debug
-            
-            populateCart();
-            
-            showStep('cart');
-
-            // Event listeners
-            document.getElementById('continueEmailBtn')?.addEventListener('click', continueFromEmail);
-            document.getElementById('continuePersonalBtn')?.addEventListener('click', continueFromPersonal);
-            document.getElementById('continueAddressBtn')?.addEventListener('click', continueFromAddress);
-            document.getElementById('finalizeBtn')?.addEventListener('click', processCheckout);
-            document.getElementById('calculateBtn')?.addEventListener('click', calculateShipping);
-            
-            document.getElementById('closeOrderBtn')?.addEventListener('click', continueFromCart);
-            // document.getElementById('calculateDeliveryBtn')?.addEventListener('click', () => {
-            //     showStep('email');
-            // });
-
+            // Event listener para o botão CALCULAR no carrinho
             const calculateDeliveryBtn = document.getElementById('calculateDeliveryBtn');
             if (calculateDeliveryBtn) {
-                console.log("[v0] Botão CALCULAR encontrado, adicionando event listener"); // Debug
+                console.log("[v0] Botão CALCULAR encontrado, adicionando event listener");
                 calculateDeliveryBtn.addEventListener('click', function(e) {
-                    e.preventDefault(); // Prevenindo comportamento padrão
-                    console.log("[v0] Botão CALCULAR clicado"); // Debug
+                    e.preventDefault();
+                    console.log("[v0] Botão CALCULAR clicado");
                     showCepFieldInCart();
                 });
             } else {
-                console.log("[v0] Botão CALCULAR não encontrado"); // Debug
+                console.log("[v0] Botão CALCULAR não encontrado");
+            }
+
+            // Event listener para o botão "Calcular frete" no carrinho
+            const calculateFreightBtn = document.getElementById('calculateFreightBtn');
+            if (calculateFreightBtn) {
+                calculateFreightBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    calculateFreightInCart();
+                });
+            }
+
+            // Event listener para formatação do CEP no carrinho
+            const cepInputCart = document.getElementById('cepInputCart');
+            if (cepInputCart) {
+                cepInputCart.addEventListener('input', function() {
+                    formatCepCart(this);
+                });
+                
+                // Validação em tempo real
+                cepInputCart.addEventListener('blur', function() {
+                    const cep = this.value.replace(/\D/g, '');
+                    const errorDiv = document.getElementById('cepErrorCart');
+                    
+                    if (this.value && cep.length !== 8) {
+                        errorDiv.textContent = 'CEP deve ter 8 dígitos';
+                        errorDiv.classList.remove('hidden');
+                        this.classList.add('border-red-500');
+                    } else {
+                        errorDiv.classList.add('hidden');
+                        this.classList.remove('border-red-500');
+                    }
+                });
+            }
+
+            // Event listener para o botão "Calcular" no checkout
+            const calculateBtn = document.getElementById('calculateBtn');
+            if (calculateBtn) {
+                calculateBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    calculateFreight();
+                });
+            }
+
+            // Event listener para formatação do CEP no checkout
+            const cepInput = document.getElementById('cep');
+            if (cepInput) {
+                cepInput.addEventListener('input', function() {
+                    formatCep(this);
+                });
+                
+                // Validação em tempo real
+                cepInput.addEventListener('blur', function() {
+                    const cep = this.value.replace(/\D/g, '');
+                    const errorDiv = document.getElementById('cepError');
+                    
+                    if (this.value && cep.length !== 8) {
+                        errorDiv.textContent = 'CEP deve ter 8 dígitos';
+                        errorDiv.classList.remove('hidden');
+                        this.classList.add('border-red-500');
+                    } else {
+                        errorDiv.classList.add('hidden');
+                        this.classList.remove('border-red-500');
+                    }
+                });
             }
         });
+
+        async function calculateFreight() {
+            const cepInput = document.getElementById('cep');
+            const cep = cepInput.value.replace(/\D/g, '');
+            const errorDiv = document.getElementById('cepError');
+            const spinner = document.getElementById('calculateSpinner');
+            const buttonText = document.getElementById('calculateBtnText');
+            
+            // Validar CEP
+            if (cep.length !== 8) {
+                errorDiv.textContent = 'CEP deve ter 8 dígitos';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+            
+            errorDiv.classList.add('hidden');
+            
+            // Mostrar spinner
+            spinner.classList.remove('hidden');
+            buttonText.textContent = 'Calculando...';
+            
+            try {
+                // Buscar endereço via API
+                const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                const data = await response.json();
+                
+                if (data.erro) {
+                    throw new Error('CEP não encontrado');
+                }
+                
+                // Simular delay de 2 segundos
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Preencher campos de endereço automaticamente
+                const addressField = document.getElementById('address');
+                const neighborhoodField = document.getElementById('neighborhood');
+                const cityField = document.getElementById('city');
+                const stateField = document.getElementById('state');
+                
+                if (addressField) addressField.value = data.logradouro || '';
+                if (neighborhoodField) neighborhoodField.value = data.bairro || '';
+                if (cityField) cityField.value = data.localidade || '';
+                if (stateField) stateField.value = data.uf || '';
+                
+                // Mostrar mensagem de sucesso
+                const successDiv = document.createElement('div');
+                successDiv.className = 'text-xs text-green-600 mt-1';
+                successDiv.textContent = 'Endereço encontrado e preenchido automaticamente!';
+                cepInput.parentNode.appendChild(successDiv);
+                
+                setTimeout(() => {
+                    successDiv.remove();
+                }, 3000);
+                
+            } catch (error) {
+                errorDiv.textContent = 'CEP não encontrado. Verifique e tente novamente.';
+                errorDiv.classList.remove('hidden');
+            } finally {
+                // Esconder spinner
+                spinner.classList.add('hidden');
+                buttonText.textContent = 'Calcular';
+            }
+        }
+
+        function formatCep(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value.length > 5) {
+                value = value.substring(0, 5) + '-' + value.substring(5, 8);
+            }
+            input.value = value;
+        }
     </script>
 </body>
 </html>
