@@ -59,13 +59,14 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
     // Capturar parâmetros UTM
     const utmParams = getUtmParams()
 
-    // Preparar dados conforme o HTML funcional
     const paymentData = {
-      ...utmParams,
+      // Campos obrigatórios conforme o PHP
       nome: data.name || "",
       email: data.email,
       cpf: data.cpf?.replace(/\D/g, "") || "",
       telefone: data.phone?.replace(/\D/g, "") || "",
+      // Incluir todos os parâmetros UTM no body
+      ...utmParams,
     }
 
     console.log("📤 Enviando dados para API:", {
@@ -76,7 +77,6 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
     const controller = new AbortController()
     const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 segundos timeout
 
-    // Fazer requisição conforme o HTML funcional
     const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento.php?valor=${data.amount}`, {
       method: "POST",
       headers: {
@@ -93,7 +93,12 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
     clearTimeout(timeoutId)
 
     if (!response.ok) {
-      if (response.status === 403) {
+      const errorText = await response.text()
+      console.error("❌ Erro HTTP:", response.status, errorText)
+
+      if (response.status === 400) {
+        throw new Error("Dados inválidos enviados para a API. Verifique os campos obrigatórios.")
+      } else if (response.status === 403) {
         throw new Error("Acesso negado pela API. Verifique as credenciais.")
       } else if (response.status === 404) {
         throw new Error("Endpoint da API não encontrado.")
