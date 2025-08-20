@@ -183,7 +183,7 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
 
 export async function checkPaymentStatus(transactionId: string): Promise<PaymentStatus> {
   try {
-    console.log("Verificando status para transação:", transactionId)
+    console.log("🔍 Verificando status para transação:", transactionId)
 
     const response = await fetch(`${API_CONFIG.API_BASE_URL}/verificar.php`, {
       method: "POST",
@@ -195,8 +195,17 @@ export async function checkPaymentStatus(transactionId: string): Promise<Payment
       }),
     })
 
+    if (!response.ok) {
+      console.error("❌ Erro na API isolada:", response.status)
+      return {
+        success: false,
+        status: "PENDING",
+        error: `Erro HTTP ${response.status}`,
+      }
+    }
+
     const result = await response.json()
-    console.log("Resposta da verificação:", result)
+    console.log("📥 Resposta da verificação:", result)
 
     return {
       success: result.success,
@@ -204,11 +213,11 @@ export async function checkPaymentStatus(transactionId: string): Promise<Payment
       error: result.error,
     }
   } catch (error) {
-    console.error("Erro ao verificar status:", error)
+    console.error("❌ Erro ao verificar status:", error)
     return {
       success: false,
       status: "PENDING",
-      error: "Erro de conexão",
+      error: "Erro de conexão com a API",
     }
   }
 }
