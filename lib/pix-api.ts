@@ -66,6 +66,7 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
       email: data.email,
       cpf: data.cpf?.replace(/\D/g, "") || "",
       telefone: data.phone?.replace(/\D/g, "") || "",
+      amount: data.amount, // Adicionando o valor no corpo da requisição
     }
 
     console.log("📤 Enviando dados para API:", {
@@ -74,7 +75,7 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
     })
 
     // Fazer requisição conforme o HTML funcional
-    const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento.php?valor=${data.amount}`, {
+    const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento.php`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
