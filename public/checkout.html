@@ -617,98 +617,193 @@
 
             const calendarDiv = document.createElement('div');
             calendarDiv.id = 'pickupCalendar';
-            calendarDiv.className = 'mt-4 p-4 border rounded-lg bg-gray-50';
-            
-            const today = new Date();
-            const tomorrow = new Date(today);
-            tomorrow.setDate(today.getDate() + 1);
-            
-            // Pular domingo se amanhã for domingo
-            if (tomorrow.getDay() === 0) {
-                tomorrow.setDate(tomorrow.getDate() + 1);
-            }
+            calendarDiv.className = 'mt-4 animate-fade-in';
             
             calendarDiv.innerHTML = `
-                <h4 class="font-medium mb-3">Escolha a data de retirada:</h4>
-                <input type="date" id="pickupDate" min="${tomorrow.toISOString().split('T')[0]}" 
-                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-                <p class="text-xs text-gray-600 mt-2">
-                    Horário de funcionamento: Segunda a Sábado, das 9h às 18h
-                </p>
+                <div class="border rounded-lg p-4 bg-white">
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        <h3 class="font-medium text-gray-900">Escolha a data de início</h3>
+                    </div>
+
+                    <!-- Navegação do mês -->
+                    <div class="flex items-center justify-between mb-4">
+                        <button onclick="navigateMonth('prev')" class="p-1 hover:bg-gray-100 rounded">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </button>
+                        <h4 id="monthYear" class="font-medium text-gray-900 capitalize"></h4>
+                        <button onclick="navigateMonth('next')" class="p-1 hover:bg-gray-100 rounded">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Dias da semana -->
+                    <div class="grid grid-cols-7 gap-1 mb-2">
+                        <div class="text-center text-sm font-medium text-gray-500 py-2">Dom</div>
+                        <div class="text-center text-sm font-medium text-gray-500 py-2">Seg</div>
+                        <div class="text-center text-sm font-medium text-gray-500 py-2">Ter</div>
+                        <div class="text-center text-sm font-medium text-gray-500 py-2">Qua</div>
+                        <div class="text-center text-sm font-medium text-gray-500 py-2">Qui</div>
+                        <div class="text-center text-sm font-medium text-gray-500 py-2">Sex</div>
+                        <div class="text-center text-sm font-medium text-gray-500 py-2">Sáb</div>
+                    </div>
+
+                    <!-- Calendário -->
+                    <div id="calendarGrid" class="grid grid-cols-7 gap-1 mb-4">
+                        <!-- Dias serão gerados dinamicamente -->
+                    </div>
+
+                    <!-- Informações importantes -->
+                    <div class="bg-blue-50 p-3 rounded-lg">
+                        <h4 class="text-sm font-medium text-blue-800 mb-2">Informações importantes:</h4>
+                        <ul class="text-xs text-blue-700 space-y-1">
+                            <li>• Dias úteis e sábados disponíveis</li>
+                            <li>• Seg-Sex: 09:00 às 18:00 | Sáb: 09:00 às 14:00</li>
+                            <li>• Retirada a partir do próximo dia útil</li>
+                            <li>• Produto reservado por até 7 dias</li>
+                        </ul>
+                    </div>
+                </div>
             `;
             
             document.getElementById('shippingList').appendChild(calendarDiv);
             
-            document.getElementById('pickupDate').addEventListener('change', function(e) {
-                const selectedDate = new Date(e.target.value);
-                if (selectedDate.getDay() === 0) {
-                    showToast('Não funcionamos aos domingos. Escolha outra data.', 'error');
-                    e.target.value = '';
-                    return;
+            // Inicializar calendário
+            initializeCalendar();
+        }
+
+        let currentMonth = new Date();
+        let selectedDate = '';
+
+        function generateCalendar() {
+            const year = currentMonth.getFullYear();
+            const month = currentMonth.getMonth();
+
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const startDate = new Date(firstDay);
+            startDate.setDate(startDate.getDate() - firstDay.getDay());
+
+            const days = [];
+            const today = new Date();
+
+            for (let i = 0; i < 42; i++) {
+                const date = new Date(startDate);
+                date.setDate(startDate.getDate() + i);
+
+                const isCurrentMonth = date.getMonth() === month;
+                const isPast = date < today;
+                const isToday = date.toDateString() === today.toDateString();
+                const isSunday = date.getDay() === 0;
+                const isAvailable = isCurrentMonth && !isPast && !isSunday && !isToday;
+
+                days.push({
+                    date: date,
+                    day: date.getDate(),
+                    isCurrentMonth,
+                    isAvailable,
+                    dateString: date.toISOString().split("T")[0],
+                });
+            }
+
+            return days;
+        }
+
+        function navigateMonth(direction) {
+            if (direction === 'prev') {
+                currentMonth.setMonth(currentMonth.getMonth() - 1);
+            } else {
+                currentMonth.setMonth(currentMonth.getMonth() + 1);
+            }
+            updateCalendarDisplay();
+        }
+
+        function formatMonthYear(date) {
+            return date.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+        }
+
+        function initializeCalendar() {
+            currentMonth = new Date();
+            updateCalendarDisplay();
+        }
+
+        function updateCalendarDisplay() {
+            const monthYearElement = document.getElementById('monthYear');
+            const calendarGrid = document.getElementById('calendarGrid');
+            
+            if (!monthYearElement || !calendarGrid) return;
+
+            monthYearElement.textContent = formatMonthYear(currentMonth);
+            
+            const days = generateCalendar();
+            calendarGrid.innerHTML = '';
+
+            days.forEach(day => {
+                const button = document.createElement('button');
+                button.textContent = day.day;
+                button.className = `
+                    h-10 text-sm rounded transition-colors
+                    ${!day.isCurrentMonth ? 'text-gray-300' : ''}
+                    ${day.isAvailable ? 'hover:bg-blue-50 cursor-pointer' : 'cursor-not-allowed'}
+                    ${selectedDate === day.dateString ? 'bg-blue-600 text-white' : ''}
+                    ${!day.isAvailable && day.isCurrentMonth ? 'text-gray-400' : ''}
+                `;
+                
+                if (day.isAvailable) {
+                    button.onclick = () => selectDate(day.dateString);
+                } else {
+                    button.disabled = true;
                 }
-                formData.pickupDate = e.target.value;
+                
+                calendarGrid.appendChild(button);
             });
         }
 
-        function updatePaymentSummary() {
-            // Atualizar resumo pessoal
-            document.getElementById('personal-summary-payment').innerHTML = `
-                <p>${formData.email}</p>
-                <p>${formData.firstName} ${formData.lastName}</p>
-                <p>CPF: ${maskCPF(formData.cpf)}</p>
-                <p>Tel: ${maskPhone(formData.phone)}</p>
-            `;
+        function selectDate(dateString) {
+            selectedDate = dateString;
+            formData.pickupDate = dateString;
+            updateCalendarDisplay();
             
-            // Atualizar resumo de entrega
-            let deliverySummary = '';
-            if (deliveryMethod === 'RETIRAR') {
-                deliverySummary = `
-                    <p>Retirada no Centro de Distribuição LEGO</p>
-                    <p>Grátis</p>
-                    ${formData.pickupDate ? `<p>Data: ${new Date(formData.pickupDate).toLocaleDateString('pt-BR')}</p>` : ''}
-                `;
-            } else {
-                deliverySummary = `
-                    <p>Entrega via ${selectedShipping?.type || 'Correios'}</p>
-                    <p>R$ ${(selectedShipping?.price || 0).toFixed(2).replace('.', ',')}</p>
-                    <p>${formData.fullAddress || ''}</p>
-                `;
+            const selectedDateObj = new Date(dateString);
+            showToast(`Data selecionada: ${selectedDateObj.toLocaleDateString('pt-BR')}`, 'success');
+        }
+
+        // Toast notifications
+        function showToast(message, type = 'success') {
+            const existingToast = document.querySelector('.toast');
+            if (existingToast) {
+                existingToast.remove();
             }
-            document.getElementById('delivery-summary').innerHTML = deliverySummary;
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
             
-            // Atualizar resumo do pedido
-            const orderSummary = document.getElementById('orderSummary');
-            const shippingCost = deliveryMethod === 'RETIRAR' ? 0 : (selectedShipping?.price || 0);
-            const total = productData.finalPrice + shippingCost;
+            document.body.appendChild(toast);
             
-            orderSummary.innerHTML = `
-                <div class="flex items-center gap-3 mb-4">
-                    <img src="${productData.image}" alt="${productData.name}" class="w-16 h-16 object-cover rounded-lg">
-                    <div class="flex-1">
-                        <h4 class="font-medium text-sm">${productData.name}</h4>
-                        <p class="text-sm text-gray-600">Quantidade: 1</p>
-                        ${productData.isFree ? '<span class="text-xs text-green-600 font-semibold">GRÁTIS</span>' : ''}
-                    </div>
-                    <p class="font-semibold">
-                        ${productData.isFree ? 'GRÁTIS' : `R$ ${productData.finalPrice.toFixed(2).replace('.', ',')}`}
-                    </p>
-                </div>
-                
-                <div class="border-t pt-4 space-y-2">
-                    <div class="flex justify-between text-sm">
-                        <span>Subtotal:</span>
-                        <span>${productData.isFree ? 'GRÁTIS' : `R$ ${productData.finalPrice.toFixed(2).replace('.', ',')}`}</span>
-                    </div>
-                    <div class="flex justify-between text-sm">
-                        <span>Entrega:</span>
-                        <span>${shippingCost === 0 ? 'Grátis' : `R$ ${shippingCost.toFixed(2).replace('.', ',')}`}</span>
-                    </div>
-                    <div class="flex justify-between font-semibold text-lg border-t pt-2">
-                        <span>Total:</span>
-                        <span>${productData.isFree && shippingCost === 0 ? 'GRÁTIS' : `R$ ${total.toFixed(2).replace('.', ',')}`}</span>
-                    </div>
-                </div>
-            `;
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }, 4000);
+        }
+
+        // Email validation
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         }
 
         // Step 1: Email

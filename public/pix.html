@@ -374,6 +374,9 @@
             const urlParams = new URLSearchParams(window.location.search);
             const checkoutData = JSON.parse(localStorage.getItem('checkoutData') || '{}');
             
+            console.log('URL Params:', Object.fromEntries(urlParams));
+            console.log('Checkout Data:', checkoutData);
+            
             // Load data from URL params or localStorage
             paymentData = {
                 name: urlParams.get('name') || checkoutData.name || '',
@@ -389,12 +392,22 @@
                 utm_term: urlParams.get('utm_term') || localStorage.getItem('utm_term')
             };
             
-            // Validate required data
-            if (!paymentData.name || !paymentData.email || !paymentData.amount) {
-                showToast('Dados de pagamento incompletos. Redirecionando...', 'error');
+            console.log('Dados carregados para PIX:', paymentData);
+            
+            // Validate required data with detailed logging
+            const missingFields = [];
+            if (!paymentData.name || paymentData.name.trim() === '') missingFields.push('nome');
+            if (!paymentData.email || paymentData.email.trim() === '') missingFields.push('email');
+            if (!paymentData.cpf || paymentData.cpf.trim() === '') missingFields.push('CPF');
+            if (!paymentData.phone || paymentData.phone.trim() === '') missingFields.push('telefone');
+            if (!paymentData.amount || paymentData.amount <= 0) missingFields.push('valor');
+            
+            if (missingFields.length > 0) {
+                console.error('Campos obrigatórios faltando:', missingFields);
+                showToast(`Dados incompletos: ${missingFields.join(', ')}. Redirecionando...`, 'error');
                 setTimeout(() => {
                     window.location.href = '/checkout.html';
-                }, 2000);
+                }, 3000);
                 return;
             }
             
@@ -402,7 +415,7 @@
             document.getElementById('userName').textContent = paymentData.name;
             document.getElementById('userEmail').textContent = paymentData.email;
             document.getElementById('paymentAmount').textContent = `R$ ${paymentData.amount.toFixed(2).replace('.', ',')}`;
-            document.getElementById('productName').textContent = paymentData.productName;
+            document.getElementById('productName').textContent = paymentData.productName || 'Produto LEGO';
             
             // Generate PIX automatically
             generatePIX();
