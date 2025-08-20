@@ -52,53 +52,9 @@ export function getUtmParams() {
   }
 }
 
-async function fetchWithRetry(url: string, options: RequestInit, retries = 2, timeout = 15000): Promise<Response> {
-  for (let i = 0; i < retries; i++) {
-    try {
-      console.log(`[v0] Tentativa ${i + 1}/${retries} para ${url}`)
-
-      const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), timeout)
-
-      const response = await fetch(url, {
-        ...options,
-        signal: controller.signal,
-      })
-
-      clearTimeout(timeoutId)
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
-      }
-
-      return response
-    } catch (error) {
-      console.error(`[v0] Erro na tentativa ${i + 1}:`, error)
-
-      if (i === retries - 1) {
-        throw error
-      }
-
-      // Aguardar antes da próxima tentativa
-      const delay = 1000 * (i + 1)
-      console.log(`[v0] Aguardando ${delay}ms antes da próxima tentativa...`)
-      await new Promise((resolve) => setTimeout(resolve, delay))
-    }
-  }
-
-  throw new Error("Todas as tentativas falharam")
-}
-
 export async function createPixPayment(data: PixPaymentData): Promise<PixResponse> {
   try {
     console.log("🚀 Iniciando processo de pagamento PIX...")
-
-    if (!data.email || !data.amount || data.amount <= 0) {
-      return {
-        success: false,
-        error: "Dados inválidos: email e valor são obrigatórios",
-      }
-    }
 
     // Capturar parâmetros UTM
     const utmParams = getUtmParams()
@@ -117,11 +73,11 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
       dados: paymentData,
     })
 
-    const response = await fetchWithRetry(`${API_CONFIG.API_BASE_URL}/pagamento.php?valor=${data.amount}`, {
+    // Fazer requisição conforme o HTML funcional
+    const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento.php?valor=${data.amount}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
       },
       body: JSON.stringify(paymentData),
     })
@@ -145,55 +101,29 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
     }
   } catch (error) {
     console.error("❌ Erro na API PIX:", error)
-
-    let errorMessage = "Erro de conexão com a API"
-    if (error instanceof Error) {
-      if (error.name === "AbortError") {
-        errorMessage = "Timeout na conexão - tente novamente"
-      } else if (error.message.includes("HTTP")) {
-        errorMessage = `Erro do servidor: ${error.message}`
-      } else if (error.message.includes("Failed to fetch")) {
-        errorMessage = "Problema de conectividade - verifique sua internet"
-      }
-    }
-
     return {
       success: false,
-      error: errorMessage,
+      error: "Erro de conexão com a API",
     }
   }
 }
 
 export async function checkPaymentStatus(transactionId: string): Promise<PaymentStatus> {
   try {
-    console.log("[v0] Verificando status para transação:", transactionId)
+    console.log("Verificando status para transação:", transactionId)
 
-    if (!transactionId || transactionId.trim() === "") {
-      return {
-        success: false,
-        status: "PENDING",
-        error: "Token de transação inválido",
-      }
-    }
-
-    const response = await fetchWithRetry(
-      `${API_CONFIG.API_BASE_URL}/verificar.php`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          idtransaction: transactionId,
-        }),
+    const response = await fetch(`${API_CONFIG.API_BASE_URL}/verificar.php`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      2,
-      15000,
-    ) // Menos tentativas e timeout menor para verificação
+      body: JSON.stringify({
+        idtransaction: transactionId,
+      }),
+    })
 
     const result = await response.json()
-    console.log("[v0] Resposta da verificação:", result)
+    console.log("Resposta da verificação:", result)
 
     return {
       success: result.success,
@@ -201,12 +131,11 @@ export async function checkPaymentStatus(transactionId: string): Promise<Payment
       error: result.error,
     }
   } catch (error) {
-    console.error("[v0] Erro ao verificar status:", error)
-
+    console.error("Erro ao verificar status:", error)
     return {
       success: false,
       status: "PENDING",
-      error: "Erro temporário na verificação",
+      error: "Erro de conexão",
     }
   }
 }
