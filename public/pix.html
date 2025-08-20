@@ -232,25 +232,37 @@
                 console.log('📤 Enviando dados PIX:', paymentData);
                 console.log('🚀 Iniciando processo de pagamento PIX...');
                 
-                const response = await fetch(`${API_BASE_URL}/pagamento.php`, {
+                const requestData = {
+                    nome: paymentData.name,
+                    email: paymentData.email,
+                    cpf: paymentData.cpf,
+                    telefone: paymentData.phone,
+                    produto: paymentData.productName,
+                    valor: paymentData.amount,
+                    utm_source: paymentData.utm_source || 'direct',
+                    utm_medium: paymentData.utm_medium || 'none',
+                    utm_campaign: paymentData.utm_campaign || null,
+                    utm_content: paymentData.utm_content || null,
+                    utm_term: paymentData.utm_term || null
+                };
+                
+                const apiUrl = `${API_BASE_URL}/pagamento.php`;
+                console.log('🌐 URL da API:', apiUrl);
+                console.log('📦 Dados da requisição:', requestData);
+                console.log('🔧 Método:', 'POST');
+                console.log('📋 Headers:', {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                });
+                
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Cache-Control': 'no-cache'
                     },
-                    body: JSON.stringify({
-                        nome: paymentData.name,
-                        email: paymentData.email,
-                        cpf: paymentData.cpf,
-                        telefone: paymentData.phone,
-                        produto: paymentData.productName,
-                        valor: paymentData.amount,
-                        utm_source: paymentData.utm_source || 'direct',
-                        utm_medium: paymentData.utm_medium || 'none',
-                        utm_campaign: paymentData.utm_campaign || null,
-                        utm_content: paymentData.utm_content || null,
-                        utm_term: paymentData.utm_term || null
-                    })
+                    body: JSON.stringify(requestData)
                 });
 
                 console.log('📤 Enviando dados para API:', {
@@ -262,8 +274,14 @@
                         telefone: paymentData.phone
                     }
                 });
+                
+                console.log('📡 Status da resposta:', response.status);
+                console.log('📡 Headers da resposta:', Object.fromEntries(response.headers.entries()));
+                console.log('📡 URL final:', response.url);
 
                 if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('❌ Erro HTTP:', response.status, errorText);
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
 
@@ -283,6 +301,7 @@
                     
                     showToast('PIX gerado com sucesso!', 'success');
                 } else {
+                    console.error('❌ Resposta de erro da API:', result);
                     throw new Error(result.message || 'Erro ao gerar PIX');
                 }
             } catch (error) {
