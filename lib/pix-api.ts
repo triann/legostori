@@ -20,49 +20,11 @@ export interface PixPaymentData {
   utm_id?: string
 }
 
-export interface CardPaymentData {
-  amount: number
-  paymentMethod: "credit_card"
-  card: {
-    number: string
-    holderName: string
-    expirationMonth: number
-    expirationYear: number
-    cvv: string
-    installments: number
-  }
-  customer: {
-    name: string
-    email: string
-    document: {
-      type: "cpf"
-      number: string
-    }
-    phone: string
-    ip: string
-  }
-  items: Array<{
-    id: string
-    title: string
-    quantity: number
-    unitPrice: number
-    tangible: boolean
-  }>
-  postbackUrl?: string
-}
-
 export interface PixResponse {
   success: boolean
   qrcode?: string
   pixCopiaECola?: string
   pixCode?: string
-  token?: string
-  message?: string
-  error?: string
-}
-
-export interface CardResponse {
-  success: boolean
   token?: string
   message?: string
   error?: string
@@ -139,92 +101,6 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
     }
   } catch (error) {
     console.error("❌ Erro na API PIX:", error)
-    return {
-      success: false,
-      error: "Erro de conexão com a API",
-    }
-  }
-}
-
-export async function createCardPayment(data: CardPaymentData): Promise<CardResponse> {
-  try {
-    console.log("💳 Iniciando processo de pagamento com cartão Asset Pay...")
-
-    // Primeiro, tokenizar o cartão usando Asset Pay
-    const tokenResponse = await fetch("https://api.assetpagamentos.com.br/v1/js", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        number: data.card.number,
-        holderName: data.card.holderName,
-        expMonth: data.card.expirationMonth,
-        expYear: data.card.expirationYear,
-        cvv: data.card.cvv,
-      }),
-    })
-
-    const tokenData = await tokenResponse.json()
-
-    if (!tokenData.success) {
-      return {
-        success: false,
-        error: "Erro ao tokenizar cartão",
-      }
-    }
-
-    // Capturar parâmetros UTM
-    const utmParams = getUtmParams()
-
-    // Preparar dados para Asset Pay API
-    const paymentData = {
-      amount: data.amount * 100, // Asset Pay usa centavos
-      paymentMethod: "credit_card",
-      card: {
-        id: tokenData.id,
-        hash: tokenData.hash,
-        number: data.card.number,
-        holderName: data.card.holderName,
-        expirationMonth: data.card.expirationMonth,
-        expirationYear: data.card.expirationYear,
-        cvv: data.card.cvv,
-        installments: data.card.installments,
-      },
-      customer: data.customer,
-      items: data.items,
-      postbackUrl: `${API_CONFIG.FRONTEND_URL}/webhook/asset-pay`,
-      ...utmParams,
-    }
-
-    console.log("📤 Enviando dados do cartão para Asset Pay API:", paymentData)
-
-    // Enviar para nossa API que processará com Asset Pay
-    const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento.php?valor=${data.amount}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(paymentData),
-    })
-
-    const result = await response.json()
-    console.log("📥 Resposta da API Asset Pay:", result)
-
-    if (result.success) {
-      return {
-        success: true,
-        token: result.token,
-        message: result.message,
-      }
-    } else {
-      return {
-        success: false,
-        error: result.message || result.error || "Erro ao processar pagamento com cartão",
-      }
-    }
-  } catch (error) {
-    console.error("❌ Erro na API Asset Pay:", error)
     return {
       success: false,
       error: "Erro de conexão com a API",
