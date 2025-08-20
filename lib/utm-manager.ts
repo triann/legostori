@@ -142,7 +142,15 @@ export class UTMManager {
   }
 
   public getUTMParams(): UTMParams {
-    return { ...this.utmParams }
+    const params = { ...this.utmParams }
+
+    // Se não há UTMs capturados, definir como tráfego direto/orgânico
+    if (!this.hasUTMs()) {
+      params.utm_source = "direct"
+      params.utm_medium = "none"
+    }
+
+    return params
   }
 
   public hasUTMs(): boolean {
