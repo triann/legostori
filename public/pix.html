@@ -228,7 +228,7 @@
                 console.log('🚀 Iniciando processo de pagamento PIX...');
                 
                 const requestData = {
-                    amount: Math.round(paymentData.amount * 100), // valor em centavos
+                    amount: paymentData.amountInCentavos,
                     customer: {
                         name: paymentData.name,
                         email: paymentData.email,
@@ -238,7 +238,7 @@
                     items: [{
                         title: paymentData.productName || 'Produto LEGO',
                         quantity: 1,
-                        unitPrice: Math.round(paymentData.amount * 100),
+                        unitPrice: paymentData.amountInCentavos,
                         tangible: true
                     }],
                     shipping: {
@@ -357,12 +357,16 @@
             console.log('💰 Amount from URL:', amountFromUrl, typeof amountFromUrl);
             console.log('💰 Amount from Storage:', amountFromStorage, typeof amountFromStorage);
             
+            const amountInCentavos = parseInt(amountFromUrl || amountFromStorage || '0');
+            const amountInReais = amountInCentavos / 100;
+            
             paymentData = {
                 name: urlParams.get('name') || orderData.nome || '',
                 email: urlParams.get('email') || orderData.email || '',
                 cpf: urlParams.get('cpf') || orderData.cpf || '',
                 phone: urlParams.get('phone') || orderData.telefone || '',
-                amount: parseFloat(amountFromUrl || amountFromStorage || '0'),
+                amount: amountInReais, // valor em reais para exibição
+                amountInCentavos: amountInCentavos, // valor em centavos para API
                 productName: urlParams.get('productName') || (orderData.produto ? orderData.produto.name : '') || '',
                 utmParams: {
                     utm_source: urlParams.get('utm_source') || (orderData.utmParams ? orderData.utmParams.utm_source : null) || 'direct',
