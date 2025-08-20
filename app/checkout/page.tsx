@@ -231,10 +231,10 @@ export default function CheckoutPage() {
       setShippingOptions([storeOption])
     } else {
       if (onlyFreeItems) {
-        setShippingOptions([{ type: "Correios Pac", price: 25.91, days: "de 5-8 dias úteis" }])
+        setShippingOptions([{ type: "Correios Pac", price: 25.91, days: "de 5-7 dias úteis" }])
       } else {
         setShippingOptions([
-          { type: "Correios Pac", price: 0, days: "de 5-8 dias úteis." },
+          { type: "Correios Pac", price: 0, days: "de 5-7 dias úteis." },
           { type: "JadLog Transportadora", price: 25.91, days: "Chegará amanhã." },
         ])
       }
