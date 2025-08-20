@@ -55,9 +55,11 @@ export function getUtmParams() {
 export async function createPixPayment(data: PixPaymentData): Promise<PixResponse> {
   try {
     console.log("🚀 Iniciando processo de pagamento PIX...")
+    console.log("📥 Dados recebidos na função:", data)
 
     // Capturar parâmetros UTM
     const utmParams = getUtmParams()
+    console.log("🔗 Parâmetros UTM capturados:", utmParams)
 
     const paymentData = {
       // Campos obrigatórios conforme o PHP
@@ -69,6 +71,7 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
       ...utmParams,
     }
 
+    console.log("📤 Dados estruturados para envio:", paymentData)
     console.log("📤 Enviando dados para API:", {
       valor: data.amount,
       dados: paymentData,
@@ -77,7 +80,10 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
     const controller = new AbortController()
     const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 segundos timeout
 
-    const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento.php?valor=${data.amount}`, {
+    const apiUrl = `${API_CONFIG.API_BASE_URL}/pagamento.php?valor=${data.amount}`
+    console.log("🌐 URL da API:", apiUrl)
+
+    const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -91,6 +97,8 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
     })
 
     clearTimeout(timeoutId)
+
+    console.log("📡 Status da resposta:", response.status, response.statusText)
 
     if (!response.ok) {
       const errorText = await response.text()
