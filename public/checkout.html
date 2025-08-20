@@ -464,6 +464,148 @@
         const VALOR_MINIMO = 20.00;
         const VALOR_MAXIMO = 2000.00;
 
+        let currentStep = 'email';
+        let formData = {};
+
+        // Função para mostrar step específico
+        function showStep(stepName) {
+            // Esconder todos os steps
+            document.querySelectorAll('.step-content').forEach(step => {
+                step.classList.add('hidden');
+            });
+            
+            // Mostrar step atual
+            const targetStep = document.getElementById(`step-${stepName}`);
+            if (targetStep) {
+                targetStep.classList.remove('hidden');
+                currentStep = stepName;
+            }
+        }
+
+        // Função para validar email
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Função para continuar do step de email
+        function continueFromEmail() {
+            const emailInput = document.getElementById('email-step');
+            const email = emailInput.value.trim();
+            
+            if (!email) {
+                showToast('Por favor, informe seu e-mail', 'error');
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                showToast('Por favor, informe um e-mail válido', 'error');
+                return;
+            }
+            
+            // Salvar email nos dados do formulário
+            formData.email = email;
+            
+            // Preencher email no step de dados pessoais
+            document.getElementById('email-display').value = email;
+            
+            // Ir para próximo step
+            showStep('personal');
+        }
+
+        // Função para continuar do step de dados pessoais
+        function continueFromPersonal() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const cpf = document.getElementById('cpf').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            
+            // Validações básicas
+            if (!firstName) {
+                showToast('Por favor, informe seu primeiro nome', 'error');
+                return;
+            }
+            
+            if (!lastName) {
+                showToast('Por favor, informe seu último nome', 'error');
+                return;
+            }
+            
+            // Salvar dados pessoais
+            formData.firstName = firstName;
+            formData.lastName = lastName;
+            formData.cpf = cpf;
+            formData.phone = phone;
+            formData.fullName = `${firstName} ${lastName}`;
+            
+            // Atualizar resumo
+            document.getElementById('personal-summary').textContent = `${firstName} ${lastName}`;
+            
+            // Ir para próximo step
+            showStep('address');
+        }
+
+        // Função para continuar do step de endereço
+        function continueFromAddress() {
+            // Validar se tem frete selecionado
+            const selectedShipping = document.querySelector('input[name="shipping"]:checked');
+            if (!selectedShipping) {
+                showToast('Por favor, selecione uma forma de entrega', 'error');
+                return;
+            }
+            
+            // Salvar dados de entrega
+            formData.shippingMethod = selectedShipping.value;
+            formData.shippingPrice = selectedShipping.dataset.price;
+            
+            // Atualizar resumos
+            updatePaymentSummary();
+            
+            // Ir para próximo step
+            showStep('payment');
+        }
+
+        // Função para atualizar resumo do pagamento
+        function updatePaymentSummary() {
+            const personalSummary = document.getElementById('personal-summary-payment');
+            const deliverySummary = document.getElementById('delivery-summary');
+            const orderSummary = document.getElementById('orderSummary');
+            
+            if (personalSummary) {
+                personalSummary.textContent = `${formData.fullName} • ${formData.email}`;
+            }
+            
+            if (deliverySummary) {
+                deliverySummary.textContent = `${formData.shippingMethod} • ${formatCurrency(formData.shippingPrice || 0)}`;
+            }
+            
+            if (orderSummary) {
+                const productPrice = 26591; // 265.91 em centavos
+                const shippingPrice = parseInt(formData.shippingPrice || 0);
+                const total = productPrice + shippingPrice;
+                
+                orderSummary.innerHTML = `
+                    <div class="flex justify-between items-center py-2">
+                        <span>Icons - McLaren MP4/4 e Ayrton Senna</span>
+                        <span>${formatCurrency(productPrice)}</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2">
+                        <span>Frete</span>
+                        <span>${formatCurrency(shippingPrice)}</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2 font-semibold border-t">
+                        <span>Total</span>
+                        <span>${formatCurrency(total)}</span>
+                    </div>
+                `;
+            }
+        }
+
+        // Função para ir para um step específico (para botões de editar)
+        function goToStep(stepName) {
+            showStep(stepName);
+        }
+
         // Captura parâmetros UTM da URL
         function getUtmParams() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -525,17 +667,25 @@
                 
                 // Capturar dados do formulário (adaptado para LEGO)
                 const utmParams = getUtmParams();
+                const productPrice = 26591; // 265.91 em centavos
+                const shippingPrice = parseInt(formData.shippingPrice || 0);
+                const totalAmount = productPrice + shippingPrice;
+                
                 const orderData = {
-                    nome: document.getElementById('fullName')?.value?.trim() || 'Cliente LEGO',
-                    email: document.getElementById('email')?.value?.trim() || '',
-                    cpf: document.getElementById('cpf')?.value?.replace(/\D/g, '') || '',
-                    telefone: document.getElementById('phone')?.value?.replace(/\D/g, '') || '',
-                    valor: 265.91, // Valor fixo do produto LEGO
+                    nome: formData.fullName || 'Cliente LEGO',
+                    email: formData.email || '',
+                    cpf: formData.cpf?.replace(/\D/g, '') || '',
+                    telefone: formData.phone?.replace(/\D/g, '') || '',
+                    valor: totalAmount / 100, // Converter para reais
                     produto: {
                         name: 'Icons - McLaren MP4/4 e Ayrton Senna',
                         id: 'lego-mclaren-senna',
-                        price: 265.91,
+                        price: productPrice / 100,
                         image: '/lego-mclaren-senna.jpg'
+                    },
+                    entrega: {
+                        metodo: formData.shippingMethod,
+                        preco: shippingPrice / 100
                     },
                     utmParams: utmParams
                 };
@@ -571,14 +721,35 @@
             console.log('🌐 API Base URL:', API_BASE_URL);
             console.log('📊 UTM Params:', getUtmParams());
             
-            // Adicionar event listener para botão de finalizar compra
-            const checkoutBtn = document.getElementById('checkoutBtn') || document.querySelector('[type="submit"]');
-            if (checkoutBtn) {
-                checkoutBtn.addEventListener('click', function(e) {
+            // Botão continuar do email
+            const continueEmailBtn = document.getElementById('continueEmailBtn');
+            if (continueEmailBtn) {
+                continueEmailBtn.addEventListener('click', continueFromEmail);
+            }
+            
+            // Botão continuar dos dados pessoais
+            const continuePersonalBtn = document.getElementById('continuePersonalBtn');
+            if (continuePersonalBtn) {
+                continuePersonalBtn.addEventListener('click', continueFromPersonal);
+            }
+            
+            // Botão continuar do endereço
+            const continueAddressBtn = document.getElementById('continueAddressBtn');
+            if (continueAddressBtn) {
+                continueAddressBtn.addEventListener('click', continueFromAddress);
+            }
+            
+            // Botão finalizar compra
+            const finalizeBtn = document.getElementById('finalizeBtn');
+            if (finalizeBtn) {
+                finalizeBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     processCheckout();
                 });
             }
+            
+            // Mostrar primeiro step
+            showStep('email');
         });
     </script>
 </body>
