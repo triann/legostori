@@ -219,105 +219,56 @@
             }, 4000);
         }
 
-        // Função para gerar PIX (baseada na referência norte)
-        async function generatePIX() {
-            try {
-                console.log('📊 Validando dados antes de gerar PIX...');
-                console.log('💰 Valor capturado:', paymentData.amount, typeof paymentData.amount);
+        function loadPaymentData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            console.log('URL Params:', Object.fromEntries(urlParams));
+            
+            paymentData = {
+                name: urlParams.get('name') || '',
+                email: urlParams.get('email') || '',
+                amount: parseFloat(urlParams.get('amount')) || 0,
+                productName: urlParams.get('productName') || '',
+                token: urlParams.get('token') || '',
+                qrcode: urlParams.get('qrcode') || ''
+            };
+            
+            console.log('Dados carregados para PIX:', paymentData);
+            
+            document.getElementById('userName').textContent = paymentData.name;
+            document.getElementById('userEmail').textContent = paymentData.email;
+            document.getElementById('paymentAmount').textContent = `R$ ${paymentData.amount.toFixed(2).replace('.', ',')}`;
+            document.getElementById('productName').textContent = paymentData.productName;
+            
+            if (paymentData.qrcode && paymentData.token) {
+                currentTransactionId = paymentData.token;
+                pixCode = paymentData.qrcode;
                 
-                if (!paymentData.amount || paymentData.amount <= 0) {
-                    throw new Error('Valor inválido ou não informado');
-                }
+                console.log('✅ PIX já processado, exibindo QR Code...');
                 
-                if (!paymentData.name || !paymentData.email || !paymentData.cpf) {
-                    throw new Error('Dados obrigatórios não informados');
-                }
+                // Gerar QR Code visual
+                const qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?' + 
+                    'size=200x200' +
+                    '&data=' + encodeURIComponent(pixCode) +
+                    '&ecc=M' +
+                    '&color=000000' +
+                    '&bgcolor=FFFFFF' +
+                    '&qzone=2' +
+                    '&format=png';
                 
-                console.log('📤 Enviando dados PIX:', paymentData);
-                console.log('🚀 Iniciando processo de pagamento PIX...');
+                // Esconder placeholder e mostrar QR code
+                document.getElementById('qrCodePlaceholder').style.display = 'none';
+                const qrImage = document.getElementById('qrCodeImage');
+                qrImage.src = qrCodeUrl;
+                qrImage.classList.remove('hidden');
                 
-                const requestData = {
-                    amount: Math.round(paymentData.amount * 100), // convertendo reais para centavos
-                    customer: {
-                        name: paymentData.name,
-                        email: paymentData.email,
-                        document: paymentData.cpf.replace(/\D/g, ''), // apenas números
-                        phone: paymentData.phone.replace(/\D/g, '') // apenas números
-                    },
-                    items: [{
-                        title: paymentData.productName || 'Produto LEGO',
-                        quantity: 1,
-                        unitPrice: Math.round(paymentData.amount * 100), // convertendo reais para centavos
-                        tangible: true
-                    }],
-                    shipping: {
-                        name: paymentData.name,
-                        address: 'Endereço do cliente'
-                    },
-                    ...paymentData.utmParams
-                };
+                // Iniciar verificação de status
+                statusCheckInterval = setInterval(checkPaymentStatus, 10000);
                 
-                console.log('📦 Dados da requisição:', requestData);
-                
-                const response = await fetch(`${API_BASE_URL}/pagamento.php`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(requestData)
-                });
-
-                const data = await response.json();
-                console.log('📥 Resposta da API:', data);
-
-                if (data.success) {
-                    currentTransactionId = data.token;
-                    pixCode = data.pixCopiaECola || data.pixCode;
-                    
-                    if (pixCode) {
-                        console.log('🎯 PIX Code recebido:', pixCode.substring(0, 50) + '...');
-                        
-                        // Atualizar QR Code usando gerador confiável
-                        const qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?' + 
-                            'size=200x200' +
-                            '&data=' + encodeURIComponent(pixCode) +
-                            '&ecc=M' +
-                            '&color=000000' +
-                            '&bgcolor=FFFFFF' +
-                            '&qzone=2' +
-                            '&format=png';
-                        
-                        // Esconder placeholder e mostrar QR code real
-                        document.getElementById('qrCodePlaceholder').style.display = 'none';
-                        const qrImage = document.getElementById('qrCodeImage');
-                        qrImage.src = qrCodeUrl;
-                        qrImage.classList.remove('hidden');
-                        
-                        console.log('✅ QR Code atualizado com sucesso');
-                    } else {
-                        throw new Error('PIX code não recebido da API');
-                    }
-                    
-                    // Iniciar verificação de status
-                    if (statusCheckInterval) clearInterval(statusCheckInterval);
-                    statusCheckInterval = setInterval(checkPaymentStatus, 10000);
-                    
-                    showToast('PIX gerado com sucesso!', 'success');
-                } else {
-                    throw new Error(data.message || 'Erro ao gerar PIX');
-                }
-
-            } catch (error) {
-                console.error('❌ Erro ao gerar PIX:', error);
-                document.getElementById('qrCodePlaceholder').innerHTML = `
-                    <div class="text-center text-red-400">
-                        <div class="w-32 h-32 bg-red-100 rounded mb-2 mx-auto flex items-center justify-center">
-                            <span class="text-red-500 text-2xl">⚠️</span>
-                        </div>
-                        <p class="text-xs">Erro ao gerar QR Code</p>
-                    </div>
-                `;
-                showToast('Erro ao processar pagamento: ' + error.message, 'error');
+                showToast('PIX carregado com sucesso!', 'success');
+            } else {
+                console.error('❌ Dados do PIX não encontrados');
+                showToast('Erro: dados do PIX não encontrados. Retorne ao checkout.', 'error');
             }
         }
 
@@ -369,61 +320,6 @@
 
             } catch (error) {
                 console.error('❌ Erro ao verificar status:', error);
-            }
-        }
-
-        // Carregar dados do pagamento (baseado na referência norte)
-        function loadPaymentData() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const orderData = JSON.parse(localStorage.getItem('orderData') || '{}');
-            
-            console.log('URL Params:', Object.fromEntries(urlParams));
-            console.log('Checkout Data:', orderData);
-            
-            const amountFromUrl = parseFloat(urlParams.get('amount')) || 0;
-            const amountFromStorage = orderData.valor || 0;
-            
-            console.log('💰 Amount from URL (reais):', amountFromUrl, typeof amountFromUrl);
-            console.log('💰 Amount from Storage (reais):', amountFromStorage, typeof amountFromStorage);
-            
-            const finalAmount = amountFromUrl || amountFromStorage;
-            
-            paymentData = {
-                name: urlParams.get('name') || orderData.nome || '',
-                email: urlParams.get('email') || orderData.email || '',
-                cpf: urlParams.get('cpf') || orderData.cpf || '',
-                phone: urlParams.get('phone') || orderData.telefone || '',
-                amount: finalAmount, // valor em reais para exibição e processamento
-                productName: urlParams.get('productName') || (orderData.produto ? orderData.produto.name : '') || '',
-                utmParams: {
-                    utm_source: urlParams.get('utm_source') || (orderData.utmParams ? orderData.utmParams.utm_source : null) || 'direct',
-                    utm_medium: urlParams.get('utm_medium') || (orderData.utmParams ? orderData.utmParams.utm_medium : null) || 'none',
-                    utm_campaign: urlParams.get('utm_campaign') || (orderData.utmParams ? orderData.utmParams.utm_campaign : null),
-                    utm_content: urlParams.get('utm_content') || (orderData.utmParams ? orderData.utmParams.utm_content : null),
-                    utm_term: urlParams.get('utm_term') || (orderData.utmParams ? orderData.utmParams.utm_term : null)
-                }
-            };
-            
-            console.log('Dados carregados para PIX:', paymentData);
-            console.log('✅ Valor final processado (reais):', paymentData.amount, typeof paymentData.amount);
-            
-            // Atualizar UI
-            document.getElementById('userName').textContent = paymentData.name;
-            document.getElementById('userEmail').textContent = paymentData.email;
-            document.getElementById('paymentAmount').textContent = `R$ ${paymentData.amount.toFixed(2).replace('.', ',')}`;
-            document.getElementById('productName').textContent = paymentData.productName || 'Produto LEGO';
-            
-            if (paymentData.amount > 0 && paymentData.name && paymentData.email && paymentData.cpf) {
-                console.log('✅ Dados válidos, gerando PIX...');
-                generatePIX();
-            } else {
-                console.error('❌ Dados inválidos:', {
-                    amount: paymentData.amount,
-                    name: paymentData.name,
-                    email: paymentData.email,
-                    cpf: paymentData.cpf
-                });
-                showToast('Dados de pagamento inválidos. Retorne ao checkout.', 'error');
             }
         }
 
