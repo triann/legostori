@@ -89,7 +89,7 @@ const products = [
   {
     id: 1,
     name: "Icons - McLaren MP4/4 e Ayrton Senna",
-    price: "R$ 799,99",
+    price: "R$ 499,99",
     originalPrice: null,
     rating: 5.0,
     reviews: 156,

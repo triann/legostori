@@ -580,7 +580,7 @@
                 
                 // Simular opções de frete
                 const shippingOptions = [
-                    { name: 'Correios PAC', price: 1000, days: '7-10 dias úteis' },
+                    { name: 'Correios PAC', price: 1500, days: '7-10 dias úteis' },
                     { name: 'Correios SEDEX', price: 2500, days: '3-5 dias úteis' }
                 ];
                 
@@ -776,13 +776,14 @@
             }
             
             if (orderSummary) {
-                const productPrice = 26591; // 265.91 em centavos
+                const productData = getProductData();
+                const productPrice = Math.round(productData.price * 100); // Converter para centavos
                 const shippingPrice = parseInt(formData.shippingPrice || 0);
                 const total = productPrice + shippingPrice;
                 
                 orderSummary.innerHTML = `
                     <div class="flex justify-between items-center py-2">
-                        <span>Icons - McLaren MP4/4 e Ayrton Senna</span>
+                        <span>${productData.name}</span>
                         <span>${formatCurrency(productPrice)}</span>
                     </div>
                     <div class="flex justify-between items-center py-2">
@@ -863,7 +864,8 @@
                 
                 // Capturar dados do formulário (adaptado para LEGO)
                 const utmParams = getUtmParams();
-                const productPrice = 26591; // 265.91 em centavos
+                const productData = getProductData();
+                const productPrice = Math.round(productData.price * 100); // Converter para centavos
                 const shippingPrice = parseInt(formData.shippingPrice || 0);
                 const totalAmount = productPrice + shippingPrice;
                 
@@ -884,6 +886,7 @@
                 };
 
                 console.log('📤 Enviando dados para API PIX:', {
+                    produto: productData.name,
                     valor: totalAmount,
                     dados: paymentData
                 });
@@ -907,7 +910,7 @@
                         amount: (totalAmount / 100).toFixed(2), // Passando em reais
                         name: formData.fullName || 'Cliente LEGO',
                         email: formData.email,
-                        productName: 'Icons - McLaren MP4/4 e Ayrton Senna',
+                        productName: productData.name,
                         ...utmParams
                     });
                     
@@ -927,6 +930,15 @@
             }
         }
 
+        function getProductData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return {
+                name: urlParams.get('productName') || 'Produto LEGO',
+                price: parseFloat(urlParams.get('price')) || 265.91,
+                image: urlParams.get('image') || '/placeholder.svg?height=100&width=100'
+            };
+        }
+
         // Event listeners para o checkout LEGO
         document.addEventListener('DOMContentLoaded', function() {
             console.log('✅ Checkout LEGO carregado');
@@ -936,9 +948,9 @@
             try {
                 if (typeof utmify !== 'undefined') {
                     utmify('event', 'initiate_checkout', {
-                        value: 265.91,
+                        value: getProductData().price,
                         currency: 'BRL',
-                        content_name: 'Icons - McLaren MP4/4 e Ayrton Senna',
+                        content_name: getProductData().name,
                         content_category: 'LEGO Icons',
                         content_ids: ['lego-mclaren-senna']
                     });
