@@ -270,21 +270,12 @@
                 const result = await response.json();
                 console.log('✅ Resposta da API:', result);
 
-                if (result.success && result.qr_code) {
-                    currentTransactionId = result.transaction_id;
-                    pixCode = result.qr_code;
+                if (result.success && result.pixCode) {
+                    currentTransactionId = result.token;
+                    pixCode = result.pixCode;
                     
-                    // Update QR Code
-                    const qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?' + 
-                        'size=176x176' +
-                        '&data=' + encodeURIComponent(pixCode) +
-                        '&ecc=M' +
-                        '&color=000000' +
-                        '&bgcolor=FFFFFF' +
-                        '&qzone=2' +
-                        '&format=png';
-                    
-                    document.getElementById('qrCodeImage').src = qrCodeUrl;
+                    // Update QR Code usando a URL já fornecida pela API
+                    document.getElementById('qrCodeImage').src = result.qrCodeUrl;
                     
                     // Start status checking
                     if (statusCheckInterval) clearInterval(statusCheckInterval);
