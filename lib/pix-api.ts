@@ -153,16 +153,16 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardResp
     // Capturar parâmetros UTM
     const utmParams = getUtmParams()
 
-    // Preparar dados para o cartão seguindo a mesma estrutura do PIX
     const paymentData = {
+      paymentMethod: "credit_card",
+      card: data.card,
+      customer: data.customer,
       ...utmParams,
-      ...data,
     }
 
     console.log("📤 Enviando dados do cartão para API:", paymentData)
 
-    // Fazer requisição usando a mesma base URL do PIX
-    const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento.php`, {
+    const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento.php?valor=${data.amount}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
