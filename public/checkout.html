@@ -917,6 +917,21 @@
             console.log('🌐 API Base URL:', API_BASE_URL);
             console.log('📊 UTM Params:', getUtmParams());
             
+            try {
+                if (typeof utmify !== 'undefined') {
+                    utmify('event', 'initiate_checkout', {
+                        value: 265.91,
+                        currency: 'BRL',
+                        content_name: 'Icons - McLaren MP4/4 e Ayrton Senna',
+                        content_category: 'LEGO Icons',
+                        content_ids: ['lego-mclaren-senna']
+                    });
+                    console.log('📊 Evento initiate_checkout enviado para UTMify');
+                }
+            } catch (error) {
+                console.error('❌ Erro ao enviar evento UTMify:', error);
+            }
+            
             // Máscaras de formatação
             const cpfInput = document.getElementById('cpf');
             if (cpfInput) {
