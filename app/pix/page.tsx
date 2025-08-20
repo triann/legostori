@@ -18,7 +18,7 @@ interface PixPaymentData {
 
 export default function PixPage() {
   const [pixData, setPixData] = useState<PixPaymentData | null>(null)
-  const [paymentStatus, setPaymentStatus] = useState<"pending" | "approved" | "rejected">("pending")
+  const [paymentStatus, setPaymentStatus] = useState<"pending" | "paid" | "refused">("pending")
   const [copied, setCopied] = useState(false)
   const [isPolling, setIsPolling] = useState(false)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
@@ -104,16 +104,19 @@ export default function PixPage() {
       console.log("🔍 Verificação manual solicitada para:", pixData.token)
       const status = await checkPaymentStatus(pixData.token)
 
-      if (status.success && status.status === "APPROVED") {
-        setPaymentStatus("approved")
+      if (
+        status.success &&
+        (status.status === "paid" || status.status === "authorized" || status.status === "partially_paid")
+      ) {
+        setPaymentStatus("paid")
         stopPolling()
         showToast("Pagamento confirmado! Redirecionando...", "success")
 
         setTimeout(() => {
           window.location.href = "/"
         }, 3000)
-      } else if (status.status === "REJECTED") {
-        setPaymentStatus("rejected")
+      } else if (status.status === "refused" || status.status === "canceled" || status.status === "chargeback") {
+        setPaymentStatus("refused")
         stopPolling()
         showToast("Pagamento rejeitado. Entre em contato conosco.", "error")
       } else {
@@ -148,16 +151,19 @@ export default function PixPage() {
         console.log("🔄 Verificando status automaticamente...")
         const status = await checkPaymentStatus(pixData.token)
 
-        if (status.success && status.status === "APPROVED") {
-          setPaymentStatus("approved")
+        if (
+          status.success &&
+          (status.status === "paid" || status.status === "authorized" || status.status === "partially_paid")
+        ) {
+          setPaymentStatus("paid")
           stopPolling()
           showToast("Pagamento confirmado! Redirecionando...", "success")
 
           setTimeout(() => {
             window.location.href = "/"
           }, 3000)
-        } else if (status.status === "REJECTED") {
-          setPaymentStatus("rejected")
+        } else if (status.status === "refused" || status.status === "canceled" || status.status === "chargeback") {
+          setPaymentStatus("refused")
           stopPolling()
           showToast("Pagamento rejeitado. Entre em contato conosco.", "error")
         } else {
@@ -222,7 +228,7 @@ export default function PixPage() {
             </div>
           )}
 
-          {paymentStatus === "approved" && (
+          {paymentStatus === "paid" && (
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-green-400 rounded-full"></div>
@@ -232,7 +238,7 @@ export default function PixPage() {
             </div>
           )}
 
-          {paymentStatus === "rejected" && (
+          {paymentStatus === "refused" && (
             <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-red-400 rounded-full"></div>

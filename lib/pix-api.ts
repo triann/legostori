@@ -32,7 +32,18 @@ export interface PixResponse {
 
 export interface PaymentStatus {
   success: boolean
-  status: "PENDING" | "APPROVED" | "REJECTED"
+  status:
+    | "pending"
+    | "paid"
+    | "authorized"
+    | "partially_paid"
+    | "refused"
+    | "canceled"
+    | "chargeback"
+    | "processing"
+    | "waiting_payment"
+    | "in_protest"
+    | "refunded"
   error?: string
 }
 
@@ -199,7 +210,7 @@ export async function checkPaymentStatus(transactionId: string): Promise<Payment
       console.error("❌ Erro na API isolada:", response.status)
       return {
         success: false,
-        status: "PENDING",
+        status: "pending",
         error: `Erro HTTP ${response.status}`,
       }
     }
@@ -207,16 +218,31 @@ export async function checkPaymentStatus(transactionId: string): Promise<Payment
     const result = await response.json()
     console.log("📥 Resposta da verificação:", result)
 
+    let mappedStatus: PaymentStatus["status"] = "pending"
+
+    if (
+      result.status === "APPROVED" ||
+      result.status === "paid" ||
+      result.status === "authorized" ||
+      result.status === "partially_paid"
+    ) {
+      mappedStatus = "paid"
+    } else if (result.status === "REJECTED" || result.status === "refused" || result.status === "canceled") {
+      mappedStatus = "refused"
+    } else {
+      mappedStatus = "pending"
+    }
+
     return {
       success: result.success,
-      status: result.status,
+      status: mappedStatus,
       error: result.error,
     }
   } catch (error) {
     console.error("❌ Erro ao verificar status:", error)
     return {
       success: false,
-      status: "PENDING",
+      status: "pending",
       error: "Erro de conexão com a API",
     }
   }
