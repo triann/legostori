@@ -73,14 +73,34 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
       dados: paymentData,
     })
 
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 segundos timeout
+
     // Fazer requisição conforme o HTML funcional
     const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento.php?valor=${data.amount}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
+        "User-Agent": "LegoStore/1.0",
+        Origin: API_CONFIG.FRONTEND_URL,
+        Referer: API_CONFIG.FRONTEND_URL,
       },
       body: JSON.stringify(paymentData),
+      signal: controller.signal,
     })
+
+    clearTimeout(timeoutId)
+
+    if (!response.ok) {
+      if (response.status === 403) {
+        throw new Error("Acesso negado pela API. Verifique as credenciais.")
+      } else if (response.status === 404) {
+        throw new Error("Endpoint da API não encontrado.")
+      } else {
+        throw new Error(`Erro HTTP ${response.status}: ${response.statusText}`)
+      }
+    }
 
     const result = await response.json()
     console.log("📥 Resposta da API:", result)
@@ -101,6 +121,21 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
     }
   } catch (error) {
     console.error("❌ Erro na API PIX:", error)
+
+    if (error instanceof Error) {
+      if (error.name === "AbortError") {
+        return {
+          success: false,
+          error: "Timeout na conexão com a API. Tente novamente.",
+        }
+      } else {
+        return {
+          success: false,
+          error: error.message,
+        }
+      }
+    }
+
     return {
       success: false,
       error: "Erro de conexão com a API",
