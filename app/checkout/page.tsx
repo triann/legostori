@@ -1485,5 +1485,5 @@ export default function CheckoutPage() {
     )
   }
 
-  return null\
+  return null
 }
