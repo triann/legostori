@@ -96,7 +96,7 @@ const products = [
     ages: "18+",
     pieces: 693,
     image:
-      "https://legobrasil.vtexassets.com/arquivos/ids/185200/10330.jpg?v=638424969949830000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/185202/10330--1-.jpg?v=638424970071170000",
     isNew: true,
     href: "/product/1",
   },

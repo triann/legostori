@@ -17,8 +17,8 @@ const products = {
     itemNumber: "76230",
     vipPoints: 1875,
     images: [
-      "https://legobrasil.vtexassets.com/arquivos/ids/185200/10330.jpg?v=638424969949830000",
       "https://legobrasil.vtexassets.com/arquivos/ids/185202/10330--1-.jpg?v=638424970071170000",
+      "https://legobrasil.vtexassets.com/arquivos/ids/185200/10330.jpg?v=638424969949830000",
       "https://legobrasil.vtexassets.com/arquivos/ids/185203/10330--2-.jpg?v=638424970785870000",
       "https://legobrasil.vtexassets.com/arquivos/ids/185208/10330--8-.jpg?v=638424971650770000",
     ],
