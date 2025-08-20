@@ -181,6 +181,7 @@
         let currentTransactionId = null;
         let statusCheckInterval = null;
         let pixCode = null;
+        let paymentData = {};
 
         function showToast(message, type = 'success') {
             const existingToast = document.querySelector('.toast');
@@ -226,40 +227,185 @@
             }
         }
 
-        function loadPaymentData() {
-            const urlParams = new URLSearchParams(window.location.search);
-            
-            // Load data from URL params
-            const name = urlParams.get('name') || 'Cliente LEGO';
-            const email = urlParams.get('email') || 'cliente@email.com';
-            const amount = urlParams.get('amount') || 'R$ 265,91';
-            
-            document.getElementById('userName').textContent = name;
-            document.getElementById('userEmail').textContent = email;
-            document.getElementById('paymentAmount').textContent = amount;
-            
-            // Generate mock PIX code for demo
-            pixCode = 'BR1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890';
-            
-            // Generate QR Code
-            const qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?' + 
-                'size=176x176' +
-                '&data=' + encodeURIComponent(pixCode) +
-                '&ecc=M' +
-                '&color=000000' +
-                '&bgcolor=FFFFFF' +
-                '&qzone=2' +
-                '&format=png';
-            
-            document.getElementById('qrCodeImage').src = qrCodeUrl;
+        async function generatePIX() {
+            try {
+                console.log('📤 Enviando dados PIX:', paymentData);
+                console.log('🚀 Iniciando processo de pagamento PIX...');
+                
+                const response = await fetch(`${API_BASE_URL}/pagamento.php?valor=${paymentData.amount}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nome: paymentData.name,
+                        email: paymentData.email,
+                        cpf: paymentData.cpf,
+                        telefone: paymentData.phone,
+                        produto: paymentData.productName,
+                        valor: paymentData.amount,
+                        utm_source: paymentData.utm_source || 'direct',
+                        utm_medium: paymentData.utm_medium || 'none',
+                        utm_campaign: paymentData.utm_campaign || null,
+                        utm_content: paymentData.utm_content || null,
+                        utm_term: paymentData.utm_term || null
+                    })
+                });
+
+                console.log('📤 Enviando dados para API:', {
+                    valor: paymentData.amount,
+                    dados: {
+                        nome: paymentData.name,
+                        email: paymentData.email,
+                        cpf: paymentData.cpf,
+                        telefone: paymentData.phone
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                console.log('✅ Resposta da API:', result);
+
+                if (result.success && result.qr_code) {
+                    currentTransactionId = result.transaction_id;
+                    pixCode = result.qr_code;
+                    
+                    // Update QR Code
+                    const qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?' + 
+                        'size=176x176' +
+                        '&data=' + encodeURIComponent(pixCode) +
+                        '&ecc=M' +
+                        '&color=000000' +
+                        '&bgcolor=FFFFFF' +
+                        '&qzone=2' +
+                        '&format=png';
+                    
+                    document.getElementById('qrCodeImage').src = qrCodeUrl;
+                    
+                    // Start status checking
+                    if (statusCheckInterval) clearInterval(statusCheckInterval);
+                    statusCheckInterval = setInterval(checkPaymentStatus, 8000);
+                    
+                    showToast('PIX gerado com sucesso!', 'success');
+                } else {
+                    throw new Error(result.message || 'Erro ao gerar PIX');
+                }
+            } catch (error) {
+                console.error('❌ Erro ao gerar PIX:', error);
+                showToast(`Erro ao processar pagamento: ${error.message}`, 'error');
+            }
         }
 
         async function checkPaymentStatus() {
-            // Mock payment verification for demo
-            console.log('🔄 Verificando status automaticamente...');
+            if (!currentTransactionId) return;
             
-            // In real implementation, this would call the API
-            // For demo purposes, we'll just log
+            try {
+                console.log(`🔄 Verificando status para transação: ${currentTransactionId}`);
+                
+                const response = await fetch(`${API_BASE_URL}/verificar.php?transaction_id=${currentTransactionId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const result = await response.json();
+                console.log('📋 Resposta da verificação:', result);
+
+                if (result.success) {
+                    if (result.status === 'APPROVED' || result.status === 'paid') {
+                        // Payment approved
+                        clearInterval(statusCheckInterval);
+                        statusCheckInterval = null;
+                        
+                        const statusDiv = document.getElementById('paymentStatus');
+                        statusDiv.innerHTML = `
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <span class="text-green-800 font-medium text-sm">Pagamento aprovado!</span>
+                            </div>
+                            <p class="text-green-700 text-xs mt-2">
+                                ✅ Seu pedido foi confirmado
+                            </p>
+                        `;
+                        statusDiv.className = 'bg-green-50 border border-green-200 rounded-lg p-4 mb-6';
+                        
+                        showToast('Pagamento aprovado! Redirecionando...', 'success');
+                        
+                        setTimeout(() => {
+                            window.location.href = '/success.html';
+                        }, 2000);
+                    } else if (result.status === 'REJECTED' || result.status === 'refused') {
+                        // Payment rejected
+                        clearInterval(statusCheckInterval);
+                        statusCheckInterval = null;
+                        
+                        const statusDiv = document.getElementById('paymentStatus');
+                        statusDiv.innerHTML = `
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                <span class="text-red-800 font-medium text-sm">Pagamento rejeitado</span>
+                            </div>
+                            <p class="text-red-700 text-xs mt-2">
+                                ❌ Tente novamente ou use outro método
+                            </p>
+                        `;
+                        statusDiv.className = 'bg-red-50 border border-red-200 rounded-lg p-4 mb-6';
+                        
+                        showToast('Pagamento rejeitado', 'error');
+                    } else {
+                        console.log('💤 Pagamento ainda pendente');
+                    }
+                }
+            } catch (error) {
+                console.error('❌ Erro ao verificar status:', error);
+            }
+        }
+
+        function loadPaymentData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const checkoutData = JSON.parse(localStorage.getItem('checkoutData') || '{}');
+            
+            // Load data from URL params or localStorage
+            paymentData = {
+                name: urlParams.get('name') || checkoutData.name || '',
+                email: urlParams.get('email') || checkoutData.email || '',
+                cpf: urlParams.get('cpf') || checkoutData.cpf || '',
+                phone: urlParams.get('phone') || checkoutData.phone || '',
+                amount: parseFloat(urlParams.get('amount') || checkoutData.total || '0'),
+                productName: urlParams.get('productName') || checkoutData.productName || '',
+                utm_source: urlParams.get('utm_source') || localStorage.getItem('utm_source') || 'direct',
+                utm_medium: urlParams.get('utm_medium') || localStorage.getItem('utm_medium') || 'none',
+                utm_campaign: urlParams.get('utm_campaign') || localStorage.getItem('utm_campaign'),
+                utm_content: urlParams.get('utm_content') || localStorage.getItem('utm_content'),
+                utm_term: urlParams.get('utm_term') || localStorage.getItem('utm_term')
+            };
+            
+            // Validate required data
+            if (!paymentData.name || !paymentData.email || !paymentData.amount) {
+                showToast('Dados de pagamento incompletos. Redirecionando...', 'error');
+                setTimeout(() => {
+                    window.location.href = '/checkout.html';
+                }, 2000);
+                return;
+            }
+            
+            // Update UI
+            document.getElementById('userName').textContent = paymentData.name;
+            document.getElementById('userEmail').textContent = paymentData.email;
+            document.getElementById('paymentAmount').textContent = `R$ ${paymentData.amount.toFixed(2).replace('.', ',')}`;
+            document.getElementById('productName').textContent = paymentData.productName;
+            
+            // Generate PIX automatically
+            generatePIX();
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -270,10 +416,7 @@
             
             loadPaymentData();
             
-            // Start status checking
-            statusCheckInterval = setInterval(checkPaymentStatus, 8000);
-            
-            // Stop after 20 minutes
+            // Stop checking after 20 minutes
             setTimeout(() => {
                 if (statusCheckInterval) {
                     clearInterval(statusCheckInterval);
