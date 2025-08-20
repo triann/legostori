@@ -879,7 +879,8 @@
                     nome: formData.fullName || 'Cliente LEGO',
                     email: formData.email || '',
                     cpf: formData.cpf?.replace(/\D/g, '') || '',
-                    telefone: formData.phone?.replace(/\D/g, '') || ''
+                    telefone: formData.phone?.replace(/\D/g, '') || '',
+                    amount: totalAmount // Adicionando valor no POST body
                 };
 
                 console.log('📤 Enviando dados para API PIX:', {
@@ -887,7 +888,7 @@
                     dados: paymentData
                 });
 
-                const response = await fetch(`${API_BASE_URL}/pagamento.php?valor=${totalAmount}`, {
+                const response = await fetch(`${API_BASE_URL}/pagamento.php`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
