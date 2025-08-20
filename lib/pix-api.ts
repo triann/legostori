@@ -148,20 +148,58 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
 
 export async function createCardPayment(data: CardPaymentData): Promise<CardResponse> {
   try {
-    console.log("💳 Iniciando processo de pagamento com cartão...")
+    console.log("💳 Iniciando processo de pagamento com cartão Asset Pay...")
+
+    // Primeiro, tokenizar o cartão usando Asset Pay
+    const tokenResponse = await fetch("https://api.assetpagamentos.com.br/v1/js", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        number: data.card.number,
+        holderName: data.card.holderName,
+        expMonth: data.card.expirationMonth,
+        expYear: data.card.expirationYear,
+        cvv: data.card.cvv,
+      }),
+    })
+
+    const tokenData = await tokenResponse.json()
+
+    if (!tokenData.success) {
+      return {
+        success: false,
+        error: "Erro ao tokenizar cartão",
+      }
+    }
 
     // Capturar parâmetros UTM
     const utmParams = getUtmParams()
 
+    // Preparar dados para Asset Pay API
     const paymentData = {
+      amount: data.amount * 100, // Asset Pay usa centavos
       paymentMethod: "credit_card",
-      card: data.card,
+      card: {
+        id: tokenData.id,
+        hash: tokenData.hash,
+        number: data.card.number,
+        holderName: data.card.holderName,
+        expirationMonth: data.card.expirationMonth,
+        expirationYear: data.card.expirationYear,
+        cvv: data.card.cvv,
+        installments: data.card.installments,
+      },
       customer: data.customer,
+      items: data.items,
+      postbackUrl: `${API_CONFIG.FRONTEND_URL}/webhook/asset-pay`,
       ...utmParams,
     }
 
-    console.log("📤 Enviando dados do cartão para API:", paymentData)
+    console.log("📤 Enviando dados do cartão para Asset Pay API:", paymentData)
 
+    // Enviar para nossa API que processará com Asset Pay
     const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento.php?valor=${data.amount}`, {
       method: "POST",
       headers: {
@@ -171,7 +209,7 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardResp
     })
 
     const result = await response.json()
-    console.log("📥 Resposta da API do cartão:", result)
+    console.log("📥 Resposta da API Asset Pay:", result)
 
     if (result.success) {
       return {
@@ -186,7 +224,7 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardResp
       }
     }
   } catch (error) {
-    console.error("❌ Erro na API do cartão:", error)
+    console.error("❌ Erro na API Asset Pay:", error)
     return {
       success: false,
       error: "Erro de conexão com a API",
