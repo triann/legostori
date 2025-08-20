@@ -467,6 +467,174 @@
         let currentStep = 'email';
         let formData = {};
 
+        function formatCPF(value) {
+            return value
+                .replace(/\D/g, '')
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+                .replace(/(-\d{2})\d+?$/, '$1');
+        }
+
+        function formatPhone(value) {
+            return value
+                .replace(/\D/g, '')
+                .replace(/(\d{2})(\d)/, '($1) $2')
+                .replace(/(\d{5})(\d)/, '$1-$2')
+                .replace(/(-\d{4})\d+?$/, '$1');
+        }
+
+        function formatCEP(value) {
+            return value
+                .replace(/\D/g, '')
+                .replace(/(\d{5})(\d)/, '$1-$2')
+                .replace(/(-\d{3})\d+?$/, '$1');
+        }
+
+        function validateCPF(cpf) {
+            cpf = cpf.replace(/\D/g, '');
+            if (cpf.length !== 11) return false;
+            
+            // Verificar se todos os dígitos são iguais
+            if (/^(\d)\1{10}$/.test(cpf)) return false;
+            
+            // Validar dígitos verificadores
+            let sum = 0;
+            for (let i = 0; i < 9; i++) {
+                sum += parseInt(cpf.charAt(i)) * (10 - i);
+            }
+            let remainder = (sum * 10) % 11;
+            if (remainder === 10 || remainder === 11) remainder = 0;
+            if (remainder !== parseInt(cpf.charAt(9))) return false;
+            
+            sum = 0;
+            for (let i = 0; i < 10; i++) {
+                sum += parseInt(cpf.charAt(i)) * (11 - i);
+            }
+            remainder = (sum * 10) % 11;
+            if (remainder === 10 || remainder === 11) remainder = 0;
+            if (remainder !== parseInt(cpf.charAt(10))) return false;
+            
+            return true;
+        }
+
+        function validatePhone(phone) {
+            const cleanPhone = phone.replace(/\D/g, '');
+            return cleanPhone.length >= 10 && cleanPhone.length <= 11;
+        }
+
+        function validateCEP(cep) {
+            const cleanCEP = cep.replace(/\D/g, '');
+            return cleanCEP.length === 8;
+        }
+
+        async function fetchAddressByCEP(cep) {
+            try {
+                const cleanCEP = cep.replace(/\D/g, '');
+                const response = await fetch(`https://viacep.com.br/ws/${cleanCEP}/json/`);
+                const data = await response.json();
+                
+                if (data.erro) {
+                    throw new Error('CEP não encontrado');
+                }
+                
+                return data;
+            } catch (error) {
+                throw new Error('Erro ao buscar CEP: ' + error.message);
+            }
+        }
+
+        async function calculateShipping() {
+            const cepInput = document.getElementById('cep');
+            const cep = cepInput.value.trim();
+            
+            if (!cep) {
+                showToast('Por favor, informe o CEP', 'error');
+                return;
+            }
+            
+            if (!validateCEP(cep)) {
+                showToast('Por favor, informe um CEP válido', 'error');
+                return;
+            }
+            
+            const calculateBtn = document.getElementById('calculateBtn');
+            const originalText = calculateBtn.textContent;
+            
+            try {
+                // Mostrar loading
+                calculateBtn.innerHTML = '<div class="loading-spinner"></div>';
+                calculateBtn.disabled = true;
+                
+                // Buscar endereço
+                const address = await fetchAddressByCEP(cep);
+                
+                // Salvar dados do endereço
+                formData.address = {
+                    cep: cep,
+                    street: address.logradouro,
+                    neighborhood: address.bairro,
+                    city: address.localidade,
+                    state: address.uf
+                };
+                
+                // Simular opções de frete
+                const shippingOptions = [
+                    { name: 'Correios PAC', price: 1500, days: '7-10 dias úteis' },
+                    { name: 'Correios SEDEX', price: 2500, days: '3-5 dias úteis' }
+                ];
+                
+                // Mostrar opções de frete
+                displayShippingOptions(shippingOptions);
+                
+                // Mostrar campos de endereço
+                document.getElementById('addressDetails').classList.remove('hidden');
+                
+                showToast('Frete calculado com sucesso!', 'success');
+                
+            } catch (error) {
+                showToast(error.message, 'error');
+            } finally {
+                calculateBtn.textContent = originalText;
+                calculateBtn.disabled = false;
+            }
+        }
+
+        function displayShippingOptions(options) {
+            const shippingOptions = document.getElementById('shippingOptions');
+            const shippingList = document.getElementById('shippingList');
+            
+            shippingList.innerHTML = '';
+            
+            options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'border rounded-lg p-3';
+                optionDiv.innerHTML = `
+                    <label class="flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <input type="radio" name="shipping" value="${option.name}" data-price="${option.price}" class="w-4 h-4 text-blue-600">
+                            <div>
+                                <div class="font-medium text-gray-900">${option.name}</div>
+                                <div class="text-sm text-gray-500">${option.days}</div>
+                            </div>
+                        </div>
+                        <div class="font-semibold text-gray-900">${formatCurrency(option.price)}</div>
+                    </label>
+                `;
+                
+                shippingList.appendChild(optionDiv);
+            });
+            
+            // Adicionar event listeners para as opções de frete
+            document.querySelectorAll('input[name="shipping"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    document.getElementById('continueAddressBtn').disabled = false;
+                });
+            });
+            
+            shippingOptions.classList.remove('hidden');
+        }
+
         // Função para mostrar step específico
         function showStep(stepName) {
             // Esconder todos os steps
@@ -513,7 +681,6 @@
             showStep('personal');
         }
 
-        // Função para continuar do step de dados pessoais
         function continueFromPersonal() {
             const firstName = document.getElementById('firstName').value.trim();
             const lastName = document.getElementById('lastName').value.trim();
@@ -528,6 +695,26 @@
             
             if (!lastName) {
                 showToast('Por favor, informe seu último nome', 'error');
+                return;
+            }
+            
+            if (!cpf) {
+                showToast('Por favor, informe seu CPF', 'error');
+                return;
+            }
+            
+            if (!validateCPF(cpf)) {
+                showToast('Por favor, informe um CPF válido', 'error');
+                return;
+            }
+            
+            if (!phone) {
+                showToast('Por favor, informe seu telefone', 'error');
+                return;
+            }
+            
+            if (!validatePhone(phone)) {
+                showToast('Por favor, informe um telefone válido', 'error');
                 return;
             }
             
@@ -554,9 +741,18 @@
                 return;
             }
             
+            // Validar número do endereço
+            const addressNumber = document.getElementById('addressNumber').value.trim();
+            if (!addressNumber) {
+                showToast('Por favor, informe o número do endereço', 'error');
+                return;
+            }
+            
             // Salvar dados de entrega
             formData.shippingMethod = selectedShipping.value;
             formData.shippingPrice = selectedShipping.dataset.price;
+            formData.addressNumber = addressNumber;
+            formData.complement = document.getElementById('complement').value.trim();
             
             // Atualizar resumos
             updatePaymentSummary();
@@ -720,6 +916,34 @@
             console.log('✅ Checkout LEGO carregado');
             console.log('🌐 API Base URL:', API_BASE_URL);
             console.log('📊 UTM Params:', getUtmParams());
+            
+            // Máscaras de formatação
+            const cpfInput = document.getElementById('cpf');
+            if (cpfInput) {
+                cpfInput.addEventListener('input', function(e) {
+                    e.target.value = formatCPF(e.target.value);
+                });
+            }
+            
+            const phoneInput = document.getElementById('phone');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    e.target.value = formatPhone(e.target.value);
+                });
+            }
+            
+            const cepInput = document.getElementById('cep');
+            if (cepInput) {
+                cepInput.addEventListener('input', function(e) {
+                    e.target.value = formatCEP(e.target.value);
+                });
+            }
+            
+            // Botão calcular frete
+            const calculateBtn = document.getElementById('calculateBtn');
+            if (calculateBtn) {
+                calculateBtn.addEventListener('click', calculateShipping);
+            }
             
             // Botão continuar do email
             const continueEmailBtn = document.getElementById('continueEmailBtn');
