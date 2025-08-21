@@ -305,10 +305,9 @@ export default function UpsellFlow() {
               <h4 className="text-xs font-bold uppercase tracking-wider text-purple-700">Preenchendo dados</h4>
               <div className="space-y-2">
                 {[
-                  { label: "Emitente", value: "Snikkys Company LTDA" },
-                  { label: "CNPJ", value: "18.585.157/0001-91" },
+                  { label: "Emitente", value: "LEGO DO BRASIL" },
+                  { label: "CNPJ", value: "18.844.479/0001-08" },
                   { label: "NCM/CFOP", value: "8517.62.99 / 5102" },
-                  { label: "Destinatário", value: "Cliente" },
                   { label: "Transmissão", value: "SEFAZ Estadual" },
                 ].map((field, index) => (
                   <div
