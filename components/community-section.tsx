@@ -14,38 +14,31 @@ export function CommunitySection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="relative rounded-lg overflow-hidden">
             <img
-              src="/placeholder.svg?height=400&width=600"
+              src="https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/2320bfd5-fb72-4284-978e-3b4aead85721___6bbff3316a8cba6efb01ff1a94c1e586.jpg"
               alt="LEGO Star Wars AT-AT"
               className="w-full h-64 object-cover"
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <img
-              src="/placeholder.svg?height=200&width=300"
+              src="https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/5ccfff9d-dfa2-4505-86a4-f811462a753b___56e56e696cb8748a4712f966ebb7a8b2.jpg"
               alt="LEGO Pirate Ship"
               className="w-full h-32 object-cover rounded-lg"
             />
             <img
-              src="/placeholder.svg?height=200&width=300"
+              src="https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/c559a7b7-c566-4451-b109-f4049df16a7c___ef230176e45d237c4287db2d1b24b3fd.jpg"
               alt="LEGO Mining Truck"
               className="w-full h-32 object-cover rounded-lg"
             />
             <img
-              src="/placeholder.svg?height=200&width=300"
+              src="https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/aa5196ae-6b1e-49d3-bf5c-f21366ce67c2___dae12d9447a67d311311e361dc31d51a.jpg"
               alt="LEGO Medieval Castle"
               className="w-full h-32 object-cover rounded-lg"
             />
             <img
-              src="/placeholder.svg?height=200&width=300"
+              src="https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/a24fbd07-82eb-47ca-9572-c2748e518d7a___4073ac5e34e17ec5c670c9bfda4e3fe3.jpg"
               alt="LEGO Viking Ship"
               className="w-full h-32 object-cover rounded-lg"
-            />
-          </div>
-          <div className="relative rounded-lg overflow-hidden">
-            <img
-              src="/placeholder.svg?height=400&width=600"
-              alt="LEGO Submarine"
-              className="w-full h-64 object-cover"
             />
           </div>
         </div>
@@ -72,7 +65,7 @@ export function CommunitySection() {
           </div>
           <div className="relative">
             <img
-              src="/placeholder.svg?height=400&width=500"
+              src="https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/fb315ef8-801c-4005-bd60-bad8c04a9a50___40b335c2507a85c22fbccd9cc553b126.jpg"
               alt="LEGO Hogwarts Castle"
               className="w-full max-w-md mx-auto"
             />

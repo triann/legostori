@@ -230,7 +230,7 @@ export default function CheckoutPage() {
       setShippingOptions([storeOption])
     } else {
       if (onlyFreeItems) {
-        setShippingOptions([{ type: "Correios Pac", price: 10.00, days: "de 5-7 dias úteis" }])
+        setShippingOptions([{ type: "Correios Sedex", price: 25.91, days: "de 5-7 dias úteis" }])
       } else {
         setShippingOptions([
           { type: "Correios Pac", price: 0, days: "de 5-7 dias úteis." },
