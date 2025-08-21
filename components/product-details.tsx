@@ -111,8 +111,34 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     // Salvar no localStorage para acessar no checkout
     localStorage.setItem("checkoutProduct", JSON.stringify(checkoutData))
 
-    // Redirecionar para o checkout
-    router.push("/checkout")
+    // Capturar UTM's da URL atual
+    const urlParams = new URLSearchParams(window.location.search)
+    const utmParamsFromUrl = new URLSearchParams()
+
+    // Adicionar todos os parâmetros UTM encontrados na URL atual
+    const utmKeys = [
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_content",
+      "utm_term",
+      "src",
+      "sck",
+      "xcod",
+      "fbclid",
+      "gclid",
+    ]
+    utmKeys.forEach((key) => {
+      const value = urlParams.get(key)
+      if (value) {
+        utmParamsFromUrl.set(key, value)
+      }
+    })
+
+    // Redirecionar para o checkout preservando UTM's na URL
+    const checkoutUrl = utmParamsFromUrl.toString() ? `/checkout?${utmParamsFromUrl.toString()}` : "/checkout"
+
+    router.push(checkoutUrl)
 
     setIsAddingToCart(false)
   }
