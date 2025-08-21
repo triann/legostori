@@ -127,14 +127,16 @@ export default function UpsellFlow() {
     const nfeProduct = {
       id: "nfe-emissao",
       name: "Emissão de Nota Fiscal Eletrônica (NF-e)",
-      price: 990,
-      finalPrice: 990,
-      originalPrice: 990,
+      price: 1783,
+      finalPrice: 1783,
+      originalPrice: 1783,
       isFree: false,
-      image: "/nota-fiscal-eletronica.png",
+      image: upsellData.img,
       description: "Serviço de emissão de NF-e para produtos LEGO com validação SEFAZ",
       quantity: 1,
       isNfe: true,
+      isDigital: true, // Produto digital - sem entrega física
+      requiresShipping: false, // Não requer frete
     }
 
     localStorage.setItem("checkoutProduct", JSON.stringify(nfeProduct))
@@ -197,7 +199,11 @@ export default function UpsellFlow() {
               !
             </div>
             <div className="w-16 h-16 rounded-2xl overflow-hidden bg-gray-100 shadow-md">
-              <img src={upsellData.img || "/placeholder.svg"} alt="Produto LEGO" className="w-16 h-16 object-cover" />
+              <img
+                src={upsellData.img || "/placeholder.svg"}
+                alt="Produto LEGO"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="flex-1 text-left">
               <div className="flex items-center gap-2 flex-wrap">
