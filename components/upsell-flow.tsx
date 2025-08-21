@@ -224,7 +224,7 @@ export default function UpsellFlow() {
       )}
 
       {currentView === "loading" && (
-        <div className="rounded-2xl p-4 bg-gradient-to-r from-purple-50 to-transparent shadow-lg">
+        <div className="rounded-2xl p-4 bg-gradient-to-r from-red-50 to-transparent shadow-lg">
           <div className="flex gap-3 items-center mb-4">
             <div className="w-14 h-14 rounded-2xl overflow-hidden bg-gray-100 shadow-md">
               <img src={upsellData.img || "/placeholder.svg"} alt="Produto LEGO" className="w-14 h-14 object-cover" />
@@ -238,7 +238,7 @@ export default function UpsellFlow() {
           <div className="flex items-center gap-3 mb-4">
             <div className="flex-1 h-3 bg-gray-200 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-purple-600 to-purple-700 transition-all duration-300 ease-linear"
+                className="h-full bg-gradient-to-r from-red-600 to-red-700 transition-all duration-300 ease-linear"
                 style={{ width: `${loadingProgress}%` }}
               />
             </div>
@@ -258,7 +258,7 @@ export default function UpsellFlow() {
                   activeSteps.includes(index) ? "opacity-100 translate-y-0" : "opacity-25 translate-y-1"
                 }`}
               >
-                <div className="w-2 h-2 rounded-full bg-purple-600"></div>
+                <div className="w-2 h-2 rounded-full bg-red-600"></div>
                 <span>{step}</span>
               </li>
             ))}
@@ -318,7 +318,7 @@ export default function UpsellFlow() {
       )}
 
       {currentView === "nfeMaking" && (
-        <div className="rounded-3xl p-5 bg-gradient-to-r from-purple-50 to-white shadow-xl space-y-4">
+        <div className="rounded-3xl p-5 bg-gradient-to-r from-red-50 to-white shadow-xl space-y-4">
           <div>
             <h3 className="text-xl font-black text-gray-900">Gerando NF‑e</h3>
             <div className="text-xs text-gray-500">A emissão será concluída após a verificação.</div>
@@ -326,7 +326,7 @@ export default function UpsellFlow() {
 
           <div className="grid gap-4 lg:grid-cols-2">
             <div className="rounded-2xl p-3 bg-gray-50 space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-purple-700">Preenchendo dados</h4>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-red-700">Preenchendo dados</h4>
               <div className="space-y-2">
                 {[
                   { label: "Emitente", value: "LEGO DO BRASIL" },
@@ -348,7 +348,7 @@ export default function UpsellFlow() {
             </div>
 
             <div className="rounded-2xl p-3 bg-gray-50 space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-purple-700">Resumo</h4>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-red-700">Resumo</h4>
               <div className="flex gap-3 items-center">
                 <div className="w-14 h-14 rounded-2xl overflow-hidden bg-gray-100 shadow-md">
                   <img
@@ -359,7 +359,7 @@ export default function UpsellFlow() {
                 </div>
                 <div>
                   <div className="font-black text-sm">{upsellData.title}</div>
-                  <div className="text-purple-700 font-black text-sm">{formatPrice(upsellData.price)}</div>
+                  <div className="text-red-700 font-black text-sm">{formatPrice(upsellData.price)}</div>
                 </div>
               </div>
 
@@ -370,7 +370,7 @@ export default function UpsellFlow() {
                 </div>
                 <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-purple-600 to-purple-700 transition-all duration-300 ease-linear"
+                    className="h-full bg-gradient-to-r from-red-600 to-red-700 transition-all duration-300 ease-linear"
                     style={{ width: `${nfeProgress}%` }}
                   />
                 </div>
@@ -381,7 +381,7 @@ export default function UpsellFlow() {
           <div className="flex justify-center">
             <button
               onClick={prepareNfeCheckout}
-              className="px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-black text-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 active:translate-y-0.5 min-w-44"
+              className="px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-black text-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 active:translate-y-0.5 min-w-44"
             >
               Ir para pagamento
             </button>
@@ -445,7 +445,7 @@ export default function UpsellFlow() {
                   setShowDeclinePush(false)
                   prepareNfeCheckout()
                 }}
-                className="px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-black text-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 active:translate-y-0.5"
+                className="px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white font-black text-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 active:translate-y-0.5"
               >
                 Ir para pagamento
               </button>
