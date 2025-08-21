@@ -5,7 +5,7 @@ export function CheckoutHeader() {
     <>
       <div className="bg-blue-600 text-white text-center py-2 text-xs md:text-sm">
         <div className="flex items-center justify-center gap-2 px-2">
-          <span className="text-center">A semana favorita de todo bruxo está quase chegando</span>
+          <span className="text-center">Resgate único por CPF</span>
           <button className="underline hidden md:inline">Saiba mais</button>
         </div>
       </div>
