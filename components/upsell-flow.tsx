@@ -22,8 +22,8 @@ export default function UpsellFlow() {
   const [activeSteps, setActiveSteps] = useState<number[]>([])
   const [activeFields, setActiveFields] = useState<number[]>([])
   const [upsellData, setUpsellData] = useState<UpsellData>({
-    img: "",
-    title: "",
+    img: "/placeholder.svg?height=160&width=160",
+    title: "Produto LEGO",
     price: "",
     orderNo: "",
     productId: "",
@@ -42,7 +42,7 @@ export default function UpsellFlow() {
       const product = JSON.parse(productData)
 
       setUpsellData({
-        img: product.image || "",
+        img: product.image || "https://images.seeklogo.com/logo-png/8/1/lego-logo-png_seeklogo-83157.png",
         title: product.name || " ",
         price: product.price || "",
         orderNo: checkout.orderId || "#" + Math.floor(1000 + Math.random() * 9000),
@@ -52,8 +52,8 @@ export default function UpsellFlow() {
     } else {
       const orderNo = "#" + Math.floor(1000 + Math.random() * 9000)
       setUpsellData({
-        img: "",
-        title: " ",
+        img: "https://images.seeklogo.com/logo-png/8/1/lego-logo-png_seeklogo-83157.png",
+        title: "",
         price: "",
         orderNo,
         productId: "",
@@ -250,9 +250,6 @@ export default function UpsellFlow() {
                 Documento fiscal obrigatório
               </div>
               <h2 className="text-2xl font-black text-gray-900 leading-tight">Emissão de Nota Fiscal (NF‑e)</h2>
-              <div className="text-sm text-gray-600">
-                Para o pedido LEGO: <strong>{upsellData.title}</strong>
-              </div>
             </div>
           </div>
 
@@ -329,7 +326,7 @@ export default function UpsellFlow() {
                 <div className="w-14 h-14 rounded-2xl overflow-hidden bg-gray-100 shadow-md">
                   <img
                     src={upsellData.img || "/placeholder.svg"}
-                    alt="Produto "
+                    alt="Produto LEGO"
                     className="w-full h-full object-cover"
                   />
                 </div>
