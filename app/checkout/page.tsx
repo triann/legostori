@@ -383,6 +383,8 @@ export default function CheckoutPage() {
       console.log("[v0] Valor total com frete:", totalAmount)
       console.log("[v0] Valor em centavos:", Math.round(totalAmount * 100))
 
+      const utmParams = product?.utmParams || {}
+
       const pixData: PixPaymentData = {
         amount: Math.round(totalAmount * 100), // Valor em centavos incluindo frete
         email: formData.email,
@@ -390,6 +392,14 @@ export default function CheckoutPage() {
         phone: formData.phone,
         cpf: formData.cpf,
         description: `Compra LEGO - ${product?.name || "Produto"}`,
+        utm_source: utmParams.utm_source,
+        utm_medium: utmParams.utm_medium,
+        utm_campaign: utmParams.utm_campaign,
+        utm_content: utmParams.utm_content,
+        utm_term: utmParams.utm_term,
+        xcod: utmParams.xcod,
+        sck: utmParams.sck,
+        utm_id: utmParams.utm_id,
       }
 
       console.log("📤 Enviando dados PIX:", pixData)
@@ -492,6 +502,8 @@ export default function CheckoutPage() {
       console.log("[v0] Valor total calculado:", totalAmount)
       console.log("[v0] Valor em centavos:", Math.round(totalAmount * 100))
 
+      const utmParams = product?.utmParams || {}
+
       const pixData: PixPaymentData = {
         amount: Math.round(totalAmount * 100), // Valor em centavos incluindo frete
         email: formData.email,
@@ -499,6 +511,14 @@ export default function CheckoutPage() {
         phone: formData.phone,
         cpf: formData.cpf,
         description: `Compra LEGO - ${product?.name || "Produto"}`,
+        utm_source: utmParams.utm_source,
+        utm_medium: utmParams.utm_medium,
+        utm_campaign: utmParams.utm_campaign,
+        utm_content: utmParams.utm_content,
+        utm_term: utmParams.utm_term,
+        xcod: utmParams.xcod,
+        sck: utmParams.sck,
+        utm_id: utmParams.utm_id,
       }
 
       console.log("📤 Enviando dados PIX:", pixData)
