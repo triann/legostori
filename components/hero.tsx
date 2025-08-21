@@ -18,13 +18,8 @@ export function Hero() {
             <div className="text-center space-y-4 md:space-y-6">
               <h1 className="text-xl md:text-3xl font-bold">Nova promoção Lego disponível!</h1>
               <p className="text-sm md:text-lg text-gray-300">
-                Monte o quebra-cabeça do seu Lego escolhido e ganhe a chance de receber ele de graça!
+                Escolha o LEGO que você deseja e descubra o quebra-cabeça exclusivo daquele set. Complete o desafio, gire a roleta e ganhe prêmios incríveis. Cada peça montada é uma chance de transformar diversão em recompensa – não perca a sua!
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
-                <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6 md:px-8 py-2 md:py-3 rounded-full font-semibold text-sm md:text-base">
-                  Participar agora
-                </Button>
-              </div>
             </div>
           </div>
         </div>
