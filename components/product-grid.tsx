@@ -8,55 +8,100 @@ import Link from "next/link"
 
 const categories = [
   {
-    name: "Novos",
+    name: "Todos os Legos",
     color: "bg-amber-600",
     image:
       "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/4feeb981-fba7-46b5-8b9d-72991831c64d___433bd283e0146251ce864d0b90e9039b.jpg",
-    href: "/categoria/novos", // adicionando navegação para página específica
+    href: "/categoria/todos", // adicionando navegação para página específica
   },
   {
-    name: "Exclusivos",
+    name: "Maletas",
     color: "bg-purple-600",
     image:
-      "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/dbba9da0-fef8-4752-8da3-4dd10e5fdae4___dff3250cc485e56c1e8392f20b546919.jpg",
-    href: "/categoria/exclusivos", // adicionando navegação para página específica
+      "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Allsets.jpg",
+    href: "/categoria/classic", // adicionando navegação para página específica
   },
   {
-    name: "Ofertas",
+    name: "Harry Potter",
+    color: "bg-purple-600",
+    image:
+      "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-HarryPotter.jpg",
+    href: "/categoria/harrypotter", // adicionando navegação para página específica
+  },
+  {
+    name: "Disney",
     color: "bg-red-600",
-    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Offers.jpg",
-    href: "/categoria/ofertas",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Disney.jpg",
+    href: "/categoria/disney",
   }, // adicionando navegação
   {
-    name: "Todos os sets",
+    name: "Marvel",
     color: "bg-red-700",
-    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Allsets.jpg",
-    href: "/categoria/todos-os-sets",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Marvel.jpg?v=2",
+    href: "/categoria/marvel",
   }, // adicionando navegação
   {
-    name: "LEGO ONE PIECE",
+    name: "",
     color: "bg-blue-600",
     image:
-      "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/f5bd9554-1255-45fb-bcd4-b0b1b117a1cd___a9b2be72ae844ee84b2cd24199a88fbf.jpg",
-    href: "/categoria/one-piece",
+      "https://i.pinimg.com/474x/58/17/13/581713909e52b3e0445de19232b0bf02.jpg",
+    href: "/categoria/minecraft",
   }, // adicionando navegação
   {
-    name: "Presentes",
+    name: "Star Wars",
     color: "bg-green-600",
-    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-forkids.jpg",
-    href: "/categoria/presentes",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Icons-2.jpg",
+    href: "/categoria/starwars",
   }, // adicionando navegação
   {
-    name: "Volta às Aulas",
+    name: "Jurassic World",
     color: "bg-teal-600",
-    image: "/colorful-brick-backpack.png",
-    href: "/categoria/volta-as-aulas",
+    image: "https://preview.redd.it/opinions-on-a-new-jurassic-lego-game-v0-n8tljfeb0khe1.jpg?width=640&crop=smart&auto=webp&s=59c0f558ee9c5198ff3d55d2dbf55a45204be02c",
+    href: "/categoria/jurassicworld",
   }, // adicionando navegação
+  {
+    name: "Speed Champions",
+    color: "bg-teal-600",
+    image: "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/39bf9ec1-118f-47e2-92b9-9aa12044bd4b___24a1b11a3bf561b24143485763a0cb1e.jpg",
+    href: "/categoria/speedchampions",
+  },
+  {
+    name: "Botanicals",
+    color: "bg-teal-600",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Botanicals.jpg",
+    href: "/categoria/botanicals",
+  },
+  {
+    name: "Creator",
+    color: "bg-teal-600",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Creator.jpg",
+    href: "/categoria/creator",
+  },
+  {
+    name: "Icons",
+    color: "bg-teal-600",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Classic.jpg",
+    href: "/categoria/icons",
+  },
 ]
 
 const products = [
   {
     id: 1,
+    name: "Icons - McLaren MP4/4 e Ayrton Senna",
+    price: "R$ 499,99",
+    originalPrice: null,
+    rating: 5.0,
+    reviews: 156,
+    ages: "18+",
+    pieces: 693,
+    image:
+      "https://legobrasil.vtexassets.com/arquivos/ids/185202/10330--1-.jpg?v=638424970071170000",
+    isNew: true,
+    href: "/product/1",
+  },
+  {
+    id: 2,
     name: "Disney - Mini Castelo da Disney",
     price: "R$ 329,99",
     originalPrice: null,
@@ -67,19 +112,6 @@ const products = [
     image:
       "https://legobrasil.vtexassets.com/arquivos/ids/176770/lego_40478_Disney_Mini_Castelo_da_Disney_01.jpg?v=637732735262400000",
     isNew: true,
-    href: "/product/1",
-  },
-  {
-    id: 2,
-    name: "Disney - Casa de Praia Lilo e Stitch",
-    price: "R$ 899,99",
-    originalPrice: null,
-    rating: 4.9,
-    reviews: 203,
-    ages: "18+",
-    pieces: 834,
-    image: "https://legobrasil.vtexassets.com/arquivos/ids/188946/43268.jpg?v=638731528542870000",
-    isNew: false,
     href: "/product/2",
   },
   {
@@ -194,8 +226,8 @@ export function ProductGrid() {
       <div className="mb-6 md:mb-8">
         <div className="flex items-center gap-2 md:gap-4 mb-4 md:mb-6 overflow-x-auto">
           <h2 className="text-base md:text-lg font-semibold whitespace-nowrap">Em Alta</h2>
-          <span className="text-gray-500 text-sm md:text-base whitespace-nowrap">Temas</span>
-          <span className="text-gray-500 text-sm md:text-base whitespace-nowrap">Idade</span>
+          {/*<span className="text-gray-500 text-sm md:text-base whitespace-nowrap">Temas</span>
+          <span className="text-gray-500 text-sm md:text-base whitespace-nowrap">Idade</span>*/}
         </div>
 
         <div
