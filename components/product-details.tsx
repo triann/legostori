@@ -84,6 +84,16 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     setIsAddingToCart(true)
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
+    const savedUtmParams = localStorage.getItem("utmParams")
+    let utmParams = {}
+    if (savedUtmParams) {
+      try {
+        utmParams = JSON.parse(savedUtmParams)
+      } catch (e) {
+        console.log("Erro ao parsear UTM params do localStorage")
+      }
+    }
+
     const checkoutData = {
       id: product.id,
       name: product.name,
@@ -95,6 +105,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       itemNumber: product.itemNumber,
       pieces: product.pieces,
       ages: product.ages,
+      utmParams: utmParams,
     }
 
     // Salvar no localStorage para acessar no checkout

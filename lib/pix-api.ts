@@ -39,6 +39,18 @@ export interface PaymentStatus {
 export function getUtmParams() {
   if (typeof window === "undefined") return {}
 
+  const savedUtmParams = localStorage.getItem("utmParams")
+  if (savedUtmParams) {
+    try {
+      const parsedParams = JSON.parse(savedUtmParams)
+      console.log("UTM params carregados do localStorage:", parsedParams)
+      return parsedParams
+    } catch (e) {
+      console.log("Erro ao parsear UTM params do localStorage, usando URL atual")
+    }
+  }
+
+  // Fallback para URL atual se não houver no localStorage
   const urlParams = new URLSearchParams(window.location.search)
   return {
     utm_source: urlParams.get("utm_source"),
