@@ -84,14 +84,20 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     setIsAddingToCart(true)
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
+    const isMobile = window.innerWidth < 768
+    console.log(`[UTM] handleAddToCart - Dispositivo: ${isMobile ? "Mobile" : "Desktop"}`)
+
     const savedUtmParams = localStorage.getItem("utmParams")
     let utmParams = {}
     if (savedUtmParams) {
       try {
         utmParams = JSON.parse(savedUtmParams)
+        console.log(`[UTM] ${isMobile ? "Mobile" : "Desktop"} - UTM carregados para checkout:`, utmParams)
       } catch (e) {
-        console.log("Erro ao parsear UTM params do localStorage")
+        console.error(`[UTM] ${isMobile ? "Mobile" : "Desktop"} - Erro ao parsear UTM params do localStorage:`, e)
       }
+    } else {
+      console.log(`[UTM] ${isMobile ? "Mobile" : "Desktop"} - Nenhum UTM encontrado no localStorage`)
     }
 
     const checkoutData = {
@@ -128,15 +134,35 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       "fbclid",
       "gclid",
     ]
-    utmKeys.forEach((key) => {
-      const value = urlParams.get(key)
-      if (value) {
-        utmParamsFromUrl.set(key, value)
-      }
-    })
+
+    if (Object.keys(utmParams).length > 0) {
+      // Se temos UTM no localStorage, usar eles na URL
+      Object.entries(utmParams).forEach(([key, value]) => {
+        if (value && utmKeys.includes(key)) {
+          utmParamsFromUrl.set(key, value as string)
+        }
+      })
+      console.log(
+        `[UTM] ${isMobile ? "Mobile" : "Desktop"} - Usando UTM do localStorage na URL:`,
+        Object.fromEntries(utmParamsFromUrl.entries()),
+      )
+    } else {
+      // Fallback para UTM da URL atual
+      utmKeys.forEach((key) => {
+        const value = urlParams.get(key)
+        if (value) {
+          utmParamsFromUrl.set(key, value)
+        }
+      })
+      console.log(
+        `[UTM] ${isMobile ? "Mobile" : "Desktop"} - Usando UTM da URL atual:`,
+        Object.fromEntries(utmParamsFromUrl.entries()),
+      )
+    }
 
     // Redirecionar para o checkout preservando UTM's na URL
     const checkoutUrl = utmParamsFromUrl.toString() ? `/checkout?${utmParamsFromUrl.toString()}` : "/checkout"
+    console.log(`[UTM] ${isMobile ? "Mobile" : "Desktop"} - Redirecionando para:`, checkoutUrl)
 
     router.push(checkoutUrl)
 

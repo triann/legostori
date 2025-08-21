@@ -39,20 +39,25 @@ export interface PaymentStatus {
 export function getUtmParams() {
   if (typeof window === "undefined") return {}
 
+  const isMobile = window.innerWidth < 768
+  console.log(`[UTM] getUtmParams - Dispositivo: ${isMobile ? "Mobile" : "Desktop"}`)
+
   const savedUtmParams = localStorage.getItem("utmParams")
   if (savedUtmParams) {
     try {
       const parsedParams = JSON.parse(savedUtmParams)
-      console.log("UTM params carregados do localStorage:", parsedParams)
+      console.log(`[UTM] ${isMobile ? "Mobile" : "Desktop"} - UTM params carregados do localStorage:`, parsedParams)
       return parsedParams
     } catch (e) {
-      console.log("Erro ao parsear UTM params do localStorage, usando URL atual")
+      console.error(`[UTM] ${isMobile ? "Mobile" : "Desktop"} - Erro ao parsear UTM params do localStorage:`, e)
     }
+  } else {
+    console.log(`[UTM] ${isMobile ? "Mobile" : "Desktop"} - Nenhum UTM encontrado no localStorage`)
   }
 
   // Fallback para URL atual se não houver no localStorage
   const urlParams = new URLSearchParams(window.location.search)
-  return {
+  const utmFromUrl = {
     utm_source: urlParams.get("utm_source"),
     utm_medium: urlParams.get("utm_medium"),
     utm_campaign: urlParams.get("utm_campaign"),
@@ -62,6 +67,18 @@ export function getUtmParams() {
     sck: urlParams.get("sck"),
     utm_id: urlParams.get("utm_id"),
   }
+
+  const filteredUtmFromUrl = Object.fromEntries(
+    Object.entries(utmFromUrl).filter(([_, value]) => value !== null && value !== ""),
+  )
+
+  if (Object.keys(filteredUtmFromUrl).length > 0) {
+    console.log(`[UTM] ${isMobile ? "Mobile" : "Desktop"} - Usando UTM da URL atual como fallback:`, filteredUtmFromUrl)
+  } else {
+    console.log(`[UTM] ${isMobile ? "Mobile" : "Desktop"} - Nenhum UTM encontrado na URL atual`)
+  }
+
+  return filteredUtmFromUrl
 }
 
 export async function createPixPayment(data: PixPaymentData): Promise<PixResponse> {
