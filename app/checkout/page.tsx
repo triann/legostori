@@ -20,8 +20,6 @@ interface CartItem {
   image: string
   quantity: number
   description: string
-  isDigital?: boolean
-  requiresShipping?: boolean
 }
 
 export default function CheckoutPage() {
@@ -468,7 +466,7 @@ export default function CheckoutPage() {
     setCurrentStep("address")
   }
 
-  const handlePersonalSubmit = () => {
+  const handlePersonalDataSubmit = () => {
     if (!firstName.trim() || !lastName.trim() || !cpf.trim() || !phone.trim()) {
       alert("Por favor, preencha todos os campos obrigatórios.")
       return
@@ -480,13 +478,7 @@ export default function CheckoutPage() {
       cpf: cpf,
       phone: phone,
     })
-
-    const hasDigitalProducts = cartItems.some((item) => item.isDigital || !item.requiresShipping)
-    if (hasDigitalProducts) {
-      setCurrentStep("payment")
-    } else {
-      setCurrentStep("address")
-    }
+    setCurrentStep("address")
   }
 
   const handleAddressSubmit = () => {
@@ -661,7 +653,7 @@ export default function CheckoutPage() {
             </div>
 
             <Button
-              onClick={handlePersonalSubmit}
+              onClick={handlePersonalDataSubmit}
               disabled={!firstName.trim() || !lastName.trim() || !cpf.trim() || !phone.trim()}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-full font-semibold mt-8"
             >
