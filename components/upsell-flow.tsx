@@ -40,6 +40,7 @@ export default function UpsellFlow() {
     if (checkoutProduct) {
       const product = JSON.parse(checkoutProduct)
       let customerData = { email: "", name: "" }
+      let realPrice = product.finalPrice?.toString() || product.price?.toString() || ""
 
       if (pixPayment) {
         const payment = JSON.parse(pixPayment)
@@ -47,12 +48,13 @@ export default function UpsellFlow() {
           email: payment.email || "",
           name: payment.name || "",
         }
+        realPrice = payment.amount?.toString() || realPrice
       }
 
       setUpsellData({
         img: product.image || "https://images.seeklogo.com/logo-png/8/1/lego-logo-png_seeklogo-83157.png",
         title: product.name || "Produto LEGO",
-        price: product.finalPrice?.toString() || product.price?.toString() || "",
+        price: realPrice,
         orderNo: "#" + Math.floor(1000 + Math.random() * 9000),
         productId: product.id || "",
         customerEmail: customerData.email,
@@ -73,10 +75,12 @@ export default function UpsellFlow() {
 
   const formatPrice = (cents: string) => {
     if (!cents || isNaN(Number(cents))) return "—"
+    const numValue = Number(cents)
+    const finalValue = numValue > 1000 ? numValue / 100 : numValue
     return new Intl.NumberFormat("pt-BR", {
       style: "currency",
       currency: "BRL",
-    }).format(Number(cents) / 100)
+    }).format(finalValue)
   }
 
   const handleOrderClick = () => {
@@ -120,26 +124,23 @@ export default function UpsellFlow() {
   }
 
   const prepareNfeCheckout = () => {
-    // Dados do produto NF-e para o checkout
     const nfeProduct = {
       id: "nfe-emissao",
       name: "Emissão de Nota Fiscal Eletrônica (NF-e)",
-      price: 990, // Removendo aspas para ser número
+      price: 990,
       finalPrice: 990,
       originalPrice: 990,
       isFree: false,
-      image: "/nota-fiscal-eletronica.png", // Usando imagem específica da NF-e
+      image: "/nota-fiscal-eletronica.png",
       description: "Serviço de emissão de NF-e para produtos LEGO com validação SEFAZ",
       quantity: 1,
-      isNfe: true, // Flag para identificar que é produto de NF-e
+      isNfe: true,
     }
 
     localStorage.setItem("checkoutProduct", JSON.stringify(nfeProduct))
 
-    // Preservar UTM parameters se existirem
     const existingUtm = localStorage.getItem("utm-params")
 
-    // Redirecionar para checkout
     router.push("/checkout")
   }
 
@@ -196,11 +197,7 @@ export default function UpsellFlow() {
               !
             </div>
             <div className="w-16 h-16 rounded-2xl overflow-hidden bg-gray-100 shadow-md">
-              <img
-                src={upsellData.img || "/placeholder.svg"}
-                alt="Produto LEGO"
-                className="w-full h-full object-cover"
-              />
+              <img src={upsellData.img || "/placeholder.svg"} alt="Produto LEGO" className="w-16 h-16 object-cover" />
             </div>
             <div className="flex-1 text-left">
               <div className="flex items-center gap-2 flex-wrap">
@@ -224,11 +221,7 @@ export default function UpsellFlow() {
         <div className="rounded-2xl p-4 bg-gradient-to-r from-purple-50 to-transparent shadow-lg">
           <div className="flex gap-3 items-center mb-4">
             <div className="w-14 h-14 rounded-2xl overflow-hidden bg-gray-100 shadow-md">
-              <img
-                src={upsellData.img || "/placeholder.svg"}
-                alt="Produto LEGO"
-                className="w-full h-full object-cover"
-              />
+              <img src={upsellData.img || "/placeholder.svg"} alt="Produto LEGO" className="w-14 h-14 object-cover" />
             </div>
             <div>
               <div className="font-black text-base">{upsellData.title}</div>
@@ -271,11 +264,7 @@ export default function UpsellFlow() {
         <div className="rounded-3xl p-5 bg-gradient-to-r from-red-50 to-transparent shadow-xl space-y-5">
           <div className="flex gap-4 items-center flex-wrap">
             <div className="w-16 h-16 rounded-2xl overflow-hidden shadow-lg">
-              <img
-                src={upsellData.img || "/placeholder.svg"}
-                alt="Produto LEGO"
-                className="w-full h-full object-cover"
-              />
+              <img src={upsellData.img || "/placeholder.svg"} alt="Produto LEGO" className="w-16 h-16 object-cover" />
             </div>
             <div className="flex-1">
               <div className="text-xs font-black text-red-700 uppercase tracking-wider">
@@ -359,7 +348,7 @@ export default function UpsellFlow() {
                   <img
                     src={upsellData.img || "/placeholder.svg"}
                     alt="Produto LEGO"
-                    className="w-full h-full object-cover"
+                    className="w-14 h-14 object-cover"
                   />
                 </div>
                 <div>
