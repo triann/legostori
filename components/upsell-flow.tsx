@@ -22,8 +22,8 @@ export default function UpsellFlow() {
   const [activeSteps, setActiveSteps] = useState<number[]>([])
   const [activeFields, setActiveFields] = useState<number[]>([])
   const [upsellData, setUpsellData] = useState<UpsellData>({
-    img: "/placeholder.svg?height=160&width=160",
-    title: "Produto LEGO",
+    img: "",
+    title: "",
     price: "",
     orderNo: "",
     productId: "",
@@ -42,8 +42,8 @@ export default function UpsellFlow() {
       const product = JSON.parse(productData)
 
       setUpsellData({
-        img: product.image || "/placeholder.svg?height=160&width=160",
-        title: product.name || "Produto LEGO",
+        img: product.image || "",
+        title: product.name || " ",
         price: product.price || "",
         orderNo: checkout.orderId || "#" + Math.floor(1000 + Math.random() * 9000),
         productId: product.id || "",
@@ -52,8 +52,8 @@ export default function UpsellFlow() {
     } else {
       const orderNo = "#" + Math.floor(1000 + Math.random() * 9000)
       setUpsellData({
-        img: "/placeholder.svg?height=160&width=160",
-        title: "Produto LEGO",
+        img: "",
+        title: " ",
         price: "",
         orderNo,
         productId: "",
@@ -329,7 +329,7 @@ export default function UpsellFlow() {
                 <div className="w-14 h-14 rounded-2xl overflow-hidden bg-gray-100 shadow-md">
                   <img
                     src={upsellData.img || "/placeholder.svg"}
-                    alt="Produto LEGO"
+                    alt="Produto "
                     className="w-full h-full object-cover"
                   />
                 </div>
