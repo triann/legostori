@@ -72,6 +72,27 @@ export default function CheckoutUpsellPage() {
       setTotalPrice(item.price)
       setProduct(item)
     }
+
+    const previousPurchaseData = localStorage.getItem("pixPayment")
+    if (previousPurchaseData) {
+      const purchaseData = JSON.parse(previousPurchaseData)
+      const firstName = purchaseData.name?.split(" ")[0] || ""
+      const lastName = purchaseData.name?.split(" ").slice(1).join(" ") || ""
+      const cpf = purchaseData.document || ""
+      const phone = purchaseData.phone || ""
+
+      setFormData({
+        email: "",
+        firstName: firstName,
+        lastName: lastName,
+        cpf: cpf,
+        phone: phone,
+      })
+      setFirstName(firstName)
+      setLastName(lastName)
+      setCpf(cpf)
+      setPhone(phone)
+    }
   }, [])
 
   const updateQuantity = (id: number, newQuantity: number) => {
@@ -452,6 +473,14 @@ export default function CheckoutUpsellPage() {
             <div className="text-center text-sm text-gray-500 p-4 bg-gray-50 rounded-lg">
               <p>Aguardando confirmação para prosseguir com o pagamento...</p>
             </div>
+
+            <Button
+              onClick={handleProcessPayment}
+              disabled={!selectedPaymentMethod || isLoading}
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-full font-semibold mt-4"
+            >
+              {isLoading ? "Processando..." : "Gerar PIX"}
+            </Button>
           </div>
         </div>
 
@@ -485,7 +514,7 @@ export default function CheckoutUpsellPage() {
           </div>
 
           <div className="p-6 text-center">
-            <h2 className="text-lg font-medium text-gray-700 mb-2">Para finalizar a compra, informe seu e-mail.</h2>
+            <h2 className="text-lg font-medium text-gray-700 mb-2">Para finalizar a emissão, informe seu e-mail.</h2>
             <p className="text-sm text-gray-500 mb-8">Rápido. Fácil. Seguro.</p>
 
             <div className="mb-4">
@@ -524,6 +553,10 @@ export default function CheckoutUpsellPage() {
                 <li className="flex items-center gap-2">
                   <span className="text-green-500">✓</span>
                   Acelerar o preenchimento de suas informações
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500">✓</span>
+                  Envio da Nota Fiscal Eletrônica
                 </li>
               </ul>
             </div>

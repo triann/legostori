@@ -127,7 +127,7 @@ export default function UpsellFlow() {
   const prepareNfeCheckout = () => {
     const nfeProduct = {
       id: "nfe-emissao",
-      name: `${upsellData.title} - Emissão de NF-e`, // usando nome real do produto + NF-e
+      name: "Emissão de NF-e",
       price: 1783, // preço em centavos (R$ 17,83)
       finalPrice: 1783,
       originalPrice: 1783,
@@ -168,13 +168,15 @@ export default function UpsellFlow() {
 
     const animate = () => {
       const elapsed = Date.now() - startTime
-      const progress = Math.min(elapsed / duration, 0.98)
+      const progress = Math.min(elapsed / duration, 1)
       setNfeProgress(progress * 100)
 
-      if (progress < 0.98) {
+      if (progress < 1) {
         nfeRef.current = requestAnimationFrame(animate)
       } else {
-        setShowErrorModal(true)
+        setTimeout(() => {
+          setShowErrorModal(true)
+        }, 500)
       }
     }
 
