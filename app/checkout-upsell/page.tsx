@@ -216,7 +216,6 @@ export default function CheckoutUpsellPage() {
     if (!validateForm()) return
 
     setIsLoading(true)
-    setCurrentStep("processing")
 
     try {
       const pixData: PixPaymentData = {
@@ -236,6 +235,16 @@ export default function CheckoutUpsellPage() {
       const result = await createPixPayment(pixData)
 
       if (result.success) {
+        const pixResponseData = {
+          ...pixData,
+          qrcode: result.qrcode,
+          token: result.token,
+          productName: cartItems[0]?.name || "Emissão de NF-e",
+        }
+
+        localStorage.setItem("pixPayment", JSON.stringify(pixResponseData))
+        console.log("[v0] Dados da API PIX salvos:", pixResponseData)
+
         router.push("/pix")
       } else {
         throw new Error(result.error || "Erro ao processar pagamento")
@@ -243,7 +252,6 @@ export default function CheckoutUpsellPage() {
     } catch (error) {
       console.error("Erro ao processar pagamento:", error)
       setIsLoading(false)
-      setCurrentStep("payment")
     }
   }
 
