@@ -115,7 +115,8 @@ export default function UpsellFlow() {
 
   const handleAcceptNfe = () => {
     sessionStorage.setItem("upsell_nfe_selected", "1")
-    prepareNfeCheckout()
+    setCurrentView("nfeMaking")
+    startNfeMaking()
   }
 
   const handleDeclineNfe = () => {
@@ -141,9 +142,14 @@ export default function UpsellFlow() {
 
     localStorage.setItem("checkoutProduct", JSON.stringify(nfeProduct))
 
+    const originalProduct = localStorage.getItem("checkoutProduct")
+    if (originalProduct) {
+      localStorage.setItem("originalProduct", originalProduct)
+    }
+
     const existingUtm = localStorage.getItem("utm-params")
 
-    router.push("/checkout")
+    router.push("/checkout-upsell")
   }
 
   const startNfeMaking = () => {
@@ -198,14 +204,14 @@ export default function UpsellFlow() {
             <div className="w-7 h-7 rounded-full bg-gradient-to-br from-red-500 to-red-600 text-white font-black text-sm flex items-center justify-center">
               !
             </div>
-            <div className="w-16 h-16 rounded-2xl overflow-hidden bg-gray-100 shadow-md">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-gray-100 shadow-md flex-shrink-0">
               <img
                 src={upsellData.img || "/placeholder.svg"}
                 alt="Produto LEGO"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-center"
               />
             </div>
-            <div className="flex-1 text-left">
+            <div className="flex-1 text-left min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
                 <div className="font-black text-base truncate">{upsellData.title}</div>
                 <div className="text-xs bg-gray-100 rounded-full px-2 py-1 font-bold text-gray-600">
@@ -239,10 +245,12 @@ export default function UpsellFlow() {
             <div className="flex-1 h-3 bg-gray-200 rounded-full overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-red-600 to-red-700 transition-all duration-300 ease-linear"
-                style={{ width: `${loadingProgress}%` }}
+                style={{ width: `${Math.min(loadingProgress, 100)}%` }}
               />
             </div>
-            <div className="text-xs text-gray-600 font-mono min-w-9 text-right">{Math.round(loadingProgress)}%</div>
+            <div className="text-xs text-gray-600 font-mono min-w-9 text-right">
+              {Math.round(Math.min(loadingProgress, 100))}%
+            </div>
           </div>
 
           <ul className="space-y-2">
