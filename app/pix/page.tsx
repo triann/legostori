@@ -117,7 +117,7 @@ export default function PixPage() {
 
         // Redirecionar após 3 segundos
         setTimeout(() => {
-          window.location.href = "/upzada"
+          window.location.href = "/pedidos"
         }, 3000)
       } else if (status.status === "REJECTED") {
         setPaymentStatus("rejected")
@@ -146,7 +146,7 @@ export default function PixPage() {
 
           // Redirecionar após 3 segundos
           setTimeout(() => {
-            window.location.href = "/upzada"
+            window.location.href = "/pedidos"
           }, 3000)
         } else if (status.status === "REJECTED") {
           setPaymentStatus("rejected")
