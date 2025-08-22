@@ -3,7 +3,6 @@
 import { CheckoutHeader } from "@/components/checkout-header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
 import { useEffect, useState } from "react"
 import { checkPaymentStatus, generateQRCodeUrl } from "@/lib/pix-api"
 
@@ -14,6 +13,7 @@ interface PixPaymentData {
   productName: string
   email: string
   name: string
+  items?: { name: string }[]
 }
 
 export default function PixPage() {
@@ -28,6 +28,11 @@ export default function PixPage() {
     if (savedPixData) {
       const parsedData = JSON.parse(savedPixData)
       console.log("[v0] Dados PIX recuperados do localStorage:", parsedData)
+
+      if (!parsedData.productName && parsedData.items && parsedData.items.length > 0) {
+        parsedData.productName = parsedData.items[0].name
+        console.log("[v0] Nome do produto extraído dos items:", parsedData.productName)
+      }
 
       if (parsedData.amount > 1000) {
         // Se o valor for maior que 1000, provavelmente está em centavos
@@ -254,7 +259,6 @@ export default function PixPage() {
                 <li>4. Confirme o pagamento</li>
               </ol>
             </div>
-
 
             <Button
               onClick={copyPixCode}

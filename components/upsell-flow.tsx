@@ -387,15 +387,6 @@ export default function UpsellFlow() {
               </div>
             </div>
           </div>
-
-          <div className="flex justify-center">
-            <button
-              onClick={prepareNfeCheckout}
-              className="px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-black text-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 active:translate-y-0.5 min-w-44"
-            >
-              Ir para pagamento
-            </button>
-          </div>
         </div>
       )}
 

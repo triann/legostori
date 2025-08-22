@@ -7,7 +7,7 @@ import { CheckoutHeader } from "@/components/checkout-header"
 import { createPixPayment, type PixPaymentData, maskCPF, maskPhone, validateEmail } from "@/lib/pix-api"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Minus, Plus, Trash2, X, Edit2 } from "lucide-react"
+import { Minus, Plus, Trash2, X, Edit2, Loader2 } from "lucide-react"
 
 interface CartItem {
   id: number
@@ -254,7 +254,7 @@ export default function CheckoutUpsellPage() {
 
         <div className="max-w-md mx-auto bg-white min-h-screen transform transition-all duration-500 ease-in-out">
           <div className="p-4 border-b">
-            <h1 className="text-xl font-semibold text-gray-900 text-center">Finalizar compra</h1>
+            <h1 className="text-xl font-semibold text-gray-900 text-center">Emissão de NF-e</h1>
           </div>
 
           <div className="p-4">
@@ -378,7 +378,7 @@ export default function CheckoutUpsellPage() {
 
         <div className="max-w-md mx-auto bg-white min-h-screen transform transition-all duration-500 ease-in-out">
           <div className="p-4 border-b">
-            <h1 className="text-xl font-semibold text-gray-900">Finalizar compra</h1>
+            <h1 className="text-xl font-semibold text-gray-900">Emissão de NF-e</h1>
           </div>
 
           <div className="p-4">
@@ -477,9 +477,16 @@ export default function CheckoutUpsellPage() {
             <Button
               onClick={handleProcessPayment}
               disabled={!selectedPaymentMethod || isLoading}
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-full font-semibold mt-4"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-full font-semibold mt-4 disabled:opacity-50"
             >
-              {isLoading ? "Processando..." : "Gerar PIX"}
+              {isLoading ? (
+                <div className="flex items-center justify-center gap-2">
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Processando...</span>
+                </div>
+              ) : (
+                "Gerar PIX"
+              )}
             </Button>
           </div>
         </div>
@@ -510,7 +517,7 @@ export default function CheckoutUpsellPage() {
 
         <div className="max-w-md mx-auto bg-white min-h-screen transform transition-all duration-500 ease-in-out">
           <div className="p-4 border-b">
-            <h1 className="text-xl font-semibold text-gray-900 text-center">Finalizar compra</h1>
+            <h1 className="text-xl font-semibold text-gray-900 text-center">Emissão de NF-e</h1>
           </div>
 
           <div className="p-6 text-center">
@@ -680,7 +687,7 @@ export default function CheckoutUpsellPage() {
               onClick={handleContinueToEmail}
               className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-full font-semibold mb-4"
             >
-              Fechar pedido
+              Continuar
             </Button>
           </div>
         </div>
