@@ -1,87 +1,213 @@
 "use client"
 
+import type React from "react"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { createPixPayment } from "@/lib/pix-api"
-import { Shield, Loader2 } from "lucide-react"
+import { CheckoutHeader } from "@/components/checkout-header"
+import { createPixPayment, type PixPaymentData, maskCPF, maskPhone, validateEmail } from "@/lib/pix-api"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Minus, Plus, Trash2, X, Edit2 } from "lucide-react"
 
-interface UpsellProduct {
-  id: string
+interface CartItem {
+  id: number
   name: string
   price: number
+  originalPrice: number
+  isFree: boolean
   image: string
+  quantity: number
   description: string
-  isDigital: boolean
+  isDigital?: boolean
+  requiresShipping?: boolean
 }
 
-interface CustomerData {
-  name: string
-  email: string
-  document: string
-}
-
-export default function CheckoutUpsell() {
+export default function CheckoutUpsellPage() {
   const router = useRouter()
-  const [product, setProduct] = useState<UpsellProduct | null>(null)
-  const [customerData, setCustomerData] = useState<CustomerData>({ name: "", email: "", document: "" })
+  const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const [currentStep, setCurrentStep] = useState<"cart" | "email" | "personal" | "payment" | "processing" | "success">(
+    "cart",
+  )
   const [email, setEmail] = useState("")
-  const [isProcessing, setIsProcessing] = useState(false)
-  const [currentStep, setCurrentStep] = useState<"review" | "email" | "processing">("review")
+  const [emailError, setEmailError] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [cpf, setCpf] = useState("")
+  const [phone, setPhone] = useState("")
+  const [saveInfo, setSaveInfo] = useState(true)
+  const [receivePromotions, setReceivePromotions] = useState(false)
+  const [showNotification, setShowNotification] = useState(false)
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>("")
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  const [totalPrice, setTotalPrice] = useState(0)
+  const [formData, setFormData] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    cpf: "",
+    phone: "",
+  })
+  const [product, setProduct] = useState<any>(null)
 
   useEffect(() => {
-    const upsellProduct = localStorage.getItem("checkoutProduct")
-    const originalCustomer = localStorage.getItem("pixPayment")
-
-    if (upsellProduct) {
-      const productData = JSON.parse(upsellProduct)
-      setProduct(productData)
+    const upsellData = localStorage.getItem("upsellProduct")
+    if (upsellData) {
+      const item = JSON.parse(upsellData)
+      setCartItems([
+        {
+          id: 1,
+          name: item.name,
+          price: item.price,
+          originalPrice: item.originalPrice || item.price,
+          isFree: false,
+          image: item.image,
+          quantity: 1,
+          description: item.description || "Produto digital",
+          isDigital: true,
+          requiresShipping: false,
+        },
+      ])
+      setTotalPrice(item.price)
+      setProduct(item)
     }
+  }, [])
 
-    if (originalCustomer) {
-      const customer = JSON.parse(originalCustomer)
-      setCustomerData({
-        name: customer.name || "",
-        email: customer.email || "",
-        document: customer.document || customer.cpf || "",
-      })
-      setEmail(customer.email || "")
-    }
+  const updateQuantity = (id: number, newQuantity: number) => {
+    if (newQuantity < 1) return
+    setCartItems((items) => items.map((item) => (item.id === id ? { ...item, quantity: newQuantity } : item)))
+  }
 
-    // Se não há produto, redirecionar
-    if (!upsellProduct) {
-      router.push("/")
-    }
-  }, [router])
+  const removeItem = (id: number) => {
+    setCartItems((items) => items.filter((item) => item.id !== id))
+  }
 
-  const formatPrice = (cents: number) => {
-    return new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    }).format(cents / 100)
+  const calculateSubtotal = () => {
+    return cartItems.reduce((total, item) => {
+      return total + (item.isFree ? 0 : item.price * item.quantity)
+    }, 0)
+  }
+
+  const calculateShipping = () => {
+    return 0
+  }
+
+  const calculateTotal = () => {
+    const subtotal = calculateSubtotal()
+    const shipping = calculateShipping()
+    const total = subtotal + shipping
+    console.log("[v0] Cálculo do total:", { subtotal, shipping, total })
+    return total
+  }
+
+  const formatCpf = (value: string) => {
+    const numbers = value.replace(/\D/g, "")
+    if (numbers.length <= 3) return numbers
+    if (numbers.length <= 6) return `${numbers.slice(0, 3)}.${numbers.slice(3)}`
+    if (numbers.length <= 9) return `${numbers.slice(0, 3)}.${numbers.slice(3, 6)}.${numbers.slice(6)}`
+    return `${numbers.slice(0, 3)}.${numbers.slice(3, 6)}.${numbers.slice(6, 9)}-${numbers.slice(9, 11)}`
+  }
+
+  const formatPhone = (value: string) => {
+    const numbers = value.replace(/\D/g, "")
+    if (numbers.length <= 2) return numbers
+    if (numbers.length <= 7) return `(${numbers.slice(0, 2)}) ${numbers.slice(2)}`
+    if (numbers.length <= 11) return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7)}`
+    return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7, 11)}`
+  }
+
+  const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const masked = maskCPF(e.target.value)
+    setCpf(masked)
+  }
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const masked = maskPhone(e.target.value)
+    setPhone(masked)
   }
 
   const handleContinueToEmail = () => {
     setCurrentStep("email")
   }
 
-  const handleProcessPayment = async () => {
-    if (!email || !product) return
+  const handleEmailSubmit = () => {
+    if (!email.trim()) {
+      setEmailError("E-mail é obrigatório")
+      return
+    }
 
-    setIsProcessing(true)
+    if (!validateEmail(email)) {
+      setEmailError("E-mail deve ter um formato válido")
+      return
+    }
+
+    setEmailError("")
+    setCurrentStep("personal")
+    setFormData({ ...formData, email: email })
+  }
+
+  const validateForm = (): boolean => {
+    const errors: string[] = []
+
+    if (!formData.email.trim()) {
+      errors.push("E-mail é obrigatório")
+    } else if (!validateEmail(formData.email)) {
+      errors.push("E-mail deve ter um formato válido")
+    }
+
+    if (!selectedPaymentMethod) {
+      errors.push("Selecione um método de pagamento")
+    }
+
+    if (errors.length > 0) {
+      alert("Erros encontrados:\n" + errors.join("\n"))
+      return false
+    }
+
+    return true
+  }
+
+  const showTemporaryNotification = () => {
+    setShowNotification(true)
+    setTimeout(() => {
+      setShowNotification(false)
+    }, 3000)
+  }
+
+  const handlePersonalSubmit = () => {
+    if (!firstName.trim() || !lastName.trim() || !cpf.trim() || !phone.trim()) {
+      alert("Por favor, preencha todos os campos obrigatórios.")
+      return
+    }
+    setFormData({
+      ...formData,
+      firstName: firstName,
+      lastName: lastName,
+      cpf: cpf,
+      phone: phone,
+    })
+
+    setCurrentStep("payment")
+  }
+
+  const handleProcessPayment = async () => {
+    if (!validateForm()) return
+
+    setIsLoading(true)
     setCurrentStep("processing")
 
     try {
-      const pixData = {
-        amount: product.price,
-        productName: product.name,
-        productId: product.id,
-        name: customerData.name,
-        email: email,
-        document: customerData.document,
-        isUpsell: true,
-        originalProduct: localStorage.getItem("originalProduct") || "",
+      const pixData: PixPaymentData = {
+        amount: calculateTotal(),
+        items: cartItems,
+        name: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        document: cpf,
+        phone: phone,
+        saveInfo: saveInfo,
+        receivePromotions: receivePromotions,
+        paymentMethod: selectedPaymentMethod,
       }
 
       localStorage.setItem("pixPayment", JSON.stringify(pixData))
@@ -95,128 +221,455 @@ export default function CheckoutUpsell() {
       }
     } catch (error) {
       console.error("Erro ao processar pagamento:", error)
-      setIsProcessing(false)
-      setCurrentStep("email")
+      setIsLoading(false)
+      setCurrentStep("payment")
     }
   }
 
-  if (!product) {
+  if (currentStep === "personal") {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-red-600" />
+      <div className="min-h-screen bg-gray-50 animate-fade-in">
+        <CheckoutHeader />
+
+        <div className="max-w-md mx-auto bg-white min-h-screen transform transition-all duration-500 ease-in-out">
+          <div className="p-4 border-b">
+            <h1 className="text-xl font-semibold text-gray-900 text-center">Finalizar compra</h1>
+          </div>
+
+          <div className="p-4">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
+                1
+              </div>
+              <h2 className="text-lg font-medium text-gray-900">Dados pessoais</h2>
+            </div>
+
+            <p className="text-sm text-gray-600 mb-6">
+              Solicitamos apenas as informações essenciais para a realização da compra.
+            </p>
+
+            <div className="space-y-4">
+              <div>
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="E-mail"
+                  className="w-full"
+                  disabled
+                />
+              </div>
+
+              <div>
+                <Input
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="Primeiro nome"
+                  className="w-full"
+                />
+                {!firstName.trim() && <p className="text-xs text-red-500 mt-1">Campo obrigatório.</p>}
+              </div>
+
+              <div>
+                <Input
+                  type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Último nome"
+                  className="w-full"
+                />
+                {!lastName.trim() && <p className="text-xs text-red-500 mt-1">Campo obrigatório.</p>}
+              </div>
+
+              <Input
+                type="text"
+                placeholder="000.000.000-00"
+                value={cpf}
+                onChange={handleCpfChange}
+                className="w-full"
+              />
+
+              <Input
+                type="tel"
+                placeholder="(11) 99999-9999"
+                value={phone}
+                onChange={handlePhoneChange}
+                className="w-full"
+              />
+
+              <div className="space-y-3 pt-4">
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={saveInfo}
+                    onChange={(e) => setSaveInfo(e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm text-gray-700">Salvar minhas informações para próximas compras.</span>
+                </label>
+
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={receivePromotions}
+                    onChange={(e) => setReceivePromotions(e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm text-gray-700">Quero receber e-mails com promoções.</span>
+                </label>
+              </div>
+            </div>
+
+            <Button
+              onClick={handlePersonalSubmit}
+              disabled={!firstName.trim() || !lastName.trim() || !cpf.trim() || !phone.trim()}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-full font-semibold mt-8"
+            >
+              Ir para o Pagamento
+            </Button>
+          </div>
+        </div>
+
+        <div className="bg-gray-100 p-4 text-center text-sm text-gray-600">
+          <p className="font-semibold text-orange-600 mb-2">FALE CONOSCO</p>
+          <p className="mb-1">Telefone: (11) 3003-9030 - de segunda à sexta-feira, das 9h às 17h.</p>
+          <p className="mb-4">
+            M Shop Comercial LTDA | Rua Alexandre Dumas, 1630 - Chácara Santo Antônio - São Paulo/SP - CEP 04717-004 |
+            CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
+          </p>
+          <div className="flex justify-center gap-2">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
+              alt="PIX"
+              className="h-6"
+            />
+          </div>
+        </div>
       </div>
     )
   }
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
+  if (currentStep === "payment") {
+    return (
+      <div className="min-h-screen bg-gray-50 animate-fade-in">
+        <CheckoutHeader />
 
-      <main className="max-w-2xl mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Finalizar Compra</h1>
-          <p className="text-gray-600">Produto digital - sem necessidade de entrega</p>
-        </div>
+        <div className="max-w-md mx-auto bg-white min-h-screen transform transition-all duration-500 ease-in-out">
+          <div className="p-4 border-b">
+            <h1 className="text-xl font-semibold text-gray-900">Finalizar compra</h1>
+          </div>
 
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-          <h2 className="text-lg font-semibold mb-4">Resumo do Pedido</h2>
-
-          <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-            <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200">
-              <img
-                src={product.image || "/placeholder.svg"}
-                alt={product.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-semibold text-gray-900">{product.name}</h3>
-              <p className="text-sm text-gray-600 mt-1">{product.description}</p>
-              <div className="flex items-center gap-2 mt-2">
-                <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Produto Digital</span>
+          <div className="p-4">
+            {currentStep === "payment" && (
+              <div className="space-y-6 mb-8">
+                <div className="border-b pb-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-semibold">
+                        1
+                      </div>
+                      <h3 className="font-medium text-gray-900">Dados pessoais</h3>
+                    </div>
+                    <button onClick={() => setCurrentStep("personal")} className="text-blue-600 hover:text-blue-700">
+                      <Edit2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <div className="ml-9 text-sm text-gray-600">
+                    <p>{formData.email}</p>
+                    <p>
+                      {formData.firstName} {formData.lastName}
+                    </p>
+                    <p>{formData.phone}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="text-right">
-              <div className="text-xl font-bold text-red-600">{formatPrice(product.price)}</div>
-            </div>
-          </div>
-
-          <div className="border-t pt-4 mt-4">
-            <div className="flex justify-between items-center text-lg font-bold">
-              <span>Total</span>
-              <span className="text-red-600">{formatPrice(product.price)}</span>
-            </div>
-          </div>
-        </div>
-
-        {currentStep === "review" && (
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h2 className="text-lg font-semibold mb-4">Confirmar Pedido</h2>
-            <p className="text-gray-600 mb-6">
-              Você está adquirindo um produto digital. Após a confirmação do pagamento, você receberá as instruções por
-              e-mail.
-            </p>
-
-            <button
-              onClick={handleContinueToEmail}
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
-            >
-              <Shield className="w-5 h-5" />
-              Continuar para Pagamento
-            </button>
-          </div>
-        )}
-
-        {currentStep === "email" && (
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h2 className="text-lg font-semibold mb-4">Confirmar E-mail</h2>
-            <p className="text-gray-600 mb-4">Confirme seu e-mail para receber as instruções do produto digital:</p>
+            )}
 
             <div className="mb-6">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                E-mail
-              </label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                placeholder="seu@email.com"
-                required
-              />
+              <h3 className="text-sm font-medium text-gray-700 mb-3">Forma de pagamento</h3>
+
+              <button
+                onClick={() => setSelectedPaymentMethod("pix")}
+                className={`w-full border-2 rounded-lg p-4 transition-colors ${
+                  selectedPaymentMethod === "pix"
+                    ? "border-blue-600 bg-white"
+                    : "border-gray-200 bg-white hover:border-gray-300"
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span
+                    className={`font-medium ${selectedPaymentMethod === "pix" ? "text-blue-600" : "text-gray-900"}`}
+                  >
+                    Pix
+                  </span>
+                  <div className="w-10 h-6 flex items-center justify-center">
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png"
+                      alt="pix logo"
+                      className="h-full object contain"
+                    ></img>
+                  </div>
+                </div>
+              </button>
             </div>
 
-            <button
-              onClick={handleProcessPayment}
-              disabled={!email || isProcessing}
-              className="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-400 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+            <div className="mb-6">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">Resumo do pedido</h3>
+
+              {cartItems.map((item) => (
+                <div key={item.id} className="flex gap-3 mb-4">
+                  <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-semibold">
+                    1
+                  </div>
+                  <img
+                    src={item.image || "/placeholder.svg"}
+                    alt={item.name}
+                    className="w-12 h-12 object-cover rounded"
+                  />
+                  <div className="flex-1">
+                    <h4 className="text-sm font-medium text-gray-900">{item.name}</h4>
+                    <p className="text-xs text-gray-500">Produto digital</p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-sm font-semibold">R$ {(item.price / 100).toFixed(2).replace(".", ",")}</span>
+                  </div>
+                </div>
+              ))}
+
+              <div className="space-y-2 pt-4 border-t">
+                <div className="flex justify-between text-sm">
+                  <span>Subtotal</span>
+                  <span>R$ {(calculateSubtotal() / 100).toFixed(2).replace(".", ",")}</span>
+                </div>
+                <div className="flex justify-between text-lg font-semibold pt-2 border-t">
+                  <span>Total</span>
+                  <span>R$ {(calculateTotal() / 100).toFixed(2).replace(".", ",")}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center text-sm text-gray-500 p-4 bg-gray-50 rounded-lg">
+              <p>Aguardando confirmação para prosseguir com o pagamento...</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gray-100 p-4 text-center text-sm text-gray-600">
+          <p className="font-semibold text-orange-600 mb-2">FALE CONOSCO</p>
+          <p className="mb-1">Telefone: (11) 3003-9030 - de segunda à sexta-feira, das 9h às 17h.</p>
+          <p className="mb-4">
+            M Shop Comercial LTDA | Rua Alexandre Dumas, 1630 - Chácara Santo Antônio - São Paulo/SP - CEP 04717-004 |
+            CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
+          </p>
+          <div className="flex justify-center gap-2">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png"
+              alt="PIX"
+              className="h-6"
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (currentStep === "email") {
+    return (
+      <div className="min-h-screen bg-gray-50 animate-fade-in">
+        <CheckoutHeader />
+
+        <div className="max-w-md mx-auto bg-white min-h-screen transform transition-all duration-500 ease-in-out">
+          <div className="p-4 border-b">
+            <h1 className="text-xl font-semibold text-gray-900 text-center">Finalizar compra</h1>
+          </div>
+
+          <div className="p-6 text-center">
+            <h2 className="text-lg font-medium text-gray-700 mb-2">Para finalizar a compra, informe seu e-mail.</h2>
+            <p className="text-sm text-gray-500 mb-8">Rápido. Fácil. Seguro.</p>
+
+            <div className="mb-4">
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="seu@email.com"
+                className={`w-full text-center ${emailError ? "border-red-500" : ""}`}
+              />
+              {emailError && <p className="text-xs text-red-500 mt-2">{emailError}</p>}
+            </div>
+
+            <Button
+              onClick={handleEmailSubmit}
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-full font-semibold mb-4"
             >
-              {isProcessing ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  Processando...
-                </>
-              ) : (
-                <>
-                  <Shield className="w-5 h-5" />
-                  Gerar PIX
-                </>
-              )}
-            </button>
+              Continuar
+            </Button>
+
+            <div className="text-left mt-8">
+              <p className="text-sm text-orange-600 font-medium mb-3">Usamos seu e-mail de forma 100% segura para:</p>
+              <ul className="text-sm text-gray-600 space-y-2">
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500">✓</span>
+                  Identificar seu perfil
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500">✓</span>
+                  Notificar sobre o andamento do seu pedido
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500">✓</span>
+                  Gerenciar seu histórico de compras
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500">✓</span>
+                  Acelerar o preenchimento de suas informações
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gray-100 p-4 text-center text-sm text-gray-600">
+          <p className="font-semibold text-orange-600 mb-2">FALE CONOSCO</p>
+          <p className="mb-1">Telefone: (11) 3003-9030 - de segunda à sexta-feira, das 9h às 17h.</p>
+          <p className="mb-4">
+            M Shop Comercial LTDA | Rua Alexandre Dumas, 1630 - Chácara Santo Antônio - São Paulo/SP - CEP 04717-004 |
+            CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
+          </p>
+          <div className="flex justify-center gap-2">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
+              alt="PIX"
+              className="h-6"
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (currentStep === "cart") {
+    return (
+      <div className="min-h-screen bg-gray-50 animate-fade-in">
+        <CheckoutHeader />
+
+        {showNotification && (
+          <div className="fixed top-0 left-0 right-0 z-50 animate-slide-down">
+            <div className="bg-orange-500 text-white px-4 py-3 text-center text-sm font-medium shadow-lg">
+              <div className="max-w-md mx-auto flex items-center justify-between">
+                <span>Essa opção não está disponível para esse produto.</span>
+                <button
+                  onClick={() => setShowNotification(false)}
+                  className="ml-2 hover:bg-orange-600 rounded-full p-1"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+            </div>
           </div>
         )}
 
-        {currentStep === "processing" && (
-          <div className="bg-white rounded-lg shadow-sm p-6 text-center">
-            <Loader2 className="w-12 h-12 animate-spin text-red-600 mx-auto mb-4" />
-            <h2 className="text-lg font-semibold mb-2">Processando Pagamento</h2>
-            <p className="text-gray-600">Aguarde enquanto geramos seu PIX...</p>
+        <div className="max-w-md mx-auto bg-white min-h-screen transform transition-all duration-500 ease-in-out">
+          <div className="p-4 border-b">
+            <h1 className="text-xl font-semibold text-gray-900 text-center">Meu Carrinho</h1>
           </div>
-        )}
-      </main>
 
-      <Footer />
-    </div>
-  )
+          <div className="p-4">
+            {cartItems.map((item) => (
+              <div key={item.id} className="flex gap-3 mb-6">
+                <img
+                  src={item.image || "/placeholder.svg"}
+                  alt={item.name}
+                  className="w-16 h-16 object-cover rounded"
+                />
+                <div className="flex-1">
+                  <div className="flex justify-between items-start mb-1">
+                    <h3 className="text-sm font-medium text-gray-900 leading-tight">{item.name}</h3>
+                    <button onClick={() => removeItem(item.id)} className="text-blue-500 p-1">
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
+                  <p className="text-xs text-gray-500 mb-2">{item.description}</p>
+
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center"
+                      >
+                        <Minus size={12} />
+                      </button>
+                      <span className="text-sm font-medium">{item.quantity}</span>
+                      <button
+                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center"
+                      >
+                        <Plus size={12} />
+                      </button>
+                    </div>
+
+                    <div className="text-right">
+                      <span className="text-sm font-semibold">
+                        R$ {(item.price / 100).toFixed(2).replace(".", ",")}
+                      </span>
+                    </div>
+                  </div>
+
+                  {item.quantity > 1 && <p className="text-xs text-red-500 mt-1">Limite de quantidade</p>}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="px-4 pb-4">
+            <div className="space-y-3 mb-6">
+              <Button variant="outline" className="w-full bg-gray-400 text-white border-gray-400 hover:bg-gray-500">
+                Adicionar Código de vendedor
+              </Button>
+              <Button variant="outline" className="w-full bg-gray-400 text-white border-gray-400 hover:bg-gray-500">
+                Adicionar cupom de desconto
+              </Button>
+            </div>
+
+            <div className="space-y-2 mb-6">
+              <div className="flex justify-between text-sm">
+                <span>Subtotal</span>
+                <span>R$ {(calculateSubtotal() / 100).toFixed(2).replace(".", ",")}</span>
+              </div>
+              <div className="flex justify-between text-lg font-semibold pt-2 border-t">
+                <span>Total</span>
+                <span>R$ {(calculateTotal() / 100).toFixed(2).replace(".", ",")}</span>
+              </div>
+            </div>
+
+            <Button
+              onClick={handleContinueToEmail}
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-full font-semibold mb-4"
+            >
+              Fechar pedido
+            </Button>
+          </div>
+        </div>
+
+        <div className="bg-gray-100 p-4 text-center text-sm text-gray-600">
+          <p className="font-semibold text-orange-600 mb-2">FALE CONOSCO</p>
+          <p className="mb-1">Telefone: (11) 3003-9030 - de segunda à sexta-feira, das 9h às 17h.</p>
+          <p className="mb-4">
+            M Shop Comercial LTDA | Rua Alexandre Dumas, 1630 - Chácara Santo Antônio - São Paulo/SP - CEP 04717-004 |
+            CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
+          </p>
+          <div className="flex justify-center gap-2">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png"
+              alt="PIX"
+              className="h-6"
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return null
 }

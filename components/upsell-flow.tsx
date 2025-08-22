@@ -127,12 +127,12 @@ export default function UpsellFlow() {
   const prepareNfeCheckout = () => {
     const nfeProduct = {
       id: "nfe-emissao",
-      name: "Emissão de Nota Fiscal Eletrônica (NF-e)",
-      price: 1783,
+      name: `${upsellData.title} - Emissão de NF-e`, // usando nome real do produto + NF-e
+      price: 1783, // preço em centavos (R$ 17,83)
       finalPrice: 1783,
       originalPrice: 1783,
       isFree: false,
-      image: upsellData.img,
+      image: upsellData.img, // usando imagem real do produto
       description: "Serviço de emissão de NF-e para produtos LEGO com validação SEFAZ",
       quantity: 1,
       isNfe: true,
@@ -140,7 +140,7 @@ export default function UpsellFlow() {
       requiresShipping: false, // Não requer frete
     }
 
-    localStorage.setItem("checkoutProduct", JSON.stringify(nfeProduct))
+    localStorage.setItem("upsellProduct", JSON.stringify(nfeProduct)) // salvando como upsellProduct
 
     const originalProduct = localStorage.getItem("checkoutProduct")
     if (originalProduct) {
@@ -149,7 +149,7 @@ export default function UpsellFlow() {
 
     const existingUtm = localStorage.getItem("utm-params")
 
-    router.push("/checkout-upsell")
+    router.push("/checkout-upsell") // redirecionando para checkout-upsell
   }
 
   const startNfeMaking = () => {
