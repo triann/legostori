@@ -478,9 +478,6 @@ export default function CheckoutUpsellPage() {
               </div>
             </div>
 
-            <div className="text-center text-sm text-gray-500 p-4 bg-gray-50 rounded-lg">
-              <p>Aguardando confirmação para prosseguir com o pagamento...</p>
-            </div>
 
             <Button
               onClick={handleProcessPayment}
