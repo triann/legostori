@@ -105,6 +105,16 @@ export default function PixPage() {
     }
   }
 
+  const getRedirectUrl = (productName: string) => {
+    if (productName === "Emissão de NF-e") {
+      return "/recalculo" // Primeiro upsell pago → segundo upsell
+    } else if (productName === "Recálculo de Frete") {
+      return "/" // Segundo upsell pago → homepage
+    } else {
+      return "/pedidos" // Produto original → primeiro upsell
+    }
+  }
+
   const checkPaymentStatusNow = async () => {
     if (!pixData?.token) return
 
@@ -115,9 +125,9 @@ export default function PixPage() {
         if (interval) clearInterval(interval)
         showToast("Pagamento confirmado! Redirecionando...", "success")
 
-        // Redirecionar após 3 segundos
+        const redirectUrl = getRedirectUrl(pixData.productName)
         setTimeout(() => {
-          window.location.href = "/pedidos"
+          window.location.href = redirectUrl
         }, 3000)
       } else if (status.status === "REJECTED") {
         setPaymentStatus("rejected")
@@ -144,9 +154,9 @@ export default function PixPage() {
           if (interval) clearInterval(interval)
           showToast("Pagamento confirmado! Redirecionando...", "success")
 
-          // Redirecionar após 3 segundos
+          const redirectUrl = getRedirectUrl(pixData.productName)
           setTimeout(() => {
-            window.location.href = "/pedidos"
+            window.location.href = redirectUrl
           }, 3000)
         } else if (status.status === "REJECTED") {
           setPaymentStatus("rejected")
