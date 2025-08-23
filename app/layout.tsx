@@ -38,7 +38,7 @@ html {
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              window.pixelId = "689d6967a9b91cc128240c1f";
+              window.pixelId = "68a94e869a20cc04599af2f6";
               var a = document.createElement("script");
               a.setAttribute("async", "");
               a.setAttribute("defer", "");
