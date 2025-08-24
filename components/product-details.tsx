@@ -5,8 +5,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Star, Heart, Share2, ChevronLeft, ChevronRight, Puzzle, Clock, Gift, Loader2 } from "lucide-react"
-import { PuzzleGame } from "@/components/puzzle-game"
+import { Star, Heart, Share2, ChevronLeft, ChevronRight, Gift, Loader2 } from "lucide-react"
 
 interface Product {
   id: string
@@ -29,17 +28,11 @@ interface Product {
 
 interface ProductDetailsProps {
   product: Product
+  discount?: number // Added discount prop from roulette
 }
 
-export function ProductDetails({ product }: ProductDetailsProps) {
+export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [showPuzzle, setShowPuzzle] = useState(false)
-  const [puzzleCompleted, setPuzzleCompleted] = useState(false)
-  const [rouletteResult, setRouletteResult] = useState<{
-    type: "discount" | "free"
-    value: number
-    productName?: string
-  } | null>(null)
   const [isAddingToCart, setIsAddingToCart] = useState(false)
   const [isAddingToWishlist, setIsAddingToWishlist] = useState(false)
   const router = useRouter()
@@ -52,33 +45,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     setCurrentImageIndex((prev) => (prev - 1 + product.images.length) % product.images.length)
   }
 
-  const handleRouletteComplete = (result: { type: "discount" | "free"; value: number; productName?: string }) => {
-    setPuzzleCompleted(true)
-    setRouletteResult(result)
-    setShowPuzzle(false)
-  }
-
-  const finalPrice =
-    rouletteResult?.type === "free"
-      ? 0
-      : rouletteResult?.type === "discount"
-        ? product.price * (1 - rouletteResult.value / 100)
-        : product.price
-
-  if (showPuzzle) {
-    return (
-      <PuzzleGame
-        image={product.puzzleImage}
-        timeLimit={product.puzzleTimeLimit}
-        onComplete={handleRouletteComplete}
-        onClose={() => setShowPuzzle(false)}
-        productName={product.name}
-        discount={product.puzzleDiscount}
-        originalPrice={product.price}
-        discountedPrice={product.price * (1 - product.puzzleDiscount / 100)}
-      />
-    )
-  }
+  const finalPrice = discount === 100 ? 0 : product.price * (1 - discount / 100)
+  const isFree = discount === 100
 
   const handleAddToCart = async () => {
     setIsAddingToCart(true)
@@ -106,8 +74,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       image: product.images[0],
       originalPrice: product.price,
       finalPrice: finalPrice,
-      isFree: rouletteResult?.type === "free",
-      discount: rouletteResult?.type === "discount" ? rouletteResult.value : 0,
+      isFree: isFree,
+      discount: discount,
       itemNumber: product.itemNumber,
       pieces: product.pieces,
       ages: product.ages,
@@ -259,9 +227,9 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           {/* Pricing */}
           <div className="space-y-2">
             <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-              {rouletteResult && (
+              {discount > 0 && (
                 <div className="text-xl sm:text-2xl font-bold text-green-600 break-words">
-                  {rouletteResult.type === "free" ? (
+                  {isFree ? (
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                       <span>GRÁTIS!</span>
                       <Badge className="bg-green-100 text-green-800 w-fit">PRODUTO GRÁTIS!</Badge>
@@ -269,69 +237,27 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                   ) : (
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                       <span>R$ {finalPrice.toFixed(2)}</span>
-                      <Badge className="bg-green-100 text-green-800 w-fit">{rouletteResult.value}% DESCONTO!</Badge>
+                      <Badge className="bg-green-100 text-green-800 w-fit">{discount}% DESCONTO!</Badge>
                     </div>
                   )}
                 </div>
               )}
-              <div className={`text-xl sm:text-2xl font-bold ${rouletteResult ? "line-through text-gray-500" : ""}`}>
+              <div className={`text-xl sm:text-2xl font-bold ${discount > 0 ? "line-through text-gray-500" : ""}`}>
                 R$ {product.price.toFixed(2)}
               </div>
             </div>
             <p className="text-sm text-gray-600">Ganhe {product.vipPoints} pontos VIP</p>
           </div>
 
-          {/* Puzzle Challenge Card */}
-          {!puzzleCompleted && (
-            <Card className="border-2 border-yellow-400 bg-yellow-50 mx-2 sm:mx-0">
-              <CardContent className="p-3 sm:p-6">
-                <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
-                  <div className="bg-yellow-400 p-2 sm:p-3 rounded-full flex-shrink-0">
-                    <Puzzle className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-base sm:text-lg mb-2 text-yellow-800">
-                      🧩 Desafio do Quebra-Cabeça!
-                    </h3>
-                    <p className="text-yellow-700 mb-3 text-sm sm:text-base">
-                      Complete o quebra-cabeça do {product.name} e ganhe o direito de girar a
-                      <strong> Roleta da Sorte</strong> com prêmios incríveis!
-                    </p>
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-xs sm:text-sm text-yellow-600 mb-4">
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4" />
-                        <span>
-                          Tempo limite: {Math.floor(product.puzzleTimeLimit / 60)}:
-                          {(product.puzzleTimeLimit % 60).toString().padStart(2, "0")}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Gift className="w-4 h-4" />
-                        <span>Prêmios: Descontos até 70% ou produto grátis!</span>
-                      </div>
-                    </div>
-                    <Button
-                      onClick={() => setShowPuzzle(true)}
-                      className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold w-full sm:w-auto text-sm sm:text-base"
-                    >
-                      Iniciar Desafio do Quebra-Cabeça
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          )}
-
-          {/* Card de sucesso baseado no resultado da roleta */}
-          {puzzleCompleted && rouletteResult && (
+          {discount > 0 && (
             <Card className="border-2 border-green-400 bg-green-50">
               <CardContent className="p-4">
                 <div className="flex items-center gap-2 text-green-800">
                   <Gift className="w-5 h-5" />
                   <span className="font-semibold">
-                    {rouletteResult.type === "free"
-                      ? `Parabéns! Você ganhou o ${rouletteResult.productName || product.name} GRÁTIS!`
-                      : `Parabéns! Você ganhou ${rouletteResult.value}% de desconto neste produto!`}
+                    {isFree
+                      ? `Parabéns! Você ganhou o ${product.name} GRÁTIS!`
+                      : `Parabéns! Você ganhou ${discount}% de desconto neste produto!`}
                   </span>
                 </div>
               </CardContent>
@@ -352,7 +278,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                 </>
               ) : !product.inStock ? (
                 "Fora de estoque"
-              ) : rouletteResult?.type === "free" ? (
+              ) : isFree ? (
                 "Resgatar Produto Grátis"
               ) : (
                 `Adicionar à sacola - R$ ${finalPrice.toFixed(2)}`
@@ -411,8 +337,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                       </div>
                     </div>
                     <p className="text-gray-700 text-sm mb-2">
-                      "mto bom!! consegui ganhar 70% no quebra cabeça e valeu demais. achei q era pegadinha mas é real
-                      msm. qualidade lego sempre perfeita né"
+                      "mto bom!! consegui ganhar 80% na roleta e valeu demais. achei q era pegadinha mas é real msm.
+                      qualidade lego sempre perfeita né"
                     </p>
                     <span className="text-xs text-gray-500">Há 2 dias</span>
                   </div>
@@ -436,7 +362,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                     </div>
                     <p className="text-gray-700 text-sm mb-2">
                       "cara nao acreditei qnd ganhei o produto GRATIS na roleta kkkkk pensei q era fake mas chegou td
-                      certinho! o quebra cabeça é legal e a promoção é real"
+                      certinho! a roleta é real e os descontos também"
                     </p>
                     <span className="text-xs text-gray-500">Há 1 semana</span>
                   </div>
@@ -460,8 +386,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                       </div>
                     </div>
                     <p className="text-gray-700 text-sm mb-2">
-                      "meu filho amou!! conseguimos 50% na primeira tentativa da roleta. mt legal essa dinamica do jogo,
-                      deixa a compra mais divertida. só achei o quebra cabeça meio dificil"
+                      "meu filho amou!! conseguimos 80% na primeira tentativa da roleta. mt legal essa dinamica do jogo,
+                      deixa a compra mais divertida. chegou rapidinho"
                     </p>
                     <span className="text-xs text-gray-500">Há 3 dias</span>
                   </div>
@@ -484,8 +410,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                       </div>
                     </div>
                     <p className="text-gray-700 text-sm mb-2">
-                      "experiencia unica cara! nunca vi uma loja assim com esse jogo. ganhei frete gratis na roleta e
-                      chegou super rapido. lego sempre inovando 👏"
+                      "experiencia unica cara! nunca vi uma loja assim com essa roleta. ganhei produto gratis e chegou
+                      super rapido. lego sempre inovando 👏"
                     </p>
                     <span className="text-xs text-gray-500">Há 5 dias</span>
                   </div>

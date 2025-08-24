@@ -34,6 +34,11 @@ html {
         {children}
 
         <Script
+          src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"
+          strategy="beforeInteractive"
+        />
+
+        <Script
           id="utmify-pixel"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{

@@ -6,6 +6,10 @@ import { Heart, Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { useState, useRef } from "react"
 import Link from "next/link"
 
+interface ProductGridProps {
+  discount?: number
+}
+
 const categories = [
   {
     name: "Todos os Legos",
@@ -17,15 +21,13 @@ const categories = [
   {
     name: "Maletas",
     color: "bg-purple-600",
-    image:
-      "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Allsets.jpg",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Allsets.jpg",
     href: "/categoria/classic", // adicionando navegação para página específica
   },
   {
     name: "Harry Potter",
     color: "bg-purple-600",
-    image:
-      "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-HarryPotter.jpg",
+    image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-HarryPotter.jpg",
     href: "/categoria/harrypotter", // adicionando navegação para página específica
   },
   {
@@ -43,8 +45,7 @@ const categories = [
   {
     name: "",
     color: "bg-blue-600",
-    image:
-      "https://i.pinimg.com/474x/58/17/13/581713909e52b3e0445de19232b0bf02.jpg",
+    image: "https://i.pinimg.com/474x/58/17/13/581713909e52b3e0445de19232b0bf02.jpg",
     href: "/categoria/minecraft",
   }, // adicionando navegação
   {
@@ -56,13 +57,15 @@ const categories = [
   {
     name: "Jurassic World",
     color: "bg-teal-600",
-    image: "https://preview.redd.it/opinions-on-a-new-jurassic-lego-game-v0-n8tljfeb0khe1.jpg?width=640&crop=smart&auto=webp&s=59c0f558ee9c5198ff3d55d2dbf55a45204be02c",
+    image:
+      "https://preview.redd.it/opinions-on-a-new-jurassic-lego-game-v0-n8tljfeb0khe1.jpg?width=640&crop=smart&auto=webp&s=59c0f558ee9c5198ff3d55d2dbf55a45204be02c",
     href: "/categoria/jurassicworld",
   }, // adicionando navegação
   {
     name: "Speed Champions",
     color: "bg-teal-600",
-    image: "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/39bf9ec1-118f-47e2-92b9-9aa12044bd4b___24a1b11a3bf561b24143485763a0cb1e.jpg",
+    image:
+      "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/39bf9ec1-118f-47e2-92b9-9aa12044bd4b___24a1b11a3bf561b24143485763a0cb1e.jpg",
     href: "/categoria/speedchampions",
   },
   {
@@ -95,8 +98,7 @@ const products = [
     reviews: 156,
     ages: "18+",
     pieces: 693,
-    image:
-      "https://legobrasil.vtexassets.com/arquivos/ids/185202/10330--1-.jpg?v=638424970071170000",
+    image: "https://legobrasil.vtexassets.com/arquivos/ids/185202/10330--1-.jpg?v=638424970071170000",
     isNew: true,
     href: "/product/1",
   },
@@ -208,7 +210,7 @@ const products = [
   },
 ]
 
-export function ProductGrid() {
+export function ProductGrid({ discount = 0 }: ProductGridProps) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const categoriesScrollRef = useRef<HTMLDivElement>(null)
 
@@ -220,8 +222,26 @@ export function ProductGrid() {
     setCurrentSlide((prev) => (prev - 1 + products.length) % products.length)
   }
 
+  const calculatePrice = (originalPrice: string) => {
+    if (discount === 0) return originalPrice
+
+    const numericPrice = Number.parseFloat(originalPrice.replace("R$ ", "").replace(",", "."))
+    if (discount === 100) return "GRÁTIS!"
+
+    const discountedPrice = numericPrice * (1 - discount / 100)
+    return `R$ ${discountedPrice.toFixed(2).replace(".", ",")}`
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 md:py-12">
+      {discount > 0 && (
+        <div className="mb-6 p-4 bg-green-100 border border-green-300 rounded-lg text-center">
+          <p className="text-green-800 font-semibold">
+            🎁 {discount === 100 ? "Produtos GRÁTIS!" : `${discount}% de desconto aplicado em todos os produtos!`}
+          </p>
+        </div>
+      )}
+
       {/* Category navigation */}
       <div className="mb-6 md:mb-8">
         <div className="flex items-center gap-2 md:gap-4 mb-4 md:mb-6 overflow-x-auto">
@@ -306,7 +326,7 @@ export function ProductGrid() {
                   <Card className="group cursor-pointer hover:shadow-lg transition-shadow w-full">
                     <CardContent className="p-4">
                       <div className="relative mb-4">
-                        <a href={product.href}>
+                        <Link href={`${product.href}${discount > 0 ? `?discount=${discount}` : ""}`}>
                           <div className="flex justify-center items-center bg-gray-50 rounded-lg p-2">
                             <img
                               src={product.image || "/placeholder.svg"}
@@ -315,7 +335,7 @@ export function ProductGrid() {
                               style={{ aspectRatio: "1/1" }}
                             />
                           </div>
-                        </a>
+                        </Link>
                         <Button
                           variant="ghost"
                           size="icon"
@@ -326,6 +346,11 @@ export function ProductGrid() {
                         {product.isNew && (
                           <span className="absolute top-2 left-2 bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded">
                             Novo
+                          </span>
+                        )}
+                        {discount > 0 && (
+                          <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                            {discount === 100 ? "GRÁTIS!" : `${discount}% OFF`}
                           </span>
                         )}
                       </div>
@@ -342,19 +367,21 @@ export function ProductGrid() {
                           </div>
                         </div>
 
-                        <a href={product.href}>
+                        <Link href={`${product.href}${discount > 0 ? `?discount=${discount}` : ""}`}>
                           <h3 className="font-semibold text-lg hover:text-blue-600">{product.name}</h3>
-                        </a>
+                        </Link>
 
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-xl">{product.price}</span>
-                          {product.originalPrice && (
-                            <span className="text-gray-500 line-through text-sm">{product.originalPrice}</span>
+                          {discount > 0 && discount < 100 && (
+                            <span className="text-gray-500 line-through text-sm">{product.price}</span>
                           )}
+                          <span className={`font-bold text-xl ${discount > 0 ? "text-green-600" : ""}`}>
+                            {calculatePrice(product.price)}
+                          </span>
                         </div>
 
                         <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full text-sm py-3">
-                          Adicionar à sacola
+                          {discount === 100 ? "Resgatar Grátis" : "Adicionar à sacola"}
                         </Button>
                       </div>
                     </CardContent>

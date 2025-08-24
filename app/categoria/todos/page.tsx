@@ -5,21 +5,30 @@ import { Button } from "@/components/ui/button"
 import { Heart, Star } from "lucide-react"
 import { products } from "@/app/product/[id]/page"
 
-const novosProducts = Object.values(products).filter((product) => product.categories?.includes("todos"))
+const todosProducts = Object.values(products).filter((product) => product.categories?.includes("todos"))
 
-export default function NovosPage() {
+export default function TodosPage({ searchParams }: { searchParams: { discount?: string } }) {
+  const discount = searchParams?.discount ? Number.parseInt(searchParams.discount) : 0
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
       <div className="max-w-7xl mx-auto px-4 py-12">
         <h1 className="text-3xl font-bold text-center mb-8">Todos os Legos</h1>
 
+        {discount > 0 && (
+          <div className="mb-6 p-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg text-center">
+            <h2 className="text-xl font-bold">🎉 Parabéns! Você conquistou {discount}% de desconto!</h2>
+            <p className="text-sm opacity-90">Desconto aplicado em todos os produtos desta categoria</p>
+          </div>
+        )}
+
         <div className="mb-6">
-          <p className="text-gray-600">Exibindo {novosProducts.length} Produtos</p>
+          <p className="text-gray-600">Exibindo {todosProducts.length} Produtos</p>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-          {novosProducts.map((product) => (
+          {todosProducts.map((product) => (
             <Card key={product.id} className="group cursor-pointer hover:shadow-lg transition-shadow">
               <CardContent className="p-3 md:p-6">
                 <div className="relative mb-4 md:mb-6">
