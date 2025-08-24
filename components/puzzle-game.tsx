@@ -13,23 +13,29 @@ interface PuzzlePiece {
   col: number
 }
 
-interface PuzzleGameProps {
-  image: string
-  timeLimit: number // in seconds
-  onComplete: (result: { type: "discount" | "free"; value: number; productName?: string }) => void
-  onClose: () => void
-  productName: string
-  discount: number
-  originalPrice: number
-  discountedPrice: number
-}
-
 interface RouletteOption {
   id: number
   label: string
   discount: number
   color: string
   textColor: string
+}
+
+interface PuzzleGameProps {
+  image: string
+  timeLimit: number // in seconds
+  onComplete: (
+    result: { type: "discount" | "free"; value: number; productName?: string },
+    moves: number,
+    errors: number,
+  ) => void
+  onClose: () => void
+  productName: string
+  discount: number
+  originalPrice: number
+  discountedPrice: number
+  currentPuzzle: number // Adicionado prop para número do quebra-cabeça atual
+  totalPuzzles: number // Adicionado prop para total de quebra-cabeças
 }
 
 export function PuzzleGame({
@@ -41,6 +47,8 @@ export function PuzzleGame({
   discount,
   originalPrice,
   discountedPrice,
+  currentPuzzle = 1, // Valor padrão
+  totalPuzzles = 1, // Valor padrão
 }: PuzzleGameProps) {
   const [pieces, setPieces] = useState<PuzzlePiece[]>([])
   const [timeRemaining, setTimeRemaining] = useState(timeLimit)
@@ -93,65 +101,12 @@ export function PuzzleGame({
       canvas.height = img.height
       ctx.drawImage(img, 0, 0)
 
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-      const data = imageData.data
-
-      let minX = canvas.width,
-        minY = canvas.height
-      let maxX = 0,
-        maxY = 0
-
-      for (let y = 0; y < canvas.height; y++) {
-        for (let x = 0; x < canvas.width; x++) {
-          const index = (y * canvas.width + x) * 4
-          const r = data[index]
-          const g = data[index + 1]
-          const b = data[index + 2]
-          const alpha = data[index + 3]
-
-          const brightness = (r + g + b) / 3
-          if (alpha > 100 && brightness < 240) {
-            minX = Math.min(minX, x)
-            minY = Math.min(minY, y)
-            maxX = Math.max(maxX, x)
-            maxY = Math.max(maxY, y)
-          }
-        }
-      }
-
-      const margin = 20
-      const cropX = Math.max(0, minX - margin)
-      const cropY = Math.max(0, minY - margin)
-      const cropWidth = Math.min(canvas.width - cropX, maxX - minX + margin * 2)
-      const cropHeight = Math.min(canvas.height - cropY, maxY - minY + margin * 2)
-
-      const size = Math.max(cropWidth, cropHeight)
-      const finalCropX = cropX - (size - cropWidth) / 2
-      const finalCropY = cropY - (size - cropHeight) / 2
-
-      const croppedCanvas = document.createElement("canvas")
-      const croppedCtx = croppedCanvas.getContext("2d")!
-      croppedCanvas.width = size
-      croppedCanvas.height = size
-
-      croppedCtx.drawImage(
-        img,
-        Math.max(0, finalCropX),
-        Math.max(0, finalCropY),
-        Math.min(size, canvas.width - Math.max(0, finalCropX)),
-        Math.min(size, canvas.height - Math.max(0, finalCropY)),
-        0,
-        0,
-        size,
-        size,
-      )
-
       resolve({
-        dataUrl: croppedCanvas.toDataURL(),
-        cropX: Math.max(0, finalCropX),
-        cropY: Math.max(0, finalCropY),
-        cropWidth: size,
-        cropHeight: size,
+        dataUrl: canvas.toDataURL(),
+        cropX: 0,
+        cropY: 0,
+        cropWidth: img.width,
+        cropHeight: img.height,
       })
     })
   }
@@ -235,8 +190,12 @@ export function PuzzleGame({
       setShowConfetti(true)
       createConfetti()
       window.scrollTo(0, 0)
+
+      setTimeout(() => {
+        onComplete({ type: "discount", value: 70 }, moves, 0)
+      }, 2000)
     }
-  }, [pieces, isComplete, timeRemaining, onComplete])
+  }, [pieces, isComplete, timeRemaining, onComplete, moves, currentPuzzle, totalPuzzles])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -427,15 +386,15 @@ export function PuzzleGame({
   }
 
   const claimFirstPrize = () => {
-    onComplete({ type: "discount", value: 70 })
+    onComplete({ type: "discount", value: 70 }, moves, 0)
   }
 
   const handleClaimRoulettePrize = () => {
     if (finalPrize) {
       if (finalPrize.discount === 100) {
-        onComplete({ type: "free", value: 100, productName: productName })
+        onComplete({ type: "free", value: 100, productName: productName }, moves, 0)
       } else {
-        onComplete({ type: "discount", value: finalPrize.discount })
+        onComplete({ type: "discount", value: finalPrize.discount }, moves, 0)
       }
     }
   }
@@ -584,165 +543,164 @@ export function PuzzleGame({
   }
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2">
-      <Card className="w-full max-w-md md:max-w-4xl bg-white max-h-[90vh] overflow-y-auto">
-        <CardContent className="p-3 md:p-4">
-          <div className="flex items-center justify-between mb-3 md:mb-4">
-            <div className="flex-1 text-center">
-              <h2 className="text-base md:text-xl font-bold text-gray-900">
-                {showRoulette ? "Roleta da Sorte!" : "Desafio do Quebra-Cabeça"}
-              </h2>
-              <p className="text-xs md:text-sm text-gray-600">{productName}</p>
-            </div>
-            <Button variant="ghost" size="icon" onClick={onClose} className="flex-shrink-0">
-              <X className="w-4 h-4 md:w-5 md:h-5" />
-            </Button>
+    <Card className="w-full max-w-sm mx-auto bg-white/95 backdrop-blur-sm rounded-lg shadow-lg transform transition-all duration-500 hover:scale-105">
+      <CardContent className="p-[3px] sm:p-4">
+        <div className="flex items-center justify-between mb-3 md:mb-4">
+          <div className="flex-1 text-center">
+            <h2 className="text-base md:text-xl font-bold text-gray-900">
+              {showRoulette ? "Roleta da Sorte!" : `Desafio do Quebra-Cabeça ${currentPuzzle}/${totalPuzzles}`}
+            </h2>
+            <p className="text-xs md:text-sm text-gray-600">{productName}</p>
           </div>
+          <Button variant="ghost" size="icon" onClick={onClose} className="flex-shrink-0">
+            <X className="w-4 h-4 md:w-5 md:h-5" />
+          </Button>
+        </div>
 
-          {showRoulette ? (
-            <div className="text-center space-y-3 md:space-y-4">
-              <div className="p-3 md:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg">
-                <p className="text-sm text-blue-700 mb-3">
-                  Parabéns! Você completou o quebra-cabeça e agora tem direito à Roleta da Sorte!
-                </p>
+        {showRoulette ? (
+          <div className="text-center space-y-3 md:space-y-4">
+            <div className="p-3 md:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg">
+              <p className="text-sm text-blue-700 mb-3">
+                Parabéns! Você completou o quebra-cabeça e agora tem direito à Roleta da Sorte!
+              </p>
 
-                {/* Informações sobre prêmios e chances */}
-                <div className="bg-white rounded-lg p-3 space-y-2">
-                  <div className="flex items-center justify-center gap-2">
-                    <Target className="w-4 h-4 text-green-600" />
-                    <span className="font-semibold text-sm text-gray-800">{"Você pode receber:"}</span>
-                  </div>
-                  <div className="text-xs text-gray-700 space-y-1">
-                    <p>• Descontos de 15% até 70%;</p>
-                    <p>• Produto completamente Grátis;</p>
-                    <p>• Frete completamente Grátis.</p>
-                  </div>
+              {/* Informações sobre prêmios e chances */}
+              <div className="bg-white rounded-lg p-3 space-y-2">
+                <div className="flex items-center justify-center gap-2">
+                  <Target className="w-4 h-4 text-green-600" />
+                  <span className="font-semibold text-sm text-gray-800">{"Você pode receber:"}</span>
+                </div>
+                <div className="text-xs text-gray-700 space-y-1">
+                  <p>• Descontos de 15% até 70%;</p>
+                  <p>• Produto completamente Grátis;</p>
+                  <p>• Frete completamente Grátis.</p>
+                </div>
 
-                  <div className="flex items-center justify-center gap-2 mt-2">
-                    <RotateCcw className="w-4 h-4 text-orange-600" />
-                    <span className="font-semibold text-sm text-gray-800">Você tem 2 chances de girar!</span>
-                  </div>
+                <div className="flex items-center justify-center gap-2 mt-2">
+                  <RotateCcw className="w-4 h-4 text-orange-600" />
+                  <span className="font-semibold text-sm text-gray-800">Você tem 2 chances de girar!</span>
                 </div>
               </div>
+            </div>
 
-              {renderRouletteWheel()}
+            {renderRouletteWheel()}
 
-              {!isSpinning && !finalPrize && (
-                <div className="flex justify-center">
-                  <Button
-                    onClick={spinRoulette}
-                    className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-bold py-3 px-6 text-base rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center gap-2"
-                  >
-                    <RotateCcw className="w-4 h-4 mr-2" />
-                    GIRAR ROLETA
-                  </Button>
+            {!isSpinning && !finalPrize && (
+              <div className="flex justify-center">
+                <Button
+                  onClick={spinRoulette}
+                  className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-bold py-3 px-6 text-base rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center gap-2"
+                >
+                  <RotateCcw className="w-4 h-4 mr-2" />
+                  GIRAR ROLETA
+                </Button>
+              </div>
+            )}
+
+            {isSpinning && (
+              <div className="text-center">
+                <div className="animate-pulse text-lg font-semibold text-gray-700 flex items-center justify-center gap-2">
+                  <RotateCcw className="w-5 h-5 animate-spin" />
+                  Girando... Boa sorte!
                 </div>
-              )}
+              </div>
+            )}
 
-              {isSpinning && (
-                <div className="text-center">
-                  <div className="animate-pulse text-lg font-semibold text-gray-700 flex items-center justify-center gap-2">
-                    <RotateCcw className="w-5 h-5 animate-spin" />
-                    Girando... Boa sorte!
+            {finalPrize && (
+              <div className="space-y-4">
+                <div className="p-4 bg-gradient-to-r from-green-100 to-emerald-100 border border-green-300 rounded-lg">
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <Gift className="w-6 h-6 text-green-600" />
+                    <h3 className="text-2xl font-bold text-green-800">
+                      Você ganhou: {finalPrize.discount === 100 ? finalPrize.label : finalPrize.label}!
+                    </h3>
                   </div>
+                  <p className="text-green-700">
+                    {finalPrize.discount === 100
+                      ? "Parabéns! O produto é seu de graça!"
+                      : `Você ganhou ${finalPrize.discount}% de desconto!`}
+                  </p>
                 </div>
-              )}
 
-              {finalPrize && (
-                <div className="space-y-4">
-                  <div className="p-4 bg-gradient-to-r from-green-100 to-emerald-100 border border-green-300 rounded-lg">
-                    <div className="flex items-center justify-center gap-2 mb-2">
-                      <Gift className="w-6 h-6 text-green-600" />
-                      <h3 className="text-2xl font-bold text-green-800">
-                        Você ganhou: {finalPrize.discount === 100 ? finalPrize.label : finalPrize.label}!
-                      </h3>
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                  <div className="flex justify-center items-center gap-4 mb-4">
+                    <div className="text-center">
+                      <p className="text-sm text-gray-600">Preço Original</p>
+                      <p className="text-lg font-bold text-gray-500 line-through">
+                        R$ {originalPrice.toFixed(2).replace(".", ",")}
+                      </p>
                     </div>
-                    <p className="text-green-700">
-                      {finalPrize.discount === 100
-                        ? "Parabéns! O produto é seu de graça!"
-                        : `Você ganhou ${finalPrize.discount}% de desconto!`}
-                    </p>
+                    <div className="text-2xl">→</div>
+                    <div className="text-center">
+                      <p className="text-sm text-gray-600">
+                        {finalPrize.discount === 100 ? "Seu Preço" : "Preço com Desconto"}
+                      </p>
+                      <p className="text-xl font-bold text-green-600">
+                        {finalPrize.discount === 100
+                          ? "GRÁTIS!"
+                          : `R$ ${getRoulettePrice().toFixed(2).replace(".", ",")}`}
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                    <div className="flex justify-center items-center gap-4 mb-4">
-                      <div className="text-center">
-                        <p className="text-sm text-gray-600">Preço Original</p>
-                        <p className="text-lg font-bold text-gray-500 line-through">
-                          R$ {originalPrice.toFixed(2).replace(".", ",")}
-                        </p>
-                      </div>
-                      <div className="text-2xl">→</div>
-                      <div className="text-center">
-                        <p className="text-sm text-gray-600">
-                          {finalPrize.discount === 100 ? "Seu Preço" : "Preço com Desconto"}
-                        </p>
-                        <p className="text-xl font-bold text-green-600">
-                          {finalPrize.discount === 100
-                            ? "GRÁTIS!"
-                            : `R$ ${getRoulettePrice().toFixed(2).replace(".", ",")}`}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-col items-center space-y-3">
-                      {showSecondChance ? (
-                        <>
-                          <Button
-                            onClick={claimFirstPrize}
-                            className="w-full max-w-md bg-green-600 hover:bg-green-700 text-white font-bold py-3 text-lg"
-                          >
-                            RESGATAR 70% DE DESCONTO
-                          </Button>
-                          <Button
-                            onClick={trySecondSpin}
-                            className="w-full max-w-md bg-red-600 hover:bg-red-700 text-white font-bold py-3 text-lg flex items-center justify-center gap-2"
-                          >
-                            <RotateCcw className="w-5 h-5" />
-                            TENTAR NOVAMENTE
-                          </Button>
-                          <p className="text-xs text-gray-600 text-center max-w-md">
-                            Se escolher tentar novamente, você pode ganhar um prêmio ainda melhor ou perder este
-                            desconto
-                          </p>
-                        </>
-                      ) : (
+                  <div className="flex flex-col items-center space-y-3">
+                    {showSecondChance ? (
+                      <>
                         <Button
-                          onClick={handleClaimRoulettePrize}
+                          onClick={claimFirstPrize}
                           className="w-full max-w-md bg-green-600 hover:bg-green-700 text-white font-bold py-3 text-lg"
                         >
-                          RESGATAR AGORA
+                          RESGATAR 70% DE DESCONTO
                         </Button>
-                      )}
-                    </div>
+                        <Button
+                          onClick={trySecondSpin}
+                          className="w-full max-w-md bg-red-600 hover:bg-red-700 text-white font-bold py-3 text-lg flex items-center justify-center gap-2"
+                        >
+                          <RotateCcw className="w-5 h-5" />
+                          TENTAR NOVAMENTE
+                        </Button>
+                        <p className="text-xs text-gray-600 text-center max-w-md">
+                          Se escolher tentar novamente, você pode ganhar um prêmio ainda melhor ou perder este desconto
+                        </p>
+                      </>
+                    ) : (
+                      <Button
+                        onClick={handleClaimRoulettePrize}
+                        className="w-full max-w-md bg-green-600 hover:bg-green-700 text-white font-bold py-3 text-lg"
+                      >
+                        RESGATAR AGORA
+                      </Button>
+                    )}
                   </div>
-                </div>
-              )}
-            </div>
-          ) : (
-            <>
-              <div className="flex flex-col md:flex-row items-center justify-between mb-3 p-2 bg-gray-50 rounded-lg gap-2 md:gap-0">
-                <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3 w-full md:w-auto">
-                  <div className="flex items-center gap-2">
-                    <Clock className={`w-4 h-4 ${getTimeColor()}`} />
-                    <span className={`font-bold text-sm ${getTimeColor()}`}>{formatTime(timeRemaining)}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-gray-600">Movimentos:</span>
-                    <span className="font-semibold text-xs">{moves}</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-yellow-500" />
-                  <span className="font-semibold text-xs text-yellow-600">GIRE A ROLETA!</span>
                 </div>
               </div>
-
-              {!croppedImageData ? (
-                <div className="text-center py-4">
-                  <p className="text-gray-600 text-sm">Preparando quebra-cabeça...</p>
+            )}
+          </div>
+        ) : (
+          <>
+            <div className="flex flex-col md:flex-row items-center justify-between mb-3 p-2 bg-gray-50 rounded-lg gap-2 md:gap-0">
+              <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3 w-full md:w-auto">
+                <div className="flex items-center gap-2">
+                  <Clock className={`w-4 h-4 ${getTimeColor()}`} />
+                  <span className={`font-bold text-sm ${getTimeColor()}`}>{formatTime(timeRemaining)}</span>
                 </div>
-              ) : (
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-gray-600">Movimentos:</span>
+                  <span className="font-semibold text-xs">{moves}</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Zap className="w-4 h-4 text-yellow-500" />
+                <span className="font-semibold text-xs text-yellow-600">GIRE A ROLETA!</span>
+              </div>
+            </div>
+
+            {!croppedImageData ? (
+              <div className="text-center py-4">
+                <p className="text-gray-600 text-sm">Preparando quebra-cabeça...</p>
+              </div>
+            ) : (
+              <>
                 <div className="flex flex-row gap-3 items-start justify-center">
                   <div className="flex-shrink-0 text-center">
                     <h3 className="font-semibold mb-2 text-xs">Referência:</h3>
@@ -810,32 +768,11 @@ export function PuzzleGame({
                     </p>
                   </div>
                 </div>
-              )}
-
-              {isComplete && !showRoulette && (
-                <div className="mt-4 md:mt-6 text-center">
-                  <div className="p-4 bg-green-50 border border-green-200 rounded-lg space-y-4">
-                    <div className="flex items-center justify-center gap-2">
-                      <Gift className="w-6 h-6 text-green-600" />
-                      <h3 className="text-lg md:text-xl font-bold text-green-800">Quebra-cabeça completo!</h3>
-                    </div>
-                    <p className="text-sm md:text-base text-green-700">
-                      Parabéns! Você completou o desafio em {formatTime(timeLimit - timeRemaining)}!
-                    </p>
-                    <Button
-                      onClick={goToRoulette}
-                      className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-bold py-3 px-6 text-lg rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center gap-2 mx-auto"
-                    >
-                      <Target className="w-5 h-5" />
-                      IR PARA ROLETA DA SORTE
-                    </Button>
-                  </div>
-                </div>
-              )}
-            </>
-          )}
-        </CardContent>
-      </Card>
-    </div>
+              </>
+            )}
+          </>
+        )}
+      </CardContent>
+    </Card>
   )
 }
