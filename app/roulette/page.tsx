@@ -223,8 +223,7 @@ export default function RoulettePage() {
                   <strong>Parabéns!</strong> você conquistou <strong>80% de desconto</strong> em todos os produtos LEGO!
                 </p>
                 <p className="risk-text">
-                  Você ainda tem <strong>1 chance</strong> para tentar ganhar o produto <strong>100% GRÁTIS</strong>. O
-                  que você escolhe?
+                  Você ainda tem <strong>1 tentativa</strong> para girar a roleta. O que você escolhe?
                 </p>
                 <p className="warning-text">
                   ⚠️ <strong>Atenção:</strong> Se você escolher "ARRISCAR TUDO", não poderá reverter essa decisão!
@@ -265,13 +264,12 @@ export default function RoulettePage() {
           <div id="popup" className="popup">
             <div className="popup-content">
               <h2>Parabéns!</h2>
-              <img src="/star-struck-happy-emoji-face-with-stars-in-eyes.png" alt="Emoji feliz" />
+              <img src="https://i.ibb.co/qFnYZt08/gratis-png-lego-thumbnail.png" alt="Emoji feliz" />
               <p>
-                Você ganhou <strong>100% de desconto</strong> em nossos Kits Exclusivos de Natal,{" "}
-                <strong>pague apenas o frete</strong>!
+                Você ganhou <strong>100% de desconto</strong> na Lego Store! Clique no botão abaixo para resgatar agora.{" "}
               </p>
               <button onClick={handleClaimPrize} id="resgatar-premio">
-                Resgatar seu Prêmio
+                Resgatar
               </button>
             </div>
           </div>
@@ -403,7 +401,7 @@ export default function RoulettePage() {
         #button-cta {
           z-index: 1;
           width: 70%;
-          margin-top: 300px;
+          margin-top: 320px;
           height: 45px;
           background-color: #ff0000;
           border: none;
@@ -500,7 +498,7 @@ export default function RoulettePage() {
         }
 
         .terms-content-simple {
-          text-align: left;
+          text-align: center;
           margin: 15px 0;
         }
 
@@ -580,9 +578,9 @@ export default function RoulettePage() {
           background: linear-gradient(45deg, #00aa00, #00cc00);
           display: flex;
           align-items: center;
-          gap: 6px;
-          padding: 10px 16px;
-          font-size: 14px;
+          gap: 4px;
+          padding: 6px 10px;
+          font-size: 10px;
         }
 
         .risk-button {
@@ -600,9 +598,9 @@ export default function RoulettePage() {
           align-items: center;
           justify-content: center;
           gap: 6px;
-          padding: 8px 12px;
-          font-size: 12px;
-          width: 150px;
+          padding: 6px 10px;
+          font-size: 10px;
+          width: 200px;
           border: none;
           border-radius: 8px;
           color: white;
@@ -611,14 +609,14 @@ export default function RoulettePage() {
         }
 
         .risk-button-small {
-          background: linear-gradient(45deg, #ff6600, #ff8800);
+          background: linear-gradient(45deg, #eb4d4dff, #ff0000ff);
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 6px;
-          padding: 8px 12px;
+          padding: 6px 10px;
           font-size: 12px;
-          width: 150px;
+          width: 200px;
           border: none;
           border-radius: 8px;
           color: white;

@@ -435,7 +435,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 bg-[url('https://i.ibb.co/5Xhm2BC8/bg.png')] bg-cover bg-center bg-no-repeat bg-blend-overlay flex items-center justify-center p-3">
       <UTMCapture />
-      <div className="max-w-sm w-full p-[3px] sm:p-4 text-center bg-white/95 backdrop-blur-sm rounded-lg transform transition-all duration-500 hover:scale-105 mt-26">
+      <div className="max-w-sm w-full p-4 sm:p-6 text-center bg-white/95 backdrop-blur-sm rounded-lg transform transition-all duration-500 hover:scale-105 mt-26">
         <div className="mb-3">
           <p className="text-sm sm:text-base text-gray-700 mb-3">
             Complete <span className="text-red-600 font-bold">5 quebra-cabeças</span> de produtos LEGO aleatórios em até{" "}
