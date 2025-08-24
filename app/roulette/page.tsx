@@ -226,7 +226,7 @@ export default function RoulettePage() {
                   Você ainda tem <strong>1 tentativa</strong> para girar a roleta. O que você escolhe?
                 </p>
                 <p className="warning-text">
-                  ⚠️ <strong>Atenção:</strong> Se você escolher "ARRISCAR TUDO", não poderá reverter essa decisão!
+                  ⚠️ <strong>Atenção:</strong> Se você escolher "ARRISCAR TUDO" não poderá reverter essa decisão!
                 </p>
               </div>
 
