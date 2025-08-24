@@ -15438,7 +15438,7 @@ const products = {
     itemNumber: "75681",
     vipPoints: 18,
     images: ["https://legobrasil.vtexassets.com/arquivos/ids/187567/75681.jpg?v=638624772159570000", "https://legobrasil.vtexassets.com/arquivos/ids/187568/75681--1-.jpg?v=638624772256800000", "https://legobrasil.vtexassets.com/arquivos/ids/187569/75681--2-.jpg?v=638624772342570000", "https://legobrasil.vtexassets.com/arquivos/ids/187570/75681--3-.jpg?v=638624772478470000"],
-    description: "Construa, brinque e exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
+    description: "Construa, brinque, exiba! Este incrível conjunto LEGO oferece uma experiência de construção envolvente com peças de alta qualidade e detalhes autênticos. Perfeito para fãs de todas as idades, este conjunto proporciona horas de diversão criativa e é ideal para exibição. Inclui instruções passo a passo e elementos únicos que tornam cada construção especial. Desperte sua imaginação e crie memórias duradouras com este fantástico conjunto LEGO.",
     features: [],
     inStock: true,
     puzzleImage: "https://legobrasil.vtexassets.com/arquivos/ids/187567/75681.jpg?v=638624772159570000",
