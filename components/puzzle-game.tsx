@@ -544,7 +544,7 @@ export function PuzzleGame({
 
   return (
     <Card className="w-full max-w-sm mx-auto bg-white/95 backdrop-blur-sm rounded-lg shadow-lg transform transition-all duration-500 hover:scale-105">
-      <CardContent className="p-[1px] sm:p-4">
+      <CardContent className="p-[px] sm:p-4">
         <div className="flex items-center justify-between mb-3 md:mb-4">
           <div className="flex-1 text-center">
             <h2 className="text-base md:text-xl font-bold text-gray-900">
