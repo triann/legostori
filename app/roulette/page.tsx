@@ -93,7 +93,7 @@ export default function RoulettePage() {
     <div
       className="min-h-screen w-full relative overflow-hidden"
       style={{
-        backgroundImage: "url(https://i.ibb.co/sdgdCHMz/bg-roleta.png)",
+        backgroundImage: "url(https://i.ibb.co/sJbPD3sB/bg-roleta.png)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -414,7 +414,8 @@ export default function RoulettePage() {
 
         #button-cta {
           z-index: 1;
-          width: 30%;
+          width: 70%;
+          margin-top: 300px;
           height: 45px;
           background-color: #ff0000;
           border: none;
@@ -684,11 +685,6 @@ export default function RoulettePage() {
             margin-top: 15px;
           }
 
-          #button-cta {
-            width: 70%;
-            margin-bottom: 10px;
-            margin-top: 10px;
-          }
 
           .popup button {
             margin-bottom: 10px;
