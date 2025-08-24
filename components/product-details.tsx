@@ -3,9 +3,9 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Star, Heart, Share2, ChevronLeft, ChevronRight, Gift, Loader2 } from "lucide-react"
+import { Star, Heart, Share2, ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
 
 interface Product {
   id: string
@@ -37,6 +37,15 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
   const [isAddingToWishlist, setIsAddingToWishlist] = useState(false)
   const router = useRouter()
 
+  console.log("[v0] ProductDetails - Discount received:", discount)
+  console.log("[v0] ProductDetails - Product price:", product.price)
+
+  const finalPrice = discount === 100 ? 0 : product.price * (1 - discount / 100)
+  const isFree = discount === 100
+
+  console.log("[v0] ProductDetails - Final price calculated:", finalPrice)
+  console.log("[v0] ProductDetails - Is free:", isFree)
+
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % product.images.length)
   }
@@ -44,9 +53,6 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
   const prevImage = () => {
     setCurrentImageIndex((prev) => (prev - 1 + product.images.length) % product.images.length)
   }
-
-  const finalPrice = discount === 100 ? 0 : product.price * (1 - discount / 100)
-  const isFree = discount === 100
 
   const handleAddToCart = async () => {
     setIsAddingToCart(true)
@@ -227,42 +233,31 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
           {/* Pricing */}
           <div className="space-y-2">
             <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-              {discount > 0 && (
-                <div className="text-xl sm:text-2xl font-bold text-green-600 break-words">
-                  {isFree ? (
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                      <span>GRÁTIS!</span>
-                      <Badge className="bg-green-100 text-green-800 w-fit">PRODUTO GRÁTIS!</Badge>
-                    </div>
-                  ) : (
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                      <span>R$ {finalPrice.toFixed(2)}</span>
-                      <Badge className="bg-green-100 text-green-800 w-fit">{discount}% DESCONTO!</Badge>
-                    </div>
-                  )}
-                </div>
+              {discount > 0 ? (
+                <>
+                  <div className="text-xl sm:text-2xl font-bold text-green-600 break-words">
+                    {isFree ? (
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                        <span>GRÁTIS!</span>
+                        <Badge className="bg-green-100 text-green-800 w-fit">PRODUTO GRÁTIS!</Badge>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                        <span>R$ {finalPrice.toFixed(2)}</span>
+                        <Badge className="bg-green-100 text-green-800 w-fit">{discount}% DESCONTO!</Badge>
+                      </div>
+                    )}
+                  </div>
+                  <div className="text-xl sm:text-2xl font-bold line-through text-gray-500">
+                    R$ {product.price.toFixed(2)}
+                  </div>
+                </>
+              ) : (
+                <div className="text-xl sm:text-2xl font-bold">R$ {product.price.toFixed(2)}</div>
               )}
-              <div className={`text-xl sm:text-2xl font-bold ${discount > 0 ? "line-through text-gray-500" : ""}`}>
-                R$ {product.price.toFixed(2)}
-              </div>
             </div>
             <p className="text-sm text-gray-600">Ganhe {product.vipPoints} pontos VIP</p>
           </div>
-
-          {discount > 0 && (
-            <Card className="border-2 border-green-400 bg-green-50">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-2 text-green-800">
-                  <Gift className="w-5 h-5" />
-                  <span className="font-semibold">
-                    {isFree
-                      ? `Parabéns! Você ganhou o ${product.name} GRÁTIS!`
-                      : `Parabéns! Você ganhou ${discount}% de desconto neste produto!`}
-                  </span>
-                </div>
-              </CardContent>
-            </Card>
-          )}
 
           {/* Action Buttons */}
           <div className="space-y-4">

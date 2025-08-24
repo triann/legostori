@@ -15456,18 +15456,24 @@ interface ProductPageProps {
   }
 }
 
-export default function ProductPage({ params }: ProductPageProps) {
-  const product = products[params.id as keyof typeof products]
+export default function ProductPage({ params, searchParams }) {
+  const product = products[params.id]
+
+  // Extract discount from URL parameters
+  const discount = searchParams?.discount ? Number(searchParams.discount) : 0
+
+  console.log("[v0] ProductPage - Discount from URL:", discount)
+  console.log("[v0] ProductPage - SearchParams:", searchParams)
 
   if (!product) {
     notFound()
   }
 
   return (
-    <div className="min-h-screen bg-white overflow-x-hidden">
+    <>
       <Header />
-      <ProductDetails product={product} />
+      <ProductDetails product={product} discount={discount} />
       <Footer />
-    </div>
+    </>
   )
 }

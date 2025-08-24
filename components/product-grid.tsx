@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Heart, Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { useState, useRef } from "react"
+import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 
 interface ProductGridProps {
@@ -16,51 +17,51 @@ const categories = [
     color: "bg-amber-600",
     image:
       "https://legobrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/4feeb981-fba7-46b5-8b9d-72991831c64d___433bd283e0146251ce864d0b90e9039b.jpg",
-    href: "/categoria/todos", // adicionando navegação para página específica
+    href: "/categoria/todos",
   },
   {
     name: "Maletas",
     color: "bg-purple-600",
     image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Allsets.jpg",
-    href: "/categoria/classic", // adicionando navegação para página específica
+    href: "/categoria/classic",
   },
   {
     name: "Harry Potter",
     color: "bg-purple-600",
     image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-HarryPotter.jpg",
-    href: "/categoria/harrypotter", // adicionando navegação para página específica
+    href: "/categoria/harrypotter",
   },
   {
     name: "Disney",
     color: "bg-red-600",
     image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Disney.jpg",
     href: "/categoria/disney",
-  }, // adicionando navegação
+  },
   {
     name: "Marvel",
     color: "bg-red-700",
     image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Marvel.jpg?v=2",
     href: "/categoria/marvel",
-  }, // adicionando navegação
+  },
   {
     name: "",
     color: "bg-blue-600",
     image: "https://i.pinimg.com/474x/58/17/13/581713909e52b3e0445de19232b0bf02.jpg",
     href: "/categoria/minecraft",
-  }, // adicionando navegação
+  },
   {
     name: "Star Wars",
     color: "bg-green-600",
     image: "https://legobrasil.vtexassets.com/arquivos/Updated-Home-AdvQuicklink-202504-Icons-2.jpg",
     href: "/categoria/starwars",
-  }, // adicionando navegação
+  },
   {
     name: "Jurassic World",
     color: "bg-teal-600",
     image:
       "https://preview.redd.it/opinions-on-a-new-jurassic-lego-game-v0-n8tljfeb0khe1.jpg?width=640&crop=smart&auto=webp&s=59c0f558ee9c5198ff3d55d2dbf55a45204be02c",
     href: "/categoria/jurassicworld",
-  }, // adicionando navegação
+  },
   {
     name: "Speed Champions",
     color: "bg-teal-600",
@@ -210,44 +211,32 @@ const products = [
   },
 ]
 
+const calculatePrice = (price: string, discount = 0) => {
+  const numericPrice = Number.parseFloat(price.replace("R$ ", "").replace(",", "."))
+  if (discount === 100) {
+    return "GRÁTIS!"
+  }
+  if (discount > 0) {
+    const discountedPrice = numericPrice * (1 - discount / 100)
+    return `R$ ${discountedPrice.toFixed(2).replace(".", ",")}`
+  }
+  return `R$ ${numericPrice.toFixed(2).replace(".", ",")}`
+}
+
 export function ProductGrid({ discount = 0 }: ProductGridProps) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const categoriesScrollRef = useRef<HTMLDivElement>(null)
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % products.length)
-  }
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + products.length) % products.length)
-  }
-
-  const calculatePrice = (originalPrice: string) => {
-    if (discount === 0) return originalPrice
-
-    const numericPrice = Number.parseFloat(originalPrice.replace("R$ ", "").replace(",", "."))
-    if (discount === 100) return "GRÁTIS!"
-
-    const discountedPrice = numericPrice * (1 - discount / 100)
-    return `R$ ${discountedPrice.toFixed(2).replace(".", ",")}`
-  }
+  const searchParams = useSearchParams()
+  const currentDiscount = searchParams.get("discount")
+  const discountParam = currentDiscount ? `?discount=${currentDiscount}` : discount > 0 ? `?discount=${discount}` : ""
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 md:py-12">
-      {discount > 0 && (
-        <div className="mb-6 p-4 bg-green-100 border border-green-300 rounded-lg text-center">
-          <p className="text-green-800 font-semibold">
-            🎁 {discount === 100 ? "Produtos GRÁTIS!" : `${discount}% de desconto aplicado em todos os produtos!`}
-          </p>
-        </div>
-      )}
-
       {/* Category navigation */}
       <div className="mb-6 md:mb-8">
         <div className="flex items-center gap-2 md:gap-4 mb-4 md:mb-6 overflow-x-auto">
           <h2 className="text-base md:text-lg font-semibold whitespace-nowrap">Em Alta</h2>
-          {/*<span className="text-gray-500 text-sm md:text-base whitespace-nowrap">Temas</span>
-          <span className="text-gray-500 text-sm md:text-base whitespace-nowrap">Idade</span>*/}
         </div>
 
         <div
@@ -260,7 +249,7 @@ export function ProductGrid({ discount = 0 }: ProductGridProps) {
           }}
         >
           {categories.map((category, index) => (
-            <Link key={index} href={category.href}>
+            <Link key={index} href={`${category.href}${discountParam}`}>
               <Card
                 className={`cursor-pointer hover:opacity-90 transition-opacity flex-shrink-0 w-24 md:w-32 relative overflow-hidden p-0 border-0`}
               >
@@ -326,7 +315,7 @@ export function ProductGrid({ discount = 0 }: ProductGridProps) {
                   <Card className="group cursor-pointer hover:shadow-lg transition-shadow w-full">
                     <CardContent className="p-4">
                       <div className="relative mb-4">
-                        <Link href={`${product.href}${discount > 0 ? `?discount=${discount}` : ""}`}>
+                        <Link href={`${product.href}${discountParam}`}>
                           <div className="flex justify-center items-center bg-gray-50 rounded-lg p-2">
                             <img
                               src={product.image || "/placeholder.svg"}
@@ -367,7 +356,7 @@ export function ProductGrid({ discount = 0 }: ProductGridProps) {
                           </div>
                         </div>
 
-                        <Link href={`${product.href}${discount > 0 ? `?discount=${discount}` : ""}`}>
+                        <Link href={`${product.href}${discountParam}`}>
                           <h3 className="font-semibold text-lg hover:text-blue-600">{product.name}</h3>
                         </Link>
 
@@ -376,7 +365,7 @@ export function ProductGrid({ discount = 0 }: ProductGridProps) {
                             <span className="text-gray-500 line-through text-sm">{product.price}</span>
                           )}
                           <span className={`font-bold text-xl ${discount > 0 ? "text-green-600" : ""}`}>
-                            {calculatePrice(product.price)}
+                            {calculatePrice(product.price, discount)}
                           </span>
                         </div>
 
@@ -395,7 +384,7 @@ export function ProductGrid({ discount = 0 }: ProductGridProps) {
             variant="outline"
             size="icon"
             className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white z-10"
-            onClick={prevSlide}
+            onClick={() => setCurrentSlide((prev) => (prev - 1 + products.length) % products.length)}
           >
             <ChevronLeft className="w-4 h-4" />
           </Button>
@@ -404,7 +393,7 @@ export function ProductGrid({ discount = 0 }: ProductGridProps) {
             variant="outline"
             size="icon"
             className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white z-10"
-            onClick={nextSlide}
+            onClick={() => setCurrentSlide((prev) => (prev + 1) % products.length)}
           >
             <ChevronRight className="w-4 h-4" />
           </Button>

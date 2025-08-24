@@ -401,7 +401,7 @@ export default function RoulettePage() {
         #button-cta {
           z-index: 1;
           width: 70%;
-          margin-top: 320px;
+          margin-top: 315px;
           height: 45px;
           background-color: #ff0000;
           border: none;
