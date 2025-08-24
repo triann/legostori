@@ -544,7 +544,7 @@ export function PuzzleGame({
 
   return (
     <Card className="w-full max-w-sm mx-auto bg-white/95 backdrop-blur-sm rounded-lg shadow-lg transform transition-all duration-500 hover:scale-105">
-      <CardContent className="p-[3px] sm:p-4">
+      <CardContent className="p-[1px] sm:p-4">
         <div className="flex items-center justify-between mb-3 md:mb-4">
           <div className="flex-1 text-center">
             <h2 className="text-base md:text-xl font-bold text-gray-900">
@@ -678,7 +678,7 @@ export function PuzzleGame({
           </div>
         ) : (
           <>
-            <div className="flex flex-col md:flex-row items-center justify-between mb-3 p-2 bg-gray-50 rounded-lg gap-2 md:gap-0">
+            <div className="flex flex-col md:flex-row items-center justify-between mb-3 p-1 bg-gray-50 rounded-lg gap-2 md:gap-0">
               <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3 w-full md:w-auto">
                 <div className="flex items-center gap-2">
                   <Clock className={`w-4 h-4 ${getTimeColor()}`} />
