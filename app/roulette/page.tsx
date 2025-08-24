@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import confetti from "canvas-confetti"
 
 export default function RoulettePage() {
   const [attempt, setAttempt] = useState(0)
@@ -53,12 +52,13 @@ export default function RoulettePage() {
       }, 10000)
     } else {
       setTimeout(() => {
-        // Confetti effect
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 },
-        })
+        if (typeof window !== "undefined" && window.confetti) {
+          window.confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+          })
+        }
         setShowWinPopup(true)
         setIsSpinning(false)
         setAttempt((prev) => prev + 1)
