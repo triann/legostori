@@ -177,7 +177,6 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
     // Capturar parâmetros UTM
     const utmParams = getUtmParams()
 
-    // Preparar dados para pagamento por cartão
     const cardPaymentData = {
       ...utmParams,
       nome: data.name,
@@ -200,17 +199,13 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       card_cvv: "***",
     })
 
-    const response = await fetch("/api/card-payment", {
+    const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento-cartao.php`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(cardPaymentData),
     })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
 
     const result = await response.json()
     console.log("📥 Resposta da API de cartão:", result)
