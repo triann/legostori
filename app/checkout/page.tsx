@@ -174,6 +174,9 @@ export default function CheckoutPage() {
   }
 
   const getAddressFromCep = async (cep: string) => {
+    // Only run on client side
+    if (typeof window === "undefined") return null
+
     try {
       const cepNumbers = cep.replace(/\D/g, "")
       const response = await fetch(`https://viacep.com.br/ws/${cepNumbers}/json/`)
@@ -197,6 +200,67 @@ export default function CheckoutPage() {
   }
 
   const getBairroFromCep = async (cep: string) => {
+    // Only run on client side
+    if (typeof window === "undefined") return "Centro"
+
+    try {
+      const cepNumbers = cep.replace(/\D/g, "")
+      const response = await fetch(`https://viacep.com.br/ws/${cepNumbers}/json/`)
+      const data = await response.json()
+
+      if (data.erro) {
+        throw new Error("CEP não encontrado")
+      }
+
+      return data.district || data.localidade || "Centro"
+    } catch (error) {
+      console.error("Erro ao buscar CEP:", error)
+      return "Centro" // Fallback
+    }
+  }
+
+  const handleCepChange2 = async (cep: string) => {
+    // Only run on client side
+    if (typeof window === "undefined") return
+
+    setIsCalculating(true)
+    setSelectedShipping(null)
+
+    const address = await getAddressFromCep(cep)
+    if (address) {
+      setAddressData(address)
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 500))
+
+    setIsCalculating(false)
+
+    const onlyFreeItems = hasOnlyFreeItems()
+
+    if (deliveryMethod === "RETIRAR") {
+      const bairro = address?.district || "Centro"
+      const storeOption = {
+        type: `Centro de Distribuição LEGO`,
+        distance: "3.1km",
+        address: `📍 ${bairro}`,
+        price: onlyFreeItems ? 0 : 0,
+      }
+      setShippingOptions([storeOption])
+    } else {
+      if (onlyFreeItems) {
+        setShippingOptions([{ type: "Correios Sedex", price: 25.91, days: "de 5-7 dias úteis" }])
+      } else {
+        setShippingOptions([
+          { type: "Correios Pac", price: 0, days: "de 5-7 dias úteis." },
+          { type: "JadLog Transportadora", price: 25.91, days: "Chegará amanhã." },
+        ])
+      }
+    }
+
+    setShowShippingOptions(true)
+  }
+
+  const getBairroFromCep2 = async (cep: string) => {
     try {
       const cepNumbers = cep.replace(/\D/g, "")
       const response = await fetch(`https://viacep.com.br/ws/${cepNumbers}/json/`)
@@ -641,6 +705,9 @@ export default function CheckoutPage() {
   }
 
   const showTemporaryNotification = () => {
+    // Only run on client side
+    if (typeof window === "undefined") return
+
     setShowNotification(true)
     setTimeout(() => {
       setShowNotification(false)
