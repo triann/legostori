@@ -179,19 +179,20 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
 
     const cardPaymentData = {
       ...utmParams,
-      nome: data.name,
-      email: data.email,
-      cpf: data.cpf.replace(/\D/g, ""),
-      telefone: data.phone.replace(/\D/g, ""),
       amount: data.amount,
+      paymentMethod: "credit_card",
+      installments: data.installments,
       card: {
         number: data.card.number.replace(/\s/g, ""),
-        holderName: data.card.holder_name,
-        expirationMonth: data.card.exp_month,
-        expirationYear: data.card.exp_year,
+        holder_name: data.card.holder_name, // Mantendo holder_name como na API
+        expirationMonth: Number.parseInt(data.card.exp_month), // Convertendo para número
+        expirationYear: Number.parseInt(data.card.exp_year), // Convertendo para número
         cvv: data.card.cvv,
       },
-      installments: data.installments,
+      name: data.name,
+      email: data.email,
+      cpf: data.cpf.replace(/\D/g, ""),
+      phone: data.phone.replace(/\D/g, ""),
       description: data.description,
     }
 
