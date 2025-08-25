@@ -1,7 +1,8 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/categoria/todos/page": "app/categoria/todos/page.js",
   "/categoria/botanicals/page": "app/categoria/botanicals/page.js",
   "/products/page": "app/products/page.js",
-  "/categoria/classic/page": "app/categoria/classic/page.js",
+  "/categoria/harrypotter/page": "app/categoria/harrypotter/page.js",
   "/product/[id]/page": "app/product/[id]/page.js"
 }

@@ -42,8 +42,8 @@ export function Hero({ discount = 0 }: HeroProps) {
         <div className="bg-gray-900 text-white">
           <div className="max-w-7xl mx-auto px-2 md:px-4 py-6 md:py-8">
             <div className="text-center space-y-4 md:space-y-6">
-              <h1 className="text-xl md:text-3xl font-bold">{heroContent.title}</h1>
-              <p className="text-sm md:text-lg text-gray-300">{heroContent.description}</p>
+              <h1 className="text-[14px] md:text-xl font-bold">{heroContent.title}</h1>
+              <p className="text-[12px] md:text-lg text-gray-300">{heroContent.description}</p>
             </div>
           </div>
         </div>
