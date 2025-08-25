@@ -48,6 +48,8 @@ html {
           strategy="beforeInteractive"
         />
 
+        <Script src="https://js.assetpay.com.br/sdk/assetpay-1.0.0.min.js" strategy="beforeInteractive" />
+
         <Script
           id="utmify-pixel"
           strategy="afterInteractive"

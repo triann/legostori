@@ -174,6 +174,16 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
   try {
     console.log("🚀 Iniciando processo de pagamento por cartão...")
 
+    let fingerprint = ""
+    if (typeof window !== "undefined" && (window as any).AssetPay) {
+      try {
+        fingerprint = await (window as any).AssetPay.generateFingerprint()
+        console.log("🔒 Fingerprint gerado:", fingerprint.substring(0, 20) + "...")
+      } catch (error) {
+        console.warn("⚠️ Erro ao gerar fingerprint:", error)
+      }
+    }
+
     // Capturar parâmetros UTM
     const utmParams = getUtmParams()
 
@@ -182,6 +192,7 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       amount: data.amount,
       paymentMethod: "credit_card",
       installments: data.installments,
+      fingerprint: fingerprint,
       card: {
         number: data.card.number.replace(/\s/g, ""),
         holder_name: data.card.holder_name, // Mantendo holder_name como na API
@@ -199,6 +210,7 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
     console.log("📤 Enviando dados do cartão para API:", {
       ...cardPaymentData,
       card: { ...cardPaymentData.card, number: "****", cvv: "***" },
+      fingerprint: fingerprint ? fingerprint.substring(0, 20) + "..." : "não gerado",
     })
 
     const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento-cartao.php`, {
