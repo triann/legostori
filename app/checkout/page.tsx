@@ -369,9 +369,39 @@ export default function CheckoutPage() {
       errors.push("E-mail deve ter um formato válido")
     }
 
-    // Validar se PIX está selecionado
+    // Validar se método de pagamento está selecionado
     if (!selectedPaymentMethod) {
       errors.push("Selecione um método de pagamento")
+    }
+
+    // Validar dados pessoais obrigatórios
+    if (!formData.firstName.trim()) {
+      errors.push("Primeiro nome é obrigatório")
+    }
+    if (!formData.lastName.trim()) {
+      errors.push("Último nome é obrigatório")
+    }
+    if (!formData.cpf.trim()) {
+      errors.push("CPF é obrigatório")
+    }
+    if (!formData.phone.trim()) {
+      errors.push("Telefone é obrigatório")
+    }
+
+    // Validar dados do cartão se método for cartão
+    if (selectedPaymentMethod === "card") {
+      if (!validateCardNumber(cardData.number)) {
+        errors.push("Número do cartão inválido")
+      }
+      if (!cardData.name.trim()) {
+        errors.push("Nome no cartão é obrigatório")
+      }
+      if (!validateExpiry(cardData.expiry)) {
+        errors.push("Data de validade inválida")
+      }
+      if (!validateCVV(cardData.cvv)) {
+        errors.push("CVV inválido")
+      }
     }
 
     if (errors.length > 0) {
@@ -463,7 +493,7 @@ export default function CheckoutPage() {
   }
 
   const handleCardPayment = async () => {
-    if (!validateForm() || !validateCardForm()) {
+    if (!validateForm()) {
       return
     }
 
