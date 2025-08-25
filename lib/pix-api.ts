@@ -226,8 +226,11 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       try {
         console.log("[v0] 🔧 Configurando AssetPay...")
 
+        const publicKey = "pk_live_v2D5sJPOcIhr7OFQn6aMUzb80GDHT3BXHz"
+        console.log("[v0] 🔑 Chave pública configurada:", publicKey.substring(0, 20) + "...")
+
         // Configurar chave pública e modo de teste
-        ;(window as any).AssetPay.setPublicKey(process.env.NEXT_PUBLIC_ASSET_PUBLIC_KEY || "")
+        ;(window as any).AssetPay.setPublicKey(publicKey)
         ;(window as any).AssetPay.setTestMode(true)
 
         console.log("[v0] 🔒 Tokenizando cartão...")
