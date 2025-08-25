@@ -61,16 +61,6 @@ export default function HomePage() {
       name: "Marvel - Warbird do Rocket vs Ronan",
       price: 1299.99,
     },
-    {
-      image: "https://legobrasil.vtexassets.com/arquivos/ids/190720/77238-lego-speed-champions-lamborguini-revuelto-huracan-sto%20-3-.jpg?v=638852513926270000",
-      name: "Speed Champions - Lamborghini Revuelto e Huracán STO",
-      price: 3499.99,
-    },
-    {
-      image: "https://legobrasil.vtexassets.com/arquivos/ids/186016/76432.jpg?v=638443147311000000",
-      name: "Harry Potter™ - Floresta Proibida™: Criaturas Mágicas",
-      price: 299.99,
-    },
   ]
 
   const loadingMessages = ["Preparando Quebra-Cabeça...", "Juntando peças...", "Você está preparado?"]
@@ -265,7 +255,7 @@ export default function HomePage() {
                   <CheckCircle className="w-4 h-4 text-gray-600" />
                   <span className="text-gray-600">Quebra-cabeças Completos:</span>
                 </div>
-                <span className="font-semibold">5/5</span>
+                <span className="font-semibold">3/3</span>
               </div>
               <hr className="my-2" />
               <div className="flex justify-between items-center">
