@@ -16,12 +16,12 @@ export default function RoulettePage() {
   const notifications = [
     { name: "Pedro Oliveira", discount: "75%", image: "https://i.postimg.cc/RhB8zCK5/24.jpg" },
     { name: "Ana Alves", discount: "50%", image: "https://i.postimg.cc/prw31XTF/2.jpg" },
-    { name: "Fernanda Santos", discount: "95%", image: "https://i.postimg.cc/X7FvNr9t/3.jpg" },
+    { name: "Fernanda Santos", discount: "15%", image: "https://i.postimg.cc/X7FvNr9t/3.jpg" },
     { name: "Bruno Souza", discount: "25%", image: "https://i.postimg.cc/2ynfYBgw/5.jpg" },
-    { name: "Fabrício Costa", discount: "75%", image: "https://i.postimg.cc/kXrTRHtD/6.jpg" },
-    { name: "Juliana Lima", discount: "50%", image: "https://i.postimg.cc/0ynPrDjX/4.jpg" },
-    { name: "Yasmin Araújo", discount: "95%", image: "https://i.postimg.cc/9XNrx3BF/10.jpg" },
-    { name: "Lucilene Silva", discount: "75%", image: "https://i.postimg.cc/x8Wj92sv/11.jpg" },
+    { name: "Fabrício Costa", discount: "15%", image: "https://i.postimg.cc/kXrTRHtD/6.jpg" },
+    { name: "Juliana Lima", discount: "75%", image: "https://i.postimg.cc/0ynPrDjX/4.jpg" },
+    { name: "Yasmin Araújo", discount: "15%", image: "https://i.postimg.cc/9XNrx3BF/10.jpg" },
+    { name: "Lucilene Silva", discount: "25%", image: "https://i.postimg.cc/x8Wj92sv/11.jpg" },
     { name: "Everaldo Rocha", discount: "50%", image: "https://i.postimg.cc/nhFYvfVV/7.jpg" },
     { name: "Oswaldo Carvalho", discount: "25%", image: "https://i.postimg.cc/cHSQ4pzN/9.jpg" },
   ]
@@ -109,7 +109,7 @@ export default function RoulettePage() {
           <img src="/placeholder.svg" id="roleta1" />
           <div id="roleta2">
             <img
-              src="https://i.ibb.co/W4TcY4Wx/roleta.png"
+              src="https://i.ibb.co/WvS5M873/roleta.png"
               className={
                 isSpinning
                   ? attempt === 0
@@ -401,7 +401,7 @@ export default function RoulettePage() {
         #button-cta {
           z-index: 1;
           width: 70%;
-          margin-top: 320px;
+          margin-top: 315px;
           height: 45px;
           background-color: #ff0000;
           border: none;

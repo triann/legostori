@@ -689,10 +689,6 @@ export function PuzzleGame({
                   <span className="font-semibold text-xs">{moves}</span>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Zap className="w-4 h-4 text-yellow-500" />
-                <span className="font-semibold text-xs text-yellow-600">GIRE A ROLETA!</span>
-              </div>
             </div>
 
             {!croppedImageData ? (

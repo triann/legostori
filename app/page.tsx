@@ -48,28 +48,28 @@ export default function HomePage() {
   const puzzles = [
     {
       image: "https://legobrasil.vtexassets.com/arquivos/ids/185202/10330--1-.jpg?v=638424970071170000",
-      name: "LEGO Icons - McLaren MP4/4 e Ayrton Senna",
-      price: 2499.99,
+      name: "Icons - McLaren MP4/4 e Ayrton Senna",
+      price: 499.99,
     },
     {
-      image: "https://legobrasil.vtexassets.com/arquivos/ids/185202/10330--1-.jpg?v=638424970071170000",
-      name: "LEGO Creator Expert - Taj Mahal",
-      price: 1899.99,
+      image: "https://legobrasil.vtexassets.com/arquivos/ids/186411/43240.jpg?v=638507775738300000",
+      name: "Disney - Dragão da Malévola",
+      price: 699.99,
     },
     {
-      image: "https://legobrasil.vtexassets.com/arquivos/ids/185202/10330--1-.jpg?v=638424970071170000",
-      name: "LEGO Architecture - Estátua da Liberdade",
+      image: "https://legobrasil.vtexassets.com/arquivos/ids/184770/76278.jpg?v=638393026065900000",
+      name: "Marvel - Warbird do Rocket vs Ronan",
       price: 1299.99,
     },
     {
-      image: "https://legobrasil.vtexassets.com/arquivos/ids/185202/10330--1-.jpg?v=638424970071170000",
-      name: "LEGO Technic - Lamborghini Sián",
+      image: "https://legobrasil.vtexassets.com/arquivos/ids/190720/77238-lego-speed-champions-lamborguini-revuelto-huracan-sto%20-3-.jpg?v=638852513926270000",
+      name: "Speed Champions - Lamborghini Revuelto e Huracán STO",
       price: 3499.99,
     },
     {
-      image: "https://legobrasil.vtexassets.com/arquivos/ids/185202/10330--1-.jpg?v=638424970071170000",
-      name: "LEGO Creator - Casa Gingerbread",
-      price: 999.99,
+      image: "https://legobrasil.vtexassets.com/arquivos/ids/186016/76432.jpg?v=638443147311000000",
+      name: "Harry Potter™ - Floresta Proibida™: Criaturas Mágicas",
+      price: 299.99,
     },
   ]
 
@@ -237,7 +237,7 @@ export default function HomePage() {
               <Trophy className="w-6 h-6 text-yellow-500" />
               <h1 className="text-2xl font-bold text-gray-900">Parabéns!</h1>
             </div>
-            <p className="text-base text-gray-700">Você completou todos os 5 quebra-cabeças!</p>
+            <p className="text-sm text-gray-700">Você completou todos os 5 quebra-cabeças!</p>
           </div>
 
           <div className="bg-gray-50 rounded-lg p-3 mb-4">
@@ -262,13 +262,6 @@ export default function HomePage() {
               </div>
               <div className="flex justify-between">
                 <div className="flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 text-gray-600" />
-                  <span className="text-gray-600">Total de Erros:</span>
-                </div>
-                <span className="font-semibold">{totalErrors}</span>
-              </div>
-              <div className="flex justify-between">
-                <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-gray-600" />
                   <span className="text-gray-600">Quebra-cabeças Completos:</span>
                 </div>
@@ -285,12 +278,8 @@ export default function HomePage() {
                     <IconComponent className="w-4 h-4" />
                     {performance.rating}
                   </div>
-                  <div className="text-xs text-gray-500">#{ranking}</div>
                 </div>
               </div>
-              <p className="text-xs text-gray-500 text-center mt-2">
-                Essa é a sua posição no ranking de pessoas que já participaram.
-              </p>
             </div>
           </div>
 
@@ -435,7 +424,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 bg-[url('https://i.ibb.co/5Xhm2BC8/bg.png')] bg-cover bg-center bg-no-repeat bg-blend-overlay flex items-center justify-center p-3">
       <UTMCapture />
-      <div className="max-w-sm w-full p-[3px] sm:p-4 text-center bg-white/95 backdrop-blur-sm rounded-lg transform transition-all duration-500 hover:scale-105 mt-26">
+      <div className="max-w-sm w-full p-3 sm:p-4 text-center bg-white/95 backdrop-blur-sm rounded-lg transform transition-all duration-500 hover:scale-105 mt-26">
         <div className="mb-3">
           <p className="text-sm sm:text-base text-gray-700 mb-3">
             Complete <span className="text-red-600 font-bold">5 quebra-cabeças</span> de produtos LEGO aleatórios em até{" "}

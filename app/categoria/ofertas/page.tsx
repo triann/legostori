@@ -16,12 +16,6 @@ export default function OfertasPage({ searchParams }: { searchParams: { discount
       <div className="max-w-7xl mx-auto px-4 py-12">
         <h1 className="text-3xl font-bold text-center mb-8">Ofertas Especiais</h1>
 
-        {discount > 0 && (
-          <div className="mb-6 p-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg text-center">
-            <h2 className="text-xl font-bold">🎉 Parabéns! Você conquistou {discount}% de desconto!</h2>
-            <p className="text-sm opacity-90">Desconto aplicado em todos os produtos desta categoria</p>
-          </div>
-        )}
 
         <div className="mb-6">
           <p className="text-gray-600">Exibindo {ofertasProducts.length} Produtos</p>
