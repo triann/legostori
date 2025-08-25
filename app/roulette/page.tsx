@@ -29,7 +29,7 @@ export default function RoulettePage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentNotification((prev) => (prev + 1) % notifications.length)
-    }, 4000)
+    }, 9000)
 
     return () => clearInterval(interval)
   }, [])
