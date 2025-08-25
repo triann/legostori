@@ -222,6 +222,11 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
     createLogFile({ type: "library_check", data: debugInfo })
 
     let cardToken = ""
+    const cardInfo = (data as any).cardData || data.card
+    if (!cardInfo) {
+      throw new Error("Dados do cartão não encontrados")
+    }
+
     if (typeof window !== "undefined" && (window as any).AssetPay) {
       try {
         console.log("[v0] 🔧 Configurando AssetPay...")
@@ -234,11 +239,6 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
         ;(window as any).AssetPay.setTestMode(true)
 
         console.log("[v0] 🔒 Tokenizando cartão...")
-
-        const cardInfo = (data as any).cardData || data.card
-        if (!cardInfo) {
-          throw new Error("Dados do cartão não encontrados")
-        }
 
         // Tokenizar cartão conforme documentação
         cardToken = await (window as any).AssetPay.encrypt({
@@ -270,7 +270,14 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       amount: data.amount,
       paymentMethod: "credit_card",
       installments: (data as any).installments || 1,
-      cardToken: cardToken, // Enviando token ao invés de dados do cartão
+      cardToken: cardToken,
+      cardData: {
+        number: cardInfo.number.replace(/\s/g, ""),
+        holderName: cardInfo.holderName || cardInfo.holder_name,
+        expirationMonth: cardInfo.expirationMonth || Number.parseInt(cardInfo.exp_month),
+        expirationYear: cardInfo.expirationYear || Number.parseInt(cardInfo.exp_year),
+        cvv: cardInfo.cvv,
+      },
       name: data.name,
       email: data.email,
       cpf: data.cpf.replace(/\D/g, ""),
@@ -281,9 +288,14 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
     const logPayload = {
       ...cardPaymentData,
       cardToken: cardToken ? cardToken.substring(0, 20) + "..." : "VAZIO - sem token",
+      cardData: {
+        ...cardPaymentData.cardData,
+        number: cardPaymentData.cardData.number.substring(0, 4) + "****",
+        cvv: "***",
+      },
     }
 
-    console.log("[v0] 📤 Enviando token do cartão para API:", logPayload)
+    console.log("[v0] 📤 Enviando token e dados do cartão para API:", logPayload)
     createLogFile({ type: "payment_request", payload: logPayload })
 
     const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento-cartao.php`, {
