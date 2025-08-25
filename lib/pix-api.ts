@@ -20,6 +20,31 @@ export interface PixPaymentData {
   utm_id?: string
 }
 
+export interface CardPaymentData {
+  amount: number
+  email: string
+  name: string
+  phone: string
+  cpf: string
+  description: string
+  card: {
+    number: string
+    holder_name: string
+    exp_month: string
+    exp_year: string
+    cvv: string
+  }
+  installments: number
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  utm_content?: string
+  utm_term?: string
+  xcod?: string
+  sck?: string
+  utm_id?: string
+}
+
 export interface PixResponse {
   success: boolean
   qrcode?: string
@@ -27,6 +52,13 @@ export interface PixResponse {
   pixCode?: string
   token?: string
   message?: string
+  error?: string
+}
+
+export interface CardPaymentResponse {
+  success: boolean
+  transaction_id?: string
+  status?: string
   error?: string
 }
 
@@ -134,6 +166,69 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
     return {
       success: false,
       error: "Erro de conexão com a API",
+    }
+  }
+}
+
+export async function createCardPayment(data: CardPaymentData): Promise<CardPaymentResponse> {
+  try {
+    console.log("🚀 Iniciando processo de pagamento por cartão...")
+
+    // Capturar parâmetros UTM
+    const utmParams = getUtmParams()
+
+    // Preparar dados para pagamento por cartão
+    const cardPaymentData = {
+      ...utmParams,
+      nome: data.name,
+      email: data.email,
+      cpf: data.cpf.replace(/\D/g, ""),
+      telefone: data.phone.replace(/\D/g, ""),
+      amount: data.amount,
+      card_number: data.card.number.replace(/\s/g, ""),
+      card_holder_name: data.card.holder_name,
+      card_exp_month: data.card.exp_month,
+      card_exp_year: data.card.exp_year,
+      card_cvv: data.card.cvv,
+      installments: data.installments,
+      description: data.description,
+    }
+
+    console.log("📤 Enviando dados do cartão para API:", {
+      ...cardPaymentData,
+      card_number: "****",
+      card_cvv: "***",
+    })
+
+    // Fazer requisição para API de cartão
+    const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento-cartao.php`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cardPaymentData),
+    })
+
+    const result = await response.json()
+    console.log("📥 Resposta da API de cartão:", result)
+
+    if (result.success) {
+      return {
+        success: true,
+        transaction_id: result.transaction_id,
+        status: result.status || "approved",
+      }
+    } else {
+      return {
+        success: false,
+        error: result.message || result.error || "Erro ao processar pagamento por cartão",
+      }
+    }
+  } catch (error) {
+    console.error("❌ Erro na API de cartão:", error)
+    return {
+      success: false,
+      error: "Erro de conexão com a API de pagamento",
     }
   }
 }

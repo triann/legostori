@@ -8,7 +8,14 @@ import { Input } from "@/components/ui/input"
 import { Minus, Plus, Trash2, Loader2, Calendar, ChevronLeft, ChevronRight, X, Home, Shield } from "lucide-react"
 import { CheckoutHeader } from "@/components/checkout-header"
 
-import { createPixPayment, type PixPaymentData, maskCPF, maskPhone, validateEmail } from "@/lib/pix-api"
+import {
+  createPixPayment,
+  type PixPaymentData,
+  maskCPF,
+  maskPhone,
+  validateEmail,
+  createCardPayment,
+} from "@/lib/pix-api"
 import { Edit2 } from "lucide-react"
 
 interface CartItem {
@@ -53,7 +60,16 @@ export default function CheckoutPage() {
   const [selectedDate, setSelectedDate] = useState("")
   const [currentMonth, setCurrentMonth] = useState(new Date())
   const [showNotification, setShowNotification] = useState(false)
+
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>("")
+  const [cardData, setCardData] = useState({
+    number: "",
+    name: "",
+    expiry: "",
+    cvv: "",
+    installments: "1",
+  })
+  const [cardErrors, setCardErrors] = useState<{ [key: string]: string }>({})
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -366,13 +382,88 @@ export default function CheckoutPage() {
     return true
   }
 
-  const handlePaymentSubmit = async () => {
-    if (selectedPaymentMethod !== "pix") {
-      alert("Selecione PIX como método de pagamento")
-      return
+  const validateCardNumber = (number: string) => {
+    const cleaned = number.replace(/\s/g, "")
+    return cleaned.length >= 13 && cleaned.length <= 19 && /^\d+$/.test(cleaned)
+  }
+
+  const validateExpiry = (expiry: string) => {
+    const [month, year] = expiry.split("/")
+    if (!month || !year) return false
+    const monthNum = Number.parseInt(month)
+    const yearNum = Number.parseInt(`20${year}`)
+    const now = new Date()
+    const currentYear = now.getFullYear()
+    const currentMonth = now.getMonth() + 1
+
+    return (
+      monthNum >= 1 &&
+      monthNum <= 12 &&
+      (yearNum > currentYear || (yearNum === currentYear && monthNum >= currentMonth))
+    )
+  }
+
+  const validateCVV = (cvv: string) => {
+    return cvv.length >= 3 && cvv.length <= 4 && /^\d+$/.test(cvv)
+  }
+
+  const formatCardNumber = (value: string) => {
+    const cleaned = value.replace(/\s/g, "")
+    const match = cleaned.match(/.{1,4}/g)
+    return match ? match.join(" ") : cleaned
+  }
+
+  const formatExpiry = (value: string) => {
+    const cleaned = value.replace(/\D/g, "")
+    if (cleaned.length >= 2) {
+      return cleaned.substring(0, 2) + "/" + cleaned.substring(2, 4)
+    }
+    return cleaned
+  }
+
+  const handleCardInputChange = (field: string, value: string) => {
+    let formattedValue = value
+
+    if (field === "number") {
+      formattedValue = formatCardNumber(value.replace(/\s/g, "").substring(0, 19))
+    } else if (field === "expiry") {
+      formattedValue = formatExpiry(value.substring(0, 5))
+    } else if (field === "cvv") {
+      formattedValue = value.replace(/\D/g, "").substring(0, 4)
+    } else if (field === "name") {
+      formattedValue = value.toUpperCase()
     }
 
-    if (!validateForm()) {
+    setCardData((prev) => ({ ...prev, [field]: formattedValue }))
+
+    // Clear error when user starts typing
+    if (cardErrors[field]) {
+      setCardErrors((prev) => ({ ...prev, [field]: "" }))
+    }
+  }
+
+  const validateCardForm = () => {
+    const errors: { [key: string]: string } = {}
+
+    if (!validateCardNumber(cardData.number)) {
+      errors.number = "Número do cartão inválido"
+    }
+    if (!cardData.name.trim()) {
+      errors.name = "Nome no cartão é obrigatório"
+    }
+    if (!validateExpiry(cardData.expiry)) {
+      errors.expiry = "Data de validade inválida"
+    }
+    if (!validateCVV(cardData.cvv)) {
+      errors.cvv = "CVV inválido"
+    }
+
+    setCardErrors(errors)
+    return Object.keys(errors).length === 0
+  }
+
+  const handleCardPayment = async () => {
+    if (!validateForm() || !validateCardForm()) {
       return
     }
 
@@ -380,18 +471,23 @@ export default function CheckoutPage() {
 
     try {
       const totalAmount = calculateTotal()
-      console.log("[v0] Valor total com frete:", totalAmount)
-      console.log("[v0] Valor em centavos:", Math.round(totalAmount * 100))
-
       const utmParams = product?.utmParams || {}
 
-      const pixData: PixPaymentData = {
-        amount: Math.round(totalAmount * 100), // Valor em centavos incluindo frete
+      const cardPaymentData = {
+        amount: Math.round(totalAmount * 100), // Valor em centavos
         email: formData.email,
         name: `${formData.firstName} ${formData.lastName}`.trim(),
         phone: formData.phone,
         cpf: formData.cpf,
         description: `Compra LEGO - ${product?.name || "Produto"}`,
+        card: {
+          number: cardData.number.replace(/\s/g, ""),
+          holder_name: cardData.name,
+          exp_month: cardData.expiry.split("/")[0],
+          exp_year: `20${cardData.expiry.split("/")[1]}`,
+          cvv: cardData.cvv,
+        },
+        installments: Number.parseInt(cardData.installments),
         utm_source: utmParams.utm_source,
         utm_medium: utmParams.utm_medium,
         utm_campaign: utmParams.utm_campaign,
@@ -402,38 +498,111 @@ export default function CheckoutPage() {
         utm_id: utmParams.utm_id,
       }
 
-      console.log("📤 Enviando dados PIX:", pixData)
+      console.log("📤 Enviando dados do cartão:", {
+        ...cardPaymentData,
+        card: { ...cardPaymentData.card, number: "****", cvv: "***" },
+      })
 
-      // Criar pagamento PIX via API
-      const pixResponse = await createPixPayment(pixData)
+      // Criar pagamento por cartão via API
+      const cardResponse = await createCardPayment(cardPaymentData)
 
-      if (pixResponse.success && (pixResponse.qrcode || pixResponse.pixCopiaECola) && pixResponse.token) {
-        const pixCode = pixResponse.qrcode || pixResponse.pixCopiaECola || ""
-
-        // Salvar dados do PIX no localStorage para a página PIX
+      if (cardResponse.success) {
+        // Salvar dados do pagamento no localStorage
         localStorage.setItem(
-          "pixPayment",
+          "cardPayment",
           JSON.stringify({
-            qrcode: pixCode,
-            token: pixResponse.token,
-            amount: totalAmount, // Usar valor total com frete ao invés de totalPrice
+            transactionId: cardResponse.transaction_id,
+            status: cardResponse.status,
+            amount: totalAmount,
             productName: product?.name || "Produto LEGO",
             email: formData.email,
             name: `${formData.firstName} ${formData.lastName}`.trim(),
           }),
         )
 
-        console.log("🔄 Redirecionando para PIX...")
-        // Redirecionar para página PIX
-        window.location.href = "/pix"
+        console.log("✅ Pagamento processado com sucesso")
+        setCurrentStep("success")
       } else {
-        throw new Error(pixResponse.error || "Erro ao gerar PIX")
+        throw new Error(cardResponse.error || "Erro ao processar pagamento")
       }
     } catch (error) {
       console.error("❌ Erro ao processar pagamento:", error)
       alert("Erro ao processar pagamento: " + (error as Error).message)
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const handlePaymentSubmit = async () => {
+    if (selectedPaymentMethod === "pix") {
+      // Existing PIX logic
+      if (!validateForm()) {
+        return
+      }
+
+      setIsLoading(true)
+
+      try {
+        const totalAmount = calculateTotal()
+        console.log("[v0] Valor total com frete:", totalAmount)
+        console.log("[v0] Valor em centavos:", Math.round(totalAmount * 100))
+
+        const utmParams = product?.utmParams || {}
+
+        const pixData: PixPaymentData = {
+          amount: Math.round(totalAmount * 100), // Valor em centavos incluindo frete
+          email: formData.email,
+          name: `${formData.firstName} ${formData.lastName}`.trim(),
+          phone: formData.phone,
+          cpf: formData.cpf,
+          description: `Compra LEGO - ${product?.name || "Produto"}`,
+          utm_source: utmParams.utm_source,
+          utm_medium: utmParams.utm_medium,
+          utm_campaign: utmParams.utm_campaign,
+          utm_content: utmParams.utm_content,
+          utm_term: utmParams.utm_term,
+          xcod: utmParams.xcod,
+          sck: utmParams.sck,
+          utm_id: utmParams.utm_id,
+        }
+
+        console.log("📤 Enviando dados PIX:", pixData)
+
+        // Criar pagamento PIX via API
+        const pixResponse = await createPixPayment(pixData)
+
+        if (pixResponse.success && (pixResponse.qrcode || pixResponse.pixCopiaECola) && pixResponse.token) {
+          const pixCode = pixResponse.qrcode || pixResponse.pixCopiaECola || ""
+
+          // Salvar dados do PIX no localStorage para a página PIX
+          localStorage.setItem(
+            "pixPayment",
+            JSON.stringify({
+              qrcode: pixCode,
+              token: pixResponse.token,
+              amount: totalAmount, // Usar valor total com frete ao invés de totalPrice
+              productName: product?.name || "Produto LEGO",
+              email: formData.email,
+              name: `${formData.firstName} ${formData.lastName}`.trim(),
+            }),
+          )
+
+          console.log("🔄 Redirecionando para PIX...")
+          // Redirecionar para página PIX
+          window.location.href = "/pix"
+        } else {
+          throw new Error(pixResponse.error || "Erro ao gerar PIX")
+        }
+      } catch (error) {
+        console.error("❌ Erro ao processar pagamento:", error)
+        alert("Erro ao processar pagamento: " + (error as Error).message)
+      } finally {
+        setIsLoading(false)
+      }
+    } else if (selectedPaymentMethod === "card") {
+      await handleCardPayment()
+    } else {
+      alert("Selecione um método de pagamento")
     }
   }
 
@@ -962,10 +1131,10 @@ export default function CheckoutPage() {
             <div className="mb-6">
               <h3 className="text-sm font-medium text-gray-700 mb-3">Forma de pagamento</h3>
 
-              {/* PIX - única opção disponível */}
+              {/* PIX */}
               <button
                 onClick={() => setSelectedPaymentMethod("pix")}
-                className={`w-full border-2 rounded-lg p-4 transition-colors ${
+                className={`w-full border-2 rounded-lg p-4 mb-3 transition-colors ${
                   selectedPaymentMethod === "pix"
                     ? "border-blue-600 bg-white"
                     : "border-gray-200 bg-white hover:border-gray-300"
@@ -982,10 +1151,120 @@ export default function CheckoutPage() {
                       src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png"
                       alt="pix logo"
                       className="h-full object contain"
-                    ></img>
+                    />
                   </div>
                 </div>
               </button>
+
+              <button
+                onClick={() => setSelectedPaymentMethod("card")}
+                className={`w-full border-2 rounded-lg p-4 transition-colors ${
+                  selectedPaymentMethod === "card"
+                    ? "border-blue-600 bg-white"
+                    : "border-gray-200 bg-white hover:border-gray-300"
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span
+                    className={`font-medium ${selectedPaymentMethod === "card" ? "text-blue-600" : "text-gray-900"}`}
+                  >
+                    Cartão de Crédito
+                  </span>
+                  <div className="flex gap-1">
+                    <img src="/placeholder.svg?height=20&width=32&text=VISA" alt="Visa" className="h-5" />
+                    <img src="/placeholder.svg?height=20&width=32&text=MC" alt="Mastercard" className="h-5" />
+                  </div>
+                </div>
+              </button>
+
+              {selectedPaymentMethod === "card" && (
+                <div className="mt-4 p-4 border rounded-lg bg-gray-50">
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Número do cartão</label>
+                      <input
+                        type="text"
+                        value={cardData.number}
+                        onChange={(e) => handleCardInputChange("number", e.target.value)}
+                        placeholder="0000 0000 0000 0000"
+                        className={`w-full p-3 border rounded-lg ${
+                          cardErrors.number ? "border-red-500" : "border-gray-300"
+                        }`}
+                      />
+                      {cardErrors.number && <p className="text-red-500 text-xs mt-1">{cardErrors.number}</p>}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Nome no cartão</label>
+                      <input
+                        type="text"
+                        value={cardData.name}
+                        onChange={(e) => handleCardInputChange("name", e.target.value)}
+                        placeholder="NOME COMO NO CARTÃO"
+                        className={`w-full p-3 border rounded-lg ${
+                          cardErrors.name ? "border-red-500" : "border-gray-300"
+                        }`}
+                      />
+                      {cardErrors.name && <p className="text-red-500 text-xs mt-1">{cardErrors.name}</p>}
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Validade</label>
+                        <input
+                          type="text"
+                          value={cardData.expiry}
+                          onChange={(e) => handleCardInputChange("expiry", e.target.value)}
+                          placeholder="MM/AA"
+                          className={`w-full p-3 border rounded-lg ${
+                            cardErrors.expiry ? "border-red-500" : "border-gray-300"
+                          }`}
+                        />
+                        {cardErrors.expiry && <p className="text-red-500 text-xs mt-1">{cardErrors.expiry}</p>}
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">CVV</label>
+                        <input
+                          type="text"
+                          value={cardData.cvv}
+                          onChange={(e) => handleCardInputChange("cvv", e.target.value)}
+                          placeholder="000"
+                          className={`w-full p-3 border rounded-lg ${
+                            cardErrors.cvv ? "border-red-500" : "border-gray-300"
+                          }`}
+                        />
+                        {cardErrors.cvv && <p className="text-red-500 text-xs mt-1">{cardErrors.cvv}</p>}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Parcelas</label>
+                      <select
+                        value={cardData.installments}
+                        onChange={(e) => handleCardInputChange("installments", e.target.value)}
+                        className="w-full p-3 border border-gray-300 rounded-lg"
+                      >
+                        <option value="1">1x de R$ {calculateTotal().toFixed(2).replace(".", ",")} sem juros</option>
+                        <option value="2">
+                          2x de R$ {(calculateTotal() / 2).toFixed(2).replace(".", ",")} sem juros
+                        </option>
+                        <option value="3">
+                          3x de R$ {(calculateTotal() / 3).toFixed(2).replace(".", ",")} sem juros
+                        </option>
+                        <option value="4">
+                          4x de R$ {(calculateTotal() / 4).toFixed(2).replace(".", ",")} sem juros
+                        </option>
+                        <option value="5">
+                          5x de R$ {(calculateTotal() / 5).toFixed(2).replace(".", ",")} sem juros
+                        </option>
+                        <option value="6">
+                          6x de R$ {(calculateTotal() / 6).toFixed(2).replace(".", ",")} sem juros
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Resumo do pedido */}
@@ -1036,9 +1315,9 @@ export default function CheckoutPage() {
 
             <Button
               onClick={handlePaymentSubmit}
-              disabled={selectedPaymentMethod !== "pix" || isLoading}
+              disabled={!selectedPaymentMethod || isLoading}
               className={`w-full py-3 rounded-full font-semibold transition-colors ${
-                selectedPaymentMethod === "pix" && !isLoading
+                selectedPaymentMethod && !isLoading
                   ? "bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
                   : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}
