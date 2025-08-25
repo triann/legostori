@@ -94,11 +94,11 @@ function createLogFile(logData: any) {
     const url = URL.createObjectURL(blob)
 
     console.log(`[v0] Log salvo - Download disponível em:`, url)
-    console.log(`[v0] Para baixar o arquivo de log, execute: 
-      const a = document.createElement('a');
-      a.href = '${url}';
-      a.download = 'assetpay_debug_${timestamp.replace(/[:.]/g, "-")}.json';
-      a.click();
+    console.log(`[v0] Para baixar logs, execute no console: 
+      const downloadLink = document.createElement('a');
+      downloadLink.href = '${url}';
+      downloadLink.download = 'assetpay_debug_${timestamp.replace(/[:.]/g, "-")}.json';
+      downloadLink.click();
     `)
   }
 }
