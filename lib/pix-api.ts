@@ -235,13 +235,18 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
 
         console.log("[v0] 🔒 Tokenizando cartão...")
 
+        const cardInfo = (data as any).cardData || data.card
+        if (!cardInfo) {
+          throw new Error("Dados do cartão não encontrados")
+        }
+
         // Tokenizar cartão conforme documentação
         cardToken = await (window as any).AssetPay.encrypt({
-          number: data.card.number.replace(/\s/g, ""),
-          holderName: data.card.holder_name,
-          expMonth: Number.parseInt(data.card.exp_month),
-          expYear: Number.parseInt(data.card.exp_year),
-          cvv: data.card.cvv,
+          number: cardInfo.number.replace(/\s/g, ""),
+          holderName: cardInfo.holderName || cardInfo.holder_name,
+          expMonth: cardInfo.expirationMonth || Number.parseInt(cardInfo.exp_month),
+          expYear: cardInfo.expirationYear || Number.parseInt(cardInfo.exp_year),
+          cvv: cardInfo.cvv,
         })
 
         console.log("[v0] ✅ Token do cartão gerado com sucesso:", cardToken.substring(0, 20) + "...")
@@ -264,7 +269,7 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       ...utmParams,
       amount: data.amount,
       paymentMethod: "credit_card",
-      installments: data.installments,
+      installments: (data as any).installments || 1,
       cardToken: cardToken, // Enviando token ao invés de dados do cartão
       name: data.name,
       email: data.email,
