@@ -200,14 +200,17 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       card_cvv: "***",
     })
 
-    // Fazer requisição para API de cartão
-    const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento-cartao.php`, {
+    const response = await fetch("/api/card-payment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(cardPaymentData),
     })
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
 
     const result = await response.json()
     console.log("📥 Resposta da API de cartão:", result)
