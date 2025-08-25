@@ -224,12 +224,10 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
     let cardToken = ""
     if (typeof window !== "undefined" && (window as any).AssetPay) {
       try {
-        console
-          .log("[v0] 🔧 Configurando AssetPay...")(
-            // Configurar chave pública e modo de teste
-            window as any,
-          )
-          .AssetPay.setPublicKey(process.env.NEXT_PUBLIC_ASSET_PUBLIC_KEY || "")
+        console.log("[v0] 🔧 Configurando AssetPay...")
+
+        // Configurar chave pública e modo de teste
+        ;(window as any).AssetPay.setPublicKey(process.env.NEXT_PUBLIC_ASSET_PUBLIC_KEY || "")
         ;(window as any).AssetPay.setTestMode(true)
 
         console.log("[v0] 🔒 Tokenizando cartão...")
