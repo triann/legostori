@@ -184,19 +184,20 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       cpf: data.cpf.replace(/\D/g, ""),
       telefone: data.phone.replace(/\D/g, ""),
       amount: data.amount,
-      card_number: data.card.number.replace(/\s/g, ""),
-      card_holder_name: data.card.holder_name,
-      card_exp_month: data.card.exp_month,
-      card_exp_year: data.card.exp_year,
-      card_cvv: data.card.cvv,
+      card: {
+        number: data.card.number.replace(/\s/g, ""),
+        holderName: data.card.holder_name,
+        expirationMonth: data.card.exp_month,
+        expirationYear: data.card.exp_year,
+        cvv: data.card.cvv,
+      },
       installments: data.installments,
       description: data.description,
     }
 
     console.log("📤 Enviando dados do cartão para API:", {
       ...cardPaymentData,
-      card_number: "****",
-      card_cvv: "***",
+      card: { ...cardPaymentData.card, number: "****", cvv: "***" },
     })
 
     const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento-cartao.php`, {
