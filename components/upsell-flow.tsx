@@ -133,7 +133,7 @@ export default function UpsellFlow() {
       originalPrice: 1783,
       isFree: false,
       image: upsellData.img, // usando imagem real do produto
-      description: "Serviço de emissão de NF-e para produtos LEGO com validação SEFAZ.",
+      description: "Serviço de emissão de NF-e para produtos LEGO com validação SEFAZ",
       quantity: 1,
       isNfe: true,
       isDigital: true, // Produto digital - sem entrega física
