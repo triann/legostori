@@ -48,7 +48,43 @@ html {
           strategy="beforeInteractive"
         />
 
-        <Script src="https://js.assetpay.com.br/sdk/assetpay-1.0.0.min.js" strategy="beforeInteractive" />
+        <Script
+          src="https://api.assetpagamentos.com.br/v1/js"
+          strategy="beforeInteractive"
+          onLoad={() => {
+            console.log("[v0] AssetPay library loaded")
+            console.log("[v0] Window.AssetPay:", typeof window.AssetPay)
+            console.log("[v0] Available methods:", window.AssetPay ? Object.keys(window.AssetPay) : "N/A")
+          }}
+          onError={(e) => {
+            console.error("[v0] Failed to load AssetPay library:", e)
+          }}
+        />
+
+        <Script
+          id="assetpay-fallback"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Verificar se AssetPay foi carregado após 2 segundos
+              setTimeout(function() {
+                if (typeof window.AssetPay === 'undefined') {
+                  console.warn('[v0] AssetPay not loaded, trying alternative approach');
+                  // Tentar carregar manualmente
+                  var script = document.createElement('script');
+                  script.src = 'https://api.assetpagamentos.com.br/v1/js';
+                  script.onload = function() {
+                    console.log('[v0] AssetPay loaded via fallback');
+                  };
+                  script.onerror = function() {
+                    console.error('[v0] AssetPay fallback also failed');
+                  };
+                  document.head.appendChild(script);
+                }
+              }, 2000);
+            `,
+          }}
+        />
 
         <Script
           id="utmify-pixel"

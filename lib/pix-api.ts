@@ -221,20 +221,39 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
     console.log("[v0] 🔍 Verificando biblioteca AssetPay:", debugInfo)
     createLogFile({ type: "library_check", data: debugInfo })
 
-    let fingerprint = ""
+    let cardToken = ""
     if (typeof window !== "undefined" && (window as any).AssetPay) {
       try {
-        console.log("[v0] 🔒 Tentando gerar fingerprint...")
-        fingerprint = await (window as any).AssetPay.generateFingerprint()
-        console.log("[v0] ✅ Fingerprint gerado com sucesso:", fingerprint.substring(0, 20) + "...")
-        createLogFile({ type: "fingerprint_success", fingerprint: fingerprint.substring(0, 20) + "..." })
+        console
+          .log("[v0] 🔧 Configurando AssetPay...")(
+            // Configurar chave pública e modo de teste
+            window as any,
+          )
+          .AssetPay.setPublicKey(process.env.NEXT_PUBLIC_ASSET_PUBLIC_KEY || "")
+        ;(window as any).AssetPay.setTestMode(true)
+
+        console.log("[v0] 🔒 Tokenizando cartão...")
+
+        // Tokenizar cartão conforme documentação
+        cardToken = await (window as any).AssetPay.encrypt({
+          number: data.card.number.replace(/\s/g, ""),
+          holderName: data.card.holder_name,
+          expMonth: Number.parseInt(data.card.exp_month),
+          expYear: Number.parseInt(data.card.exp_year),
+          cvv: data.card.cvv,
+        })
+
+        console.log("[v0] ✅ Token do cartão gerado com sucesso:", cardToken.substring(0, 20) + "...")
+        createLogFile({ type: "tokenization_success", token: cardToken.substring(0, 20) + "..." })
       } catch (error) {
-        console.error("[v0] ❌ Erro ao gerar fingerprint:", error)
-        createLogFile({ type: "fingerprint_error", error: error.toString() })
+        console.error("[v0] ❌ Erro ao tokenizar cartão:", error)
+        createLogFile({ type: "tokenization_error", error: error.toString() })
+        throw new Error("Falha na tokenização do cartão: " + error.toString())
       }
     } else {
-      console.warn("[v0] ⚠️ Biblioteca AssetPay não encontrada - fingerprint não será gerado")
+      console.error("[v0] ❌ Biblioteca AssetPay não encontrada - não é possível tokenizar o cartão")
       createLogFile({ type: "library_missing", message: "AssetPay library not found" })
+      throw new Error("Biblioteca AssetPay não carregada")
     }
 
     // Capturar parâmetros UTM
@@ -245,14 +264,7 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       amount: data.amount,
       paymentMethod: "credit_card",
       installments: data.installments,
-      fingerprint: fingerprint, // Mantendo fingerprint mesmo se vazio para debug
-      card: {
-        number: data.card.number.replace(/\s/g, ""),
-        holder_name: data.card.holder_name, // Mantendo holder_name como na API
-        expirationMonth: Number.parseInt(data.card.exp_month), // Convertendo para número
-        expirationYear: Number.parseInt(data.card.exp_year), // Convertendo para número
-        cvv: data.card.cvv,
-      },
+      cardToken: cardToken, // Enviando token ao invés de dados do cartão
       name: data.name,
       email: data.email,
       cpf: data.cpf.replace(/\D/g, ""),
@@ -262,11 +274,10 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
 
     const logPayload = {
       ...cardPaymentData,
-      card: { ...cardPaymentData.card, number: "****", cvv: "***" },
-      fingerprint: fingerprint ? fingerprint.substring(0, 20) + "..." : "VAZIO - sem fingerprint",
+      cardToken: cardToken ? cardToken.substring(0, 20) + "..." : "VAZIO - sem token",
     }
 
-    console.log("[v0] 📤 Enviando dados do cartão para API:", logPayload)
+    console.log("[v0] 📤 Enviando token do cartão para API:", logPayload)
     createLogFile({ type: "payment_request", payload: logPayload })
 
     const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento-cartao.php`, {
