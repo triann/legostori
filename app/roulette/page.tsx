@@ -457,6 +457,7 @@ export default function RoulettePage() {
 
         .people {
           display: flex;
+          font-size: 14px;
           justify-content: center;
           align-items: center;
           padding-inline: 10px;
@@ -466,7 +467,7 @@ export default function RoulettePage() {
           top: 100%;
           transform: translateY(-100%);
           width: 100vw;
-          height: 60px;
+          height: 40px;
           gap: 12px;
           background-color: #ff0000;
           border-top: gray 1px solid;
@@ -478,7 +479,7 @@ export default function RoulettePage() {
         }
 
         .people img {
-          width: 40px;
+          width: 32px;
           border-radius: 50px;
         }
 
