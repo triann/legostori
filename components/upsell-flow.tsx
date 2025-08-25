@@ -388,14 +388,6 @@ export default function UpsellFlow() {
             </div>
           </div>
 
-          <div className="flex justify-center">
-            <button
-              onClick={prepareNfeCheckout}
-              className="px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-black text-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 active:translate-y-0.5 min-w-44"
-            >
-              Ir para pagamento
-            </button>
-          </div>
         </div>
       )}
 
@@ -451,19 +443,10 @@ export default function UpsellFlow() {
 
             <div className="flex gap-3 flex-wrap justify-center">
               <button
-                onClick={() => {
-                  setShowDeclinePush(false)
-                  prepareNfeCheckout()
-                }}
-                className="px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white font-black text-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 active:translate-y-0.5"
-              >
-                Ir para pagamento
-              </button>
-              <button
                 onClick={() => setShowDeclinePush(false)}
                 className="px-4 py-2 bg-gray-100 text-gray-800 font-black text-sm rounded-xl hover:bg-gray-200 transition-all duration-200 active:translate-y-0.5"
               >
-                Continuar sem NF‑e
+                Desejo emitir
               </button>
             </div>
           </div>
