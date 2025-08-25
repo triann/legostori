@@ -231,11 +231,11 @@ export default function HomePage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 bg-[url('https://i.ibb.co/5Xhm2BC8/bg.png')] bg-cover bg-center bg-no-repeat bg-blend-overlay flex items-center justify-center p-3">
         <UTMCapture />
-        <div className="max-w-xs w-full bg-white/95 backdrop-blur-sm rounded-lg p-2 text-center">
-          <div className="mb-1">
+        <div className="max-w-sm w-full bg-white/95 backdrop-blur-sm rounded-lg p-4 text-center">
+          <div className="mb-4">
             <div className="flex items-center justify-center gap-2 mb-2">
-              <Trophy className="w-5 h-5 text-yellow-500" />
-              <h1 className="text-xl font-bold text-gray-900">Parabéns!</h1>
+              <Trophy className="w-6 h-6 text-yellow-500" />
+              <h1 className="text-2xl font-bold text-gray-900">Parabéns!</h1>
             </div>
             <p className="text-base text-gray-700">Você completou todos os 5 quebra-cabeças!</p>
           </div>
@@ -262,6 +262,13 @@ export default function HomePage() {
               </div>
               <div className="flex justify-between">
                 <div className="flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-gray-600" />
+                  <span className="text-gray-600">Total de Erros:</span>
+                </div>
+                <span className="font-semibold">{totalErrors}</span>
+              </div>
+              <div className="flex justify-between">
+                <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-gray-600" />
                   <span className="text-gray-600">Quebra-cabeças Completos:</span>
                 </div>
@@ -278,8 +285,12 @@ export default function HomePage() {
                     <IconComponent className="w-4 h-4" />
                     {performance.rating}
                   </div>
+                  <div className="text-xs text-gray-500">#{ranking}</div>
                 </div>
               </div>
+              <p className="text-xs text-gray-500 text-center mt-2">
+                Essa é a sua posição no ranking de pessoas que já participaram.
+              </p>
             </div>
           </div>
 
@@ -313,7 +324,7 @@ export default function HomePage() {
               {cpf.replace(/\D/g, "").length >= 11 ? (
                 <>
                   <Target className="w-4 h-4" />
-                  Confirmar CPF
+                  Confirmar e Girar Roleta
                 </>
               ) : (
                 <>
@@ -424,7 +435,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 bg-[url('https://i.ibb.co/5Xhm2BC8/bg.png')] bg-cover bg-center bg-no-repeat bg-blend-overlay flex items-center justify-center p-3">
       <UTMCapture />
-      <div className="max-w-sm w-full p-4 sm:p-6 text-center bg-white/95 backdrop-blur-sm rounded-lg transform transition-all duration-500 hover:scale-105 mt-26">
+      <div className="max-w-sm w-full p-[3px] sm:p-4 text-center bg-white/95 backdrop-blur-sm rounded-lg transform transition-all duration-500 hover:scale-105 mt-26">
         <div className="mb-3">
           <p className="text-sm sm:text-base text-gray-700 mb-3">
             Complete <span className="text-red-600 font-bold">5 quebra-cabeças</span> de produtos LEGO aleatórios em até{" "}

@@ -478,6 +478,9 @@ export default function CheckoutUpsellPage() {
               </div>
             </div>
 
+            <div className="text-center text-sm text-gray-500 p-4 bg-gray-50 rounded-lg">
+              <p>Aguardando confirmação para prosseguir com o pagamento...</p>
+            </div>
 
             <Button
               onClick={handleProcessPayment}
@@ -522,11 +525,11 @@ export default function CheckoutUpsellPage() {
 
         <div className="max-w-md mx-auto bg-white min-h-screen transform transition-all duration-500 ease-in-out">
           <div className="p-4 border-b">
-            <h1 className="text-xl font-semibold text-gray-900 text-center">Finalizar</h1>
+            <h1 className="text-xl font-semibold text-gray-900 text-center">Emissão de NF-e</h1>
           </div>
 
           <div className="p-6 text-center">
-            <h2 className="text-lg font-medium text-gray-700 mb-2">Para finalizar, informe seu e-mail.</h2>
+            <h2 className="text-lg font-medium text-gray-700 mb-2">Para finalizar a emissão, informe seu e-mail.</h2>
             <p className="text-sm text-gray-500 mb-8">Rápido. Fácil. Seguro.</p>
 
             <div className="mb-4">

@@ -17,7 +17,9 @@ export default function BotanicalsPage({ searchParams }: { searchParams: { disco
         <h1 className="text-3xl font-bold text-center mb-8">Botanicals</h1>
 
         {discount > 0 && (
-          <div className="mb-6 p-4 bg-gradient-to-r from-white-500 to-white-600 text-white rounded-lg text-center">
+          <div className="mb-6 p-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg text-center">
+            <h2 className="text-xl font-bold">🎉 Parabéns! Você conquistou {discount}% de desconto!</h2>
+            <p className="text-sm opacity-90">Desconto aplicado em todos os produtos desta categoria</p>
           </div>
         )}
 
