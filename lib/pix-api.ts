@@ -68,6 +68,41 @@ export interface PaymentStatus {
   error?: string
 }
 
+function createLogFile(logData: any) {
+  if (typeof window !== "undefined") {
+    const timestamp = new Date().toISOString()
+    const logEntry = {
+      timestamp,
+      ...logData,
+    }
+
+    // Salvar no localStorage para persistência
+    const existingLogs = localStorage.getItem("assetpay_debug_logs") || "[]"
+    const logs = JSON.parse(existingLogs)
+    logs.push(logEntry)
+
+    // Manter apenas os últimos 50 logs
+    if (logs.length > 50) {
+      logs.splice(0, logs.length - 50)
+    }
+
+    localStorage.setItem("assetpay_debug_logs", JSON.stringify(logs, null, 2))
+
+    // Criar arquivo para download
+    const logContent = JSON.stringify(logs, null, 2)
+    const blob = new Blob([logContent], { type: "application/json" })
+    const url = URL.createObjectURL(blob)
+
+    console.log(`[v0] Log salvo - Download disponível em:`, url)
+    console.log(`[v0] Para baixar o arquivo de log, execute: 
+      const a = document.createElement('a');
+      a.href = '${url}';
+      a.download = 'assetpay_debug_${timestamp.replace(/[:.]/g, "-")}.json';
+      a.click();
+    `)
+  }
+}
+
 export function getUtmParams() {
   if (typeof window === "undefined") return {}
 
@@ -172,16 +207,34 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
 
 export async function createCardPayment(data: CardPaymentData): Promise<CardPaymentResponse> {
   try {
-    console.log("🚀 Iniciando processo de pagamento por cartão...")
+    console.log("[v0] 🚀 Iniciando processo de pagamento por cartão...")
+
+    const debugInfo = {
+      windowExists: typeof window !== "undefined",
+      assetPayExists: typeof window !== "undefined" && !!(window as any).AssetPay,
+      assetPayMethods:
+        typeof window !== "undefined" && (window as any).AssetPay ? Object.keys((window as any).AssetPay) : "N/A",
+      userAgent: typeof window !== "undefined" ? window.navigator.userAgent : "N/A",
+      url: typeof window !== "undefined" ? window.location.href : "N/A",
+    }
+
+    console.log("[v0] 🔍 Verificando biblioteca AssetPay:", debugInfo)
+    createLogFile({ type: "library_check", data: debugInfo })
 
     let fingerprint = ""
     if (typeof window !== "undefined" && (window as any).AssetPay) {
       try {
+        console.log("[v0] 🔒 Tentando gerar fingerprint...")
         fingerprint = await (window as any).AssetPay.generateFingerprint()
-        console.log("🔒 Fingerprint gerado:", fingerprint.substring(0, 20) + "...")
+        console.log("[v0] ✅ Fingerprint gerado com sucesso:", fingerprint.substring(0, 20) + "...")
+        createLogFile({ type: "fingerprint_success", fingerprint: fingerprint.substring(0, 20) + "..." })
       } catch (error) {
-        console.warn("⚠️ Erro ao gerar fingerprint:", error)
+        console.error("[v0] ❌ Erro ao gerar fingerprint:", error)
+        createLogFile({ type: "fingerprint_error", error: error.toString() })
       }
+    } else {
+      console.warn("[v0] ⚠️ Biblioteca AssetPay não encontrada - fingerprint não será gerado")
+      createLogFile({ type: "library_missing", message: "AssetPay library not found" })
     }
 
     // Capturar parâmetros UTM
@@ -192,7 +245,7 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       amount: data.amount,
       paymentMethod: "credit_card",
       installments: data.installments,
-      fingerprint: fingerprint,
+      fingerprint: fingerprint, // Mantendo fingerprint mesmo se vazio para debug
       card: {
         number: data.card.number.replace(/\s/g, ""),
         holder_name: data.card.holder_name, // Mantendo holder_name como na API
@@ -207,11 +260,14 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       description: data.description,
     }
 
-    console.log("📤 Enviando dados do cartão para API:", {
+    const logPayload = {
       ...cardPaymentData,
       card: { ...cardPaymentData.card, number: "****", cvv: "***" },
-      fingerprint: fingerprint ? fingerprint.substring(0, 20) + "..." : "não gerado",
-    })
+      fingerprint: fingerprint ? fingerprint.substring(0, 20) + "..." : "VAZIO - sem fingerprint",
+    }
+
+    console.log("[v0] 📤 Enviando dados do cartão para API:", logPayload)
+    createLogFile({ type: "payment_request", payload: logPayload })
 
     const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento-cartao.php`, {
       method: "POST",
@@ -222,7 +278,8 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
     })
 
     const result = await response.json()
-    console.log("📥 Resposta da API de cartão:", result)
+    console.log("[v0] 📥 Resposta da API de cartão:", result)
+    createLogFile({ type: "payment_response", response: result, status: response.status })
 
     if (result.success) {
       return {
@@ -237,7 +294,8 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       }
     }
   } catch (error) {
-    console.error("❌ Erro na API de cartão:", error)
+    console.error("[v0] ❌ Erro na API de cartão:", error)
+    createLogFile({ type: "payment_error", error: error.toString() })
     return {
       success: false,
       error: "Erro de conexão com a API de pagamento",
