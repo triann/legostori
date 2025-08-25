@@ -1,7 +1,7 @@
 {
-  "/products/page": "app/products/page.js",
-  "/roulette/page": "app/roulette/page.js",
   "/categoria/harrypotter/page": "app/categoria/harrypotter/page.js",
+  "/products/page": "app/products/page.js",
   "/categoria/classic/page": "app/categoria/classic/page.js",
+  "/roulette/page": "app/roulette/page.js",
   "/product/[id]/page": "app/product/[id]/page.js"
 }
