@@ -54,44 +54,105 @@
             try {
                 log('🟢 Iniciando checkout com 3DS...');
                 
+                log('🔍 Verificando disponibilidade da biblioteca AssetPay...');
+                if (typeof AssetPay === 'undefined') {
+                    throw new Error('AssetPay library not loaded');
+                }
+                log('✅ AssetPay library disponível', {
+                    methods: Object.getOwnPropertyNames(AssetPay),
+                    version: AssetPay.version || 'unknown'
+                });
+                
                 // Coletar dados do cartão
-                const cardData = {
-                    number: document.getElementById('cardNumber').value.replace(/\s/g, ''),
+                log('📋 Coletando dados do formulário...');
+                const rawCardData = {
+                    number: document.getElementById('cardNumber').value,
                     holderName: document.getElementById('holderName').value,
-                    expMonth: parseInt(document.getElementById('expMonth').value),
-                    expYear: parseInt(document.getElementById('expYear').value),
+                    expMonth: document.getElementById('expMonth').value,
+                    expYear: document.getElementById('expYear').value,
                     cvv: document.getElementById('cvv').value
                 };
+                log('📋 Dados brutos coletados', rawCardData);
                 
-                log('📇 Dados do cartão coletados', cardData);
+                const cardData = {
+                    number: rawCardData.number.replace(/\s/g, ''),
+                    holderName: rawCardData.holderName,
+                    expMonth: parseInt(rawCardData.expMonth),
+                    expYear: parseInt(rawCardData.expYear),
+                    cvv: rawCardData.cvv
+                };
+                
+                log('📇 Dados do cartão processados', {
+                    ...cardData,
+                    number: cardData.number.substring(0, 6) + '****' + cardData.number.substring(cardData.number.length - 4),
+                    cvv: '***'
+                });
+
+                log('🔍 Validando dados do cartão...');
+                const validations = {
+                    numberLength: cardData.number.length >= 13 && cardData.number.length <= 19,
+                    holderNameLength: cardData.holderName.length >= 2,
+                    expMonthRange: cardData.expMonth >= 1 && cardData.expMonth <= 12,
+                    expYearRange: cardData.expYear >= 2024 && cardData.expYear <= 2040,
+                    cvvLength: cardData.cvv.length >= 3 && cardData.cvv.length <= 4
+                };
+                log('✅ Validações dos dados', validations);
+                
+                if (!Object.values(validations).every(v => v)) {
+                    throw new Error('Dados do cartão inválidos: ' + JSON.stringify(validations));
+                }
 
                 // Gerar fingerprint
+                log('🆔 Iniciando geração de fingerprint...');
                 const fp = await FingerprintJS.load();
+                log('🆔 FingerprintJS carregado', { version: fp.version || 'unknown' });
+                
                 const fpResult = await fp.get();
                 const visitorId = fpResult.visitorId;
                 
-                log('🆔 VisitorId gerado', { visitorId, confidence: fpResult.confidence });
+                log('🆔 VisitorId gerado', { 
+                    visitorId, 
+                    confidence: fpResult.confidence,
+                    components: Object.keys(fpResult.components || {}).length
+                });
 
                 // Configurar AssetPay
                 log('⚙️ Configurando AssetPay...');
-                AssetPay.setPublicKey('pk_live_v2D5sJPOcIhr7OFQn6aMUzb80GDHT3BXHz');
+                const publicKey = 'pk_live_v2D5sJPOcIhr7OFQn6aMUzb80GDHT3BXHz';
+                log('⚙️ Usando chave pública', { key: publicKey.substring(0, 20) + '...' });
+                
+                AssetPay.setPublicKey(publicKey);
+                log('✅ Chave pública configurada');
+                
                 AssetPay.setTestMode(false);
+                log('✅ Modo de produção ativado');
 
-                // Tokenizar cartão
-                log('🔐 Tokenizando cartão...');
-                const cardToken = await AssetPay.encrypt({
+                const tokenizeData = {
                     number: cardData.number,
                     holderName: cardData.holderName,
                     expMonth: cardData.expMonth,
                     expYear: cardData.expYear,
                     cvv: cardData.cvv
+                };
+                log('🔐 Dados preparados para tokenização', {
+                    ...tokenizeData,
+                    number: tokenizeData.number.substring(0, 6) + '****' + tokenizeData.number.substring(tokenizeData.number.length - 4),
+                    cvv: '***',
+                    expMonthType: typeof tokenizeData.expMonth,
+                    expYearType: typeof tokenizeData.expYear
                 });
-                
-                log('🔑 Token do cartão gerado', cardToken);
 
-                // Executar autenticação 3DS
-                log('🔒 Executando autenticação 3DS...');
-                const threeDSResult = await AssetPay.authenticate3DS({
+                // Tokenizar cartão
+                log('🔐 Iniciando tokenização do cartão...');
+                const cardToken = await AssetPay.encrypt(tokenizeData);
+                
+                log('🔑 Token do cartão gerado', {
+                    token: cardToken.substring(0, 20) + '...',
+                    tokenLength: cardToken.length,
+                    tokenType: typeof cardToken
+                });
+
+                const threeDSData = {
                     token: cardToken,
                     amount: 1000,
                     currency: "brl",
@@ -99,18 +160,39 @@
                     card: {
                         number: cardData.number,
                         holderName: cardData.holderName,
-                        expirationMonth: cardData.expMonth,
-                        expirationYear: cardData.expYear,
+                        expMonth: cardData.expMonth.toString().padStart(2, '0'),
+                        expYear: cardData.expYear.toString().slice(-2),
                         cvv: cardData.cvv
                     },
                     holderName: cardData.holderName,
                     email: "cliente@exemplo.com",
                     cpf: "12345678909"
-                });
+                };
                 
-                log('✅ Autenticação 3DS concluída', threeDSResult);
+                log('🔒 Dados preparados para 3DS', {
+                    ...threeDSData,
+                    token: threeDSData.token.substring(0, 20) + '...',
+                    card: {
+                        ...threeDSData.card,
+                        number: threeDSData.card.number.substring(0, 6) + '****' + threeDSData.card.number.substring(threeDSData.card.number.length - 4),
+                        cvv: '***',
+                        expMonthType: typeof threeDSData.card.expMonth,
+                        expYearType: typeof threeDSData.card.expYear
+                    }
+                });
 
-                // Preparar payload para backend
+                // Executar autenticação 3DS
+                log('🔒 Executando autenticação 3DS...');
+                const threeDSResult = await AssetPay.authenticate3DS(threeDSData);
+                
+                log('✅ Autenticação 3DS concluída', {
+                    id: threeDSResult.id,
+                    threeDSecureId: threeDSResult.threeDSecureId,
+                    status: threeDSResult.status,
+                    resultType: typeof threeDSResult,
+                    allKeys: Object.keys(threeDSResult)
+                });
+
                 const payload = {
                     amount: 1000,
                     cardToken: cardToken,
@@ -125,11 +207,22 @@
                     installments: 1
                 };
                 
-                log('📤 Payload enviado para backend', payload);
+                log('📤 Payload preparado para backend', {
+                    ...payload,
+                    cardToken: payload.cardToken.substring(0, 20) + '...',
+                    cardData: {
+                        ...payload.cardData,
+                        number: payload.cardData.number.substring(0, 6) + '****' + payload.cardData.number.substring(payload.cardData.number.length - 4),
+                        cvv: '***'
+                    },
+                    payloadSize: JSON.stringify(payload).length
+                });
 
                 // Enviar para backend
-                log('🌐 Enviando requisição HTTP');
-                const response = await fetch('https://monkeycheckout.online/vakinha-luky/pagamento-cartao.php', {
+                const backendUrl = 'https://monkeycheckout.online/vakinha-luky/pagamento-cartao.php';
+                log('🌐 Enviando requisição HTTP', { url: backendUrl, method: 'POST' });
+                
+                const response = await fetch(backendUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -137,17 +230,44 @@
                     body: JSON.stringify(payload)
                 });
 
-                log('📄 Resposta HTTP status:', response.status);
+                log('📄 Resposta HTTP recebida', { 
+                    status: response.status,
+                    statusText: response.statusText,
+                    headers: Object.fromEntries(response.headers.entries()),
+                    ok: response.ok
+                });
+                
                 const responseData = await response.text();
-                log('📄 Resposta HTTP body:', responseData);
+                log('📄 Resposta HTTP body (raw)', { 
+                    data: responseData,
+                    length: responseData.length,
+                    type: typeof responseData
+                });
 
-                const paymentResult = JSON.parse(responseData);
-                log('✅ Checkout concluído com 3DS', paymentResult);
+                let paymentResult;
+                try {
+                    paymentResult = JSON.parse(responseData);
+                    log('✅ Parse JSON da resposta bem-sucedido', paymentResult);
+                } catch (parseError) {
+                    log('❌ Erro ao fazer parse JSON da resposta', {
+                        error: parseError.message,
+                        rawData: responseData.substring(0, 500)
+                    });
+                    throw new Error('Resposta inválida do servidor: ' + parseError.message);
+                }
+                
+                log('✅ Checkout concluído com 3DS', {
+                    success: paymentResult.success,
+                    message: paymentResult.message,
+                    allKeys: Object.keys(paymentResult)
+                });
 
             } catch (error) {
                 log('❌ Erro durante o checkout', {
                     message: error.message,
-                    stack: error.stack
+                    stack: error.stack,
+                    name: error.name,
+                    cause: error.cause
                 });
             }
         }
