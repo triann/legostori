@@ -67,10 +67,10 @@
 
                 // Gerar fingerprint
                 const fp = await FingerprintJS.load();
-                const result = await fp.get();
-                const visitorId = result.visitorId;
+                const fpResult = await fp.get();
+                const visitorId = fpResult.visitorId;
                 
-                log('🆔 VisitorId gerado', { visitorId, confidence: result.confidence });
+                log('🆔 VisitorId gerado', { visitorId, confidence: fpResult.confidence });
 
                 // Configurar AssetPay
                 log('⚙️ Configurando AssetPay...');
@@ -141,8 +141,8 @@
                 const responseData = await response.text();
                 log('📄 Resposta HTTP body:', responseData);
 
-                const result = JSON.parse(responseData);
-                log('✅ Checkout concluído com 3DS', result);
+                const paymentResult = JSON.parse(responseData);
+                log('✅ Checkout concluído com 3DS', paymentResult);
 
             } catch (error) {
                 log('❌ Erro durante o checkout', {
