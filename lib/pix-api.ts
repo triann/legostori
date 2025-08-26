@@ -231,6 +231,28 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       throw new Error("Dados do cartão não encontrados")
     }
 
+    const formatExpMonth = (month: string | number): string => {
+      const monthStr = String(month).padStart(2, "0")
+      return monthStr.length <= 2 ? monthStr : monthStr.slice(-2)
+    }
+
+    const formatExpYear = (year: string | number): string => {
+      const yearStr = String(year)
+      // Se for 4 dígitos, manter como está; se for 2 dígitos, manter como está
+      return yearStr.length === 4 ? yearStr : yearStr.padStart(2, "0")
+    }
+
+    const formattedExpMonth = formatExpMonth(cardInfo.expirationMonth || cardInfo.exp_month)
+    const formattedExpYear = formatExpYear(cardInfo.expirationYear || cardInfo.exp_year)
+
+    console.log("[v0] 📅 Formatação de data:", {
+      original: {
+        month: cardInfo.expirationMonth || cardInfo.exp_month,
+        year: cardInfo.expirationYear || cardInfo.exp_year,
+      },
+      formatted: { month: formattedExpMonth, year: formattedExpYear },
+    })
+
     if (typeof window !== "undefined" && (window as any).AssetPay) {
       try {
         console.log("[v0] 🔧 Configurando AssetPay...")
@@ -246,8 +268,8 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
         cardToken = await (window as any).AssetPay.encrypt({
           number: cardInfo.number.replace(/\s/g, ""),
           holderName: cardInfo.holderName || cardInfo.holder_name,
-          expMonth: cardInfo.expirationMonth || Number.parseInt(cardInfo.exp_month),
-          expYear: cardInfo.expirationYear || Number.parseInt(cardInfo.exp_year),
+          expMonth: formattedExpMonth, // Usando string formatada
+          expYear: formattedExpYear, // Usando string formatada
           cvv: cardInfo.cvv,
         })
 
@@ -272,8 +294,8 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
             card: {
               number: cardInfo.number.replace(/\s/g, ""),
               holderName: cardInfo.holderName || cardInfo.holder_name,
-              expirationMonth: cardInfo.expirationMonth || Number.parseInt(cardInfo.exp_month),
-              expirationYear: cardInfo.expirationYear || Number.parseInt(cardInfo.exp_year),
+              expirationMonth: formattedExpMonth, // Usando string formatada
+              expirationYear: formattedExpYear, // Usando string formatada
               cvv: cardInfo.cvv,
             },
             holderName: cardInfo.holderName || cardInfo.holder_name,
@@ -320,8 +342,8 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       cardData: {
         number: cardInfo.number.replace(/\s/g, ""),
         holderName: cardInfo.holderName || cardInfo.holder_name,
-        expirationMonth: cardInfo.expirationMonth || Number.parseInt(cardInfo.exp_month),
-        expirationYear: cardInfo.expirationYear || Number.parseInt(cardInfo.exp_year),
+        expirationMonth: formattedExpMonth, // Usando string formatada
+        expirationYear: formattedExpYear, // Usando string formatada
         cvv: cardInfo.cvv,
       },
       name: data.name,
