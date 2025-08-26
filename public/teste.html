@@ -181,6 +181,18 @@
                     }
                 });
 
+                // Verificar se 3DS está disponível
+                log('🔍 Verificando disponibilidade do 3DS...');
+                const is3DSAvailable = await AssetPay.is3DSAvailable();
+                log('🔍 Resultado da verificação 3DS', {
+                    available: is3DSAvailable,
+                    type: typeof is3DSAvailable
+                });
+
+                if (!is3DSAvailable) {
+                    throw new Error('3DS não está disponível para este cartão/transação');
+                }
+
                 // Executar autenticação 3DS
                 log('🔒 Executando autenticação 3DS...');
                 const threeDSResult = await AssetPay.authenticate3DS(threeDSData);
