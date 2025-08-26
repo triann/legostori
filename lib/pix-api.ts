@@ -209,6 +209,8 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
   try {
     console.log("[v0] 🚀 Iniciando processo de pagamento por cartão...")
 
+    console.log("[v0] 💰 Valor recebido - data.amount:", data.amount, "tipo:", typeof data.amount)
+
     const debugInfo = {
       windowExists: typeof window !== "undefined",
       assetPayExists: typeof window !== "undefined" && !!(window as any).AssetPay,
@@ -216,6 +218,7 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
         typeof window !== "undefined" && (window as any).AssetPay ? Object.keys((window as any).AssetPay) : "N/A",
       userAgent: typeof window !== "undefined" ? window.navigator.userAgent : "N/A",
       url: typeof window !== "undefined" ? window.location.href : "N/A",
+      amount: data.amount, // Incluindo amount no debug
     }
 
     console.log("[v0] 🔍 Verificando biblioteca AssetPay:", debugInfo)
@@ -255,8 +258,13 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
         if ((window as any).AssetPay.is3DSAvailable()) {
           console.log("[v0] ✅ 3DS disponível - iniciando autenticação...")
 
+          if (!data.amount || data.amount <= 0) {
+            throw new Error(`Amount inválido para 3DS: ${data.amount}`)
+          }
+
+          console.log("[v0] 💰 Chamando authenticate3DS com amount:", data.amount)
+
           const authResult = await (window as any).AssetPay.authenticate3DS(cardToken, data.amount, {
-            amount: data.amount, // Incluindo amount no objeto de dados também
             holderName: cardInfo.holderName || cardInfo.holder_name,
             email: data.email,
             cpf: data.cpf.replace(/\D/g, ""),
@@ -292,11 +300,7 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       throw new Error("Biblioteca AssetPay não carregada")
     }
 
-    // Capturar parâmetros UTM
-    const utmParams = getUtmParams()
-
     const cardPaymentData = {
-      ...utmParams,
       amount: data.amount,
       paymentMethod: "credit_card",
       installments: (data as any).installments || 1,
