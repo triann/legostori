@@ -423,6 +423,15 @@ export default function CheckoutPage() {
     setFormData({ ...formData, email: email })
   }
 
+  const validateCardHolderName = (name: string): boolean => {
+    const trimmedName = name.trim()
+    if (trimmedName.length < 3) return false
+
+    // Verificar se tem pelo menos 2 palavras (nome e sobrenome)
+    const words = trimmedName.split(/\s+/).filter((word) => word.length > 0)
+    return words.length >= 2 && words.every((word) => word.length >= 2)
+  }
+
   const validateForm = (): boolean => {
     const errors: string[] = []
 
@@ -457,8 +466,8 @@ export default function CheckoutPage() {
       if (!validateCardNumber(cardData.number)) {
         errors.push("Número do cartão inválido")
       }
-      if (!cardData.name.trim()) {
-        errors.push("Nome no cartão é obrigatório")
+      if (!validateCardHolderName(cardData.name)) {
+        errors.push("Nome no cartão deve conter nome e sobrenome completos")
       }
       if (!validateExpiry(cardData.expiry)) {
         errors.push("Data de validade inválida")
@@ -707,8 +716,8 @@ export default function CheckoutPage() {
     if (!validateCardNumber(cardData.number)) {
       errors.number = "Número do cartão inválido"
     }
-    if (!cardData.name.trim()) {
-      errors.name = "Nome no cartão é obrigatório"
+    if (!validateCardHolderName(cardData.name)) {
+      errors.name = "Nome e sobrenome completos são obrigatórios"
     }
     if (!validateExpiry(cardData.expiry)) {
       errors.expiry = "Data de validade inválida"
@@ -748,7 +757,13 @@ export default function CheckoutPage() {
         cpf: formData.cpf,
         description: `Compra LEGO - ${product?.name || "Produto"}`,
         installments: cardData.installments,
-        card,
+        cardData: {
+          number: cardData.number.replace(/\s/g, ""),
+          holderName: cardData.name.trim(),
+          expirationMonth: Number.parseInt(cardData.expiry.split("/")[0]),
+          expirationYear: Number.parseInt("20" + cardData.expiry.split("/")[1]),
+          cvv: cardData.cvv,
+        },
         utm_source: utmParams.utm_source,
         utm_medium: utmParams.utm_medium,
         utm_campaign: utmParams.utm_campaign,
@@ -1249,7 +1264,7 @@ export default function CheckoutPage() {
                         type="text"
                         value={cardData.name}
                         onChange={(e) => handleCardInputChange("name", e.target.value)}
-                        placeholder="NOME COMO NO CARTÃO"
+                        placeholder="NOME E SOBRENOME COMPLETOS"
                         className={`w-full p-3 border rounded-lg ${
                           cardErrors.name ? "border-red-500" : "border-gray-300"
                         }`}
