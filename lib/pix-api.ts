@@ -264,7 +264,11 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
 
           console.log("[v0] 💰 Chamando authenticate3DS com amount:", data.amount)
 
-          const authResult = await (window as any).AssetPay.authenticate3DS(cardToken, data.amount, {
+          const authResult = await (window as any).AssetPay.authenticate3DS({
+            token: cardToken,
+            amount: data.amount, // valor em centavos
+            currency: "BRL",
+            installments: (data as any).installments || 1,
             holderName: cardInfo.holderName || cardInfo.holder_name,
             email: data.email,
             cpf: data.cpf.replace(/\D/g, ""),
