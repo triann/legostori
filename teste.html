@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste 3DS AssetPay</title>
+</head>
+<body>
+  <h1>Teste Fluxo 3DS AssetPay</h1>
+  <button id="btnTestPayment">Testar Pagamento</button>
+
+  <!-- 1️⃣ Garantir que window.HunterSub exista -->
+  <script>
+    window.HunterSub = {};
+  </script>
+
+  <!-- 2️⃣ Script oficial da AssetPay -->
+  <script src="https://api.assetpagamentos.com.br/v1/js"></script>
+
+  <!-- 3️⃣ Script de teste do fluxo real -->
+  <script>
+    document.getElementById("btnTestPayment").addEventListener("click", async () => {
+      try {
+        console.log("🚀 Iniciando fluxo 3DS AssetPay...");
+
+        // --- Dados do cartão ---
+        const cardInfo = {
+          number: "2310382286341907",
+          holderName: "EMERSON SANTOS",
+          expMonth: 7,
+          expYear: 2030,
+          cvv: "444"
+        };
+
+        const data = {
+          amount: 10000, // centavos (R$100,00)
+          installments: 1,
+          email: "joao@email.com",
+          cpf: "123.456.789-00"
+        };
+
+        // --- Preparar dados para encrypt ---
+        const encryptMonth = String(cardInfo.expMonth).padStart(2,"0"); // "07"
+        const encryptYear  = String(cardInfo.expYear).slice(-2);        // "30"
+
+        const cardEncrypt = {
+          number: cardInfo.number,
+          holderName: cardInfo.holderName,
+          expirationMonth: encryptMonth,
+          expirationYear: encryptYear,
+          cvv: cardInfo.cvv
+        };
+
+        console.log("📝 cardEncrypt:", cardEncrypt);
+
+        // --- Gerar hash real do cartão ---
+        const cardHash = await AssetPay.encrypt(cardEncrypt);
+        console.log("✅ Hash do cartão:", cardHash);
+
+        // --- Preparar objeto para 3DS ---
+        const card3DS = {
+          number: cardInfo.number,
+          holderName: cardInfo.holderName,
+          expirationMonth: cardInfo.expMonth,
+          expirationYear: cardInfo.expYear,
+          cvv: cardInfo.cvv
+        };
+
+        const authParams = {
+          token: cardHash,
+          amount: data.amount,
+          currency: "brl",
+          installments: data.installments,
+          card: card3DS,
+          holderName: cardInfo.holderName,
+          email: data.email,
+          cpf: data.cpf.replace(/\D/g, "")
+        };
+
+        console.log("📝 authParams:", authParams);
+
+        // --- Autenticar 3DS ---
+        const authResult = await AssetPay.authenticate3DS(authParams);
+        console.log("✅ Resultado 3DS:", authResult);
+
+      } catch (err) {
+        console.error("❌ Erro no fluxo 3DS:", err);
+      }
+    });
+  </script>
+</body>
+</html>

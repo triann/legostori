@@ -268,15 +268,12 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       types: { month: typeof expMonth, year: typeof expYear },
     })
 
-    console.log("[v0] 🔍 Valores que serão enviados ao authenticate3DS:")
-    console.log("[v0] - token:", cardToken ? cardToken.substring(0, 20) + "..." : "VAZIO")
-    console.log("[v0] - amount:", data.amount, "tipo:", typeof data.amount)
-    console.log("[v0] - currency: 'brl'")
-    console.log("[v0] - card.expirationMonth:", expMonth, "tipo:", typeof expMonth)
-    console.log("[v0] - card.expirationYear:", expYear, "tipo:", typeof expYear)
-    console.log("[v0] - card.holderName:", cardInfo.holderName || cardInfo.holder_name)
-    console.log("[v0] - card.number:", cardInfo.number.replace(/\s/g, "").substring(0, 4) + "****")
-    console.log("[v0] - card.cvv:", cardInfo.cvv ? "***" : "VAZIO")
+    console.log("[v0] 🔍 Valores que serão enviados ao AssetPay.encrypt:")
+    console.log("[v0] - number:", cardInfo.number.replace(/\s/g, "").substring(0, 4) + "****")
+    console.log("[v0] - holderName:", cardInfo.holderName || cardInfo.holder_name)
+    console.log("[v0] - expMonth:", expMonth, "tipo:", typeof expMonth)
+    console.log("[v0] - expYear:", expYear, "tipo:", typeof expYear)
+    console.log("[v0] - cvv:", cardInfo.cvv ? "***" : "VAZIO")
 
     if (typeof window !== "undefined" && (window as any).AssetPay) {
       try {
@@ -292,8 +289,8 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
         cardToken = await (window as any).AssetPay.encrypt({
           number: cardInfo.number.replace(/\s/g, ""),
           holderName: cardInfo.holderName || cardInfo.holder_name,
-          expMonth: expMonth, // Número para encrypt também
-          expYear: expYear, // Número para encrypt também
+          expMonth: expMonth, // Integer puro (ex: 7, não "07")
+          expYear: expYear, // Integer puro (ex: 2030, não "30")
           cvv: cardInfo.cvv,
         })
 
@@ -318,8 +315,8 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
             card: {
               number: cardInfo.number.replace(/\s/g, ""),
               holderName: cardInfo.holderName || cardInfo.holder_name,
-              expirationMonth: expMonth, // Número inteiro (1-12)
-              expirationYear: expYear, // Número inteiro (ano completo como 2030)
+              expirationMonth: expMonth, // Integer puro (1-12)
+              expirationYear: expYear, // Integer puro (ano completo como 2030)
               cvv: cardInfo.cvv,
             },
             holderName: cardInfo.holderName || cardInfo.holder_name,
