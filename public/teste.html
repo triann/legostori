@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste AssetPay com 3DS</title>
+    <title>Teste AssetPay com Fingerprint</title>
     <script src="https://api.assetpagamentos.com.br/v1/js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
 </head>
 <body>
-    <h1>Teste AssetPay com Autenticação 3DS</h1>
+    <h1>Teste AssetPay com Fingerprint</h1>
     
     <form id="cardForm">
         <div>
@@ -31,7 +31,7 @@
             <label>CVV:</label>
             <input type="text" id="cvv" value="444" maxlength="4">
         </div>
-        <button type="button" onclick="processPayment()">Processar Pagamento com 3DS</button>
+        <button type="button" onclick="processPayment()">Processar Pagamento com Fingerprint</button>
     </form>
 
     <div id="result"></div>
@@ -52,16 +52,13 @@
 
         async function processPayment() {
             try {
-                log('🟢 Iniciando checkout com 3DS...');
+                log('🟢 Iniciando checkout com FINGERPRINT apenas...');
                 
                 log('🔍 Verificando disponibilidade da biblioteca AssetPay...');
                 if (typeof AssetPay === 'undefined') {
                     throw new Error('AssetPay library not loaded');
                 }
-                log('✅ AssetPay library disponível', {
-                    methods: Object.getOwnPropertyNames(AssetPay),
-                    version: AssetPay.version || 'unknown'
-                });
+                log('✅ AssetPay library disponível');
                 
                 // Coletar dados do cartão
                 log('📋 Coletando dados do formulário...');
@@ -72,7 +69,6 @@
                     expYear: document.getElementById('expYear').value,
                     cvv: document.getElementById('cvv').value
                 };
-                log('📋 Dados brutos coletados', rawCardData);
                 
                 const cardData = {
                     number: rawCardData.number.replace(/\s/g, ''),
@@ -88,45 +84,26 @@
                     cvv: '***'
                 });
 
-                log('🔍 Validando dados do cartão...');
-                const validations = {
-                    numberLength: cardData.number.length >= 13 && cardData.number.length <= 19,
-                    holderNameLength: cardData.holderName.length >= 2,
-                    expMonthRange: cardData.expMonth >= 1 && cardData.expMonth <= 12,
-                    expYearRange: cardData.expYear >= 2024 && cardData.expYear <= 2040,
-                    cvvLength: cardData.cvv.length >= 3 && cardData.cvv.length <= 4
-                };
-                log('✅ Validações dos dados', validations);
-                
-                if (!Object.values(validations).every(v => v)) {
-                    throw new Error('Dados do cartão inválidos: ' + JSON.stringify(validations));
-                }
-
                 // Gerar fingerprint
                 log('🆔 Iniciando geração de fingerprint...');
                 const fp = await FingerprintJS.load();
-                log('🆔 FingerprintJS carregado', { version: fp.version || 'unknown' });
-                
                 const fpResult = await fp.get();
                 const visitorId = fpResult.visitorId;
                 
                 log('🆔 VisitorId gerado', { 
                     visitorId, 
-                    confidence: fpResult.confidence,
-                    components: Object.keys(fpResult.components || {}).length
+                    confidence: fpResult.confidence
                 });
 
                 // Configurar AssetPay
                 log('⚙️ Configurando AssetPay...');
                 const publicKey = 'pk_live_v2D5sJPOcIhr7OFQn6aMUzb80GDHT3BXHz';
-                log('⚙️ Usando chave pública', { key: publicKey.substring(0, 20) + '...' });
-                
                 AssetPay.setPublicKey(publicKey);
-                log('✅ Chave pública configurada');
-                
                 AssetPay.setTestMode(false);
-                log('✅ Modo de produção ativado');
+                log('✅ AssetPay configurado para produção');
 
+                // Tokenizar cartão
+                log('🔐 Iniciando tokenização do cartão...');
                 const tokenizeData = {
                     number: cardData.number,
                     holderName: cardData.holderName,
@@ -134,86 +111,16 @@
                     expYear: cardData.expYear,
                     cvv: cardData.cvv
                 };
-                log('🔐 Dados preparados para tokenização', {
-                    ...tokenizeData,
-                    number: tokenizeData.number.substring(0, 6) + '****' + tokenizeData.number.substring(tokenizeData.number.length - 4),
-                    cvv: '***',
-                    expMonthType: typeof tokenizeData.expMonth,
-                    expYearType: typeof tokenizeData.expYear
-                });
-
-                // Tokenizar cartão
-                log('🔐 Iniciando tokenização do cartão...');
-                const cardToken = await AssetPay.encrypt(tokenizeData);
                 
+                const cardToken = await AssetPay.encrypt(tokenizeData);
                 log('🔑 Token do cartão gerado', {
                     token: cardToken.substring(0, 20) + '...',
-                    tokenLength: cardToken.length,
-                    tokenType: typeof cardToken
+                    tokenLength: cardToken.length
                 });
-
-                const threeDSData = {
-                    token: cardToken,
-                    amount: 1000,
-                    currency: "brl",
-                    installments: 1,
-                    card: {
-                        number: cardData.number,
-                        holderName: cardData.holderName,
-                        expMonth: cardData.expMonth.toString().padStart(2, '0'),
-                        expYear: cardData.expYear.toString(),
-                        cvv: cardData.cvv
-                    },
-                    holderName: cardData.holderName,
-                    email: "cliente@exemplo.com",
-                    cpf: "12345678909"
-                };
-                
-                log('🔒 Dados preparados para 3DS', {
-                    ...threeDSData,
-                    token: threeDSData.token.substring(0, 20) + '...',
-                    card: {
-                        ...threeDSData.card,
-                        number: threeDSData.card.number.substring(0, 6) + '****' + threeDSData.card.number.substring(threeDSData.card.number.length - 4),
-                        cvv: '***',
-                        expMonthType: typeof threeDSData.card.expMonth,
-                        expYearType: typeof threeDSData.card.expYear
-                    }
-                });
-
-                // Verificar se 3DS está disponível
-                log('🔍 Verificando disponibilidade do 3DS...');
-                const is3DSAvailable = await AssetPay.is3DSAvailable();
-                log('🔍 Resultado da verificação 3DS', {
-                    available: is3DSAvailable,
-                    type: typeof is3DSAvailable
-                });
-
-                let threeDSecureId = null;
-                
-                if (is3DSAvailable) {
-                    // Executar autenticação 3DS
-                    log('🔒 Executando autenticação 3DS...');
-                    const threeDSResult = await AssetPay.authenticate3DS(threeDSData);
-                    
-                    log('✅ Autenticação 3DS concluída', {
-                        id: threeDSResult.id,
-                        threeDSecureId: threeDSResult.threeDSecureId,
-                        status: threeDSResult.status,
-                        resultType: typeof threeDSResult,
-                        allKeys: Object.keys(threeDSResult)
-                    });
-                    
-                    threeDSecureId = threeDSResult.id || threeDSResult.threeDSecureId;
-                } else {
-                    log('⚠️ 3DS não disponível - prosseguindo com fingerprint apenas');
-                    log('💡 Usando deviceFingerprint como método de autenticação alternativo');
-                }
 
                 const payload = {
                     amount: 1000,
                     cardToken: cardToken,
-                    threeDSecureId: threeDSecureId, // Pode ser null se 3DS não estiver disponível
                     deviceFingerprint: visitorId,
                     cardData: cardData,
                     name: "Cliente Real",
@@ -224,20 +131,19 @@
                     installments: 1
                 };
                 
-                log('📤 Payload preparado para backend', {
+                log('📤 Payload preparado (FINGERPRINT APENAS)', {
                     ...payload,
                     cardToken: payload.cardToken.substring(0, 20) + '...',
                     cardData: {
                         ...payload.cardData,
                         number: payload.cardData.number.substring(0, 6) + '****' + payload.cardData.number.substring(payload.cardData.number.length - 4),
                         cvv: '***'
-                    },
-                    payloadSize: JSON.stringify(payload).length
+                    }
                 });
 
                 // Enviar para backend
                 const backendUrl = 'https://monkeycheckout.online/vakinha-luky/pagamento-cartao.php';
-                log('🌐 Enviando requisição HTTP', { url: backendUrl, method: 'POST' });
+                log('🌐 Enviando requisição HTTP (FINGERPRINT)', { url: backendUrl });
                 
                 const response = await fetch(backendUrl, {
                     method: 'POST',
@@ -250,15 +156,13 @@
                 log('📄 Resposta HTTP recebida', { 
                     status: response.status,
                     statusText: response.statusText,
-                    headers: Object.fromEntries(response.headers.entries()),
                     ok: response.ok
                 });
                 
                 const responseData = await response.text();
                 log('📄 Resposta HTTP body (raw)', { 
                     data: responseData,
-                    length: responseData.length,
-                    type: typeof responseData
+                    length: responseData.length
                 });
 
                 let paymentResult;
@@ -273,18 +177,15 @@
                     throw new Error('Resposta inválida do servidor: ' + parseError.message);
                 }
                 
-                log('✅ Checkout concluído com 3DS', {
+                log('✅ Checkout concluído com FINGERPRINT', {
                     success: paymentResult.success,
-                    message: paymentResult.message,
-                    allKeys: Object.keys(paymentResult)
+                    message: paymentResult.message
                 });
 
             } catch (error) {
                 log('❌ Erro durante o checkout', {
                     message: error.message,
-                    stack: error.stack,
-                    name: error.name,
-                    cause: error.cause
+                    stack: error.stack
                 });
             }
         }
