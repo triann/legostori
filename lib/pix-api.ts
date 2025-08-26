@@ -222,7 +222,7 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
     createLogFile({ type: "library_check", data: debugInfo })
 
     let cardToken = ""
-    let deviceFingerprint = ""
+    let threeDSecureId = ""
     const cardInfo = (data as any).cardData || data.card
     if (!cardInfo) {
       throw new Error("Dados do cartão não encontrados")
@@ -237,10 +237,6 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
         ;(window as any).AssetPay.setPublicKey(publicKey)
         ;(window as any).AssetPay.setTestMode(false) // Modo produção para chave live
 
-        // Gerar fingerprint do dispositivo para evitar erro 3DS
-        deviceFingerprint = `${Date.now()}_${Math.random().toString(36).substring(2)}_${window.navigator.userAgent.replace(/\s/g, "").substring(0, 20)}`
-        console.log("[v0] 🔍 Fingerprint do dispositivo gerado:", deviceFingerprint.substring(0, 20) + "...")
-
         console.log("[v0] 🔒 Tokenizando cartão...")
 
         // Tokenizar cartão conforme documentação
@@ -253,15 +249,41 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
         })
 
         console.log("[v0] ✅ Token do cartão gerado com sucesso:", cardToken.substring(0, 20) + "...")
-        createLogFile({
-          type: "tokenization_success",
-          token: cardToken.substring(0, 20) + "...",
-          fingerprint: deviceFingerprint.substring(0, 20) + "...",
-        })
+
+        console.log("[v0] 🔐 Verificando disponibilidade do 3DS...")
+
+        if ((window as any).AssetPay.is3DSAvailable()) {
+          console.log("[v0] ✅ 3DS disponível - iniciando autenticação...")
+
+          const authResult = await (window as any).AssetPay.authenticate3DS(cardToken, data.amount, {
+            holderName: cardInfo.holderName || cardInfo.holder_name,
+            email: data.email,
+            cpf: data.cpf.replace(/\D/g, ""),
+          })
+
+          threeDSecureId = authResult.threeDSecureId || authResult.id || authResult.authenticationId
+          console.log(
+            "[v0] ✅ Autenticação 3DS concluída:",
+            threeDSecureId ? threeDSecureId.substring(0, 20) + "..." : "sem ID",
+          )
+
+          createLogFile({
+            type: "3ds_authentication_success",
+            token: cardToken.substring(0, 20) + "...",
+            threeDSecureId: threeDSecureId ? threeDSecureId.substring(0, 20) + "..." : "sem ID",
+            authResult: authResult,
+          })
+        } else {
+          console.log("[v0] ⚠️ 3DS não disponível - continuando sem autenticação")
+          createLogFile({
+            type: "3ds_not_available",
+            token: cardToken.substring(0, 20) + "...",
+          })
+        }
       } catch (error) {
-        console.error("[v0] ❌ Erro ao tokenizar cartão:", error)
-        createLogFile({ type: "tokenization_error", error: error.toString() })
-        throw new Error("Falha na tokenização do cartão: " + error.toString())
+        console.error("[v0] ❌ Erro ao tokenizar/autenticar cartão:", error)
+        createLogFile({ type: "tokenization_or_3ds_error", error: error.toString() })
+        throw new Error("Falha na tokenização/autenticação do cartão: " + error.toString())
       }
     } else {
       console.error("[v0] ❌ Biblioteca AssetPay não encontrada - não é possível tokenizar o cartão")
@@ -278,7 +300,7 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       paymentMethod: "credit_card",
       installments: (data as any).installments || 1,
       cardToken: cardToken,
-      deviceFingerprint: deviceFingerprint, // Incluir fingerprint na requisição
+      threeDSecureId: threeDSecureId,
       cardData: {
         number: cardInfo.number.replace(/\s/g, ""),
         holderName: cardInfo.holderName || cardInfo.holder_name,
@@ -296,7 +318,7 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
     const logPayload = {
       ...cardPaymentData,
       cardToken: cardToken ? cardToken.substring(0, 20) + "..." : "VAZIO - sem token",
-      deviceFingerprint: deviceFingerprint ? deviceFingerprint.substring(0, 20) + "..." : "VAZIO - sem fingerprint",
+      threeDSecureId: threeDSecureId ? threeDSecureId.substring(0, 20) + "..." : "VAZIO - sem 3DS",
       cardData: {
         ...cardPaymentData.cardData,
         number: cardPaymentData.cardData.number.substring(0, 4) + "****",
@@ -304,7 +326,7 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       },
     }
 
-    console.log("[v0] 📤 Enviando token, fingerprint e dados do cartão para API:", logPayload)
+    console.log("[v0] 📤 Enviando token, 3DS ID e dados do cartão para API:", logPayload)
     createLogFile({ type: "payment_request", payload: logPayload })
 
     const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento-cartao.php`, {

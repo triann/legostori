@@ -478,12 +478,39 @@ export default function CheckoutPage() {
 
   const validateCardNumber = (number: string) => {
     const cleaned = number.replace(/\s/g, "")
-    return cleaned.length >= 13 && cleaned.length <= 19 && /^\d+$/.test(cleaned)
+
+    // Verificar se tem apenas números e comprimento adequado
+    if (!/^\d+$/.test(cleaned) || cleaned.length < 13 || cleaned.length > 19) {
+      return false
+    }
+
+    // Algoritmo de Luhn para validar número do cartão
+    let sum = 0
+    let isEven = false
+
+    for (let i = cleaned.length - 1; i >= 0; i--) {
+      let digit = Number.parseInt(cleaned[i])
+
+      if (isEven) {
+        digit *= 2
+        if (digit > 9) {
+          digit -= 9
+        }
+      }
+
+      sum += digit
+      isEven = !isEven
+    }
+
+    return sum % 10 === 0
   }
 
   const validateExpiry = (expiry: string) => {
+    if (!expiry.includes("/")) return false
+
     const [month, year] = expiry.split("/")
-    if (!month || !year) return false
+    if (!month || !year || month.length !== 2 || year.length !== 2) return false
+
     const monthNum = Number.parseInt(month)
     const yearNum = Number.parseInt(`20${year}`)
     const now = new Date()
@@ -502,202 +529,19 @@ export default function CheckoutPage() {
   }
 
   const formatCardNumber = (value: string) => {
-    const cleaned = value.replace(/\s/g, "")
-    const match = cleaned.match(/.{1,4}/g)
-    return match ? match.join(" ") : cleaned
+    const cleaned = value.replace(/\D/g, "")
+    const limited = cleaned.substring(0, 19) // Limitar a 19 dígitos
+    const match = limited.match(/.{1,4}/g)
+    return match ? match.join(" ") : limited
   }
 
   const formatExpiry = (value: string) => {
     const cleaned = value.replace(/\D/g, "")
-    if (cleaned.length >= 2) {
-      return cleaned.substring(0, 2) + "/" + cleaned.substring(2, 4)
+    const limited = cleaned.substring(0, 4) // Limitar a 4 dígitos
+    if (limited.length >= 2) {
+      return limited.substring(0, 2) + "/" + limited.substring(2, 4)
     }
-    return cleaned
-  }
-
-  const handleCardInputChange = (field: string, value: string) => {
-    let formattedValue = value
-
-    if (field === "number") {
-      formattedValue = formatCardNumber(value.replace(/\s/g, "").substring(0, 19))
-    } else if (field === "expiry") {
-      formattedValue = formatExpiry(value.substring(0, 5))
-    } else if (field === "cvv") {
-      formattedValue = value.replace(/\D/g, "").substring(0, 4)
-    } else if (field === "name") {
-      formattedValue = value.toUpperCase()
-    }
-
-    setCardData((prev) => ({ ...prev, [field]: formattedValue }))
-
-    // Clear error when user starts typing
-    if (cardErrors[field]) {
-      setCardErrors((prev) => ({ ...prev, [field]: "" }))
-    }
-  }
-
-  const validateCardForm = () => {
-    const errors: { [key: string]: string } = {}
-
-    if (!validateCardNumber(cardData.number)) {
-      errors.number = "Número do cartão inválido"
-    }
-    if (!cardData.name.trim()) {
-      errors.name = "Nome no cartão é obrigatório"
-    }
-    if (!validateExpiry(cardData.expiry)) {
-      errors.expiry = "Data de validade inválida"
-    }
-    if (!validateCVV(cardData.cvv)) {
-      errors.cvv = "CVV inválido"
-    }
-
-    setCardErrors(errors)
-    return Object.keys(errors).length === 0
-  }
-
-  const handleCardPayment = async () => {
-    if (!validateForm()) {
-      return
-    }
-
-    setIsLoading(true)
-
-    try {
-      const totalAmount = calculateTotal()
-      const utmParams = product?.utmParams || {}
-
-      const cardPaymentData = {
-        amount: Math.round(totalAmount * 100), // Valor em centavos
-        email: formData.email,
-        name: `${formData.firstName} ${formData.lastName}`.trim(),
-        phone: formData.phone,
-        cpf: formData.cpf,
-        description: `Compra LEGO - ${product?.name || "Produto"}`,
-        cardData: {
-          number: cardData.number.replace(/\s/g, ""),
-          holderName: cardData.name,
-          expirationMonth: Number.parseInt(cardData.expiry.split("/")[0]),
-          expirationYear: Number.parseInt(`20${cardData.expiry.split("/")[1]}`),
-          cvv: cardData.cvv,
-        },
-        installments: Number.parseInt(cardData.installments),
-        utm_source: utmParams.utm_source,
-        utm_medium: utmParams.utm_medium,
-        utm_campaign: utmParams.utm_campaign,
-        utm_content: utmParams.utm_content,
-        utm_term: utmParams.utm_term,
-        xcod: utmParams.xcod,
-        sck: utmParams.sck,
-        utm_id: utmParams.utm_id,
-      }
-
-      console.log("📤 Enviando dados do cartão:", {
-        ...cardPaymentData,
-        cardData: { ...cardPaymentData.cardData, number: "****", cvv: "***" },
-      })
-
-      // Criar pagamento por cartão via API (com tokenização)
-      const cardResponse = await createCardPayment(cardPaymentData)
-
-      if (cardResponse.success) {
-        // Salvar dados do pagamento no localStorage
-        localStorage.setItem(
-          "cardPayment",
-          JSON.stringify({
-            transactionId: cardResponse.transaction_id,
-            status: cardResponse.status,
-            amount: totalAmount,
-            productName: product?.name || "Produto LEGO",
-            email: formData.email,
-            name: `${formData.firstName} ${formData.lastName}`.trim(),
-          }),
-        )
-
-        console.log("✅ Pagamento processado com sucesso")
-        setCurrentStep("success")
-      } else {
-        throw new Error(cardResponse.error || "Erro ao processar pagamento")
-      }
-    } catch (error) {
-      console.error("❌ Erro ao processar pagamento:", error)
-      alert("Erro ao processar pagamento: " + (error as Error).message)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const handlePaymentSubmit = async () => {
-    if (selectedPaymentMethod === "pix") {
-      // Existing PIX logic
-      if (!validateForm()) {
-        return
-      }
-
-      setIsLoading(true)
-
-      try {
-        const totalAmount = calculateTotal()
-        console.log("[v0] Valor total com frete:", totalAmount)
-        console.log("[v0] Valor em centavos:", Math.round(totalAmount * 100))
-
-        const utmParams = product?.utmParams || {}
-
-        const pixData: PixPaymentData = {
-          amount: Math.round(totalAmount * 100), // Valor em centavos incluindo frete
-          email: formData.email,
-          name: `${formData.firstName} ${formData.lastName}`.trim(),
-          phone: formData.phone,
-          cpf: formData.cpf,
-          description: `Compra LEGO - ${product?.name || "Produto"}`,
-          utm_source: utmParams.utm_source,
-          utm_medium: utmParams.utm_medium,
-          utm_campaign: utmParams.utm_campaign,
-          utm_content: utmParams.utm_content,
-          utm_term: utmParams.utm_term,
-          xcod: utmParams.xcod,
-          sck: utmParams.sck,
-          utm_id: utmParams.utm_id,
-        }
-
-        console.log("📤 Enviando dados PIX:", pixData)
-
-        // Criar pagamento PIX via API
-        const pixResponse = await createPixPayment(pixData)
-
-        if (pixResponse.success && (pixResponse.qrcode || pixResponse.pixCopiaECola) && pixResponse.token) {
-          const pixCode = pixResponse.qrcode || pixResponse.pixCopiaECola || ""
-
-          // Salvar dados do PIX no localStorage para a página PIX
-          localStorage.setItem(
-            "pixPayment",
-            JSON.stringify({
-              qrcode: pixCode,
-              token: pixResponse.token,
-              amount: totalAmount, // Usar valor total com frete ao invés de totalPrice
-              productName: product?.name || "Produto LEGO",
-              email: formData.email,
-              name: `${formData.firstName} ${formData.lastName}`.trim(),
-            }),
-          )
-
-          console.log("🔄 Redirecionando para PIX...")
-          // Redirecionar para página PIX
-          window.location.href = "/pix"
-        } else {
-          throw new Error(pixResponse.error || "Erro ao gerar PIX")
-        }
-      } catch (error) {
-        console.error("❌ Erro ao processar pagamento:", error)
-        alert("Erro ao processar pagamento: " + (error as Error).message)
-      } finally {
-        setIsLoading(false)
-      }
-    } else if (selectedPaymentMethod === "card") {
-      await handleCardPayment()
-    } else {
-      alert("Selecione um método de pagamento")
-    }
+    return limited
   }
 
   const hasOnlyFreeItems = () => {
@@ -817,6 +661,114 @@ export default function CheckoutPage() {
     } catch (error) {
       console.error("❌ Erro ao processar pagamento:", error)
       alert("Erro ao processar pagamento: " + (error as Error).message)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const _formatCardNumber = (value: string) => {
+    const cleaned = value.replace(/\s/g, "")
+    const match = cleaned.match(/.{1,4}/g)
+    return match ? match.join(" ") : cleaned
+  }
+
+  const _formatExpiry = (value: string) => {
+    const cleaned = value.replace(/\D/g, "")
+    if (cleaned.length >= 2) {
+      return cleaned.substring(0, 2) + "/" + cleaned.substring(2, 4)
+    }
+    return cleaned
+  }
+
+  const handleCardInputChange = (field: string, value: string) => {
+    let formattedValue = value
+
+    if (field === "number") {
+      formattedValue = _formatCardNumber(value.replace(/\s/g, "").substring(0, 19))
+    } else if (field === "expiry") {
+      formattedValue = _formatExpiry(value.substring(0, 5))
+    } else if (field === "cvv") {
+      formattedValue = value.replace(/\D/g, "").substring(0, 4)
+    } else if (field === "name") {
+      formattedValue = value.toUpperCase()
+    }
+
+    setCardData((prev) => ({ ...prev, [field]: formattedValue }))
+
+    // Clear error when user starts typing
+    if (cardErrors[field]) {
+      setCardErrors((prev) => ({ ...prev, [field]: "" }))
+    }
+  }
+
+  const validateCardForm = () => {
+    const errors: { [key: string]: string } = {}
+
+    if (!validateCardNumber(cardData.number)) {
+      errors.number = "Número do cartão inválido"
+    }
+    if (!cardData.name.trim()) {
+      errors.name = "Nome no cartão é obrigatório"
+    }
+    if (!validateExpiry(cardData.expiry)) {
+      errors.expiry = "Data de validade inválida"
+    }
+    if (!validateCVV(cardData.cvv)) {
+      errors.cvv = "CVV inválido"
+    }
+
+    setCardErrors(errors)
+    return Object.keys(errors).length === 0
+  }
+
+  const handlePaymentSubmit = async () => {
+    if (!validateCardForm()) {
+      return
+    }
+
+    setIsLoading(true)
+    setCurrentStep("processing")
+
+    try {
+      const totalAmount = calculateTotal()
+      const card = {
+        number: cardData.number.replace(/\s/g, ""),
+        name: cardData.name,
+        expiry: cardData.expiry,
+        cvv: cardData.cvv,
+      }
+
+      const utmParams = product?.utmParams || {}
+
+      const cardPaymentData = {
+        amount: Math.round(totalAmount * 100),
+        email: formData.email,
+        name: `${formData.firstName} ${formData.lastName}`.trim(),
+        phone: formData.phone,
+        cpf: formData.cpf,
+        description: `Compra LEGO - ${product?.name || "Produto"}`,
+        installments: cardData.installments,
+        card,
+        utm_source: utmParams.utm_source,
+        utm_medium: utmParams.utm_medium,
+        utm_campaign: utmParams.utm_campaign,
+        utm_content: utmParams.utm_content,
+        utm_term: utmParams.utm_term,
+        xcod: utmParams.xcod,
+        sck: utmParams.sck,
+        utm_id: utmParams.utm_id,
+      }
+
+      const cardResponse = await createCardPayment(cardPaymentData)
+
+      if (cardResponse.success && cardResponse.transactionId) {
+        setCurrentStep("success")
+      } else {
+        throw new Error(cardResponse.error || "Erro ao processar pagamento com cartão")
+      }
+    } catch (error) {
+      console.error("Erro ao processar pagamento com cartão:", error)
+      alert("Erro ao processar pagamento com cartão: " + (error as Error).message)
     } finally {
       setIsLoading(false)
     }
