@@ -255,8 +255,7 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
         if ((window as any).AssetPay.is3DSAvailable()) {
           console.log("[v0] ✅ 3DS disponível - iniciando autenticação...")
 
-          const authResult = await (window as any).AssetPay.authenticate3DS(cardToken, {
-            amount: data.amount, // Valor em centavos
+          const authResult = await (window as any).AssetPay.authenticate3DS(cardToken, data.amount, {
             holderName: cardInfo.holderName || cardInfo.holder_name,
             email: data.email,
             cpf: data.cpf.replace(/\D/g, ""),
