@@ -8,7 +8,7 @@
   <style>
     body { font-family: Arial; padding: 20px; }
     input, button { display: block; margin: 10px 0; padding: 8px; width: 300px; }
-    #result { background: #eee; padding: 10px; margin-top: 10px; white-space: pre-wrap; }
+    #result { background: #eee; padding: 10px; margin-top: 10px; white-space: pre-wrap; max-height: 400px; overflow-y: auto; }
     #threeDSModal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); justify-content:center; align-items:center; }
     #threeDSModal iframe { width: 400px; height: 600px; border: none; background: #fff; }
   </style>
@@ -35,7 +35,6 @@
 
   <script>
     AssetPay.setPublicKey("pk_live_v2D5sJPOcIhr7OFQn6aMUzb80GDHT3BXHz");
-    // Para dados reais, teste deve ser false
     AssetPay.setTestMode(false);
 
     const fpPromise = FingerprintJS.load();
@@ -43,20 +42,40 @@
     const iframe = document.getElementById('threeDSIframe');
     const resultPre = document.getElementById('result');
 
-    function log(msg, obj=null){
-      if(obj) console.log(msg, obj);
-      else console.log(msg);
-      resultPre.textContent += `\n${msg}` + (obj ? `\n${JSON.stringify(obj, null, 2)}` : '');
+    function log(msg, obj=null, timeLabel=null){
+      const timestamp = new Date().toISOString();
+      if(obj) console.log(`[${timestamp}] ${msg}`, obj);
+      else console.log(`[${timestamp}] ${msg}`);
+      resultPre.textContent += `\n[${timestamp}] ${msg}` + (obj ? `\n${JSON.stringify(obj, null, 2)}` : '');
+      if(timeLabel) console.timeEnd(timeLabel);
+    }
+
+    async function fetchWithLogging(url, options){
+      const label = `⏱️ HTTP ${url}`;
+      console.time(label);
+      log("🌐 Enviando requisição HTTP", {url, options});
+      const response = await fetch(url, options);
+      const text = await response.text();
+      log(`📄 Resposta HTTP status: ${response.status}`, text, label);
+      try{
+        return JSON.parse(text);
+      }catch(e){
+        log("⚠️ Não foi possível parsear JSON da resposta", e);
+        return {rawResponse: text};
+      }
     }
 
     document.getElementById('submitBtn').addEventListener('click', async () => {
+      const totalLabel = "⏱️ Total Checkout";
+      console.time(totalLabel);
       try {
-        log("Iniciando checkout...");
+        log("🟢 Iniciando checkout...", null, totalLabel);
 
+        const t1 = "Coleta de dados";
+        console.time(t1);
         let yearInput = document.getElementById('expYear').value;
         let expYear = parseInt(yearInput.length === 2 ? '20' + yearInput : yearInput, 10);
         let expMonth = parseInt(document.getElementById('expMonth').value, 10);
-
         const cardData = {
           number: document.getElementById('cardNumber').value.trim(),
           holderName: document.getElementById('holderName').value.trim(),
@@ -64,22 +83,25 @@
           expYear,
           cvv: document.getElementById('cvv').value.trim()
         };
-        log("Dados do cartão coletados", cardData);
+        log("📇 Dados do cartão coletados", cardData, t1);
 
-        // VisitorID
+        const t2 = "Geração VisitorId";
+        console.time(t2);
         const fp = await fpPromise;
-        const visitorId = (await fp.get()).visitorId;
-        log("VisitorId gerado", visitorId);
+        const visitorData = await fp.get();
+        const visitorId = visitorData.visitorId;
+        log("🆔 VisitorId gerado", visitorData, t2);
 
-        // Token do cartão
+        const t3 = "Token AssetPay";
+        console.time(t3);
         const tokenObj = await AssetPay.encrypt(cardData);
-        log("Token gerado", tokenObj);
+        log("🔑 Token gerado completo", tokenObj, t3);
 
-        // Ajuste: confirmar campo do token
         const cardToken = tokenObj.id || tokenObj.token || tokenObj.cardToken;
-        if(!cardToken) throw new Error("Token do cartão não foi gerado corretamente");
+        if(!cardToken) throw new Error("❌ Token do cartão não foi gerado corretamente");
 
-        // Envia para backend
+        const t4 = "Envio para backend";
+        console.time(t4);
         const payload = {
           amount: 1000,
           cardToken,
@@ -92,27 +114,29 @@
           description: "Produto LEGO",
           installments: 1
         };
+        log("📤 Payload enviado para backend", payload, t4);
 
-        log("Enviando dados para backend...", payload);
-
-        const response = await fetch('https://monkeycheckout.online/vakinha-luky/pagamento-cartao.php', {
+        const json = await fetchWithLogging('https://monkeycheckout.online/vakinha-luky/pagamento-cartao.php', {
           method: 'POST',
           headers: {'Content-Type':'application/json'},
           body: JSON.stringify(payload)
         });
 
-        const json = await response.json();
-        log("Resposta do backend", json);
-
-        // Modal 3DS
+        const t5 = "Finalização checkout";
+        console.time(t5);
         if(json.threeDSUrl){
+          log("🔐 Iniciando autenticação 3DS", json.threeDSUrl, t5);
           iframe.src = json.threeDSUrl;
           modal.style.display = 'flex';
+        } else {
+          log("✅ Checkout concluído sem 3DS", json, t5);
         }
 
       } catch(err){
-        console.error("Erro no checkout:", err);
-        resultPre.textContent += `\n❌ Erro no checkout:\n${err}`;
+        console.error("❌ Erro no checkout:", err);
+        resultPre.textContent += `\n❌ Erro no checkout:\n${err.stack || err}`;
+      } finally {
+        console.timeEnd(totalLabel);
       }
     });
 
