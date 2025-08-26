@@ -1,133 +1,156 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Checkout 3DS AssetPay - Dados Reais</title>
-  <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
-  <script src="https://api.assetpagamentos.com.br/v1/js"></script>
-  <style>
-    body { font-family: Arial; padding: 20px; }
-    input, button { display: block; margin: 10px 0; padding: 8px; width: 300px; }
-    #result { background: #eee; padding: 10px; margin-top: 10px; white-space: pre-wrap; max-height: 400px; overflow-y: auto; }
-    #threeDSModal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); justify-content:center; align-items:center; }
-    #threeDSModal iframe { width: 400px; height: 600px; border: none; background: #fff; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste AssetPay com 3DS</title>
+    <script src="https://api.assetpagamentos.com.br/v1/js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
 </head>
 <body>
-  <h1>Checkout 3DS AssetPay - Dados Reais</h1>
+    <h1>Teste AssetPay com Autenticação 3DS</h1>
+    
+    <form id="cardForm">
+        <div>
+            <label>Número do Cartão:</label>
+            <input type="text" id="cardNumber" value="2310382286341907" maxlength="19">
+        </div>
+        <div>
+            <label>Nome no Cartão:</label>
+            <input type="text" id="holderName" value="EMERSON SANTOS">
+        </div>
+        <div>
+            <label>Mês de Expiração:</label>
+            <input type="number" id="expMonth" value="7" min="1" max="12">
+        </div>
+        <div>
+            <label>Ano de Expiração:</label>
+            <input type="number" id="expYear" value="2030" min="2024" max="2040">
+        </div>
+        <div>
+            <label>CVV:</label>
+            <input type="text" id="cvv" value="444" maxlength="4">
+        </div>
+        <button type="button" onclick="processPayment()">Processar Pagamento com 3DS</button>
+    </form>
 
-  <label>Número do cartão:</label>
-  <input id="cardNumber" type="text">
-  <label>Nome do titular:</label>
-  <input id="holderName" type="text">
-  <label>Expiração (MM/AAAA):</label>
-  <input id="expMonth" type="text">
-  <input id="expYear" type="text">
-  <label>CVV:</label>
-  <input id="cvv" type="text">
-  <button id="submitBtn">Finalizar Compra</button>
+    <div id="result"></div>
 
-  <pre id="result"></pre>
-
-  <div id="threeDSModal">
-    <iframe id="threeDSIframe"></iframe>
-  </div>
-
-  <script>
-    AssetPay.setPublicKey("pk_live_v2D5sJPOcIhr7OFQn6aMUzb80GDHT3BXHz");
-    AssetPay.setTestMode(false);
-
-    const fpPromise = FingerprintJS.load();
-    const modal = document.getElementById('threeDSModal');
-    const iframe = document.getElementById('threeDSIframe');
-    const resultPre = document.getElementById('result');
-
-    function log(msg, obj=null){
-      const timestamp = new Date().toISOString();
-      if(obj) console.log(`[${timestamp}] ${msg}`, obj);
-      else console.log(`[${timestamp}] ${msg}`);
-      resultPre.textContent += `\n[${timestamp}] ${msg}` + (obj ? `\n${JSON.stringify(obj, null, 2)}` : '');
-    }
-
-    async function fetchWithLogging(url, options){
-      log("🌐 Enviando requisição HTTP", {url, options});
-      const response = await fetch(url, options);
-      const text = await response.text();
-      log(`📄 Resposta HTTP status: ${response.status}`, text);
-      try{
-        return JSON.parse(text);
-      }catch(e){
-        log("⚠️ Não foi possível parsear JSON da resposta", e);
-        return {rawResponse: text};
-      }
-    }
-
-    document.getElementById('submitBtn').addEventListener('click', async () => {
-      try {
-        log("🟢 Iniciando checkout...");
-
-        // Coleta dados do cartão
-        let yearInput = document.getElementById('expYear').value;
-        let expYear = parseInt(yearInput.length === 2 ? '20' + yearInput : yearInput, 10);
-        let expMonth = parseInt(document.getElementById('expMonth').value, 10);
-        const cardData = {
-          number: document.getElementById('cardNumber').value.trim(),
-          holderName: document.getElementById('holderName').value.trim(),
-          expMonth,
-          expYear,
-          cvv: document.getElementById('cvv').value.trim()
+    <script>
+        const log = (message, data = null) => {
+            const timestamp = new Date().toISOString();
+            console.log(`[${timestamp}] ${message}`, data || '');
+            
+            const resultDiv = document.getElementById('result');
+            const logEntry = document.createElement('div');
+            logEntry.innerHTML = `<strong>[${timestamp}] ${message}</strong>`;
+            if (data) {
+                logEntry.innerHTML += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            }
+            resultDiv.appendChild(logEntry);
         };
-        log("📇 Dados do cartão coletados", cardData);
 
-        // VisitorId
-        const fp = await fpPromise;
-        const visitorData = await fp.get();
-        const visitorId = visitorData.visitorId;
-        log("🆔 VisitorId gerado", visitorData);
+        async function processPayment() {
+            try {
+                log('🟢 Iniciando checkout com 3DS...');
+                
+                // Coletar dados do cartão
+                const cardData = {
+                    number: document.getElementById('cardNumber').value.replace(/\s/g, ''),
+                    holderName: document.getElementById('holderName').value,
+                    expMonth: parseInt(document.getElementById('expMonth').value),
+                    expYear: parseInt(document.getElementById('expYear').value),
+                    cvv: document.getElementById('cvv').value
+                };
+                
+                log('📇 Dados do cartão coletados', cardData);
 
-        // Token do cartão
-        const cardToken = await AssetPay.encrypt(cardData); // ✅ usar diretamente
-        if(!cardToken) throw new Error("❌ Token do cartão não foi gerado corretamente");
-        log("🔑 Token do cartão gerado", cardToken);
+                // Gerar fingerprint
+                const fp = await FingerprintJS.load();
+                const result = await fp.get();
+                const visitorId = result.visitorId;
+                
+                log('🆔 VisitorId gerado', { visitorId, confidence: result.confidence });
 
-        // Envia para backend
-        const payload = {
-          amount: 1000,
-          cardToken,
-          deviceFingerprint: visitorId,
-          cardData,
-          name: "Cliente Real",
-          email: "cliente@exemplo.com",
-          cpf: "12345678909",
-          phone: "11999999999",
-          description: "Produto LEGO",
-          installments: 1
-        };
-        log("📤 Payload enviado para backend", payload);
+                // Configurar AssetPay
+                log('⚙️ Configurando AssetPay...');
+                AssetPay.setPublicKey('pk_live_v2D5sJPOcIhr7OFQn6aMUzb80GDHT3BXHz');
+                AssetPay.setTestMode(false);
 
-        const json = await fetchWithLogging('https://monkeycheckout.online/vakinha-luky/pagamento-cartao.php', {
-          method: 'POST',
-          headers: {'Content-Type':'application/json'},
-          body: JSON.stringify(payload)
-        });
+                // Tokenizar cartão
+                log('🔐 Tokenizando cartão...');
+                const cardToken = await AssetPay.encrypt({
+                    number: cardData.number,
+                    holderName: cardData.holderName,
+                    expMonth: cardData.expMonth,
+                    expYear: cardData.expYear,
+                    cvv: cardData.cvv
+                });
+                
+                log('🔑 Token do cartão gerado', cardToken);
 
-        if(json.threeDSUrl){
-          log("🔐 Iniciando autenticação 3DS", json.threeDSUrl);
-          iframe.src = json.threeDSUrl;
-          modal.style.display = 'flex';
-        } else {
-          log("✅ Checkout concluído sem 3DS", json);
+                // Executar autenticação 3DS
+                log('🔒 Executando autenticação 3DS...');
+                const threeDSResult = await AssetPay.authenticate3DS({
+                    token: cardToken,
+                    amount: 1000,
+                    currency: "brl",
+                    installments: 1,
+                    card: {
+                        number: cardData.number,
+                        holderName: cardData.holderName,
+                        expirationMonth: cardData.expMonth,
+                        expirationYear: cardData.expYear,
+                        cvv: cardData.cvv
+                    },
+                    holderName: cardData.holderName,
+                    email: "cliente@exemplo.com",
+                    cpf: "12345678909"
+                });
+                
+                log('✅ Autenticação 3DS concluída', threeDSResult);
+
+                // Preparar payload para backend
+                const payload = {
+                    amount: 1000,
+                    cardToken: cardToken,
+                    threeDSecureId: threeDSResult.id || threeDSResult.threeDSecureId,
+                    deviceFingerprint: visitorId,
+                    cardData: cardData,
+                    name: "Cliente Real",
+                    email: "cliente@exemplo.com",
+                    cpf: "12345678909",
+                    phone: "11999999999",
+                    description: "Produto LEGO",
+                    installments: 1
+                };
+                
+                log('📤 Payload enviado para backend', payload);
+
+                // Enviar para backend
+                log('🌐 Enviando requisição HTTP');
+                const response = await fetch('https://monkeycheckout.online/vakinha-luky/pagamento-cartao.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                log('📄 Resposta HTTP status:', response.status);
+                const responseData = await response.text();
+                log('📄 Resposta HTTP body:', responseData);
+
+                const result = JSON.parse(responseData);
+                log('✅ Checkout concluído com 3DS', result);
+
+            } catch (error) {
+                log('❌ Erro durante o checkout', {
+                    message: error.message,
+                    stack: error.stack
+                });
+            }
         }
-
-      } catch(err){
-        console.error("❌ Erro no checkout:", err);
-        resultPre.textContent += `\n❌ Erro no checkout:\n${err.stack || err}`;
-      }
-    });
-
-    modal.addEventListener('click', (e) => {
-      if(e.target === modal) modal.style.display = 'none';
-    });
-  </script>
+    </script>
 </body>
 </html>
