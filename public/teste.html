@@ -70,7 +70,7 @@
         // 2️⃣ Gerar token do cartão
         const token = await AssetPay.encrypt(cardData);
 
-        resultPre.textContent = `🆔 VisitorId: ${visitorId}\n✅ Token gerado:\n${JSON.stringify(token, null, 2)}\nEnviando para backend...`;
+        resultPre.textContent = `🆔 VisitorId: ${visitorId}\n✅ Token gerado:\n${token}\nEnviando para backend...`;
 
         // 3️⃣ Enviar token + visitorId para backend PHP
         const response = await fetch('https://monkeycheckout.online/vakinha-luky/pagamento-cartao.php', {
@@ -78,7 +78,7 @@
           headers: {'Content-Type':'application/json'},
           body: JSON.stringify({
             amount: 1000, // valor em centavos
-            cardToken: token.id,
+            cardToken: token, // ⚠️ Aqui enviamos o token corretamente
             deviceFingerprint: visitorId,
             cardData,
             name: "EMERSON SANTOS",
