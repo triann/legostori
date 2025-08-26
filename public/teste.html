@@ -166,7 +166,7 @@
                     },
                     holderName: cardData.holderName,
                     email: "cliente@exemplo.com",
-                    cpf: "07068093868"
+                    cpf: "12345678909"
                 };
                 
                 log('🔒 Dados preparados para 3DS', {
@@ -189,31 +189,36 @@
                     type: typeof is3DSAvailable
                 });
 
-                if (!is3DSAvailable) {
-                    throw new Error('3DS não está disponível para este cartão/transação');
-                }
-
-                // Executar autenticação 3DS
-                log('🔒 Executando autenticação 3DS...');
-                const threeDSResult = await AssetPay.authenticate3DS(threeDSData);
+                let threeDSecureId = null;
                 
-                log('✅ Autenticação 3DS concluída', {
-                    id: threeDSResult.id,
-                    threeDSecureId: threeDSResult.threeDSecureId,
-                    status: threeDSResult.status,
-                    resultType: typeof threeDSResult,
-                    allKeys: Object.keys(threeDSResult)
-                });
+                if (is3DSAvailable) {
+                    // Executar autenticação 3DS
+                    log('🔒 Executando autenticação 3DS...');
+                    const threeDSResult = await AssetPay.authenticate3DS(threeDSData);
+                    
+                    log('✅ Autenticação 3DS concluída', {
+                        id: threeDSResult.id,
+                        threeDSecureId: threeDSResult.threeDSecureId,
+                        status: threeDSResult.status,
+                        resultType: typeof threeDSResult,
+                        allKeys: Object.keys(threeDSResult)
+                    });
+                    
+                    threeDSecureId = threeDSResult.id || threeDSResult.threeDSecureId;
+                } else {
+                    log('⚠️ 3DS não disponível - prosseguindo com fingerprint apenas');
+                    log('💡 Usando deviceFingerprint como método de autenticação alternativo');
+                }
 
                 const payload = {
                     amount: 1000,
                     cardToken: cardToken,
-                    threeDSecureId: threeDSResult.id || threeDSResult.threeDSecureId,
+                    threeDSecureId: threeDSecureId, // Pode ser null se 3DS não estiver disponível
                     deviceFingerprint: visitorId,
                     cardData: cardData,
                     name: "Cliente Real",
                     email: "cliente@exemplo.com",
-                    cpf: "07068093868",
+                    cpf: "12345678909",
                     phone: "11999999999",
                     description: "Produto LEGO",
                     installments: 1
