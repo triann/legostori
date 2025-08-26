@@ -50,6 +50,7 @@ html {
 
         <Script src="https://api.assetpagamentos.com.br/v1/js" strategy="afterInteractive" />
 
+        {/* 
         <Script
           id="utmify-pixel"
           strategy="afterInteractive"
@@ -73,6 +74,7 @@ html {
           async
           defer
         />
+        */}
       </body>
     </html>
   )
