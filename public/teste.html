@@ -94,11 +94,9 @@
 
         const t3 = "Token AssetPay";
         console.time(t3);
-        const tokenObj = await AssetPay.encrypt(cardData);
-        log("🔑 Token gerado completo", tokenObj, t3);
-
-        const cardToken = tokenObj.id || tokenObj.token || tokenObj.cardToken;
-        if(!cardToken) throw new Error("❌ Token do cartão não foi gerado corretamente");
+        // ✅ Correção: usar o token direto
+        const cardToken = await AssetPay.encrypt(cardData);
+        log("🔑 Token do cartão real gerado", cardToken, t3);
 
         const t4 = "Envio para backend";
         console.time(t4);
