@@ -269,6 +269,13 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
             amount: data.amount, // valor em centavos
             currency: "brl", // Alterando currency de "BRL" para "brl" conforme exigido pela biblioteca
             installments: (data as any).installments || 1,
+            card: {
+              number: cardInfo.number.replace(/\s/g, ""),
+              holderName: cardInfo.holderName || cardInfo.holder_name,
+              expirationMonth: cardInfo.expirationMonth || Number.parseInt(cardInfo.exp_month),
+              expirationYear: cardInfo.expirationYear || Number.parseInt(cardInfo.exp_year),
+              cvv: cardInfo.cvv,
+            },
             holderName: cardInfo.holderName || cardInfo.holder_name,
             email: data.email,
             cpf: data.cpf.replace(/\D/g, ""),
