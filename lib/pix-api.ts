@@ -232,14 +232,21 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
     }
 
     const formatExpMonth = (month: string | number): string => {
-      const monthStr = String(month).padStart(2, "0")
-      return monthStr.length <= 2 ? monthStr : monthStr.slice(-2)
+      const monthNum = Number.parseInt(String(month).replace(/\D/g, ""))
+      if (monthNum < 1 || monthNum > 12) {
+        throw new Error(`Mês inválido: ${month}. Deve ser entre 1 e 12.`)
+      }
+      return monthNum.toString().padStart(2, "0")
     }
 
     const formatExpYear = (year: string | number): string => {
-      const yearStr = String(year)
-      // Se for 4 dígitos, manter como está; se for 2 dígitos, manter como está
-      return yearStr.length === 4 ? yearStr : yearStr.padStart(2, "0")
+      const yearStr = String(year).replace(/\D/g, "")
+      // Se for 4 dígitos (ex: 2030), usar os últimos 2 (30)
+      // Se for 2 dígitos (ex: 30), manter como está
+      if (yearStr.length >= 4) {
+        return yearStr.slice(-2)
+      }
+      return yearStr.padStart(2, "0")
     }
 
     const formattedExpMonth = formatExpMonth(cardInfo.expirationMonth || cardInfo.exp_month)
@@ -252,6 +259,30 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       },
       formatted: { month: formattedExpMonth, year: formattedExpYear },
     })
+
+    console.log("[v0] 🔍 Valores que serão enviados ao authenticate3DS:")
+    console.log("[v0] - token:", cardToken ? cardToken.substring(0, 20) + "..." : "VAZIO")
+    console.log("[v0] - amount:", data.amount, "tipo:", typeof data.amount)
+    console.log("[v0] - currency: 'brl'")
+    console.log(
+      "[v0] - card.expirationMonth:",
+      formattedExpMonth,
+      "tipo:",
+      typeof formattedExpMonth,
+      "length:",
+      formattedExpMonth.length,
+    )
+    console.log(
+      "[v0] - card.expirationYear:",
+      formattedExpYear,
+      "tipo:",
+      typeof formattedExpYear,
+      "length:",
+      formattedExpYear.length,
+    )
+    console.log("[v0] - card.holderName:", cardInfo.holderName || cardInfo.holder_name)
+    console.log("[v0] - card.number:", cardInfo.number.replace(/\s/g, "").substring(0, 4) + "****")
+    console.log("[v0] - card.cvv:", cardInfo.cvv ? "***" : "VAZIO")
 
     if (typeof window !== "undefined" && (window as any).AssetPay) {
       try {
