@@ -267,7 +267,7 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
           const authResult = await (window as any).AssetPay.authenticate3DS({
             token: cardToken,
             amount: data.amount, // valor em centavos
-            currency: "BRL",
+            currency: "brl", // Alterando currency de "BRL" para "brl" conforme exigido pela biblioteca
             installments: (data as any).installments || 1,
             holderName: cardInfo.holderName || cardInfo.holder_name,
             email: data.email,
