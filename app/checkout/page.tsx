@@ -248,8 +248,8 @@ export default function CheckoutPage() {
       setShippingOptions([storeOption])
     } else {
       if (onlyFreeItems) {
-        setShippingOptions([{ type: "Sedex", price: 25.91, days: "Em até 10 dias úteis" }])
-        setShippingOptions([{ type: "Azul Express", price: 33.59, days: "Em até 3 dias úteis" }])
+        setShippingOptions([{ type: "PAC", price: 25.91, days: "Em até 10 dias úteis" }]),
+        setShippingOptions([{ type: "Azul Express", price: 33.59, days: "Em até 3 dias úteis" }]),
       } else {
         setShippingOptions([
           { type: "Correios", price: 0, days: "Em até 10 dias úteis" },
@@ -312,8 +312,8 @@ export default function CheckoutPage() {
       setShippingOptions([storeOption])
     } else {
       if (onlyFreeItems) {
-        setShippingOptions([{ type: "PAC", price: 25.91, days: "Em até 10 dias úteis" }])
-        setShippingOptions([{ type: "Azul Express", price: 33.59, days: "Em até 3 dias úteis" }])
+        setShippingOptions([{ type: "PAC", price: 25.91, days: "Em até 10 dias úteis" }]),
+        setShippingOptions([{ type: "Azul Express", price: 33.59, days: "Em até 3 dias úteis" }]),
       } else {
         setShippingOptions([
           { type: "PAC", price: 0, days: "Em até 10 dias úteis" },
