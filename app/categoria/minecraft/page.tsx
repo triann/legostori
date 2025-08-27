@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Heart, Star } from "lucide-react"
 import { products } from "@/app/product/[id]/page"
 
+export const dynamic = "force-dynamic"
+
 const minecraftProducts = Object.values(products).filter((product) => product.categories?.includes("minecraft"))
 
 export default function MinecraftPage({ searchParams }: { searchParams: { discount?: string } }) {

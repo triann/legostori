@@ -9,6 +9,8 @@ import { products } from "@/app/product/[id]/page"
 import { useAnalytics } from "@/hooks/use-analytics"
 import { useEffect } from "react"
 
+export const dynamic = "force-dynamic"
+
 const harrypotterProducts = Object.values(products).filter((product) => product.categories?.includes("harrypotter"))
 
 export default function HarryPotterPage({ searchParams }: { searchParams: { discount?: string } }) {

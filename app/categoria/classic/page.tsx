@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button"
 import { Heart, Star } from "lucide-react"
 import { products } from "@/app/product/[id]/page"
 
+export const dynamic = "force-dynamic"
+
+
 const classicProducts = Object.values(products).filter((product) => product.categories?.includes("classic"))
 
 export default function ClassicPage({ searchParams }: { searchParams: { discount?: string } }) {

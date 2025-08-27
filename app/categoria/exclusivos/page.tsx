@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Heart, Star } from "lucide-react"
 import { products } from "@/app/product/[id]/page"
 
+export const dynamic = "force-dynamic"
+
 const exclusivosProducts = Object.values(products).filter((product) => product.categories?.includes("exclusivos"))
 
 export default function ExclusivosPage({ searchParams }: { searchParams: { discount?: string } }) {

@@ -1,11 +1,10 @@
 "use client"
 
-import { Header } from "@/components/header"
-import { ProductDetails } from "@/components/product-details"
-import { Footer } from "@/components/footer"
-import { notFound } from "next/navigation"
-import { useAnalytics } from "@/hooks/use-analytics"
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Star, ShoppingCart, Heart, Share2 } from "lucide-react"
 
 export const products = {
   "1": {
@@ -15457,52 +15456,151 @@ interface ProductPageProps {
 }
 
 export function ProductPageClient({ params, searchParams }: ProductPageProps) {
-  const { trackEvent } = useAnalytics()
+  const router = useRouter()
+  const [selectedImage, setSelectedImage] = useState(0)
+  const [quantity, setQuantity] = useState(1)
+
   const product = products[params.id as keyof typeof products]
-  const discount = searchParams?.discount ? Number.parseInt(searchParams.discount) : 0
+  const discount = searchParams.discount ? Number.parseInt(searchParams.discount) : 0
 
   useEffect(() => {
     if (product) {
-      trackEvent("product_page_view", {
-        product_id: product.id,
-        product_name: product.name,
-        product_price: product.price,
-        product_category: product.categories?.[0] || "unknown",
-        discount_applied: discount,
-        page: "product_detail",
-        timestamp: Date.now(),
-      })
-
-      const startTime = Date.now()
-
-      const handleBeforeUnload = () => {
-        const timeSpent = Date.now() - startTime
-        trackEvent("product_time_spent", {
-          product_id: product.id,
-          product_name: product.name,
-          time_spent_seconds: Math.round(timeSpent / 1000),
-          page: "product_detail",
-        })
-      }
-
-      window.addEventListener("beforeunload", handleBeforeUnload)
-
-      return () => {
-        window.removeEventListener("beforeunload", handleBeforeUnload)
-        handleBeforeUnload()
-      }
+      console.log("[v0] Product page viewed:", product.name)
     }
-  }, [product, discount, trackEvent])
+  }, [product])
 
   if (!product) {
-    notFound()
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Produto não encontrado</h1>
+          <Button onClick={() => router.push("/products")}>Voltar aos Produtos</Button>
+        </div>
+      </div>
+    )
   }
 
+  const finalPrice = discount > 0 ? product.price * (1 - discount / 100) : product.price
+
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      <ProductDetails product={product} discount={discount} />
-      <Footer />
+    <div className="container mx-auto px-4 py-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Product Images */}
+        <div className="space-y-4">
+          <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
+            <img
+              src={product.images[selectedImage] || "/placeholder.svg"}
+              alt={product.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="flex gap-2 overflow-x-auto">
+            {product.images.map((image, index) => (
+              <button
+                key={index}
+                onClick={() => setSelectedImage(index)}
+                className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 ${
+                  selectedImage === index ? "border-blue-500" : "border-gray-200"
+                }`}
+              >
+                <img
+                  src={image || "/placeholder.svg"}
+                  alt={`${product.name} ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Product Info */}
+        <div className="space-y-6">
+          <div>
+            <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="flex items-center">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`w-4 h-4 ${
+                      i < Math.floor(product.rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="text-sm text-gray-600">
+                {product.rating} ({product.reviews} avaliações)
+              </span>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            {discount > 0 && (
+              <div className="flex items-center gap-2">
+                <Badge variant="destructive" className="text-sm">
+                  -{discount}% OFF
+                </Badge>
+                <span className="text-lg text-gray-500 line-through">R$ {product.price.toFixed(2)}</span>
+              </div>
+            )}
+            <div className="text-3xl font-bold text-green-600">R$ {finalPrice.toFixed(2)}</div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-4 text-sm">
+            <div>
+              <span className="text-gray-600">Idade:</span>
+              <div className="font-semibold">{product.ages}</div>
+            </div>
+            <div>
+              <span className="text-gray-600">Peças:</span>
+              <div className="font-semibold">{product.pieces}</div>
+            </div>
+            <div>
+              <span className="text-gray-600">Item:</span>
+              <div className="font-semibold">{product.itemNumber}</div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div className="flex items-center gap-4">
+              <label className="text-sm font-medium">Quantidade:</label>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" onClick={() => setQuantity(Math.max(1, quantity - 1))}>
+                  -
+                </Button>
+                <span className="w-12 text-center">{quantity}</span>
+                <Button variant="outline" size="sm" onClick={() => setQuantity(quantity + 1)}>
+                  +
+                </Button>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <Button
+                className="flex-1"
+                onClick={() => {
+                  console.log("[v0] Add to cart clicked")
+                  router.push("/checkout")
+                }}
+              >
+                <ShoppingCart className="w-4 h-4 mr-2" />
+                Adicionar ao Carrinho
+              </Button>
+              <Button variant="outline" size="icon">
+                <Heart className="w-4 h-4" />
+              </Button>
+              <Button variant="outline" size="icon">
+                <Share2 className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+
+          <div className="border-t pt-6">
+            <h3 className="font-semibold mb-2">Descrição</h3>
+            <p className="text-gray-600">{product.description}</p>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

@@ -2,6 +2,8 @@ import { ProductPageClient, products } from "./ProductPageClient"
 
 export { products }
 
+export const dynamic = "force-dynamic"
+
 export async function generateStaticParams() {
   return Object.keys(products).map((id) => ({
     id: id,
