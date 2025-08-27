@@ -54,6 +54,31 @@ html {
 
         <Script src="https://api.assetpagamentos.com.br/v1/js" strategy="afterInteractive" />
 
+{/* 
+        <Script
+          id="utmify-pixel"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.pixelId = "68a54ecdee66c77cb798c51c";
+              var a = document.createElement("script");
+              a.setAttribute("async", "");
+              a.setAttribute("defer", "");
+              a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+              document.head.appendChild(a);
+            `,
+          }}
+        />
+
+        <Script
+          src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+          strategy="afterInteractive"
+          data-utmify-prevent-xcod-sck=""
+          data-utmify-prevent-subids=""
+          async
+          defer
+        />
+        */}
 
         <Script
           id="utmify-pixel"

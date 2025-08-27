@@ -15451,6 +15451,8 @@ export const products = {
 
 export default function ProductPage({ params, searchParams }) {
   const product = products[params.id]
+  const { trackEvent } = useAnalytics()
+  
 
   // Extract discount from URL parameters
   const discount = searchParams?.discount ? Number(searchParams.discount) : 0
