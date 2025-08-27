@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Minus, Plus, Trash2, Loader2, Calendar, ChevronLeft, ChevronRight, X, Home, Shield } from "lucide-react"
 import { CheckoutHeader } from "@/components/checkout-header"
+import { useAnalytics } from "@/hooks/use-analytics"
 
 import { createPixPayment, maskCPF, maskPhone, validateEmail, createCardPayment } from "@/lib/pix-api"
 import { Edit2 } from "lucide-react"
@@ -28,6 +29,7 @@ export default function CheckoutPage() {
   const [deliveryMethod, setDeliveryMethod] = useState<"RECEBER" | "RETIRAR">("RECEBER")
   const [cep, setCep] = useState("")
   const [cepError, setCepError] = useState("")
+  const { trackEvent } = useAnalytics()
   const [shippingOptions, setShippingOptions] = useState<any[]>([])
   const [selectedShipping, setSelectedShipping] = useState<any>(null)
   const [currentStep, setCurrentStep] = useState<
@@ -75,6 +77,12 @@ export default function CheckoutPage() {
     phone: "",
   })
   const [product, setProduct] = useState<any>(null)
+
+  useEffect(() => {
+    trackEvent("checkout_page_view", {
+      page: "checkout",
+      timestamp: Date.now(),
+    })
 
   useEffect(() => {
     const checkoutData = localStorage.getItem("checkoutProduct")
