@@ -2,6 +2,7 @@ import { Header } from "@/components/header"
 import { ProductDetails } from "@/components/product-details"
 import { Footer } from "@/components/footer"
 import { notFound } from "next/navigation"
+import { useAnalytics } from "@/hooks/use-analytics"
 
 export const products = {
   "1": {
