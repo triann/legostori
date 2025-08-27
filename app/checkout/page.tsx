@@ -78,11 +78,6 @@ export default function CheckoutPage() {
   })
   const [product, setProduct] = useState<any>(null)
 
-  useEffect(() => {
-    trackEvent("checkout_page_view", {
-      page: "checkout",
-      timestamp: Date.now(),
-    })
 
   useEffect(() => {
     const checkoutData = localStorage.getItem("checkoutProduct")
