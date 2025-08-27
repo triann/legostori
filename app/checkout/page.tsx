@@ -8,14 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Minus, Plus, Trash2, Loader2, Calendar, ChevronLeft, ChevronRight, X, Home, Shield } from "lucide-react"
 import { CheckoutHeader } from "@/components/checkout-header"
 
-import {
-  createPixPayment,
-  type PixPaymentData,
-  maskCPF,
-  maskPhone,
-  validateEmail,
-  createCardPayment,
-} from "@/lib/pix-api"
+import { createPixPayment, maskCPF, maskPhone, validateEmail, createCardPayment } from "@/lib/pix-api"
 import { Edit2 } from "lucide-react"
 
 interface CartItem {
@@ -59,7 +52,7 @@ export default function CheckoutPage() {
   const [showCalendar, setShowCalendar] = useState(false)
   const [selectedDate, setSelectedDate] = useState("")
   const [currentMonth, setCurrentMonth] = useState(new Date())
-  const [showNotification, setShowNotification] = useState(false)
+  const [showNotificationState, setShowNotificationState] = useState(false)
 
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>("")
   const [cardData, setCardData] = useState({
@@ -248,7 +241,7 @@ export default function CheckoutPage() {
       setShippingOptions([storeOption])
     } else {
       if (onlyFreeItems) {
-        setShippingOptions([ 
+        setShippingOptions([
           { type: "PAC", price: 25.91, days: "Em até 10 dias úteis" },
           { type: "Azul Express", price: 33.59, days: "Em até 3 dias úteis" },
         ])
@@ -314,7 +307,7 @@ export default function CheckoutPage() {
       setShippingOptions([storeOption])
     } else {
       if (onlyFreeItems) {
-        setShippingOptions([ 
+        setShippingOptions([
           { type: "PAC", price: 25.91, days: "Em até 10 dias úteis" },
           { type: "Azul Express", price: 33.59, days: "Em até 3 dias úteis" },
         ])
@@ -569,10 +562,23 @@ export default function CheckoutPage() {
     // Only run on client side
     if (typeof window === "undefined") return
 
-    setShowNotification(true)
+    setShowNotificationState(true)
     setTimeout(() => {
-      setShowNotification(false)
+      setShowNotificationState(false)
     }, 3000)
+  }
+
+  const _showNotification = (message: string) => {
+    // Criar e mostrar notificação temporária
+    const notification = document.createElement("div")
+    notification.className =
+      "fixed top-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-slide-down"
+    notification.textContent = message
+    document.body.appendChild(notification)
+
+    setTimeout(() => {
+      notification.remove()
+    }, 4000)
   }
 
   const handleDeliveryMethodChange = (method: "RECEBER" | "RETIRAR") => {
@@ -616,68 +622,88 @@ export default function CheckoutPage() {
     setCurrentStep("payment")
   }
 
-  const handleFinalizePurchase = async () => {
-    if (!selectedPaymentMethod) {
-      showNotification("Selecione um método de pagamento")
-      return
-    }
+  const handlePaymentSubmit = async () => {
+    if (!selectedPaymentMethod) return
 
     setIsLoading(true)
+    setCurrentStep("processing")
 
     try {
       const totalAmount = calculateTotal()
-      console.log("[v0] Valor total calculado:", totalAmount)
-      console.log("[v0] Valor em centavos:", Math.round(totalAmount * 100))
-
       const utmParams = product?.utmParams || {}
 
-      const pixData: PixPaymentData = {
-        amount: Math.round(totalAmount * 100), // Valor em centavos incluindo frete
-        email: formData.email,
-        name: `${formData.firstName} ${formData.lastName}`.trim(),
-        phone: formData.phone,
-        cpf: formData.cpf,
-        description: `Compra LEGO - ${product?.name || "Produto"}`,
-        utm_source: utmParams.utm_source,
-        utm_medium: utmParams.utm_medium,
-        utm_campaign: utmParams.utm_campaign,
-        utm_content: utmParams.utm_content,
-        utm_term: utmParams.utm_term,
-        xcod: utmParams.xcod,
-        sck: utmParams.sck,
-        utm_id: utmParams.utm_id,
+      if (selectedPaymentMethod === "card") {
+        if (!validateCardForm()) {
+          setIsLoading(false)
+          setCurrentStep("payment")
+          return
+        }
+
+        const cardPaymentData = {
+          amount: Math.round(totalAmount * 100),
+          email: formData.email,
+          name: `${formData.firstName} ${formData.lastName}`.trim(),
+          phone: formData.phone,
+          cpf: formData.cpf,
+          description: `Compra LEGO - ${product?.name || "Produto"}`,
+          installments: cardData.installments,
+          cardData: {
+            number: cardData.number.replace(/\s/g, ""),
+            holderName: cardData.name.trim(),
+            expirationMonth: Number.parseInt(cardData.expiry.split("/")[0]),
+            expirationYear: Number.parseInt("20" + cardData.expiry.split("/")[1]),
+            cvv: cardData.cvv,
+          },
+          ...utmParams,
+        }
+
+        const cardResponse = await createCardPayment(cardPaymentData)
+
+        if (cardResponse.success && cardResponse.transactionId) {
+          window.location.href = "/pedidos"
+        } else {
+          throw new Error(cardResponse.error || "Erro ao processar pagamento com cartão")
+        }
       }
 
-      console.log("📤 Enviando dados PIX:", pixData)
+      if (selectedPaymentMethod === "pix") {
+        const pixPaymentData = {
+          amount: Math.round(totalAmount * 100),
+          email: formData.email,
+          name: `${formData.firstName} ${formData.lastName}`.trim(),
+          phone: formData.phone,
+          cpf: formData.cpf,
+          description: `Compra LEGO - ${product?.name || "Produto"}`,
+          ...utmParams,
+        }
 
-      // Criar pagamento PIX via API
-      const pixResponse = await createPixPayment(pixData)
+        const pixResponse = await createPixPayment(pixPaymentData)
 
-      if (pixResponse.success && (pixResponse.qrcode || pixResponse.pixCopiaECola) && pixResponse.token) {
-        const pixCode = pixResponse.qrcode || pixResponse.pixCopiaECola || ""
+        if (pixResponse.success && (pixResponse.qrcode || pixResponse.pixCopiaECola) && pixResponse.token) {
+          const pixCode = pixResponse.qrcode || pixResponse.pixCopiaECola || ""
 
-        // Salvar dados do PIX no localStorage para a página PIX
-        localStorage.setItem(
-          "pixPayment",
-          JSON.stringify({
-            qrcode: pixCode,
-            token: pixResponse.token,
-            amount: totalAmount, // Usar valor total com frete
-            productName: product?.name || "Produto LEGO",
-            email: formData.email,
-            name: `${formData.firstName} ${formData.lastName}`.trim(),
-          }),
-        )
+          // Salvar dados do PIX no localStorage para a página PIX
+          localStorage.setItem(
+            "pixPayment",
+            JSON.stringify({
+              qrcode: pixCode,
+              token: pixResponse.token,
+              amount: totalAmount,
+              productName: product?.name || "Produto LEGO",
+              email: formData.email,
+              name: `${formData.firstName} ${formData.lastName}`.trim(),
+            }),
+          )
 
-        console.log("🔄 Redirecionando para PIX...")
-        // Redirecionar para página PIX
-        window.location.href = "/pix"
-      } else {
-        throw new Error(pixResponse.error || "Erro ao gerar PIX")
+          window.location.href = "/pix"
+        } else {
+          throw new Error(pixResponse.error || "Erro ao gerar PIX")
+        }
       }
     } catch (error) {
-      console.error("❌ Erro ao processar pagamento:", error)
-      alert("Erro ao processar pagamento: " + (error as Error).message)
+      console.error("Erro ao processar pagamento:", error)
+      _showNotification((error as Error).message)
+      setCurrentStep("payment")
     } finally {
       setIsLoading(false)
     }
@@ -737,80 +763,6 @@ export default function CheckoutPage() {
     setCardErrors(errors)
     return Object.keys(errors).length === 0
   }
-
-const handlePaymentSubmit = async () => {
-  if (!selectedPaymentMethod) return;
-
-  setIsLoading(true);
-  setCurrentStep("processing");
-
-  try {
-    const totalAmount = calculateTotal();
-    const utmParams = product?.utmParams || {};
-
-    if (selectedPaymentMethod === "card") {
-      // 🔹 validação só para cartão
-      if (!validateCardForm()) {
-        setIsLoading(false);
-        return;
-      }
-
-      const cardPaymentData = {
-        amount: Math.round(totalAmount * 100),
-        email: formData.email,
-        name: `${formData.firstName} ${formData.lastName}`.trim(),
-        phone: formData.phone,
-        cpf: formData.cpf,
-        description: `Compra LEGO - ${product?.name || "Produto"}`,
-        installments: cardData.installments,
-        cardData: {
-          number: cardData.number.replace(/\s/g, ""),
-          holderName: cardData.name.trim(),
-          expirationMonth: Number.parseInt(cardData.expiry.split("/")[0]),
-          expirationYear: Number.parseInt("20" + cardData.expiry.split("/")[1]),
-          cvv: cardData.cvv,
-        },
-        ...utmParams,
-      };
-
-      const cardResponse = await createCardPayment(cardPaymentData);
-
-      if (cardResponse.success && cardResponse.transactionId) {
-        setCurrentStep("success");
-      } else {
-        throw new Error(cardResponse.error || "Erro ao processar pagamento com cartão");
-      }
-    }
-
-    if (selectedPaymentMethod === "pix") {
-      const pixPaymentData = {
-        amount: Math.round(totalAmount * 100),
-        email: formData.email,
-        name: `${formData.firstName} ${formData.lastName}`.trim(),
-        phone: formData.phone,
-        cpf: formData.cpf,
-        description: `Compra LEGO - ${product?.name || "Produto"}`,
-        ...utmParams,
-      };
-
-      const pixResponse = await createPixPayment(pixPaymentData);
-
-      if (pixResponse.success && pixResponse.qrCode) {
-        // aqui você pode salvar o QR Code ou exibir em tela
-        setPixQrCode(pixResponse.qrCode);
-        setCurrentStep("pix"); // exibe passo de pagamento Pix
-      } else {
-        throw new Error(pixResponse.error || "Erro ao gerar Pix");
-      }
-    }
-  } catch (error) {
-    console.error("Erro ao processar pagamento:", error);
-    alert("Erro ao processar pagamento: " + (error as Error).message);
-  } finally {
-    setIsLoading(false);
-  }
-};
-
 
   if (currentStep === "personal") {
     return (
@@ -928,13 +880,25 @@ const handlePaymentSubmit = async () => {
           </p>
           <div className="flex justify-center gap-2">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
               alt="PIX"
               className="h-6"
             />
-            <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png" alt="MC" className="h-6"/>  
-            <img src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png" alt="Visa" className="h-6"/>  
-            <img src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png" alt="Amex" className="h-6"/> 
+            <img
+              src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png"
+              alt="MC"
+              className="h-6"
+            />
+            <img
+              src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png"
+              alt="Visa"
+              className="h-6"
+            />
+            <img
+              src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png"
+              alt="Amex"
+              className="h-6"
+            />
           </div>
         </div>
       </div>
@@ -1141,9 +1105,21 @@ const handlePaymentSubmit = async () => {
               alt="PIX"
               className="h-6"
             />
-            <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png" alt="MC" className="h-6"/>  
-            <img src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png" alt="Visa" className="h-6"/>  
-            <img src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png" alt="Amex" className="h-6"/> 
+            <img
+              src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png"
+              alt="MC"
+              className="h-6"
+            />
+            <img
+              src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png"
+              alt="Visa"
+              className="h-6"
+            />
+            <img
+              src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png"
+              alt="Amex"
+              className="h-6"
+            />
           </div>
         </div>
       </div>
@@ -1264,9 +1240,21 @@ const handlePaymentSubmit = async () => {
                     Cartão de Crédito
                   </span>
                   <div className="flex gap-1">
-                    <img src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png" alt="Visa" className="h-5" />
-                    <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png" alt="Mastercard" className="h-5" />
-                    <img src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png" alt="Amex" className="h-5" />
+                    <img
+                      src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png"
+                      alt="Visa"
+                      className="h-5"
+                    />
+                    <img
+                      src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png"
+                      alt="Mastercard"
+                      className="h-5"
+                    />
+                    <img
+                      src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png"
+                      alt="Amex"
+                      className="h-5"
+                    />
                   </div>
                 </div>
               </button>
@@ -1439,10 +1427,26 @@ const handlePaymentSubmit = async () => {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6"/>
-            <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png" alt="MC" className="h-6"/>  
-            <img src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png" alt="Visa" className="h-6"/>  
-            <img src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png" alt="Amex" className="h-6"/>  
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
+              alt="PIX"
+              className="h-6"
+            />
+            <img
+              src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png"
+              alt="MC"
+              className="h-6"
+            />
+            <img
+              src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png"
+              alt="Visa"
+              className="h-6"
+            />
+            <img
+              src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png"
+              alt="Amex"
+              className="h-6"
+            />
           </div>
         </div>
       </div>
@@ -1578,9 +1582,21 @@ const handlePaymentSubmit = async () => {
               alt="PIX"
               className="h-6"
             />
-            <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png" alt="MC" className="h-6"/>  
-            <img src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png" alt="Visa" className="h-6"/>  
-            <img src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png" alt="Amex" className="h-6"/> 
+            <img
+              src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png"
+              alt="MC"
+              className="h-6"
+            />
+            <img
+              src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png"
+              alt="Visa"
+              className="h-6"
+            />
+            <img
+              src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png"
+              alt="Amex"
+              className="h-6"
+            />
           </div>
         </div>
       </div>
@@ -1592,13 +1608,13 @@ const handlePaymentSubmit = async () => {
       <div className="min-h-screen bg-gray-50 animate-fade-in">
         <CheckoutHeader />
 
-        {showNotification && (
+        {showNotificationState && (
           <div className="fixed top-0 left-0 right-0 z-50 animate-slide-down">
             <div className="bg-orange-500 text-white px-4 py-3 text-center text-sm font-medium shadow-lg">
               <div className="max-w-md mx-auto flex items-center justify-between">
                 <span>Essa opção não está disponível para esse produto.</span>
                 <button
-                  onClick={() => setShowNotification(false)}
+                  onClick={() => setShowNotificationState(false)}
                   className="ml-2 hover:bg-orange-600 rounded-full p-1"
                 >
                   <X size={16} />
@@ -1875,9 +1891,21 @@ const handlePaymentSubmit = async () => {
               alt="PIX"
               className="h-6"
             />
-            <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png" alt="MC" className="h-6"/>  
-            <img src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png" alt="Visa" className="h-6"/>  
-            <img src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png" alt="Amex" className="h-6"/> 
+            <img
+              src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png"
+              alt="MC"
+              className="h-6"
+            />
+            <img
+              src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png"
+              alt="Visa"
+              className="h-6"
+            />
+            <img
+              src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png"
+              alt="Amex"
+              className="h-6"
+            />
           </div>
         </div>
       </div>
