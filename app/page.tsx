@@ -52,14 +52,14 @@ export default function HomePage() {
       price: 499.99,
     },
     {
-      image: "https://legobrasil.vtexassets.com/arquivos/ids/186411/43240.jpg?v=638507775738300000",
-      name: "Disney - Dragão da Malévola",
-      price: 699.99,
+      image: "https://legobrasil.vtexassets.com/arquivos/ids/188029/76443.jpg?v=638689283624800000",
+      name: "Harry Potter™ - Passeio de moto de Hagrid™ e Harr",
+      price: 479.99,
     },
     {
-      image: "https://legobrasil.vtexassets.com/arquivos/ids/184770/76278.jpg?v=638393026065900000",
-      name: "Marvel - Warbird do Rocket vs Ronan",
-      price: 1299.99,
+      image: "https://legobrasil.vtexassets.com/arquivos/ids/176770/lego_40478_Disney_Mini_Castelo_da_Disney_01.jpg?v=637732735262400000",
+      name: "Disney - Mini Castelo da Disney",
+      price: 329.99,
     },
   ]
 
@@ -227,7 +227,7 @@ export default function HomePage() {
               <Trophy className="w-6 h-6 text-yellow-500" />
               <h1 className="text-2xl font-bold text-gray-900">Parabéns!</h1>
             </div>
-            <p className="text-sm text-gray-700">Você completou todos os 5 quebra-cabeças!</p>
+            <p className="text-sm text-gray-700">Você completou todos os quebra-cabeças!</p>
           </div>
 
           <div className="bg-gray-50 rounded-lg p-3 mb-4">
@@ -279,7 +279,7 @@ export default function HomePage() {
               <h3 className="text-base font-semibold text-red-800">Resgate seu Prêmio</h3>
             </div>
             <p className="text-xs text-red-700 mb-3">
-              Insira seu CPF para resgatar seu desconto. Cada CPF pode resgatar apenas uma vez.
+              Insira seu CPF para resgatar seu desconto. <strong>O resgate é único por CPF.</strong>
             </p>
 
             <input
@@ -417,7 +417,7 @@ export default function HomePage() {
       <div className="max-w-sm w-full p-3 sm:p-4 text-center bg-white/95 backdrop-blur-sm rounded-lg transform transition-all duration-500 hover:scale-105 mt-26">
         <div className="mb-3">
           <p className="text-sm sm:text-base text-gray-700 mb-3">
-            Complete <span className="text-red-600 font-bold">5 quebra-cabeças</span> de produtos LEGO aleatórios em até{" "}
+            Complete <span className="text-red-600 font-bold">3 quebra-cabeças</span> de produtos LEGO aleatórios em até{" "}
             <span className="text-red-600 font-bold">5 minutos</span> e ganhe até{" "}
             <span className="text-red-600 font-bold">80% OFF</span>!
           </p>
@@ -425,7 +425,7 @@ export default function HomePage() {
 
         <div className="bg-gray-50 p-3 rounded-lg mb-3">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <CheckCircle className="w-5 h-5 text-blue-600" />
+            <CheckCircle className="w-5 h-5 text-red-600" />
             <h2 className="text-base sm:text-lg font-semibold text-gray-900">Como Funciona:</h2>
           </div>
           <div className="space-y-2 text-left text-xs sm:text-sm">
@@ -433,25 +433,25 @@ export default function HomePage() {
               <span className="w-5 h-5 bg-red-600 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">
                 1
               </span>
-              <span>Monte 5 quebra-cabeças de produtos LEGO usando as imagens de referência</span>
+              <span>Monte 3 quebra-cabeças de produtos LEGO usando as imagens de referência;</span>
             </div>
             <div className="flex items-start gap-2">
               <span className="w-5 h-5 bg-red-600 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">
                 2
               </span>
-              <span>Clique nas peças para trocá-las de posição até formar a imagem correta</span>
+              <span>Clique nas peças para trocá-las de posição até formar a imagem correta;</span>
             </div>
             <div className="flex items-start gap-2">
               <span className="w-5 h-5 bg-red-600 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">
                 3
               </span>
-              <span>Você tem apenas 5 minutos para completar todos os 5 quebra-cabeças</span>
+              <span>Você tem 5 minutos para completar os 3 quebra-cabeças;</span>
             </div>
             <div className="flex items-start gap-2">
               <span className="w-5 h-5 bg-red-600 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">
                 4
               </span>
-              <span>Gire a roleta da sorte e ganhe descontos incríveis!</span>
+              <span>Gire a roleta da sorte e ganhe 80% de desconto na loja toda!</span>
             </div>
           </div>
         </div>
