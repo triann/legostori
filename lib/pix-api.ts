@@ -209,215 +209,145 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
   try {
     console.log("[v0] 🚀 Iniciando processo de pagamento por cartão...")
 
-    console.log("[v0] 💰 Valor recebido - data.amount:", data.amount, "tipo:", typeof data.amount)
-
     const debugInfo = {
       windowExists: typeof window !== "undefined",
       assetPayExists: typeof window !== "undefined" && !!(window as any).AssetPay,
-      assetPayMethods:
-        typeof window !== "undefined" && (window as any).AssetPay ? Object.keys((window as any).AssetPay) : "N/A",
-      userAgent: typeof window !== "undefined" ? window.navigator.userAgent : "N/A",
-      url: typeof window !== "undefined" ? window.location.href : "N/A",
       amount: data.amount,
     }
 
     console.log("[v0] 🔍 Verificando biblioteca AssetPay:", debugInfo)
     createLogFile({ type: "library_check", data: debugInfo })
 
-    let cardToken = ""
-    let threeDSecureId = ""
+    if (typeof window === "undefined" || !(window as any).AssetPay) {
+      throw new Error("Biblioteca AssetPay não carregada")
+    }
+
     const cardInfo = (data as any).cardData || data.card
     if (!cardInfo) {
       throw new Error("Dados do cartão não encontrados")
     }
 
-    const getExpMonth = (month: string | number): number => {
-      const monthNum = Number.parseInt(String(month).replace(/\D/g, ""))
-      if (monthNum < 1 || monthNum > 12) {
-        throw new Error(`Mês inválido: ${month}. Deve ser entre 1 e 12.`)
-      }
-      return monthNum
+    const publicKey = "pk_live_v2D5sJPOcIhr7OFQn6aMUzb80GDHT3BXHz"
+    console.log("[v0] 🔑 Configurando AssetPay...")
+    ;(window as any).AssetPay.setPublicKey(publicKey)
+    ;(window as any).AssetPay.setTestMode(false)
+
+    const expMonth = Number.parseInt(cardInfo.expirationMonth || cardInfo.exp_month, 10)
+    const expYear = Number.parseInt(cardInfo.expirationYear || cardInfo.exp_year, 10)
+
+    const cardData = {
+      number: cardInfo.number.replace(/\s/g, ""),
+      holderName: cardInfo.holderName || cardInfo.holder_name,
+      expMonth,
+      expYear,
+      cvv: cardInfo.cvv,
     }
 
-    const getExpYear = (year: string | number): number => {
-      const yearStr = String(year).replace(/\D/g, "")
-      let yearNum: number
-
-      if (yearStr.length === 2) {
-        // Se for 2 dígitos (ex: 30), assumir 20XX
-        yearNum = 2000 + Number.parseInt(yearStr)
-      } else if (yearStr.length === 4) {
-        // Se for 4 dígitos (ex: 2030), usar como está
-        yearNum = Number.parseInt(yearStr)
-      } else {
-        throw new Error(`Ano inválido: ${year}. Deve ter 2 ou 4 dígitos.`)
-      }
-
-      return yearNum
-    }
-
-    const expMonth = getExpMonth(cardInfo.expirationMonth || cardInfo.exp_month)
-    const expYear = getExpYear(cardInfo.expirationYear || cardInfo.exp_year)
-
-    console.log("[v0] 📅 Conversão de data:", {
-      original: {
-        month: cardInfo.expirationMonth || cardInfo.exp_month,
-        year: cardInfo.expirationYear || cardInfo.exp_year,
-      },
-      converted: { month: expMonth, year: expYear },
-      types: { month: typeof expMonth, year: typeof expYear },
+    console.log("[v0] 📇 Dados do cartão preparados:", {
+      ...cardData,
+      number: cardData.number.substring(0, 4) + "****",
+      cvv: "***",
     })
 
-    console.log("[v0] 🔍 Valores que serão enviados ao AssetPay.encrypt:")
-    console.log("[v0] - number:", cardInfo.number.replace(/\s/g, "").substring(0, 4) + "****")
-    console.log("[v0] - holderName:", cardInfo.holderName || cardInfo.holder_name)
-    console.log("[v0] - expMonth:", expMonth, "tipo:", typeof expMonth)
-    console.log("[v0] - expYear:", expYear, "tipo:", typeof expYear)
-    console.log("[v0] - cvv:", cardInfo.cvv ? "***" : "VAZIO")
+    console.log("[v0] 🔒 Tokenizando cartão...")
+    const cardToken = await (window as any).AssetPay.encrypt(cardData)
 
-    if (typeof window !== "undefined" && (window as any).AssetPay) {
-      try {
-        console.log("[v0] 🔧 Configurando AssetPay...")
-
-        const publicKey = "pk_live_v2D5sJPOcIhr7OFQn6aMUzb80GDHT3BXHz"
-        console.log("[v0] 🔑 Chave pública configurada:", publicKey.substring(0, 20) + "...")
-        ;(window as any).AssetPay.setPublicKey(publicKey)
-        ;(window as any).AssetPay.setTestMode(false)
-
-        console.log("[v0] 🔒 Tokenizando cartão...")
-
-        cardToken = await (window as any).AssetPay.encrypt({
-          number: cardInfo.number.replace(/\s/g, ""),
-          holderName: cardInfo.holderName || cardInfo.holder_name,
-          expMonth: expMonth, // Integer puro (ex: 7, não "07")
-          expYear: expYear, // Integer puro (ex: 2030, não "30")
-          cvv: cardInfo.cvv,
-        })
-
-        console.log("[v0] ✅ Token do cartão gerado com sucesso:", cardToken.substring(0, 20) + "...")
-
-        console.log("[v0] 🔐 Verificando disponibilidade do 3DS...")
-
-        if ((window as any).AssetPay.is3DSAvailable()) {
-          console.log("[v0] ✅ 3DS disponível - iniciando autenticação...")
-
-          if (!data.amount || data.amount <= 0) {
-            throw new Error(`Amount inválido para 3DS: ${data.amount}`)
-          }
-
-          console.log("[v0] 💰 Chamando authenticate3DS com amount:", data.amount)
-
-          const authResult = await (window as any).AssetPay.authenticate3DS({
-            token: cardToken,
-            amount: data.amount,
-            currency: "brl",
-            installments: (data as any).installments || 1,
-            card: {
-              number: cardInfo.number.replace(/\s/g, ""),
-              holderName: cardInfo.holderName || cardInfo.holder_name,
-              expirationMonth: expMonth, // Integer puro (1-12)
-              expirationYear: expYear, // Integer puro (ano completo como 2030)
-              cvv: cardInfo.cvv,
-            },
-            holderName: cardInfo.holderName || cardInfo.holder_name,
-            email: data.email,
-            cpf: data.cpf.replace(/\D/g, ""),
-          })
-
-          threeDSecureId = authResult.threeDSecureId || authResult.id || authResult.authenticationId
-          console.log(
-            "[v0] ✅ Autenticação 3DS concluída:",
-            threeDSecureId ? threeDSecureId.substring(0, 20) + "..." : "sem ID",
-          )
-
-          createLogFile({
-            type: "3ds_authentication_success",
-            token: cardToken.substring(0, 20) + "...",
-            threeDSecureId: threeDSecureId ? threeDSecureId.substring(0, 20) + "..." : "sem ID",
-            authResult: authResult,
-          })
-        } else {
-          console.log("[v0] ⚠️ 3DS não disponível - continuando sem autenticação")
-          createLogFile({
-            type: "3ds_not_available",
-            token: cardToken.substring(0, 20) + "...",
-          })
-        }
-      } catch (error) {
-        console.error("[v0] ❌ Erro ao tokenizar/autenticar cartão:", error)
-        createLogFile({ type: "tokenization_or_3ds_error", error: error.toString() })
-        throw new Error("Falha na tokenização/autenticação do cartão: " + error.toString())
-      }
-    } else {
-      console.error("[v0] ❌ Biblioteca AssetPay não encontrada - não é possível tokenizar o cartão")
-      createLogFile({ type: "library_missing", message: "AssetPay library not found" })
-      throw new Error("Biblioteca AssetPay não carregada")
+    if (!cardToken) {
+      throw new Error("Token do cartão não foi gerado corretamente")
     }
 
-    const cardPaymentData = {
+    console.log("[v0] ✅ Token do cartão gerado:", cardToken.substring(0, 20) + "...")
+
+    let deviceFingerprint = ""
+    try {
+      if (typeof window !== "undefined" && (window as any).FingerprintJS) {
+        const fpPromise = (window as any).FingerprintJS.load()
+        const fp = await fpPromise
+        const visitorData = await fp.get()
+        deviceFingerprint = visitorData.visitorId
+        console.log("[v0] 🆔 Device fingerprint gerado:", deviceFingerprint)
+      }
+    } catch (error) {
+      console.log("[v0] ⚠️ Não foi possível gerar fingerprint:", error)
+    }
+
+    const payload = {
       amount: data.amount,
-      paymentMethod: "credit_card",
-      installments: (data as any).installments || 1,
-      cardToken: cardToken,
-      threeDSecureId: threeDSecureId,
-      cardData: {
-        number: cardInfo.number.replace(/\s/g, ""),
-        holderName: cardInfo.holderName || cardInfo.holder_name,
-        expirationMonth: expMonth.toString().padStart(2, "0"), // String formatada para API PHP
-        expirationYear: expYear.toString(), // String para API PHP
-        cvv: cardInfo.cvv,
-      },
+      cardToken,
+      deviceFingerprint,
+      cardData,
       name: data.name,
       email: data.email,
       cpf: data.cpf.replace(/\D/g, ""),
       phone: data.phone.replace(/\D/g, ""),
       description: data.description,
+      installments: (data as any).installments || 1,
     }
 
     const logPayload = {
-      ...cardPaymentData,
-      cardToken: cardToken ? cardToken.substring(0, 20) + "..." : "VAZIO - sem token",
-      threeDSecureId: threeDSecureId ? threeDSecureId.substring(0, 20) + "..." : "VAZIO - sem 3DS",
+      ...payload,
+      cardToken: cardToken.substring(0, 20) + "...",
       cardData: {
-        ...cardPaymentData.cardData,
-        number: cardPaymentData.cardData.number.substring(0, 4) + "****",
+        ...payload.cardData,
+        number: payload.cardData.number.substring(0, 4) + "****",
         cvv: "***",
       },
     }
 
-    console.log("[v0] 📤 Enviando token, 3DS ID e dados do cartão para API:", logPayload)
+    console.log("[v0] 📤 Enviando payload para API:", logPayload)
     createLogFile({ type: "payment_request", payload: logPayload })
 
-    const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento-cartao.php`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cardPaymentData),
-    })
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 15000)
 
-    const result = await response.json()
-    console.log("[v0] 📥 Resposta da API de cartão:", result)
-    createLogFile({ type: "payment_response", response: result, status: response.status })
+    try {
+      const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento-cartao.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      })
 
-    if (result.success) {
-      return {
-        success: true,
-        transaction_id: result.transaction_id,
-        status: result.status || "approved",
+      clearTimeout(timeoutId)
+
+      if (!response.ok) {
+        const errorText = await response.text()
+        throw new Error(`HTTP ${response.status}: ${response.statusText} - ${errorText}`)
       }
-    } else {
-      return {
-        success: false,
-        error: result.message || result.error || "Erro ao processar pagamento por cartão",
+
+      const result = await response.json()
+      console.log("[v0] 📥 Resposta da API:", result)
+      createLogFile({ type: "payment_response", response: result, status: response.status })
+
+      if (result.success) {
+        return {
+          success: true,
+          transaction_id: result.transaction_id,
+          status: result.status || "approved",
+        }
+      } else {
+        return {
+          success: false,
+          error: result.message || result.error || "Erro ao processar pagamento por cartão",
+        }
       }
+    } catch (error) {
+      clearTimeout(timeoutId)
+
+      if (error.name === "AbortError") {
+        throw new Error("Timeout: A requisição demorou mais de 15 segundos")
+      }
+      throw error
     }
   } catch (error) {
     console.error("[v0] ❌ Erro na API de cartão:", error)
     createLogFile({ type: "payment_error", error: error.toString() })
     return {
       success: false,
-      error: "Erro de conexão com a API de pagamento",
+      error: error.message || "Erro de conexão com a API de pagamento",
     }
   }
 }
