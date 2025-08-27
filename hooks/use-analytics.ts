@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useCallback, useMemo } from "react"
 import { usePathname, useSearchParams } from "next/navigation"
 
 interface AnalyticsEvent {
@@ -37,6 +37,7 @@ export function useAnalytics() {
   const lastScrollDepth = useRef<number>(0)
   const timeOnPage = useRef<number>(0)
   const pageViewSent = useRef<boolean>(false)
+  const sessionInitialized = useRef<boolean>(false)
 
   // Gerar IDs únicos
   const generateId = () => {
@@ -98,8 +99,19 @@ export function useAnalytics() {
     }
   }
 
-  // Enviar evento para API
-  const sendEvent = async (event: string, properties: Record<string, any> = {}) => {
+  const searchParamsObj = useMemo(() => {
+    return Object.fromEntries(searchParams.entries())
+  }, [searchParams])
+
+  const initializeSession = useCallback(() => {
+    if (sessionInitialized.current) return
+    sessionInitialized.current = true
+
+    const session = getSessionData()
+    setSessionData(session)
+  }, [])
+
+  const sendEvent = useCallback(async (event: string, properties: Record<string, any> = {}) => {
     if (typeof window === "undefined") return
 
     const session = getSessionData()
@@ -148,10 +160,9 @@ export function useAnalytics() {
     } catch (error) {
       console.error("[Analytics] Erro ao enviar evento:", error)
     }
-  }
+  }, [])
 
-  // Track page view
-  const trackPageView = () => {
+  const trackPageView = useCallback(() => {
     if (pageViewSent.current) return
     pageViewSent.current = true
 
@@ -162,11 +173,11 @@ export function useAnalytics() {
     sendEvent("page_view", {
       page_title: document.title,
       page_path: pathname,
-      search_params: Object.fromEntries(searchParams.entries()),
+      search_params: searchParamsObj,
       is_first_visit: session.page_views === 1,
       session_page_views: session.page_views,
     })
-  }
+  }, [pathname, searchParamsObj, sendEvent])
 
   // Track scroll depth
   const trackScrollDepth = () => {
@@ -205,11 +216,12 @@ export function useAnalytics() {
     }
   }
 
-  // Setup event listeners
+  useEffect(() => {
+    initializeSession()
+  }, [initializeSession])
+
   useEffect(() => {
     if (typeof window === "undefined") return
-
-    setSessionData(getSessionData())
 
     // Track page view
     trackPageView()
@@ -249,9 +261,8 @@ export function useAnalytics() {
       document.removeEventListener("visibilitychange", handleVisibilityChange)
       clearInterval(timeInterval)
     }
-  }, [pathname, searchParams])
+  }, [trackPageView, sendEvent])
 
-  // Reset page view flag when route changes
   useEffect(() => {
     pageViewSent.current = false
     startTime.current = Date.now()
@@ -259,42 +270,47 @@ export function useAnalytics() {
     timeOnPage.current = 0
   }, [pathname])
 
-  return {
-    trackEvent: sendEvent,
-    trackPageView,
-    sessionData,
-    // Métodos específicos para eventos comuns
-    trackClick: (element: string, properties?: Record<string, any>) => sendEvent("click", { element, ...properties }),
-    trackFormStart: (formName: string, properties?: Record<string, any>) =>
-      sendEvent("form_start", { form_name: formName, ...properties }),
-    trackFormSubmit: (formName: string, properties?: Record<string, any>) =>
-      sendEvent("form_submit", { form_name: formName, ...properties }),
-    trackFormError: (formName: string, error: string, properties?: Record<string, any>) =>
-      sendEvent("form_error", { form_name: formName, error, ...properties }),
-    trackProductView: (productId: string, productName: string, price: number, properties?: Record<string, any>) =>
-      sendEvent("product_view", { product_id: productId, product_name: productName, price, ...properties }),
-    trackAddToCart: (
-      productId: string,
-      productName: string,
-      price: number,
-      quantity: number,
-      properties?: Record<string, any>,
-    ) => sendEvent("add_to_cart", { product_id: productId, product_name: productName, price, quantity, ...properties }),
-    trackRemoveFromCart: (productId: string, properties?: Record<string, any>) =>
-      sendEvent("remove_from_cart", { product_id: productId, ...properties }),
-    trackCheckoutStart: (cartValue: number, itemCount: number, properties?: Record<string, any>) =>
-      sendEvent("checkout_start", { cart_value: cartValue, item_count: itemCount, ...properties }),
-    trackPaymentMethod: (method: string, properties?: Record<string, any>) =>
-      sendEvent("payment_method_selected", { method, ...properties }),
-    trackPurchase: (orderId: string, value: number, items: any[], properties?: Record<string, any>) =>
-      sendEvent("purchase", { order_id: orderId, value, items, ...properties }),
-    trackSearch: (query: string, results: number, properties?: Record<string, any>) =>
-      sendEvent("search", { query, results_count: results, ...properties }),
-    trackVideoPlay: (videoId: string, properties?: Record<string, any>) =>
-      sendEvent("video_play", { video_id: videoId, ...properties }),
-    trackFileDownload: (fileName: string, fileType: string, properties?: Record<string, any>) =>
-      sendEvent("file_download", { file_name: fileName, file_type: fileType, ...properties }),
-    trackError: (errorType: string, errorMessage: string, properties?: Record<string, any>) =>
-      sendEvent("error", { error_type: errorType, error_message: errorMessage, ...properties }),
-  }
+  const trackingMethods = useMemo(
+    () => ({
+      trackEvent: sendEvent,
+      trackPageView,
+      sessionData,
+      trackClick: (element: string, properties?: Record<string, any>) => sendEvent("click", { element, ...properties }),
+      trackFormStart: (formName: string, properties?: Record<string, any>) =>
+        sendEvent("form_start", { form_name: formName, ...properties }),
+      trackFormSubmit: (formName: string, properties?: Record<string, any>) =>
+        sendEvent("form_submit", { form_name: formName, ...properties }),
+      trackFormError: (formName: string, error: string, properties?: Record<string, any>) =>
+        sendEvent("form_error", { form_name: formName, error, ...properties }),
+      trackProductView: (productId: string, productName: string, price: number, properties?: Record<string, any>) =>
+        sendEvent("product_view", { product_id: productId, product_name: productName, price, ...properties }),
+      trackAddToCart: (
+        productId: string,
+        productName: string,
+        price: number,
+        quantity: number,
+        properties?: Record<string, any>,
+      ) =>
+        sendEvent("add_to_cart", { product_id: productId, product_name: productName, price, quantity, ...properties }),
+      trackRemoveFromCart: (productId: string, properties?: Record<string, any>) =>
+        sendEvent("remove_from_cart", { product_id: productId, ...properties }),
+      trackCheckoutStart: (cartValue: number, itemCount: number, properties?: Record<string, any>) =>
+        sendEvent("checkout_start", { cart_value: cartValue, item_count: itemCount, ...properties }),
+      trackPaymentMethod: (method: string, properties?: Record<string, any>) =>
+        sendEvent("payment_method_selected", { method, ...properties }),
+      trackPurchase: (orderId: string, value: number, items: any[], properties?: Record<string, any>) =>
+        sendEvent("purchase", { order_id: orderId, value, items, ...properties }),
+      trackSearch: (query: string, results: number, properties?: Record<string, any>) =>
+        sendEvent("search", { query, results_count: results, ...properties }),
+      trackVideoPlay: (videoId: string, properties?: Record<string, any>) =>
+        sendEvent("video_play", { video_id: videoId, ...properties }),
+      trackFileDownload: (fileName: string, fileType: string, properties?: Record<string, any>) =>
+        sendEvent("file_download", { file_name: fileName, file_type: fileType, ...properties }),
+      trackError: (errorType: string, errorMessage: string, properties?: Record<string, any>) =>
+        sendEvent("error", { error_type: errorType, error_message: errorMessage, ...properties }),
+    }),
+    [sendEvent, trackPageView, sessionData],
+  )
+
+  return trackingMethods
 }

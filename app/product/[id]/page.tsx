@@ -1,7 +1,11 @@
+"use client"
+
 import { Header } from "@/components/header"
 import { ProductDetails } from "@/components/product-details"
 import { Footer } from "@/components/footer"
 import { notFound } from "next/navigation"
+import { useAnalytics } from "@/hooks/use-analytics"
+import { useEffect } from "react"
 
 export const products = {
   "1": {
@@ -15447,24 +15451,58 @@ export const products = {
   },
 }
 
-export default function ProductPage({ params, searchParams }) {
-  const product = products[params.id]
+interface ProductPageProps {
+  params: { id: string }
+  searchParams: { discount?: string }
+}
 
-  // Extract discount from URL parameters
-  const discount = searchParams?.discount ? Number(searchParams.discount) : 0
+export default function ProductPage({ params, searchParams }: ProductPageProps) {
+  const { trackEvent } = useAnalytics()
+  const product = products[params.id as keyof typeof products]
+  const discount = searchParams?.discount ? Number.parseInt(searchParams.discount) : 0
 
-  console.log("[v0] ProductPage - Discount from URL:", discount)
-  console.log("[v0] ProductPage - SearchParams:", searchParams)
+  useEffect(() => {
+    if (product) {
+      trackEvent("product_page_view", {
+        product_id: product.id,
+        product_name: product.name,
+        product_price: product.price,
+        product_category: product.categories?.[0] || "unknown",
+        discount_applied: discount,
+        page: "product_detail",
+        timestamp: Date.now(),
+      })
+
+      const startTime = Date.now()
+
+      const handleBeforeUnload = () => {
+        const timeSpent = Date.now() - startTime
+        trackEvent("product_time_spent", {
+          product_id: product.id,
+          product_name: product.name,
+          time_spent_seconds: Math.round(timeSpent / 1000),
+          page: "product_detail",
+        })
+      }
+
+      window.addEventListener("beforeunload", handleBeforeUnload)
+
+      return () => {
+        window.removeEventListener("beforeunload", handleBeforeUnload)
+        handleBeforeUnload()
+      }
+    }
+  }, [product, discount, trackEvent])
 
   if (!product) {
     notFound()
   }
 
   return (
-    <>
+    <div className="min-h-screen bg-white">
       <Header />
       <ProductDetails product={product} discount={discount} />
       <Footer />
-    </>
+    </div>
   )
 }
