@@ -248,11 +248,13 @@ export default function CheckoutPage() {
       setShippingOptions([storeOption])
     } else {
       if (onlyFreeItems) {
-        setShippingOptions([{ type: "Correios Sedex", price: 25.91, days: "de 5-7 dias úteis" }])
+        setShippingOptions([{ type: "Sedex", price: 25.91, days: "Em até 10 dias úteis" }])
+        setShippingOptions([{ type: "Azul Express", price: 33.59, days: "Em até 3 dias úteis" }])
       } else {
         setShippingOptions([
-          { type: "Correios Pac", price: 0, days: "de 5-7 dias úteis." },
-          { type: "JadLog Transportadora", price: 25.91, days: "Chegará amanhã." },
+          { type: "Correios", price: 0, days: "Em até 10 dias úteis" },
+          { type: "PAC", price: 25.91, days: "Em até 7 dias úteis" },
+          { type: "Azul Express", price: 33.59, days: "Em até 3 dias úteis" },
         ])
       }
     }
@@ -310,11 +312,13 @@ export default function CheckoutPage() {
       setShippingOptions([storeOption])
     } else {
       if (onlyFreeItems) {
-        setShippingOptions([{ type: "Correios Sedex", price: 25.91, days: "de 5-7 dias úteis" }])
+        setShippingOptions([{ type: "PAC", price: 25.91, days: "Em até 10 dias úteis" }])
+        setShippingOptions([{ type: "Azul Express", price: 33.59, days: "Em até 3 dias úteis" }])
       } else {
         setShippingOptions([
-          { type: "Correios Pac", price: 0, days: "de 5-7 dias úteis." },
-          { type: "JadLog Transportadora", price: 25.91, days: "Chegará amanhã." },
+          { type: "PAC", price: 0, days: "Em até 10 dias úteis" },
+          { type: "Sedex", price: 25.91, days: "Em até 7 dias úteis" },
+          { type: "Azul Express", price: 33.59, days: "Em até 3 dias úteis" },
         ])
       }
     }
