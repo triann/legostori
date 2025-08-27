@@ -74,10 +74,13 @@ export default function HomePage() {
   ]
 
   const handleStartPuzzle = () => {
-    analytics.trackEvent("puzzle_start", {
+    analytics.trackEvent("puzzle_start_clicked", {
       puzzle_type: "lego_challenge",
       total_puzzles: puzzles.length,
       time_limit: 300,
+      page: "homepage",
+      button_location: "main_cta",
+      user_session_time: Date.now() - (window.performance?.timing?.navigationStart || Date.now()),
     })
 
     setShowLoading(true)
@@ -86,6 +89,8 @@ export default function HomePage() {
     setTotalErrors(0)
     setCompletionTime(0)
 
+    const loadingStartTime = Date.now()
+
     let messageIndex = 0
     setLoadingMessage(loadingMessages[0])
 
@@ -93,11 +98,28 @@ export default function HomePage() {
       messageIndex++
       if (messageIndex < loadingMessages.length) {
         setLoadingMessage(loadingMessages[messageIndex])
+
+        analytics.trackEvent("puzzle_loading_step", {
+          step: messageIndex,
+          message: loadingMessages[messageIndex],
+          loading_time: Date.now() - loadingStartTime,
+        })
       } else {
         clearInterval(messageInterval)
+
+        analytics.trackEvent("puzzle_loading_complete", {
+          total_loading_time: Date.now() - loadingStartTime,
+          ready_to_play: true,
+        })
+
         setTimeout(() => {
           setShowLoading(false)
           setShowPuzzle(true)
+
+          analytics.trackEvent("puzzle_game_started", {
+            puzzle_number: currentPuzzle + 1,
+            game_start_time: Date.now(),
+          })
         }, 500)
       }
     }, 1500)
@@ -108,7 +130,7 @@ export default function HomePage() {
     moves: number,
     errors: number,
   ) => {
-    analytics.trackEvent("puzzle_complete", {
+    analytics.trackEvent("puzzle_completed", {
       puzzle_number: currentPuzzle + 1,
       moves_count: moves || 0,
       errors_count: errors || 0,
@@ -116,6 +138,8 @@ export default function HomePage() {
       result_value: result.value,
       product_name: result.productName,
       time_taken: 300 - timeLeft,
+      completion_efficiency: Math.max(0, 100 - (moves || 0) * 2 - (errors || 0) * 5),
+      time_remaining: timeLeft,
     })
 
     setTotalMoves((prev) => prev + (moves || 0))
@@ -126,6 +150,13 @@ export default function HomePage() {
       setShowConfetti(false)
 
       if (currentPuzzle < puzzles.length - 1) {
+        analytics.trackEvent("puzzle_transition_started", {
+          from_puzzle: currentPuzzle + 1,
+          to_puzzle: currentPuzzle + 2,
+          total_moves_so_far: totalMoves + (moves || 0),
+          total_errors_so_far: totalErrors + (errors || 0),
+        })
+
         setShowTransition(true)
         let messageIndex = 0
         setTransitionMessage(transitionMessages[0])
@@ -139,10 +170,27 @@ export default function HomePage() {
             setTimeout(() => {
               setShowTransition(false)
               setCurrentPuzzle(currentPuzzle + 1)
+
+              analytics.trackEvent("next_puzzle_started", {
+                puzzle_number: currentPuzzle + 2,
+                previous_puzzle_performance: {
+                  moves: moves || 0,
+                  errors: errors || 0,
+                  time_taken: 300 - timeLeft,
+                },
+              })
             }, 500)
           }
-        }, 1000) // 1 segundo cada mensagem
+        }, 1000)
       } else {
+        analytics.trackEvent("all_puzzles_completed", {
+          total_completion_time: 300 - timeLeft,
+          total_moves: totalMoves + (moves || 0),
+          total_errors: totalErrors + (errors || 0),
+          final_result: result,
+          performance_rating: getPerformanceRating().rating,
+        })
+
         setTimerActive(false)
         setCompletionTime(300 - timeLeft)
         setPuzzleResult(result)
@@ -162,12 +210,19 @@ export default function HomePage() {
         total_moves: totalMoves,
         total_errors: totalErrors,
         performance_rating: getPerformanceRating().rating,
+        ready_for_roulette: true,
       })
 
       setShowPerformance(false)
       setShowCpfConfirmation(true)
 
       setTimeout(() => {
+        analytics.trackEvent("redirecting_to_roulette", {
+          user_cpf_provided: true,
+          discount_earned: puzzleResult?.value || 80,
+          total_journey_time: Date.now() - (window.performance?.timing?.navigationStart || Date.now()),
+        })
+
         localStorage.setItem("puzzleCompleted", "true")
         localStorage.setItem("discountEarned", puzzleResult?.value.toString() || "80")
         localStorage.setItem("discountType", puzzleResult?.type || "discount")
@@ -176,12 +231,21 @@ export default function HomePage() {
         }
         localStorage.setItem("userCpf", cpf)
         setShowCpfConfirmation(false)
-        window.location.href = "/roulette" // Assuming you have a roulette page
+        window.location.href = "/roulette"
       }, 3000)
     }
   }
 
   const handleClosePuzzle = () => {
+    analytics.trackEvent("puzzle_abandoned", {
+      puzzle_number: currentPuzzle + 1,
+      time_spent: 300 - timeLeft,
+      moves_made: totalMoves,
+      errors_made: totalErrors,
+      abandonment_reason: "user_closed",
+      completion_percentage: Math.round(((300 - timeLeft) / 300) * 100),
+    })
+
     setTimerActive(false)
     setShowPuzzle(false)
     setCurrentPuzzle(0)
@@ -491,10 +555,15 @@ export default function HomePage() {
 
         <button
           onClick={() => {
-            trackButtonClick("start_puzzle_challenge", {
+            analytics.trackEvent("start_puzzle_button_clicked", {
               page: "homepage",
               challenge_type: "lego_puzzle",
+              button_text: "Começar Desafio",
+              user_scroll_position: window.scrollY,
+              viewport_height: window.innerHeight,
+              time_on_page: Date.now() - (window.performance?.timing?.navigationStart || Date.now()),
             })
+
             handleStartPuzzle()
           }}
           className="w-full text-base px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all hover:scale-105 animate-pulse shadow-lg flex items-center justify-center gap-2"

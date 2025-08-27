@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { X, Clock, Zap, Gift, Target, RotateCcw } from "lucide-react"
+import { X, Clock, Gift, Target, RotateCcw } from "lucide-react"
+import { useAnalytics } from "@/hooks/use-analytics"
 
 interface PuzzlePiece {
   id: number
@@ -34,8 +35,8 @@ interface PuzzleGameProps {
   discount: number
   originalPrice: number
   discountedPrice: number
-  currentPuzzle: number // Adicionado prop para número do quebra-cabeça atual
-  totalPuzzles: number // Adicionado prop para total de quebra-cabeças
+  currentPuzzle: number // Valor padrão
+  totalPuzzles: number // Valor padrão
 }
 
 export function PuzzleGame({
@@ -201,12 +202,34 @@ export function PuzzleGame({
     window.scrollTo(0, 0)
   }, [])
 
+  const analytics = useAnalytics()
+
   const handlePieceClick = (pieceId: number) => {
     if (selectedPiece === null) {
       setSelectedPiece(pieceId)
+
+      analytics.trackEvent("puzzle_piece_selected", {
+        piece_id: pieceId,
+        puzzle_number: currentPuzzle,
+        current_moves: moves,
+        time_elapsed: timeLimit - timeRemaining,
+      })
     } else if (selectedPiece === pieceId) {
       setSelectedPiece(null)
+
+      analytics.trackEvent("puzzle_piece_deselected", {
+        piece_id: pieceId,
+        puzzle_number: currentPuzzle,
+      })
     } else {
+      analytics.trackEvent("puzzle_pieces_swap_attempt", {
+        piece1_id: selectedPiece,
+        piece2_id: pieceId,
+        puzzle_number: currentPuzzle,
+        move_number: moves + 1,
+        time_elapsed: timeLimit - timeRemaining,
+      })
+
       setAnimatingPieces(new Set([selectedPiece, pieceId]))
 
       setTimeout(() => {
@@ -222,10 +245,26 @@ export function PuzzleGame({
         const piece2Correct = newPieces[piece2Index].correctPosition === newPieces[piece2Index].currentPosition
 
         if (!piece1Correct && !piece2Correct) {
+          analytics.trackEvent("puzzle_incorrect_move", {
+            piece1_id: selectedPiece,
+            piece2_id: pieceId,
+            puzzle_number: currentPuzzle,
+            move_number: moves + 1,
+            error_count: 1,
+          })
+
           setErrorPieces(new Set([selectedPiece, pieceId]))
           setTimeout(() => {
             setErrorPieces(new Set())
           }, 600)
+        } else {
+          analytics.trackEvent("puzzle_correct_move", {
+            piece1_id: selectedPiece,
+            piece2_id: pieceId,
+            puzzle_number: currentPuzzle,
+            move_number: moves + 1,
+            pieces_correctly_placed: [piece1Correct, piece2Correct].filter(Boolean).length,
+          })
         }
 
         setPieces(newPieces)
@@ -345,6 +384,15 @@ export function PuzzleGame({
   const spinRoulette = () => {
     if (isSpinning) return
 
+    analytics.trackEvent("roulette_spin_started", {
+      spin_number: currentSpin,
+      puzzle_performance: {
+        total_moves: moves,
+        completion_time: timeLimit - timeRemaining,
+      },
+      expected_prize: currentSpin === 1 ? "70% OFF" : "PRODUTO GRÁTIS",
+    })
+
     setIsSpinning(true)
 
     let selectedPrize: RouletteOption
@@ -372,13 +420,31 @@ export function PuzzleGame({
       setIsSpinning(false)
       setFinalPrize(selectedPrize)
 
+      analytics.trackEvent("roulette_spin_completed", {
+        spin_number: currentSpin,
+        prize_won: selectedPrize.label,
+        prize_value: selectedPrize.discount,
+        spin_duration: 3000,
+      })
+
       if (currentSpin === 1) {
         setShowSecondChance(true)
+
+        analytics.trackEvent("second_chance_offered", {
+          first_prize: selectedPrize.label,
+          first_prize_value: selectedPrize.discount,
+        })
       }
     }, 3000)
   }
 
   const trySecondSpin = () => {
+    analytics.trackEvent("second_chance_taken", {
+      abandoned_prize: finalPrize?.label,
+      abandoned_value: finalPrize?.discount,
+      risk_taken: true,
+    })
+
     setCurrentSpin(2)
     setFinalPrize(null)
     setShowSecondChance(false)
@@ -386,11 +452,25 @@ export function PuzzleGame({
   }
 
   const claimFirstPrize = () => {
+    analytics.trackEvent("first_prize_claimed", {
+      prize_claimed: "70% OFF",
+      prize_value: 70,
+      second_chance_declined: true,
+    })
+
     onComplete({ type: "discount", value: 70 }, moves, 0)
   }
 
   const handleClaimRoulettePrize = () => {
     if (finalPrize) {
+      analytics.trackEvent("final_prize_claimed", {
+        prize_type: finalPrize.discount === 100 ? "free_product" : "discount",
+        prize_value: finalPrize.discount,
+        prize_label: finalPrize.label,
+        total_spins_used: currentSpin,
+        journey_completed: true,
+      })
+
       if (finalPrize.discount === 100) {
         onComplete({ type: "free", value: 100, productName: productName }, moves, 0)
       } else {
@@ -399,13 +479,12 @@ export function PuzzleGame({
     }
   }
 
-  const getRoulettePrice = () => {
-    if (!finalPrize) return originalPrice
-    if (finalPrize.discount === 100) return 0
-    return originalPrice * (1 - finalPrize.discount / 100)
-  }
-
   const goToRoulette = () => {
+    analytics.trackEvent("transition_to_roulette", {
+      puzzle_completed: true,
+      ready_for_roulette: true,
+    })
+
     setShowRoulette(true)
     window.scrollTo(0, 0)
   }
@@ -540,6 +619,10 @@ export function PuzzleGame({
         </div>
       </div>
     )
+  }
+
+  const getRoulettePrice = () => {
+    return originalPrice - (originalPrice * finalPrize?.discount!) / 100
   }
 
   return (

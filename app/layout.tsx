@@ -53,6 +53,23 @@ html {
         />
 
         <Script src="https://api.assetpagamentos.com.br/v1/js" strategy="afterInteractive" />
+
+        <Script
+          id="utmify-pixel"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                var img = document.createElement('img');
+                img.src = 'https://utmify.com.br/pixel/pixel.php?id=1234';
+                img.style.display = 'none';
+                document.body.appendChild(img);
+              })();
+            `,
+          }}
+        />
+
+        <Script src="https://utmify.com.br/js/utm-capture.js" strategy="afterInteractive" />
       </body>
     </html>
   )

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import { useAnalytics } from "@/hooks/use-analytics"
 
 export default function RoulettePage() {
   const [attempt, setAttempt] = useState(0)
@@ -12,6 +13,8 @@ export default function RoulettePage() {
   const [hasSeenTerms, setHasSeenTerms] = useState(false)
   const [currentNotification, setCurrentNotification] = useState(0)
   const router = useRouter()
+
+  const analytics = useAnalytics()
 
   const notifications = [
     { name: "Pedro Oliveira", discount: "75%", image: "https://i.postimg.cc/RhB8zCK5/24.jpg" },
@@ -27,6 +30,14 @@ export default function RoulettePage() {
   ]
 
   useEffect(() => {
+    analytics.trackEvent("roulette_page_entered", {
+      page: "roulette",
+      has_seen_terms: hasSeenTerms,
+      current_attempt: attempt,
+      referrer: document.referrer,
+      time_entered: Date.now(),
+    })
+
     const interval = setInterval(() => {
       setCurrentNotification((prev) => (prev + 1) % notifications.length)
     }, 9000)
@@ -38,20 +49,49 @@ export default function RoulettePage() {
     if (isSpinning) return
 
     if (!hasSeenTerms) {
+      analytics.trackEvent("roulette_spin_blocked", {
+        reason: "terms_not_accepted",
+        attempt_number: attempt + 1,
+        time_on_page: Date.now() - (window.performance?.timing?.navigationStart || Date.now()),
+      })
+
       setShowTermsModal(true)
       return
     }
+
+    analytics.trackEvent("roulette_spin_started", {
+      attempt_number: attempt + 1,
+      is_first_attempt: attempt === 0,
+      has_seen_terms: hasSeenTerms,
+      spin_start_time: Date.now(),
+      expected_outcome: attempt === 0 ? "80_percent_discount" : "100_percent_free",
+    })
 
     setIsSpinning(true)
 
     if (attempt === 0) {
       setTimeout(() => {
+        analytics.trackEvent("roulette_first_attempt_completed", {
+          result: "80_percent_discount",
+          spin_duration: 10000,
+          next_action_available: "claim_or_risk",
+          time_to_result: 10000,
+        })
+
         setShowTryAgainPopup(true)
         setIsSpinning(false)
         setAttempt((prev) => prev + 1)
       }, 10000)
     } else {
       setTimeout(() => {
+        analytics.trackEvent("roulette_second_attempt_completed", {
+          result: "100_percent_free",
+          spin_duration: 10000,
+          final_outcome: "product_free",
+          total_attempts: 2,
+          journey_completed: true,
+        })
+
         if (typeof window !== "undefined" && window.confetti) {
           window.confetti({
             particleCount: 100,
@@ -67,25 +107,64 @@ export default function RoulettePage() {
   }
 
   const handleAcceptTerms = () => {
+    analytics.trackEvent("roulette_terms_accepted", {
+      time_to_accept: Date.now() - (window.performance?.timing?.navigationStart || Date.now()),
+      terms_modal_shown: true,
+      ready_to_spin: true,
+    })
+
     setShowTermsModal(false)
     setHasSeenTerms(true)
   }
 
   const handleTryAgain = () => {
+    analytics.trackEvent("roulette_popup_dismissed", {
+      popup_type: "try_again",
+      action_taken: "dismiss",
+      discount_abandoned: 80,
+    })
+
     setShowTryAgainPopup(false)
   }
 
   const handleClaim80Discount = () => {
+    analytics.trackEvent("roulette_discount_claimed", {
+      discount_claimed: 80,
+      decision: "claim_80_percent",
+      second_chance_declined: true,
+      risk_aversion: true,
+      final_discount: 80,
+      redirect_to: "/products",
+    })
+
     setShowTryAgainPopup(false)
     router.push("/products?discount=80")
   }
 
   const handleClaimPrize = () => {
+    analytics.trackEvent("roulette_final_prize_claimed", {
+      final_prize: "product_free",
+      discount_value: 100,
+      total_attempts_used: 2,
+      journey_completed: true,
+      conversion_achieved: true,
+      redirect_to: "/products",
+    })
+
     setShowWinPopup(false)
     router.push("/products?discount=100")
   }
 
   const handleRisk = () => {
+    analytics.trackEvent("roulette_risk_taken", {
+      decision: "risk_all",
+      abandoned_discount: 80,
+      risk_tolerance: "high",
+      second_attempt_started: true,
+      potential_gain: "product_free",
+      potential_loss: "all_discount",
+    })
+
     setShowTryAgainPopup(false)
     // Inicia automaticamente a segunda tentativa da roleta
     handleSpin()
@@ -122,7 +201,21 @@ export default function RoulettePage() {
           <img src="https://i.ibb.co/r97hXK6/button-gire.png" id="roleta3" />
         </div>
         <div className="button-roulette">
-          <button onClick={handleSpin} disabled={isSpinning} id="button-cta" className="runSpin">
+          <button
+            onClick={() => {
+              analytics.trackClick("roulette_spin_button", {
+                button_text: isSpinning ? "GIRANDO..." : "GIRE PARA GANHAR",
+                is_spinning: isSpinning,
+                attempt_number: attempt + 1,
+                has_seen_terms: hasSeenTerms,
+              })
+
+              handleSpin()
+            }}
+            disabled={isSpinning}
+            id="button-cta"
+            className="runSpin"
+          >
             {isSpinning ? "GIRANDO..." : "GIRE PARA GANHAR"}
           </button>
         </div>
@@ -205,7 +298,17 @@ export default function RoulettePage() {
                 </div>
               </div>
 
-              <button onClick={handleAcceptTerms} id="accept-terms-button">
+              <button
+                onClick={() => {
+                  analytics.trackClick("accept_terms_button", {
+                    modal_type: "terms_and_conditions",
+                    time_to_accept: Date.now() - (window.performance?.timing?.navigationStart || Date.now()),
+                  })
+
+                  handleAcceptTerms()
+                }}
+                id="accept-terms-button"
+              >
                 Entendi!
               </button>
             </div>
@@ -231,7 +334,18 @@ export default function RoulettePage() {
               </div>
 
               <div className="action-buttons-vertical">
-                <button onClick={handleClaim80Discount} className="claim-button-small">
+                <button
+                  onClick={() => {
+                    analytics.trackClick("claim_80_discount_button", {
+                      discount_claimed: 80,
+                      decision_type: "safe_choice",
+                      second_chance_declined: true,
+                    })
+
+                    handleClaim80Discount()
+                  }}
+                  className="claim-button-small"
+                >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
@@ -243,7 +357,18 @@ export default function RoulettePage() {
                   </svg>
                   RESGATAR 80%
                 </button>
-                <button onClick={handleRisk} className="risk-button-small">
+                <button
+                  onClick={() => {
+                    analytics.trackClick("risk_all_button", {
+                      decision_type: "risky_choice",
+                      abandoned_discount: 80,
+                      potential_gain: "product_free",
+                    })
+
+                    handleRisk()
+                  }}
+                  className="risk-button-small"
+                >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z"
@@ -268,7 +393,18 @@ export default function RoulettePage() {
               <p>
                 Você ganhou <strong>100% de desconto</strong> na Lego Store! Clique no botão abaixo para resgatar agora.{" "}
               </p>
-              <button onClick={handleClaimPrize} id="resgatar-premio">
+              <button
+                onClick={() => {
+                  analytics.trackClick("claim_final_prize_button", {
+                    final_prize: "product_free",
+                    discount_value: 100,
+                    conversion_completed: true,
+                  })
+
+                  handleClaimPrize()
+                }}
+                id="resgatar-premio"
+              >
                 Resgatar
               </button>
             </div>
