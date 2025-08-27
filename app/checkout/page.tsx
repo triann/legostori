@@ -78,11 +78,6 @@ export default function CheckoutPage() {
   })
   const [product, setProduct] = useState<any>(null)
 
-  useEffect(() => {
-    trackEvent("checkout_page_view", {
-      page: "checkout",
-      timestamp: Date.now(),
-    })
 
   useEffect(() => {
     const checkoutData = localStorage.getItem("checkoutProduct")
@@ -102,6 +97,9 @@ export default function CheckoutPage() {
       ])
       setTotalPrice(item.finalPrice)
       setProduct(item)
+      trackEvent("checkout_page_view", {
+      page: "checkout",
+      timestamp: Date.now(),
     }
   }, [])
 
@@ -1469,11 +1467,10 @@ export default function CheckoutPage() {
         <div className="max-w-md mx-auto bg-white min-h-screen flex items-center justify-center">
           <div className="text-center p-8">
             <div className="bg-green-500 text-white p-4 rounded-lg mb-6 flex items-center gap-3">
-              <Shield className="w-5 h-5" />
               <span className="font-medium">Aguarde... Estamos finalizando sua compra.</span>
             </div>
 
-            <div className="w-16 h-16 mx-auto animate-spin border-4 border-gray-200 border-t-blue-600 rounded-full"></div>
+            <div className="w-16 h-16 mx-auto animate-spin border-4 border-gray-200 border-t-red-600 rounded-full"></div>
           </div>
         </div>
       </div>

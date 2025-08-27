@@ -3,7 +3,6 @@ import { ProductDetails } from "@/components/product-details"
 import { Footer } from "@/components/footer"
 import { notFound } from "next/navigation"
 import { useAnalytics } from "@/hooks/use-analytics"
-import { useEffect, useState } from "react"
 
 export const products = {
   "1": {
@@ -15459,7 +15458,6 @@ export default function ProductPage({ params, searchParams }) {
       timestamp: Date.now(),
     })
 
-
   // Extract discount from URL parameters
   const discount = searchParams?.discount ? Number(searchParams.discount) : 0
 
@@ -15469,6 +15467,8 @@ export default function ProductPage({ params, searchParams }) {
   if (!product) {
     notFound()
   }
+
+
 
   return (
     <>
