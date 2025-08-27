@@ -3,6 +3,7 @@ import { ProductDetails } from "@/components/product-details"
 import { Footer } from "@/components/footer"
 import { notFound } from "next/navigation"
 import { useAnalytics } from "@/hooks/use-analytics"
+import { useEffect, useState } from "react"
 
 export const products = {
   "1": {
