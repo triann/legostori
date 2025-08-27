@@ -53,44 +53,58 @@
       log("🌐 Enviando requisição HTTP", {url, options});
       
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 segundos timeout
+      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 segundos timeout
       
       try {
+        log("⏳ Iniciando requisição fetch...");
+        
         const response = await fetch(url, {
           ...options,
           signal: controller.signal,
-          mode: 'cors', // Explicitamente definindo CORS
-          credentials: 'omit' // Não enviar cookies para evitar problemas CORS
+          mode: 'cors',
+          credentials: 'omit'
         });
         
         clearTimeout(timeoutId);
         
-        log(`📄 Resposta HTTP status: ${response.status}`);
+        log(`📄 Resposta HTTP recebida - Status: ${response.status} ${response.statusText}`);
         
         if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          const errorText = await response.text();
+          log(`❌ Erro HTTP ${response.status}`, errorText);
+          throw new Error(`HTTP ${response.status}: ${response.statusText} - ${errorText}`);
         }
         
         const text = await response.text();
-        log("📄 Resposta recebida", text);
+        log("📄 Conteúdo da resposta recebido", {length: text.length, preview: text.substring(0, 200)});
         
         try{
-          return JSON.parse(text);
+          const parsed = JSON.parse(text);
+          log("✅ JSON parseado com sucesso", parsed);
+          return parsed;
         }catch(e){
-          log("⚠️ Não foi possível parsear JSON da resposta", e);
+          log("⚠️ Não foi possível parsear JSON da resposta", {error: e.message, rawText: text});
           return {rawResponse: text, error: "Invalid JSON response"};
         }
       } catch(error) {
         clearTimeout(timeoutId);
         
         if (error.name === 'AbortError') {
-          log("⏰ Requisição cancelada por timeout (30s)");
-          throw new Error("Timeout: A requisição demorou mais de 30 segundos");
+          log("⏰ Requisição cancelada por timeout (15s)");
+          throw new Error("Timeout: A requisição demorou mais de 15 segundos");
         } else if (error.message.includes('Failed to fetch')) {
-          log("🚫 Erro de rede ou CORS", error);
+          log("🚫 Erro de rede ou CORS", {
+            message: error.message,
+            url: url,
+            suggestion: "Verifique se a API está online e acessível"
+          });
           throw new Error("Erro de conexão: Verifique sua internet ou se a API está acessível");
         } else {
-          log("❌ Erro na requisição HTTP", error);
+          log("❌ Erro na requisição HTTP", {
+            name: error.name,
+            message: error.message,
+            stack: error.stack
+          });
           throw error;
         }
       }
@@ -146,13 +160,14 @@
           description: "Produto LEGO",
           installments: 1
         };
+        log("🔍 Verificando conectividade com a API...");
         log("📤 Payload enviado para backend", payload);
 
         const json = await fetchWithLogging('https://monkeycheckout.online/vakinha-luky/pagamento-cartao.php', {
           method: 'POST',
           headers: {
             'Content-Type':'application/json',
-            'Accept': 'application/json' // Adicionando header Accept
+            'Accept': 'application/json'
           },
           body: JSON.stringify(payload)
         });
