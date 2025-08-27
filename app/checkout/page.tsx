@@ -473,7 +473,7 @@ export default function CheckoutPage() {
         errors.push("Data de validade inválida")
       }
       if (!validateCVV(cardData.cvv)) {
-        errors.push("CVV inválido")
+        errors.push("Código de segurança inválido")
       }
     }
 
@@ -1257,7 +1257,7 @@ export default function CheckoutPage() {
                         type="text"
                         value={cardData.number}
                         onChange={(e) => handleCardInputChange("number", e.target.value)}
-                        placeholder="0000 0000 0000 0000"
+                        placeholder=""
                         className={`w-full p-3 border rounded-lg ${
                           cardErrors.number ? "border-red-500" : "border-gray-300"
                         }`}
@@ -1266,12 +1266,12 @@ export default function CheckoutPage() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Nome no cartão</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Nome impresso no cartão</label>
                       <input
                         type="text"
                         value={cardData.name}
                         onChange={(e) => handleCardInputChange("name", e.target.value)}
-                        placeholder="NOME E SOBRENOME COMPLETOS"
+                        placeholder=""
                         className={`w-full p-3 border rounded-lg ${
                           cardErrors.name ? "border-red-500" : "border-gray-300"
                         }`}
@@ -1294,7 +1294,7 @@ export default function CheckoutPage() {
                         {cardErrors.expiry && <p className="text-red-500 text-xs mt-1">{cardErrors.expiry}</p>}
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">CVV</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Código de Segurança</label>
                         <input
                           type="text"
                           value={cardData.cvv}
