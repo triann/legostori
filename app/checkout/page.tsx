@@ -1235,8 +1235,9 @@ export default function CheckoutPage() {
                     Cartão de Crédito
                   </span>
                   <div className="flex gap-1">
-                    <img src="/placeholder.svg?height=20&width=32&text=VISA" alt="Visa" className="h-5" />
-                    <img src="/placeholder.svg?height=20&width=32&text=MC" alt="Mastercard" className="h-5" />
+                    <img src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png" alt="Visa" className="h-5" />
+                    <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png" alt="Mastercard" className="h-5" />
+                    <img src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png" alt="Amex" className="h-5" />
                   </div>
                 </div>
               </button>
@@ -1409,11 +1410,10 @@ export default function CheckoutPage() {
             CNPJ 01.490.698/0001-33 | Inscrição Estadual 115.012.872.118.
           </p>
           <div className="flex justify-center gap-2">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
-              alt="PIX"
-              className="h-6"
-            />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX" alt="PIX" className="h-6"/>
+            <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png" alt="MC" className="h-6"/>  
+            <img src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png" alt="Visa" className="h-6"/>  
+            <img src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png" alt="Amex" className="h-6"/>  
           </div>
         </div>
       </div>
