@@ -239,7 +239,7 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
                     {isFree ? (
                       <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                         <span>GRÁTIS!</span>
-                        <Badge className="bg-green-100 text-green-800 w-fit">PRODUTO GRÁTIS!</Badge>
+                        <Badge className="bg-green-100 text-green-800 w-fit">100% DE DESCONTO APLICADO!</Badge>
                       </div>
                     ) : (
                       <div className="flex flex-col sm:flex-row sm:items-center gap-2">
