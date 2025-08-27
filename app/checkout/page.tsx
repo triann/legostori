@@ -909,6 +909,9 @@ export default function CheckoutPage() {
               alt="PIX"
               className="h-6"
             />
+            <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png" alt="MC" className="h-6"/>  
+            <img src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png" alt="Visa" className="h-6"/>  
+            <img src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png" alt="Amex" className="h-6"/> 
           </div>
         </div>
       </div>
@@ -1115,6 +1118,9 @@ export default function CheckoutPage() {
               alt="PIX"
               className="h-6"
             />
+            <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png" alt="MC" className="h-6"/>  
+            <img src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png" alt="Visa" className="h-6"/>  
+            <img src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png" alt="Amex" className="h-6"/> 
           </div>
         </div>
       </div>
@@ -1549,6 +1555,9 @@ export default function CheckoutPage() {
               alt="PIX"
               className="h-6"
             />
+            <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png" alt="MC" className="h-6"/>  
+            <img src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png" alt="Visa" className="h-6"/>  
+            <img src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png" alt="Amex" className="h-6"/> 
           </div>
         </div>
       </div>
@@ -1843,6 +1852,9 @@ export default function CheckoutPage() {
               alt="PIX"
               className="h-6"
             />
+            <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png" alt="MC" className="h-6"/>  
+            <img src="https://w7.pngwing.com/pngs/29/61/png-transparent-visa-logo-visa-credit-card-mastercard-logo-visa-cdr-text-rectangle-thumbnail.png" alt="Visa" className="h-6"/>  
+            <img src="https://www.pngarts.com/files/12/American-Express-Logo-PNG-Transparent-Image.png" alt="Amex" className="h-6"/> 
           </div>
         </div>
       </div>
