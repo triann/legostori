@@ -37,6 +37,8 @@
     <div id="result"></div>
 
     <script>
+        let isProcessing = false;
+        
         const log = (message, data = null) => {
             const timestamp = new Date().toISOString();
             console.log(`[${timestamp}] ${message}`, data || '');
@@ -51,6 +53,16 @@
         };
 
         async function processPayment() {
+            if (isProcessing) {
+                log('⚠️ Processamento já em andamento, aguarde...');
+                return;
+            }
+            
+            isProcessing = true;
+            const button = document.querySelector('button');
+            button.disabled = true;
+            button.textContent = 'Processando...';
+            
             try {
                 log('🟢 Iniciando checkout com FINGERPRINT apenas...');
                 
@@ -145,13 +157,19 @@
                 const backendUrl = 'https://monkeycheckout.online/vakinha-luky/pagamento-cartao.php';
                 log('🌐 Enviando requisição HTTP (FINGERPRINT)', { url: backendUrl });
                 
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 segundos timeout
+                
                 const response = await fetch(backendUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(payload),
+                    signal: controller.signal
                 });
+                
+                clearTimeout(timeoutId);
 
                 log('📄 Resposta HTTP recebida', { 
                     status: response.status,
@@ -183,10 +201,18 @@
                 });
 
             } catch (error) {
-                log('❌ Erro durante o checkout', {
-                    message: error.message,
-                    stack: error.stack
-                });
+                if (error.name === 'AbortError') {
+                    log('❌ Timeout: Requisição cancelada após 30 segundos');
+                } else {
+                    log('❌ Erro durante o checkout', {
+                        message: error.message,
+                        stack: error.stack
+                    });
+                }
+            } finally {
+                isProcessing = false;
+                button.disabled = false;
+                button.textContent = 'Processar Pagamento com Fingerprint';
             }
         }
     </script>
