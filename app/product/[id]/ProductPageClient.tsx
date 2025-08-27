@@ -1,10 +1,14 @@
 "use client"
 
+import { Header } from "@/components/header"
+import { ProductDetails } from "@/components/product-details"
+import { Footer } from "@/components/footer"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Star, ShoppingCart, Heart, Share2 } from "lucide-react"
+import { notFound } from "next/navigation"
 
 export const products = {
   "1": {
