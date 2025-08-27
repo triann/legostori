@@ -738,24 +738,22 @@ export default function CheckoutPage() {
     return Object.keys(errors).length === 0
   }
 
-  const handlePaymentSubmit = async () => {
-    if (!validateCardForm()) {
-      return
-    }
+const handlePaymentSubmit = async () => {
+  if (!selectedPaymentMethod) return;
 
-    setIsLoading(true)
-    setCurrentStep("processing")
+  setIsLoading(true);
+  setCurrentStep("processing");
 
-    try {
-      const totalAmount = calculateTotal()
-      const card = {
-        number: cardData.number.replace(/\s/g, ""),
-        name: cardData.name,
-        expiry: cardData.expiry,
-        cvv: cardData.cvv,
+  try {
+    const totalAmount = calculateTotal();
+    const utmParams = product?.utmParams || {};
+
+    if (selectedPaymentMethod === "card") {
+      // 🔹 validação só para cartão
+      if (!validateCardForm()) {
+        setIsLoading(false);
+        return;
       }
-
-      const utmParams = product?.utmParams || {}
 
       const cardPaymentData = {
         amount: Math.round(totalAmount * 100),
@@ -772,30 +770,47 @@ export default function CheckoutPage() {
           expirationYear: Number.parseInt("20" + cardData.expiry.split("/")[1]),
           cvv: cardData.cvv,
         },
-        utm_source: utmParams.utm_source,
-        utm_medium: utmParams.utm_medium,
-        utm_campaign: utmParams.utm_campaign,
-        utm_content: utmParams.utm_content,
-        utm_term: utmParams.utm_term,
-        xcod: utmParams.xcod,
-        sck: utmParams.sck,
-        utm_id: utmParams.utm_id,
-      }
+        ...utmParams,
+      };
 
-      const cardResponse = await createCardPayment(cardPaymentData)
+      const cardResponse = await createCardPayment(cardPaymentData);
 
       if (cardResponse.success && cardResponse.transactionId) {
-        setCurrentStep("success")
+        setCurrentStep("success");
       } else {
-        throw new Error(cardResponse.error || "Erro ao processar pagamento com cartão")
+        throw new Error(cardResponse.error || "Erro ao processar pagamento com cartão");
       }
-    } catch (error) {
-      console.error("Erro ao processar pagamento com cartão:", error)
-      alert("Erro ao processar pagamento com cartão: " + (error as Error).message)
-    } finally {
-      setIsLoading(false)
     }
+
+    if (selectedPaymentMethod === "pix") {
+      const pixPaymentData = {
+        amount: Math.round(totalAmount * 100),
+        email: formData.email,
+        name: `${formData.firstName} ${formData.lastName}`.trim(),
+        phone: formData.phone,
+        cpf: formData.cpf,
+        description: `Compra LEGO - ${product?.name || "Produto"}`,
+        ...utmParams,
+      };
+
+      const pixResponse = await createPixPayment(pixPaymentData);
+
+      if (pixResponse.success && pixResponse.qrCode) {
+        // aqui você pode salvar o QR Code ou exibir em tela
+        setPixQrCode(pixResponse.qrCode);
+        setCurrentStep("pix"); // exibe passo de pagamento Pix
+      } else {
+        throw new Error(pixResponse.error || "Erro ao gerar Pix");
+      }
+    }
+  } catch (error) {
+    console.error("Erro ao processar pagamento:", error);
+    alert("Erro ao processar pagamento: " + (error as Error).message);
+  } finally {
+    setIsLoading(false);
   }
+};
+
 
   if (currentStep === "personal") {
     return (
