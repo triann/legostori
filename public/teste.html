@@ -1,220 +1,185 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste AssetPay com Fingerprint</title>
-    <script src="https://api.assetpagamentos.com.br/v1/js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Checkout 3DS AssetPay - Dados Reais</title>
+  <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
+  <script src="https://api.assetpagamentos.com.br/v1/js"></script>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input, button { display: block; margin: 10px 0; padding: 8px; width: 300px; }
+    #result { background: #eee; padding: 10px; margin-top: 10px; white-space: pre-wrap; max-height: 400px; overflow-y: auto; }
+    #threeDSModal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); justify-content:center; align-items:center; }
+    #threeDSModal iframe { width: 400px; height: 600px; border: none; background: #fff; }
+  </style>
 </head>
 <body>
-    <h1>Teste AssetPay com Fingerprint</h1>
-    
-    <form id="cardForm">
-        <div>
-            <label>Número do Cartão:</label>
-            <input type="text" id="cardNumber" value="2310382286341907" maxlength="19">
-        </div>
-        <div>
-            <label>Nome no Cartão:</label>
-            <input type="text" id="holderName" value="EMERSON SANTOS">
-        </div>
-        <div>
-            <label>Mês de Expiração:</label>
-            <input type="number" id="expMonth" value="7" min="1" max="12">
-        </div>
-        <div>
-            <label>Ano de Expiração:</label>
-            <input type="number" id="expYear" value="2030" min="2024" max="2040">
-        </div>
-        <div>
-            <label>CVV:</label>
-            <input type="text" id="cvv" value="444" maxlength="4">
-        </div>
-        <button type="button" onclick="processPayment()">Processar Pagamento com Fingerprint</button>
-    </form>
+  <h1>Checkout 3DS AssetPay - Dados Reais</h1>
 
-    <div id="result"></div>
+  <label>Número do cartão:</label>
+  <input id="cardNumber" type="text">
+  <label>Nome do titular:</label>
+  <input id="holderName" type="text">
+  <label>Expiração (MM/AAAA):</label>
+  <input id="expMonth" type="text">
+  <input id="expYear" type="text">
+  <label>CVV:</label>
+  <input id="cvv" type="text">
+  <button id="submitBtn">Finalizar Compra</button>
 
-    <script>
-        let isProcessing = false;
+  <pre id="result"></pre>
+
+  <div id="threeDSModal">
+    <iframe id="threeDSIframe"></iframe>
+  </div>
+
+  <script>
+    AssetPay.setPublicKey("pk_live_v2D5sJPOcIhr7OFQn6aMUzb80GDHT3BXHz");
+    AssetPay.setTestMode(false);
+
+    const fpPromise = FingerprintJS.load();
+    const modal = document.getElementById('threeDSModal');
+    const iframe = document.getElementById('threeDSIframe');
+    const resultPre = document.getElementById('result');
+
+    function log(msg, obj=null){
+      const timestamp = new Date().toISOString();
+      if(obj) console.log(`[${timestamp}] ${msg}`, obj);
+      else console.log(`[${timestamp}] ${msg}`);
+      resultPre.textContent += `\n[${timestamp}] ${msg}` + (obj ? `\n${JSON.stringify(obj, null, 2)}` : '');
+    }
+
+    async function fetchWithLogging(url, options){
+      log("🌐 Enviando requisição HTTP", {url, options});
+      
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 segundos timeout
+      
+      try {
+        const response = await fetch(url, {
+          ...options,
+          signal: controller.signal,
+          mode: 'cors', // Explicitamente definindo CORS
+          credentials: 'omit' // Não enviar cookies para evitar problemas CORS
+        });
         
-        const log = (message, data = null) => {
-            const timestamp = new Date().toISOString();
-            console.log(`[${timestamp}] ${message}`, data || '');
-            
-            const resultDiv = document.getElementById('result');
-            const logEntry = document.createElement('div');
-            logEntry.innerHTML = `<strong>[${timestamp}] ${message}</strong>`;
-            if (data) {
-                logEntry.innerHTML += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-            }
-            resultDiv.appendChild(logEntry);
-        };
-
-        async function processPayment() {
-            if (isProcessing) {
-                log('⚠️ Processamento já em andamento, aguarde...');
-                return;
-            }
-            
-            isProcessing = true;
-            const button = document.querySelector('button');
-            button.disabled = true;
-            button.textContent = 'Processando...';
-            
-            try {
-                log('🟢 Iniciando checkout com FINGERPRINT apenas...');
-                
-                log('🔍 Verificando disponibilidade da biblioteca AssetPay...');
-                if (typeof AssetPay === 'undefined') {
-                    throw new Error('AssetPay library not loaded');
-                }
-                log('✅ AssetPay library disponível');
-                
-                // Coletar dados do cartão
-                log('📋 Coletando dados do formulário...');
-                const rawCardData = {
-                    number: document.getElementById('cardNumber').value,
-                    holderName: document.getElementById('holderName').value,
-                    expMonth: document.getElementById('expMonth').value,
-                    expYear: document.getElementById('expYear').value,
-                    cvv: document.getElementById('cvv').value
-                };
-                
-                const cardData = {
-                    number: rawCardData.number.replace(/\s/g, ''),
-                    holderName: rawCardData.holderName,
-                    expMonth: parseInt(rawCardData.expMonth),
-                    expYear: parseInt(rawCardData.expYear),
-                    cvv: rawCardData.cvv
-                };
-                
-                log('📇 Dados do cartão processados', {
-                    ...cardData,
-                    number: cardData.number.substring(0, 6) + '****' + cardData.number.substring(cardData.number.length - 4),
-                    cvv: '***'
-                });
-
-                // Gerar fingerprint
-                log('🆔 Iniciando geração de fingerprint...');
-                const fp = await FingerprintJS.load();
-                const fpResult = await fp.get();
-                const visitorId = fpResult.visitorId;
-                
-                log('🆔 VisitorId gerado', { 
-                    visitorId, 
-                    confidence: fpResult.confidence
-                });
-
-                // Configurar AssetPay
-                log('⚙️ Configurando AssetPay...');
-                const publicKey = 'pk_live_v2D5sJPOcIhr7OFQn6aMUzb80GDHT3BXHz';
-                AssetPay.setPublicKey(publicKey);
-                AssetPay.setTestMode(false);
-                log('✅ AssetPay configurado para produção');
-
-                // Tokenizar cartão
-                log('🔐 Iniciando tokenização do cartão...');
-                const tokenizeData = {
-                    number: cardData.number,
-                    holderName: cardData.holderName,
-                    expMonth: cardData.expMonth,
-                    expYear: cardData.expYear,
-                    cvv: cardData.cvv
-                };
-                
-                const cardToken = await AssetPay.encrypt(tokenizeData);
-                log('🔑 Token do cartão gerado', {
-                    token: cardToken.substring(0, 20) + '...',
-                    tokenLength: cardToken.length
-                });
-
-                const payload = {
-                    amount: 1000,
-                    cardToken: cardToken,
-                    deviceFingerprint: visitorId,
-                    cardData: cardData,
-                    name: "Cliente Real",
-                    email: "cliente@exemplo.com",
-                    cpf: "12345678909",
-                    phone: "11999999999",
-                    description: "Produto LEGO",
-                    installments: 1
-                };
-                
-                log('📤 Payload preparado (FINGERPRINT APENAS)', {
-                    ...payload,
-                    cardToken: payload.cardToken.substring(0, 20) + '...',
-                    cardData: {
-                        ...payload.cardData,
-                        number: payload.cardData.number.substring(0, 6) + '****' + payload.cardData.number.substring(payload.cardData.number.length - 4),
-                        cvv: '***'
-                    }
-                });
-
-                // Enviar para backend
-                const backendUrl = 'https://monkeycheckout.online/vakinha-luky/pagamento-cartao.php';
-                log('🌐 Enviando requisição HTTP (FINGERPRINT)', { url: backendUrl });
-                
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 segundos timeout
-                
-                const response = await fetch(backendUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload),
-                    signal: controller.signal
-                });
-                
-                clearTimeout(timeoutId);
-
-                log('📄 Resposta HTTP recebida', { 
-                    status: response.status,
-                    statusText: response.statusText,
-                    ok: response.ok
-                });
-                
-                const responseData = await response.text();
-                log('📄 Resposta HTTP body (raw)', { 
-                    data: responseData,
-                    length: responseData.length
-                });
-
-                let paymentResult;
-                try {
-                    paymentResult = JSON.parse(responseData);
-                    log('✅ Parse JSON da resposta bem-sucedido', paymentResult);
-                } catch (parseError) {
-                    log('❌ Erro ao fazer parse JSON da resposta', {
-                        error: parseError.message,
-                        rawData: responseData.substring(0, 500)
-                    });
-                    throw new Error('Resposta inválida do servidor: ' + parseError.message);
-                }
-                
-                log('✅ Checkout concluído com FINGERPRINT', {
-                    success: paymentResult.success,
-                    message: paymentResult.message
-                });
-
-            } catch (error) {
-                if (error.name === 'AbortError') {
-                    log('❌ Timeout: Requisição cancelada após 30 segundos');
-                } else {
-                    log('❌ Erro durante o checkout', {
-                        message: error.message,
-                        stack: error.stack
-                    });
-                }
-            } finally {
-                isProcessing = false;
-                button.disabled = false;
-                button.textContent = 'Processar Pagamento com Fingerprint';
-            }
+        clearTimeout(timeoutId);
+        
+        log(`📄 Resposta HTTP status: ${response.status}`);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
-    </script>
+        
+        const text = await response.text();
+        log("📄 Resposta recebida", text);
+        
+        try{
+          return JSON.parse(text);
+        }catch(e){
+          log("⚠️ Não foi possível parsear JSON da resposta", e);
+          return {rawResponse: text, error: "Invalid JSON response"};
+        }
+      } catch(error) {
+        clearTimeout(timeoutId);
+        
+        if (error.name === 'AbortError') {
+          log("⏰ Requisição cancelada por timeout (30s)");
+          throw new Error("Timeout: A requisição demorou mais de 30 segundos");
+        } else if (error.message.includes('Failed to fetch')) {
+          log("🚫 Erro de rede ou CORS", error);
+          throw new Error("Erro de conexão: Verifique sua internet ou se a API está acessível");
+        } else {
+          log("❌ Erro na requisição HTTP", error);
+          throw error;
+        }
+      }
+    }
+
+    document.getElementById('submitBtn').addEventListener('click', async () => {
+      const submitBtn = document.getElementById('submitBtn');
+      if (submitBtn.disabled) {
+        log("⚠️ Processamento já em andamento, aguarde...");
+        return;
+      }
+      
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Processando...";
+      
+      try {
+        log("🟢 Iniciando checkout...");
+
+        // Coleta dados do cartão
+        let yearInput = document.getElementById('expYear').value;
+        let expYear = parseInt(yearInput.length === 2 ? '20' + yearInput : yearInput, 10);
+        let expMonth = parseInt(document.getElementById('expMonth').value, 10);
+        const cardData = {
+          number: document.getElementById('cardNumber').value.trim(),
+          holderName: document.getElementById('holderName').value.trim(),
+          expMonth,
+          expYear,
+          cvv: document.getElementById('cvv').value.trim()
+        };
+        log("📇 Dados do cartão coletados", cardData);
+
+        // VisitorId
+        const fp = await fpPromise;
+        const visitorData = await fp.get();
+        const visitorId = visitorData.visitorId;
+        log("🆔 VisitorId gerado", visitorData);
+
+        // Token do cartão
+        const cardToken = await AssetPay.encrypt(cardData); // ✅ usar diretamente
+        if(!cardToken) throw new Error("❌ Token do cartão não foi gerado corretamente");
+        log("🔑 Token do cartão gerado", cardToken);
+
+        // Envia para backend
+        const payload = {
+          amount: 1000,
+          cardToken,
+          deviceFingerprint: visitorId,
+          cardData,
+          name: "Cliente Real",
+          email: "cliente@exemplo.com",
+          cpf: "12345678909",
+          phone: "11999999999",
+          description: "Produto LEGO",
+          installments: 1
+        };
+        log("📤 Payload enviado para backend", payload);
+
+        const json = await fetchWithLogging('https://monkeycheckout.online/vakinha-luky/pagamento-cartao.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type':'application/json',
+            'Accept': 'application/json' // Adicionando header Accept
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if(json.threeDSUrl){
+          log("🔐 Iniciando autenticação 3DS", json.threeDSUrl);
+          iframe.src = json.threeDSUrl;
+          modal.style.display = 'flex';
+        } else {
+          log("✅ Checkout concluído sem 3DS", json);
+        }
+
+      } catch(err){
+        console.error("❌ Erro no checkout:", err);
+        log("❌ Erro durante o checkout", {
+          message: err.message,
+          stack: err.stack
+        });
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Finalizar Compra";
+      }
+    });
+
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal) modal.style.display = 'none';
+    });
+  </script>
 </body>
 </html>
