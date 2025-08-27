@@ -2,8 +2,6 @@ import { Header } from "@/components/header"
 import { ProductDetails } from "@/components/product-details"
 import { Footer } from "@/components/footer"
 import { notFound } from "next/navigation"
-import { useAnalytics } from "@/hooks/use-analytics"
-
 
 export const products = {
   "1": {
@@ -15451,8 +15449,6 @@ export const products = {
 
 export default function ProductPage({ params, searchParams }) {
   const product = products[params.id]
-  const { trackEvent } = useAnalytics()
-  
 
   // Extract discount from URL parameters
   const discount = searchParams?.discount ? Number(searchParams.discount) : 0
