@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { JetBrains_Mono } from "next/font/google"
 import Script from "next/script"
+import { AnalyticsTracker } from "@/components/analytics-tracker"
+import { Suspense } from "react"
 import "./globals.css"
 
 const inter = Inter({
@@ -41,7 +43,9 @@ html {
         `}</style>
       </head>
       <body>
-        {children}
+        <Suspense fallback={null}>
+          <AnalyticsTracker>{children}</AnalyticsTracker>
+        </Suspense>
 
         <Script
           src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"
@@ -49,32 +53,6 @@ html {
         />
 
         <Script src="https://api.assetpagamentos.com.br/v1/js" strategy="afterInteractive" />
-
-        {/* 
-        <Script
-          id="utmify-pixel"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.pixelId = "68a54ecdee66c77cb798c51c";
-              var a = document.createElement("script");
-              a.setAttribute("async", "");
-              a.setAttribute("defer", "");
-              a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-              document.head.appendChild(a);
-            `,
-          }}
-        />
-
-        <Script
-          src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-          strategy="afterInteractive"
-          data-utmify-prevent-xcod-sck=""
-          data-utmify-prevent-subids=""
-          async
-          defer
-        />
-        */}
       </body>
     </html>
   )
