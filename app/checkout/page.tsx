@@ -1463,11 +1463,11 @@ export default function CheckoutPage() {
 
         <div className="max-w-md mx-auto bg-white min-h-screen flex items-center justify-center">
           <div className="text-center p-8">
-            <div className="text-white p-4 rounded-lg mb-6 flex items-center gap-3">
+            <div className="text-black p-4 rounded-lg mb-6 flex items-center gap-3">
               <span className="font-medium">Aguarde... Estamos finalizando sua compra.</span>
             </div>
 
-            <div className="w-16 h-16 mx-auto animate-spin border-4 border-gray-200 border-t-red-600 rounded-full"></div>
+            <div className="w-16 h-16 mx-auto animate-spin border-4 border-gray-200 border-t-blue-600 rounded-full"></div>
           </div>
         </div>
       </div>
