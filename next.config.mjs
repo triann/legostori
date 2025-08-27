@@ -10,9 +10,6 @@ const nextConfig = {
   },
   images: {
     unoptimized: true
-  },
-  generateStaticParams: async () => {
-    return []
   }
 }
 
