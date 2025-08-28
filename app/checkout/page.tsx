@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Minus, Plus, Trash2, Loader2, Calendar, ChevronLeft, ChevronRight, X, Home, Shield } from "lucide-react"
 import { CheckoutHeader } from "@/components/checkout-header"
-import { useAnalytics } from "@/hooks/use-analytics"
 
 import { createPixPayment, maskCPF, maskPhone, validateEmail, createCardPayment } from "@/lib/pix-api"
 import { Edit2 } from "lucide-react"
@@ -29,7 +28,6 @@ export default function CheckoutPage() {
   const [deliveryMethod, setDeliveryMethod] = useState<"RECEBER" | "RETIRAR">("RECEBER")
   const [cep, setCep] = useState("")
   const [cepError, setCepError] = useState("")
-  const { trackEvent } = useAnalytics()
   const [shippingOptions, setShippingOptions] = useState<any[]>([])
   const [selectedShipping, setSelectedShipping] = useState<any>(null)
   const [currentStep, setCurrentStep] = useState<
@@ -77,7 +75,6 @@ export default function CheckoutPage() {
     phone: "",
   })
   const [product, setProduct] = useState<any>(null)
-
 
   useEffect(() => {
     const checkoutData = localStorage.getItem("checkoutProduct")
@@ -1464,6 +1461,7 @@ export default function CheckoutPage() {
         <div className="max-w-md mx-auto bg-white min-h-screen flex items-center justify-center">
           <div className="text-center p-8">
             <div className="text-black p-4 rounded-lg mb-6 flex items-center gap-3">
+              <Shield className="w-5 h-5" />
               <span className="font-medium">Aguarde... Estamos finalizando sua compra.</span>
             </div>
 
