@@ -242,7 +242,7 @@ export default function CheckoutPage() {
     } else {
       if (onlyFreeItems) {
         setShippingOptions([
-          { type: "PAC", price: 25.91, days: "Em até 10 dias úteis" },
+          { type: "PAC", price: 10.0, days: "Em até 10 dias úteis" },
           { type: "Azul Express", price: 33.59, days: "Em até 3 dias úteis" },
         ])
       } else {
