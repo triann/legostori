@@ -207,35 +207,20 @@ export async function createPixPayment(data: PixPaymentData): Promise<PixRespons
 
 export async function createCardPayment(data: CardPaymentData): Promise<CardPaymentResponse> {
   try {
-    console.log("[v0] 🟢 Iniciando checkout...")
+    console.log("[v0] 🚀 Iniciando processo de pagamento por cartão...")
 
     const debugInfo = {
       windowExists: typeof window !== "undefined",
       assetPayExists: typeof window !== "undefined" && !!(window as any).AssetPay,
-      fingerprintExists: typeof window !== "undefined" && !!(window as any).FingerprintJS,
       amount: data.amount,
     }
 
-    console.log("[v0] 🔍 Verificando bibliotecas:", debugInfo)
+    console.log("[v0] 🔍 Verificando biblioteca AssetPay:", debugInfo)
     createLogFile({ type: "library_check", data: debugInfo })
 
-    if (typeof window === "undefined") {
-      throw new Error("Ambiente não é browser")
+    if (typeof window === "undefined" || !(window as any).AssetPay) {
+      throw new Error("Biblioteca AssetPay não carregada")
     }
-
-    let attempts = 0
-    const maxAttempts = 20 // Aumentar tentativas
-    while (!(window as any).AssetPay && attempts < maxAttempts) {
-      console.log(`[v0] ⏳ Aguardando carregamento do AssetPay... (tentativa ${attempts + 1}/${maxAttempts})`)
-      await new Promise((resolve) => setTimeout(resolve, 250)) // Reduzir intervalo
-      attempts++
-    }
-
-    if (!(window as any).AssetPay) {
-      throw new Error("Biblioteca AssetPay não carregada após 5 segundos")
-    }
-
-    await new Promise((resolve) => setTimeout(resolve, 100))
 
     const cardInfo = (data as any).cardData || data.card
     if (!cardInfo) {
@@ -247,152 +232,57 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
     ;(window as any).AssetPay.setPublicKey(publicKey)
     ;(window as any).AssetPay.setTestMode(false)
 
-    let expMonth: number
-    let expYear: number
-
-    if (cardInfo.expirationMonth && cardInfo.expirationYear) {
-      expMonth = Number.parseInt(cardInfo.expirationMonth, 10)
-      expYear = Number.parseInt(cardInfo.expirationYear, 10)
-    } else if (cardInfo.exp_month && cardInfo.exp_year) {
-      expMonth = Number.parseInt(cardInfo.exp_month, 10)
-      expYear = Number.parseInt(cardInfo.exp_year, 10)
-    } else {
-      throw new Error("Dados de expiração do cartão inválidos")
-    }
-
-    // Garantir que o ano tenha 4 dígitos
-    if (expYear < 100) {
-      expYear += 2000
-    }
+    const expMonth = Number.parseInt(cardInfo.expirationMonth || cardInfo.exp_month, 10)
+    const expYear = Number.parseInt(cardInfo.expirationYear || cardInfo.exp_year, 10)
 
     const cardData = {
       number: cardInfo.number.replace(/\s/g, ""),
-      holderName: (cardInfo.holderName || cardInfo.holder_name || "").trim().toUpperCase(),
+      holderName: cardInfo.holderName || cardInfo.holder_name,
       expMonth,
       expYear,
       cvv: cardInfo.cvv,
     }
 
-    if (!cardData.number || cardData.number.length < 13) {
-      throw new Error("Número do cartão inválido")
-    }
-    if (!cardData.holderName || cardData.holderName.length < 3) {
-      throw new Error("Nome do portador inválido")
-    }
-    if (!cardData.expMonth || cardData.expMonth < 1 || cardData.expMonth > 12) {
-      throw new Error("Mês de expiração inválido")
-    }
-    if (!cardData.expYear || cardData.expYear < new Date().getFullYear()) {
-      throw new Error("Ano de expiração inválido")
-    }
-    if (!cardData.cvv || cardData.cvv.length < 3) {
-      throw new Error("CVV inválido")
-    }
-
-    console.log("[v0] 📇 Dados do cartão coletados")
-    console.log({
-      number: cardData.number.substring(0, 4) + "****" + cardData.number.slice(-4),
-      holderName: cardData.holderName,
-      expMonth: cardData.expMonth,
-      expYear: cardData.expYear,
+    console.log("[v0] 📇 Dados do cartão preparados:", {
+      ...cardData,
+      number: cardData.number.substring(0, 4) + "****",
       cvv: "***",
     })
 
-    let deviceFingerprint = ""
-    let visitorId = ""
+    console.log("[v0] 🔒 Tokenizando cartão...")
+    const cardToken = await (window as any).AssetPay.encrypt(cardData)
 
+    if (!cardToken) {
+      throw new Error("Token do cartão não foi gerado corretamente")
+    }
+
+    console.log("[v0] ✅ Token do cartão gerado:", cardToken.substring(0, 20) + "...")
+
+    let deviceFingerprint = ""
     try {
-      if ((window as any).FingerprintJS) {
-        console.log("[v0] 🆔 Gerando VisitorId...")
+      if (typeof window !== "undefined" && (window as any).FingerprintJS) {
         const fpPromise = (window as any).FingerprintJS.load()
         const fp = await fpPromise
-        const result = await fp.get()
-        visitorId = result.visitorId
-        deviceFingerprint = visitorId
-
-        console.log("[v0] 🆔 VisitorId gerado")
-        console.log({
-          visitorId: result.visitorId,
-          confidence: result.confidence,
-          components: Object.keys(result.components).reduce((acc, key) => {
-            acc[key] = {
-              value: result.components[key].value,
-              duration: result.components[key].duration,
-            }
-            return acc
-          }, {}),
-        })
-      } else {
-        console.log("[v0] ⚠️ FingerprintJS não disponível, gerando fingerprint alternativo...")
-
-        const canvas = document.createElement("canvas")
-        const ctx = canvas.getContext("2d")
-        if (ctx) {
-          ctx.textBaseline = "top"
-          ctx.font = "14px Arial"
-          ctx.fillText("Device fingerprint", 2, 2)
-        }
-        const canvasData = canvas.toDataURL()
-
-        const components = {
-          userAgent: navigator.userAgent,
-          language: navigator.language,
-          platform: navigator.platform,
-          screen: `${screen.width}x${screen.height}`,
-          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-          canvas: canvasData.substring(0, 100),
-        }
-
-        const fingerprint = btoa(JSON.stringify(components)).substring(0, 32)
-        deviceFingerprint = fingerprint
-        visitorId = fingerprint
-
-        console.log("[v0] 🆔 Fingerprint alternativo gerado:", deviceFingerprint)
+        const visitorData = await fp.get()
+        deviceFingerprint = visitorData.visitorId
+        console.log("[v0] 🆔 Device fingerprint gerado:", deviceFingerprint)
       }
     } catch (error) {
-      console.log("[v0] ⚠️ Erro ao gerar fingerprint:", error)
-      const fallbackData = `${navigator.userAgent}-${Date.now()}-${Math.random()}`
-      deviceFingerprint = btoa(fallbackData).substring(0, 32)
-      visitorId = deviceFingerprint
-      console.log("[v0] 🆔 Fingerprint fallback gerado:", deviceFingerprint)
+      console.log("[v0] ⚠️ Não foi possível gerar fingerprint:", error)
     }
-
-    console.log("[v0] 🔑 Token do cartão gerado")
-    let cardToken = ""
-    try {
-      cardToken = await (window as any).AssetPay.encrypt(cardData)
-      if (!cardToken || typeof cardToken !== "string" || cardToken.length < 10) {
-        throw new Error("Token do cartão não foi gerado corretamente")
-      }
-      console.log(`"${cardToken}"`)
-    } catch (error) {
-      console.error("[v0] ❌ Erro ao gerar token do cartão:", error)
-      throw new Error("Falha na tokenização do cartão: " + error.message)
-    }
-
-    console.log("[v0] 🔍 Verificando conectividade com a API...")
 
     const payload = {
       amount: data.amount,
       cardToken,
       deviceFingerprint,
-      cardData: {
-        number: cardData.number,
-        holderName: cardData.holderName,
-        expMonth: cardData.expMonth,
-        expYear: cardData.expYear,
-        cvv: cardData.cvv,
-      },
+      cardData,
       name: data.name,
       email: data.email,
       cpf: data.cpf.replace(/\D/g, ""),
       phone: data.phone.replace(/\D/g, ""),
       description: data.description,
-      installments: Number((data as any).installments) || 1,
+      installments: (data as any).installments || 1,
     }
-
-    console.log("[v0] 📤 Payload enviado para backend")
-    console.log(payload)
 
     const logPayload = {
       ...payload,
@@ -403,40 +293,28 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
         cvv: "***",
       },
     }
+
+    console.log("[v0] 📤 Enviando payload para API:", logPayload)
     createLogFile({ type: "payment_request", payload: logPayload })
 
-    console.log("[v0] 🌐 Enviando requisição HTTP")
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(payload),
-    }
-    console.log({
-      url: `${API_CONFIG.API_BASE_URL}/pagamento-cartao.php`,
-      options: requestOptions,
-    })
-
     const controller = new AbortController()
-    const timeoutId = setTimeout(() => controller.abort(), 30000)
+    const timeoutId = setTimeout(() => controller.abort(), 15000)
 
     try {
-      console.log("[v0] ⏳ Iniciando requisição fetch...")
       const response = await fetch(`${API_CONFIG.API_BASE_URL}/pagamento-cartao.php`, {
-        ...requestOptions,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
         signal: controller.signal,
       })
 
       clearTimeout(timeoutId)
 
-      console.log(`[v0] 📄 Resposta HTTP recebida - Status: ${response.status} `)
-
       if (!response.ok) {
         const errorText = await response.text()
-        console.log(`[v0] ❌ Erro HTTP ${response.status}`)
-        console.log(`"${errorText}"`)
         throw new Error(`HTTP ${response.status}: ${response.statusText} - ${errorText}`)
       }
 
@@ -458,10 +336,9 @@ export async function createCardPayment(data: CardPaymentData): Promise<CardPaym
       }
     } catch (error) {
       clearTimeout(timeoutId)
-      console.log("[v0] ❌ Erro na requisição HTTP")
 
       if (error.name === "AbortError") {
-        throw new Error("Timeout: A requisição demorou mais de 30 segundos")
+        throw new Error("Timeout: A requisição demorou mais de 15 segundos")
       }
       throw error
     }
