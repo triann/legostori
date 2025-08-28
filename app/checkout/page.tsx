@@ -1460,12 +1460,12 @@ export default function CheckoutPage() {
 
         <div className="max-w-md mx-auto bg-white min-h-screen flex items-center justify-center">
           <div className="text-center p-8">
-            <div className="text-black p-4 rounded-lg mb-6 flex items-center gap-3">
+            <div className="bg-green-500 text-white p-4 rounded-lg mb-6 flex items-center gap-3">
               <Shield className="w-5 h-5" />
               <span className="font-medium">Aguarde... Estamos finalizando sua compra.</span>
             </div>
 
-            <div className="w-16 h-16 mx-auto animate-spin border-4 border-gray-200 border-t-red-600 rounded-full"></div>
+            <div className="w-16 h-16 mx-auto animate-spin border-4 border-gray-200 border-t-blue-600 rounded-full"></div>
           </div>
         </div>
       </div>
@@ -1826,7 +1826,7 @@ export default function CheckoutPage() {
                           ))}
                         </div>
 
-                        {/* Informações importantes */}
+                        {/* Informaç��es importantes */}
                         <div className="bg-blue-50 p-3 rounded-lg">
                           <h4 className="text-sm font-medium text-blue-800 mb-2">Informações importantes:</h4>
                           <ul className="text-xs text-blue-700 space-y-1">
