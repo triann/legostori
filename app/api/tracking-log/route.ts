@@ -44,6 +44,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const format = searchParams.get("format") || "json"
     const platform = searchParams.get("platform")
+    const date = searchParams.get("date") // Added support for single date parameter
     const dateFrom = searchParams.get("dateFrom")
     const dateTo = searchParams.get("dateTo")
     const sessionId = searchParams.get("sessionId")
@@ -59,14 +60,26 @@ export async function GET(request: NextRequest) {
       filteredLogs = filteredLogs.filter((log) => log.sessionId === sessionId)
     }
 
-    if (dateFrom) {
-      const fromDate = new Date(dateFrom)
-      filteredLogs = filteredLogs.filter((log) => new Date(log.timestamp) >= fromDate)
-    }
+    if (date) {
+      const targetDate = new Date(date)
+      const startOfDay = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate())
+      const endOfDay = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate() + 1)
 
-    if (dateTo) {
-      const toDate = new Date(dateTo)
-      filteredLogs = filteredLogs.filter((log) => new Date(log.timestamp) <= toDate)
+      filteredLogs = filteredLogs.filter((log) => {
+        const logDate = new Date(log.timestamp)
+        return logDate >= startOfDay && logDate < endOfDay
+      })
+    } else {
+      // Use dateFrom and dateTo if date is not provided
+      if (dateFrom) {
+        const fromDate = new Date(dateFrom)
+        filteredLogs = filteredLogs.filter((log) => new Date(log.timestamp) >= fromDate)
+      }
+
+      if (dateTo) {
+        const toDate = new Date(dateTo)
+        filteredLogs = filteredLogs.filter((log) => new Date(log.timestamp) <= toDate)
+      }
     }
 
     // Ordenar por timestamp (mais recente primeiro)
@@ -77,15 +90,12 @@ export async function GET(request: NextRequest) {
       return new NextResponse(csv, {
         headers: {
           "Content-Type": "text/csv",
-          "Content-Disposition": `attachment; filename="tracking-logs-${new Date().toISOString().split("T")[0]}.csv"`,
+          "Content-Disposition": `attachment; filename="tracking-logs-${date || new Date().toISOString().split("T")[0]}.csv"`,
         },
       })
     }
 
-    return NextResponse.json({
-      total: filteredLogs.length,
-      logs: filteredLogs,
-    })
+    return NextResponse.json(filteredLogs) // Return logs directly instead of wrapped object for dashboard compatibility
   } catch (error) {
     console.error("[Tracking Log API] Error:", error)
     return NextResponse.json({ error: "Failed to retrieve logs" }, { status: 500 })
