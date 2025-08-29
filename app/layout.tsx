@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import { JetBrains_Mono } from "next/font/google"
 import Script from "next/script"
 import { AnalyticsTracker } from "@/components/analytics-tracker"
+import TrackingDebugPanel from "@/components/tracking-debug-panel"
 import { Suspense } from "react"
 import "./globals.css"
 
@@ -46,6 +47,8 @@ html {
         <Suspense fallback={null}>
           <AnalyticsTracker>{children}</AnalyticsTracker>
         </Suspense>
+
+        <TrackingDebugPanel />
 
         <Script
           id="meta-pixel"
