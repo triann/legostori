@@ -110,11 +110,30 @@ class UnifiedTracking {
     })
   }
 
-  async trackInitiateCheckout(value: number, numItems = 1) {
+  async trackInitiateCheckout(data: {
+    content_ids?: string[]
+    content_name?: string
+    content_category?: string
+    value: number
+    currency?: string
+    num_items?: number
+    contents?: Array<{
+      id: string
+      quantity: number
+      item_price: number
+    }>
+  }) {
     await this.track({
       eventName: "InitiateCheckout",
-      value,
-      customData: { num_items: numItems },
+      value: data.value,
+      currency: data.currency || "BRL",
+      contentIds: data.content_ids || [],
+      customData: {
+        content_name: data.content_name,
+        content_category: data.content_category,
+        num_items: data.num_items || 1,
+        contents: data.contents || [],
+      },
     })
   }
 
