@@ -11,6 +11,7 @@ import { CheckoutHeader } from "@/components/checkout-header"
 import { createPixPayment, maskCPF, maskPhone, validateEmail, createCardPayment } from "@/lib/pix-api"
 import { Edit2 } from "lucide-react"
 import { trackEvent } from "@/lib/unified-tracking"
+import { unifiedTracking } from "@/lib/unified-tracking"
 
 interface CartItem {
   id: number
@@ -96,7 +97,7 @@ export default function CheckoutPage() {
       setTotalPrice(item.finalPrice)
       setProduct(item)
 
-      trackEvent("InitiateCheckout", {
+      unifiedTracking.trackInitiateCheckout({
         content_ids: [item.id?.toString() || "1"],
         content_name: item.name,
         content_category: "LEGO",

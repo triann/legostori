@@ -49,6 +49,15 @@ export default function RoulettePage() {
     }
 
     unifiedTracking.track({
+      eventName: "RouletteButtonClicked",
+      customData: {
+        button_id: "button-cta",
+        attempt_number: attempt + 1,
+        user_ready_to_spin: true,
+      },
+    })
+
+    unifiedTracking.track({
       eventName: "RouletteSpinStarted",
       customData: {
         attempt_number: attempt + 1,

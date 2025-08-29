@@ -138,6 +138,14 @@ export default function AnalyticsDashboard() {
     fetchAnalytics()
   }, [selectedDate])
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchAnalytics()
+    }, 30000) // Atualiza a cada 30 segundos
+
+    return () => clearInterval(interval)
+  }, [selectedDate])
+
   const conversionRate = (from: number, to: number) => {
     return from > 0 ? ((to / from) * 100).toFixed(1) : "0.0"
   }
