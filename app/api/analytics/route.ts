@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
       id: Math.random().toString(36).substring(2) + Date.now().toString(36),
       sessionId: eventData.session_id,
       timestamp: serverTimestamp,
-      platform: "analytics",
+      platform: "meta",
       eventName: eventData.event,
       status: "success",
       data: {
