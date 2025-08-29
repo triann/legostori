@@ -13,6 +13,7 @@ interface AnalyticsData {
   error?: string
   userAgent: string
   url: string
+  event_name?: string // Added for snake_case compatibility
 }
 
 interface FunnelMetrics {
@@ -51,6 +52,8 @@ export default function AnalyticsDashboard() {
       const response = await fetch(`/api/tracking-log?date=${selectedDate}`)
       if (response.ok) {
         const logs = await response.json()
+        console.log("[v0] Logs recebidos:", logs)
+        console.log("[v0] Primeiro log:", logs[0])
         setData(logs)
         calculateFunnelMetrics(logs)
       }
@@ -75,9 +78,22 @@ export default function AnalyticsDashboard() {
       purchase: 0,
     }
 
-    logs.forEach((log) => {
+    console.log("[v0] Calculando métricas para", logs.length, "logs")
+
+    logs.forEach((log, index) => {
+      if (index < 5) {
+        console.log(`[v0] Log ${index}:`, {
+          eventName: log.eventName,
+          event_name: log.event_name,
+          status: log.status,
+          platform: log.platform,
+        })
+      }
+
       if (log.status === "success") {
-        switch (log.eventName) {
+        const eventName = log.eventName || log.event_name
+
+        switch (eventName) {
           case "PageView":
             metrics.pageViews++
             break
@@ -108,10 +124,13 @@ export default function AnalyticsDashboard() {
           case "Purchase":
             metrics.purchase++
             break
+          default:
+            console.log("[v0] Evento não reconhecido:", eventName)
         }
       }
     })
 
+    console.log("[v0] Métricas calculadas:", metrics)
     setFunnelMetrics(metrics)
   }
 
@@ -305,7 +324,9 @@ export default function AnalyticsDashboard() {
                         {log.platform}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{log.eventName}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {log.eventName || log.event_name}
+                    </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       <span
                         className={`px-2 py-1 rounded-full text-xs ${
