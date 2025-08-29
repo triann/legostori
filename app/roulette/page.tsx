@@ -477,12 +477,16 @@ export default function RoulettePage() {
           justify-content: center;
           margin-top: 20px;
           z-index: 1;
+          position: absolute;
+          bottom: 25%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100%;
         }
 
         #button-cta {
           z-index: 1;
           width: 55%;
-          margin-top: 330px;
           height: 35px;
           background-color: #ff0000;
           border: none;
@@ -492,6 +496,7 @@ export default function RoulettePage() {
           color: rgb(255, 255, 255);
           box-shadow: 0px 0px 15px 1px #4e5399;
           animation: pulse 1s linear infinite;
+          max-width: 300px;
         }
 
         .popup {
@@ -750,7 +755,13 @@ export default function RoulettePage() {
           }
 
           .button-roulette {
-            margin-top: 15px;
+            bottom: 20%;
+          }
+
+          #button-cta {
+            width: 70%;
+            font-size: 16px;
+            height: 40px;
           }
 
           .popup button {
