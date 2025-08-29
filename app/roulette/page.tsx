@@ -12,7 +12,6 @@ export default function RoulettePage() {
   const [showTermsModal, setShowTermsModal] = useState(false)
   const [hasSeenTerms, setHasSeenTerms] = useState(false)
   const [currentNotification, setCurrentNotification] = useState(0)
-  const [imagesLoaded, setImagesLoaded] = useState(false)
   const router = useRouter()
 
   const notifications = [
@@ -31,24 +30,6 @@ export default function RoulettePage() {
   useEffect(() => {
     unifiedTracking.trackPageView()
     unifiedTracking.trackRouletteStarted()
-
-    const preloadImages = async () => {
-      const criticalImages = ["https://i.ibb.co/WvS5M873/roleta.png", "https://i.ibb.co/r97hXK6/button-gire.png"]
-
-      const promises = criticalImages.map((src) => {
-        return new Promise((resolve) => {
-          const img = new Image()
-          img.onload = resolve
-          img.onerror = resolve // Continue mesmo se falhar
-          img.src = src
-        })
-      })
-
-      await Promise.all(promises)
-      setImagesLoaded(true)
-    }
-
-    preloadImages()
   }, [])
 
   useEffect(() => {
@@ -197,6 +178,7 @@ export default function RoulettePage() {
           <div style={{ height: "195px" }}></div>
         </div>
         <div className="roulette">
+          <img src="/placeholder.svg" id="roleta1" />
           <div id="roleta2">
             <img
               src="https://i.ibb.co/WvS5M873/roleta.png"
@@ -207,7 +189,6 @@ export default function RoulettePage() {
                     : "wheel__spinner_animated"
                   : "spinner"
               }
-              style={{ opacity: imagesLoaded ? 1 : 0, transition: "opacity 0.3s ease" }}
             />
           </div>
           <img src="https://i.ibb.co/r97hXK6/button-gire.png" id="roleta3" />
@@ -454,6 +435,7 @@ export default function RoulettePage() {
           transform-origin: center center;
         }
 
+        #roleta1,
         #roleta2 {
           position: absolute;
           left: 50%;
@@ -733,6 +715,7 @@ export default function RoulettePage() {
         }
 
         @media (max-width: 800px) {
+          #roleta1,
           #roleta2 {
             max-width: 95%;
             top: 50%;
@@ -740,7 +723,7 @@ export default function RoulettePage() {
             z-index: -1;
           }
 
-          #roleta2 img {
+          #roleta2 {
             width: 100%;
             z-index: 1;
           }

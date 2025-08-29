@@ -13,10 +13,13 @@ class PersistentLogger {
   private events: StoredEvent[] = []
   private sessionId: string
   private maxEvents = 1000 // Limite para evitar memory leak
+  private isClient = typeof window !== "undefined"
 
   constructor() {
     this.sessionId = this.generateSessionId()
-    this.loadFromStorage()
+    if (this.isClient) {
+      this.loadFromStorage()
+    }
   }
 
   private generateSessionId(): string {
@@ -24,10 +27,14 @@ class PersistentLogger {
   }
 
   private loadFromStorage() {
+    if (!this.isClient) return
+
     try {
       const stored = localStorage.getItem("tracking_events")
       if (stored) {
-        this.events = JSON.parse(stored)
+        const parsedEvents = JSON.parse(stored)
+        const today = new Date().toISOString().split("T")[0]
+        this.events = parsedEvents.filter((event: StoredEvent) => event.timestamp.startsWith(today))
       }
     } catch (error) {
       console.error("[PersistentLogger] Error loading from storage:", error)
@@ -35,8 +42,9 @@ class PersistentLogger {
   }
 
   private saveToStorage() {
+    if (!this.isClient) return
+
     try {
-      // Manter apenas os últimos 1000 eventos
       const eventsToSave = this.events.slice(-this.maxEvents)
       localStorage.setItem("tracking_events", JSON.stringify(eventsToSave))
       this.events = eventsToSave
@@ -46,6 +54,8 @@ class PersistentLogger {
   }
 
   log(event: TrackingEvent) {
+    if (!this.isClient) return
+
     const storedEvent: StoredEvent = {
       ...event,
       id: `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
@@ -58,8 +68,7 @@ class PersistentLogger {
     this.events.push(storedEvent)
     this.saveToStorage()
 
-    // Enviar para API em background
-    this.sendToAPI(storedEvent)
+    this.sendToAPI(storedEvent).catch(console.error)
   }
 
   private async sendToAPI(event: StoredEvent) {
@@ -123,6 +132,11 @@ class PersistentLogger {
   clear() {
     this.events = []
     localStorage.removeItem("tracking_events")
+  }
+
+  getTodaysEvents(): StoredEvent[] {
+    const today = new Date().toISOString().split("T")[0]
+    return this.events.filter((event) => event.timestamp.startsWith(today))
   }
 }
 

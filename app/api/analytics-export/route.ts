@@ -22,17 +22,19 @@ export async function GET(request: NextRequest) {
 
     let logsUrl = `${request.nextUrl.origin}/api/tracking-log`
     if (date) {
-      const dateFrom = `${date}T00:00:00.000Z`
-      const dateTo = `${date}T23:59:59.999Z`
-      logsUrl += `?dateFrom=${dateFrom}&dateTo=${dateTo}`
+      logsUrl += `?date=${date}`
     }
 
     const response = await fetch(logsUrl)
     if (!response.ok) {
-      throw new Error("Failed to fetch logs")
+      throw new Error(`Failed to fetch logs: ${response.status}`)
     }
 
-    const { logs } = await response.json()
+    const logs = await response.json()
+
+    if (!Array.isArray(logs)) {
+      throw new Error("Invalid logs format received")
+    }
 
     const stats = calculateFunnelStats(logs)
 
@@ -50,11 +52,17 @@ export async function GET(request: NextRequest) {
       date: date || new Date().toISOString().split("T")[0],
       total_events: logs.length,
       funnel_stats: stats,
-      logs: logs.slice(0, 1000), // Limitar a 1000 logs para performance
+      logs: logs.slice(0, 1000),
     })
   } catch (error) {
     console.error("[Analytics Export API] Error:", error)
-    return NextResponse.json({ error: "Failed to export analytics" }, { status: 500 })
+    return NextResponse.json(
+      {
+        error: "Failed to export analytics",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 },
+    )
   }
 }
 
