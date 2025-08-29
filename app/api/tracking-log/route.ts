@@ -1,4 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
+import { promises as fs } from "fs"
+import path from "path"
 
 interface TrackingLogEntry {
   id: string
@@ -14,8 +16,39 @@ interface TrackingLogEntry {
   referrer: string
 }
 
-// Simulação de banco de dados em memória (em produção usar banco real)
-let trackingLogs: TrackingLogEntry[] = []
+const LOGS_FILE_PATH = path.join(process.cwd(), "data", "tracking-logs.json")
+
+// Função para garantir que o diretório existe
+async function ensureDataDirectory() {
+  const dataDir = path.dirname(LOGS_FILE_PATH)
+  try {
+    await fs.access(dataDir)
+  } catch {
+    await fs.mkdir(dataDir, { recursive: true })
+  }
+}
+
+// Função para carregar logs existentes
+async function loadLogs(): Promise<TrackingLogEntry[]> {
+  try {
+    await ensureDataDirectory()
+    const data = await fs.readFile(LOGS_FILE_PATH, "utf-8")
+    return JSON.parse(data)
+  } catch {
+    // Se arquivo não existe ou erro de parsing, retorna array vazio
+    return []
+  }
+}
+
+// Função para salvar logs
+async function saveLogs(logs: TrackingLogEntry[]): Promise<void> {
+  try {
+    await ensureDataDirectory()
+    await fs.writeFile(LOGS_FILE_PATH, JSON.stringify(logs, null, 2))
+  } catch (error) {
+    console.error("[Tracking Log API] Error saving logs:", error)
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,13 +57,13 @@ export async function POST(request: NextRequest) {
     // Adicionar IP do usuário
     logEntry.ip = request.ip || request.headers.get("x-forwarded-for") || "unknown"
 
-    // Armazenar log
-    trackingLogs.push(logEntry)
+    const existingLogs = await loadLogs()
+    existingLogs.push(logEntry)
 
-    // Manter apenas os últimos 10000 logs para evitar memory leak
-    if (trackingLogs.length > 10000) {
-      trackingLogs = trackingLogs.slice(-10000)
-    }
+    // Manter apenas os últimos 50000 logs para evitar arquivo muito grande
+    const logsToKeep = existingLogs.slice(-50000)
+
+    await saveLogs(logsToKeep)
 
     return NextResponse.json({ success: true })
   } catch (error) {
@@ -44,12 +77,12 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const format = searchParams.get("format") || "json"
     const platform = searchParams.get("platform")
-    const date = searchParams.get("date") // Added support for single date parameter
+    const date = searchParams.get("date")
     const dateFrom = searchParams.get("dateFrom")
     const dateTo = searchParams.get("dateTo")
     const sessionId = searchParams.get("sessionId")
 
-    let filteredLogs = [...trackingLogs]
+    let filteredLogs = await loadLogs()
 
     // Aplicar filtros
     if (platform) {
@@ -70,7 +103,6 @@ export async function GET(request: NextRequest) {
         return logDate >= startOfDay && logDate < endOfDay
       })
     } else {
-      // Use dateFrom and dateTo if date is not provided
       if (dateFrom) {
         const fromDate = new Date(dateFrom)
         filteredLogs = filteredLogs.filter((log) => new Date(log.timestamp) >= fromDate)
@@ -95,7 +127,7 @@ export async function GET(request: NextRequest) {
       })
     }
 
-    return NextResponse.json(filteredLogs) // Return logs directly instead of wrapped object for dashboard compatibility
+    return NextResponse.json(filteredLogs)
   } catch (error) {
     console.error("[Tracking Log API] Error:", error)
     return NextResponse.json({ error: "Failed to retrieve logs" }, { status: 500 })
