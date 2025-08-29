@@ -1,5 +1,6 @@
 import { metaTracking } from "./meta-tracking"
 import { trackingLogger } from "./tracking-logger"
+import { persistentLogger } from "./persistent-logger"
 
 // Unified tracking system that combines Meta Ads and UTMify
 export interface TrackingEventData {
@@ -24,10 +25,27 @@ class UnifiedTracking {
   private utmifyPixelId = "68a54ecdee66c77cb798c51c"
   private utmifyApiUrl = "https://api.utmify.com.br/api-credentials/orders"
 
+  private async logEvent(platform: string, eventName: string, data: any, status: string, error?: string) {
+    // Log to console (development)
+    trackingLogger.log(platform, eventName, data, status, error)
+
+    // Log to persistent storage (production)
+    await persistentLogger.log({
+      platform,
+      eventName,
+      data,
+      status,
+      error,
+      timestamp: new Date().toISOString(),
+      userAgent: typeof window !== "undefined" ? window.navigator.userAgent : "server",
+      url: typeof window !== "undefined" ? window.location.href : "server",
+    })
+  }
+
   // Send event to UTMify
   private async sendUtmifyEvent(eventData: any) {
     try {
-      trackingLogger.log("utmify", eventData.eventName, eventData, "pending")
+      await this.logEvent("utmify", eventData.eventName, eventData, "pending")
 
       // Send to UTMify pixel (client-side)
       if (typeof window !== "undefined" && (window as any).utmify) {
@@ -45,14 +63,14 @@ class UnifiedTracking {
       })
 
       if (response.ok) {
-        trackingLogger.log("utmify", eventData.eventName, eventData, "success")
+        await this.logEvent("utmify", eventData.eventName, eventData, "success")
         console.log("[v0] UTMify API event sent:", eventData.eventName)
       } else {
-        trackingLogger.log("utmify", eventData.eventName, eventData, "error", `HTTP ${response.status}`)
+        await this.logEvent("utmify", eventData.eventName, eventData, "error", `HTTP ${response.status}`)
         console.error("[v0] UTMify API error:", response.status)
       }
     } catch (error) {
-      trackingLogger.log(
+      await this.logEvent(
         "utmify",
         eventData.eventName,
         eventData,
@@ -68,7 +86,7 @@ class UnifiedTracking {
     const { eventName, value, currency = "BRL", contentIds = [], customData = {} } = eventData
 
     try {
-      trackingLogger.log("both", eventName, { value, currency, contentIds, customData }, "pending")
+      await this.logEvent("both", eventName, { value, currency, contentIds, customData }, "pending")
 
       // Track with Meta Ads
       await metaTracking.track(eventName, {
@@ -78,7 +96,7 @@ class UnifiedTracking {
         ...customData,
       })
 
-      trackingLogger.log("meta", eventName, { value, currency, content_ids: contentIds, ...customData }, "success")
+      await this.logEvent("meta", eventName, { value, currency, content_ids: contentIds, ...customData }, "success")
 
       // Track with UTMify
       await this.sendUtmifyEvent({
@@ -90,9 +108,9 @@ class UnifiedTracking {
         timestamp: Date.now(),
       })
 
-      trackingLogger.log("both", eventName, eventData, "success")
+      await this.logEvent("both", eventName, eventData, "success")
     } catch (error) {
-      trackingLogger.log(
+      await this.logEvent(
         "both",
         eventName,
         eventData,
@@ -175,7 +193,7 @@ class UnifiedTracking {
     utm_params: Record<string, any>
   }) {
     try {
-      trackingLogger.log("utmify", "PendingOrder", orderData, "pending")
+      await this.logEvent("utmify", "PendingOrder", orderData, "pending")
 
       const response = await fetch("/api/utmify-pending", {
         method: "POST",
@@ -186,14 +204,14 @@ class UnifiedTracking {
       })
 
       if (response.ok) {
-        trackingLogger.log("utmify", "PendingOrder", orderData, "success")
+        await this.logEvent("utmify", "PendingOrder", orderData, "success")
         console.log("[v0] UTMify pending order tracked")
       } else {
-        trackingLogger.log("utmify", "PendingOrder", orderData, "error", `HTTP ${response.status}`)
+        await this.logEvent("utmify", "PendingOrder", orderData, "error", `HTTP ${response.status}`)
         console.error("[v0] UTMify pending order error:", response.status)
       }
     } catch (error) {
-      trackingLogger.log(
+      await this.logEvent(
         "utmify",
         "PendingOrder",
         orderData,
@@ -214,7 +232,7 @@ class UnifiedTracking {
     utm_params: Record<string, any>
   }) {
     try {
-      trackingLogger.log("utmify", "Conversion", orderData, "pending")
+      await this.logEvent("utmify", "Conversion", orderData, "pending")
 
       const response = await fetch("/api/utmify-conversion", {
         method: "POST",
@@ -225,14 +243,14 @@ class UnifiedTracking {
       })
 
       if (response.ok) {
-        trackingLogger.log("utmify", "Conversion", orderData, "success")
+        await this.logEvent("utmify", "Conversion", orderData, "success")
         console.log("[v0] UTMify conversion tracked")
       } else {
-        trackingLogger.log("utmify", "Conversion", orderData, "error", `HTTP ${response.status}`)
+        await this.logEvent("utmify", "Conversion", orderData, "error", `HTTP ${response.status}`)
         console.error("[v0] UTMify conversion error:", response.status)
       }
     } catch (error) {
-      trackingLogger.log(
+      await this.logEvent(
         "utmify",
         "Conversion",
         orderData,

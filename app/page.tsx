@@ -242,21 +242,16 @@ export default function HomePage() {
         console.error("[v0] Erro ao salvar no localStorage:", error)
       }
 
-      setShowPerformance(false)
       setShowCpfConfirmation(true)
 
-      setTimeout(() => {
-        console.log("[v0] Redirecionando para roleta")
+      analytics.trackEvent("redirecting_to_roulette", {
+        user_cpf_provided: true,
+        discount_earned: puzzleResult?.value || 80,
+        total_journey_time: Date.now() - (window.performance?.timing?.navigationStart || Date.now()),
+      })
 
-        analytics.trackEvent("redirecting_to_roulette", {
-          user_cpf_provided: true,
-          discount_earned: puzzleResult?.value || 80,
-          total_journey_time: Date.now() - (window.performance?.timing?.navigationStart || Date.now()),
-        })
-
-        setShowCpfConfirmation(false)
-        router.push("/roulette") // Usando router.push ao invés de window.location.href
-      }, 1000) // Reduzindo delay de 3000ms para 1000ms
+      console.log("[v0] Redirecionando para roleta")
+      router.push("/roulette")
     }
   }
 
