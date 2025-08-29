@@ -1,6 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { promises as fs } from "fs"
-import path from "path"
+import { createClient } from "@/lib/supabase/server"
 
 interface TrackingLogEntry {
   id: string
@@ -16,56 +15,34 @@ interface TrackingLogEntry {
   referrer: string
 }
 
-const LOGS_FILE_PATH = path.join(process.cwd(), "data", "tracking-logs.json")
-
-// Função para garantir que o diretório existe
-async function ensureDataDirectory() {
-  const dataDir = path.dirname(LOGS_FILE_PATH)
-  try {
-    await fs.access(dataDir)
-  } catch {
-    await fs.mkdir(dataDir, { recursive: true })
-  }
-}
-
-// Função para carregar logs existentes
-async function loadLogs(): Promise<TrackingLogEntry[]> {
-  try {
-    await ensureDataDirectory()
-    const data = await fs.readFile(LOGS_FILE_PATH, "utf-8")
-    return JSON.parse(data)
-  } catch {
-    // Se arquivo não existe ou erro de parsing, retorna array vazio
-    return []
-  }
-}
-
-// Função para salvar logs
-async function saveLogs(logs: TrackingLogEntry[]): Promise<void> {
-  try {
-    await ensureDataDirectory()
-    await fs.writeFile(LOGS_FILE_PATH, JSON.stringify(logs, null, 2))
-  } catch (error) {
-    console.error("[Tracking Log API] Error saving logs:", error)
-  }
-}
-
 export async function POST(request: NextRequest) {
   try {
     const logEntry: TrackingLogEntry = await request.json()
+    const supabase = createClient()
 
-    // Adicionar IP do usuário
     logEntry.ip = request.ip || request.headers.get("x-forwarded-for") || "unknown"
 
-    const existingLogs = await loadLogs()
-    existingLogs.push(logEntry)
+    const { data, error } = await supabase
+      .from("tracking_logs")
+      .insert({
+        event_name: logEntry.eventName,
+        event_data: logEntry.data,
+        session_id: logEntry.sessionId,
+        user_agent: logEntry.userAgent,
+        ip_address: logEntry.ip,
+        platform: logEntry.platform,
+        status: logEntry.status,
+        created_at: new Date(logEntry.timestamp).toISOString(),
+      })
+      .select()
 
-    // Manter apenas os últimos 50000 logs para evitar arquivo muito grande
-    const logsToKeep = existingLogs.slice(-50000)
+    if (error) {
+      console.error("[Tracking Log API] Supabase error:", error)
+      return NextResponse.json({ error: "Failed to save to database" }, { status: 500 })
+    }
 
-    await saveLogs(logsToKeep)
-
-    return NextResponse.json({ success: true })
+    console.log("[Tracking Log API] Event saved to database:", logEntry.eventName)
+    return NextResponse.json({ success: true, received: logEntry.eventName, id: data?.[0]?.id })
   } catch (error) {
     console.error("[Tracking Log API] Error:", error)
     return NextResponse.json({ error: "Failed to log event" }, { status: 500 })
@@ -74,95 +51,45 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
+    const supabase = createClient()
     const { searchParams } = new URL(request.url)
-    const format = searchParams.get("format") || "json"
-    const platform = searchParams.get("platform")
     const date = searchParams.get("date")
-    const dateFrom = searchParams.get("dateFrom")
-    const dateTo = searchParams.get("dateTo")
-    const sessionId = searchParams.get("sessionId")
 
-    let filteredLogs = await loadLogs()
-
-    // Aplicar filtros
-    if (platform) {
-      filteredLogs = filteredLogs.filter((log) => log.platform === platform)
-    }
-
-    if (sessionId) {
-      filteredLogs = filteredLogs.filter((log) => log.sessionId === sessionId)
-    }
+    let query = supabase.from("tracking_logs").select("*").order("created_at", { ascending: false })
 
     if (date) {
-      const targetDate = new Date(date)
-      const startOfDay = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate())
-      const endOfDay = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate() + 1)
+      const startDate = new Date(date)
+      const endDate = new Date(date)
+      endDate.setDate(endDate.getDate() + 1)
 
-      filteredLogs = filteredLogs.filter((log) => {
-        const logDate = new Date(log.timestamp)
-        return logDate >= startOfDay && logDate < endOfDay
-      })
-    } else {
-      if (dateFrom) {
-        const fromDate = new Date(dateFrom)
-        filteredLogs = filteredLogs.filter((log) => new Date(log.timestamp) >= fromDate)
-      }
-
-      if (dateTo) {
-        const toDate = new Date(dateTo)
-        filteredLogs = filteredLogs.filter((log) => new Date(log.timestamp) <= toDate)
-      }
+      query = query.gte("created_at", startDate.toISOString()).lt("created_at", endDate.toISOString())
     }
 
-    // Ordenar por timestamp (mais recente primeiro)
-    filteredLogs.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+    const { data: logs, error } = await query
 
-    if (format === "csv") {
-      const csv = convertToCSV(filteredLogs)
-      return new NextResponse(csv, {
-        headers: {
-          "Content-Type": "text/csv",
-          "Content-Disposition": `attachment; filename="tracking-logs-${date || new Date().toISOString().split("T")[0]}.csv"`,
-        },
-      })
+    if (error) {
+      console.error("[Tracking Log API] Supabase error:", error)
+      return NextResponse.json({ error: "Failed to retrieve logs" }, { status: 500 })
     }
 
-    return NextResponse.json(filteredLogs)
+    const transformedLogs =
+      logs?.map((log) => ({
+        id: log.id,
+        sessionId: log.session_id,
+        timestamp: log.created_at,
+        platform: log.platform,
+        eventName: log.event_name,
+        status: log.status,
+        data: log.event_data,
+        userAgent: log.user_agent,
+        ip: log.ip_address,
+        url: log.event_data?.url || "",
+        referrer: log.event_data?.referrer || "",
+      })) || []
+
+    return NextResponse.json(transformedLogs)
   } catch (error) {
     console.error("[Tracking Log API] Error:", error)
     return NextResponse.json({ error: "Failed to retrieve logs" }, { status: 500 })
   }
-}
-
-function convertToCSV(logs: TrackingLogEntry[]): string {
-  if (logs.length === 0) return ""
-
-  const headers = [
-    "id",
-    "sessionId",
-    "timestamp",
-    "platform",
-    "eventName",
-    "status",
-    "data",
-    "userAgent",
-    "ip",
-    "url",
-    "referrer",
-  ]
-  const csvHeaders = headers.join(",")
-
-  const csvRows = logs.map((log) => {
-    return headers
-      .map((header) => {
-        let value = log[header as keyof TrackingLogEntry]
-        if (typeof value === "object") {
-          value = JSON.stringify(value)
-        }
-        return `"${String(value).replace(/"/g, '""')}"`
-      })
-      .join(",")
-  })
-
-  return [csvHeaders, ...csvRows].join("\n")
 }

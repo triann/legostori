@@ -1,14 +1,19 @@
 import { type NextRequest, NextResponse } from "next/server"
+import { createClient } from "@supabase/supabase-js"
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 interface TrackingLogEntry {
   id: string
-  sessionId: string
+  session_id: string
   timestamp: string
   platform: string
-  eventName: string
+  event_name: string
   status: string
   data: any
-  userAgent: string
+  user_agent: string
   ip?: string
   url: string
   referrer: string
@@ -20,20 +25,24 @@ export async function GET(request: NextRequest) {
     const date = searchParams.get("date")
     const format = searchParams.get("format") || "json"
 
-    let logsUrl = `${request.nextUrl.origin}/api/tracking-log`
+    let query = supabase.from("tracking_logs").select("*").order("timestamp", { ascending: false })
+
     if (date) {
-      logsUrl += `?date=${date}`
+      const startDate = new Date(date)
+      const endDate = new Date(date)
+      endDate.setDate(endDate.getDate() + 1)
+
+      query = query.gte("timestamp", startDate.toISOString()).lt("timestamp", endDate.toISOString())
     }
 
-    const response = await fetch(logsUrl)
-    if (!response.ok) {
-      throw new Error(`Failed to fetch logs: ${response.status}`)
+    const { data: logs, error } = await query
+
+    if (error) {
+      throw new Error(`Supabase error: ${error.message}`)
     }
 
-    const logs = await response.json()
-
-    if (!Array.isArray(logs)) {
-      throw new Error("Invalid logs format received")
+    if (!logs || !Array.isArray(logs)) {
+      throw new Error("Invalid logs format received from database")
     }
 
     const stats = calculateFunnelStats(logs)
@@ -84,7 +93,7 @@ function calculateFunnelStats(logs: TrackingLogEntry[]) {
   }
 
   logs.forEach((log) => {
-    stats.uniqueSessions.add(log.sessionId)
+    stats.uniqueSessions.add(log.session_id)
     stats.platforms[log.platform] = (stats.platforms[log.platform] || 0) + 1
 
     if (log.status === "error") {
@@ -92,7 +101,7 @@ function calculateFunnelStats(logs: TrackingLogEntry[]) {
       return
     }
 
-    switch (log.eventName) {
+    switch (log.event_name) {
       case "page_view":
       case "PageView":
         stats.pageViews++
@@ -140,7 +149,7 @@ function calculateFunnelStats(logs: TrackingLogEntry[]) {
 }
 
 function convertToCSV(logs: TrackingLogEntry[], stats: any): string {
-  const headers = ["timestamp", "platform", "eventName", "status", "sessionId", "data", "userAgent", "url"]
+  const headers = ["timestamp", "platform", "event_name", "status", "session_id", "data", "user_agent", "url"]
   const csvHeaders = headers.join(",")
 
   const csvRows = logs.map((log) => {
