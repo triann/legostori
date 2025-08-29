@@ -105,33 +105,48 @@ export default function AnalyticsDashboard() {
       if (log.status === "success") {
         switch (eventName) {
           case "PageView":
+          case "page_view":
             metrics.pageViews++
             break
           case "PuzzleStarted":
+          case "puzzle_started":
+          case "next_puzzle_started":
             metrics.puzzleStarted++
             break
           case "PuzzleCompleted":
+          case "puzzle_completed":
+          case "all_puzzles_completed":
             metrics.puzzleCompleted++
             break
           case "CpfEntered":
+          case "cpf_entered":
+          case "cpf_confirmed":
             metrics.cpfEntered++
             break
           case "RouletteStarted":
+          case "roulette_started":
             metrics.rouletteStarted++
             break
           case "DiscountClaimed":
+          case "discount_claimed":
+          case "discount_applied":
             metrics.discountClaimed++
             break
           case "ViewContent":
+          case "view_content":
+          case "products_page_view":
             metrics.viewContent++
             break
           case "AddToCart":
+          case "add_to_cart":
             metrics.addToCart++
             break
           case "InitiateCheckout":
+          case "initiate_checkout":
             metrics.initiateCheckout++
             break
           case "Purchase":
+          case "purchase":
             metrics.purchase++
             break
           default:
