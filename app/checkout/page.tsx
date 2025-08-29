@@ -5,11 +5,12 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Minus, Plus, Trash2, Loader2, Calendar, ChevronLeft, ChevronRight, X, Home, Shield } from "lucide-react"
+import { Minus, Plus, Trash2, Loader2, Calendar, ChevronLeft, ChevronRight, X, Home } from "lucide-react"
 import { CheckoutHeader } from "@/components/checkout-header"
 
 import { createPixPayment, maskCPF, maskPhone, validateEmail, createCardPayment } from "@/lib/pix-api"
 import { Edit2 } from "lucide-react"
+import { trackEvent } from "@/lib/unified-tracking"
 
 interface CartItem {
   id: number
@@ -94,6 +95,22 @@ export default function CheckoutPage() {
       ])
       setTotalPrice(item.finalPrice)
       setProduct(item)
+
+      trackEvent("InitiateCheckout", {
+        content_ids: [item.id?.toString() || "1"],
+        content_name: item.name,
+        content_category: "LEGO",
+        value: item.finalPrice,
+        currency: "BRL",
+        num_items: 1,
+        contents: [
+          {
+            id: item.id?.toString() || "1",
+            quantity: 1,
+            item_price: item.finalPrice,
+          },
+        ],
+      })
     }
   }, [])
 
@@ -632,6 +649,14 @@ export default function CheckoutPage() {
       const totalAmount = calculateTotal()
       const utmParams = product?.utmParams || {}
 
+      trackEvent("AddPaymentInfo", {
+        content_ids: [product?.id?.toString() || "1"],
+        content_name: product?.name || "Produto LEGO",
+        value: totalAmount,
+        currency: "BRL",
+        payment_method: selectedPaymentMethod,
+      })
+
       if (selectedPaymentMethod === "card") {
         if (!validateCardForm()) {
           setIsLoading(false)
@@ -660,6 +685,24 @@ export default function CheckoutPage() {
         const cardResponse = await createCardPayment(cardPaymentData)
 
         if (cardResponse.success && cardResponse.transactionId) {
+          trackEvent("Purchase", {
+            content_ids: [product?.id?.toString() || "1"],
+            content_name: product?.name || "Produto LEGO",
+            content_category: "LEGO",
+            value: totalAmount,
+            currency: "BRL",
+            transaction_id: cardResponse.transactionId,
+            payment_method: "credit_card",
+            num_items: 1,
+            contents: [
+              {
+                id: product?.id?.toString() || "1",
+                quantity: 1,
+                item_price: totalAmount,
+              },
+            ],
+          })
+
           window.location.href = "/pedidos"
         } else {
           throw new Error(cardResponse.error || "Erro ao processar pagamento com cartão")
@@ -681,6 +724,24 @@ export default function CheckoutPage() {
 
         if (pixResponse.success && (pixResponse.qrcode || pixResponse.pixCopiaECola) && pixResponse.token) {
           const pixCode = pixResponse.qrcode || pixResponse.pixCopiaECola || ""
+
+          trackEvent("Purchase", {
+            content_ids: [product?.id?.toString() || "1"],
+            content_name: product?.name || "Produto LEGO",
+            content_category: "LEGO",
+            value: totalAmount,
+            currency: "BRL",
+            transaction_id: pixResponse.token,
+            payment_method: "pix",
+            num_items: 1,
+            contents: [
+              {
+                id: product?.id?.toString() || "1",
+                quantity: 1,
+                item_price: totalAmount,
+              },
+            ],
+          })
 
           // Salvar dados do PIX no localStorage para a página PIX
           localStorage.setItem(
@@ -880,7 +941,7 @@ export default function CheckoutPage() {
           </p>
           <div className="flex justify-center gap-2">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
               alt="PIX"
               className="h-6"
             />
@@ -1577,7 +1638,7 @@ export default function CheckoutPage() {
           </p>
           <div className="flex justify-center gap-2">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png?height=24&width=40&text=PIX"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1200px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png"
               alt="PIX"
               className="h-6"
             />
@@ -1825,7 +1886,7 @@ export default function CheckoutPage() {
                           ))}
                         </div>
 
-                        {/* Informaç��es importantes */}
+                        {/* Informaçes importantes */}
                         <div className="bg-blue-50 p-3 rounded-lg">
                           <h4 className="text-sm font-medium text-blue-800 mb-2">Informações importantes:</h4>
                           <ul className="text-xs text-blue-700 space-y-1">

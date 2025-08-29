@@ -48,13 +48,31 @@ html {
         </Suspense>
 
         <Script
+          id="meta-pixel"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', '14315111414682142');
+              fbq('track', 'PageView');
+            `,
+          }}
+        />
+
+        <Script
           src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"
           strategy="beforeInteractive"
         />
 
         <Script src="https://api.assetpagamentos.com.br/v1/js" strategy="afterInteractive" />
 
-{/* 
         <Script
           id="utmify-pixel"
           strategy="afterInteractive"
@@ -78,24 +96,6 @@ html {
           async
           defer
         />
-        */}
-
-        <Script
-          id="utmify-pixel"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                var img = document.createElement('img');
-                img.src = 'https://utmify.com.br/pixel/pixel.php?id=1234';
-                img.style.display = 'none';
-                document.body.appendChild(img);
-              })();
-            `,
-          }}
-        />
-
-        <Script src="https://utmify.com.br/js/utm-capture.js" strategy="afterInteractive" />
       </body>
     </html>
   )

@@ -4,11 +4,14 @@ import type React from "react"
 import { PuzzleGame } from "@/components/puzzle-game"
 import { UTMCapture } from "@/components/utm-capture"
 import { useAnalytics } from "@/hooks/use-analytics"
+import { unifiedTracking } from "@/lib/unified-tracking"
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation" // Adicionando useRouter para navegação
 import { Trophy, Star, ThumbsUp, Zap, Target, Clock, CheckCircle, AlertCircle } from "lucide-react"
 
 export default function HomePage() {
   const analytics = useAnalytics()
+  const router = useRouter() // Inicializando router
   const [showPuzzle, setShowPuzzle] = useState(false)
   const [showLoading, setShowLoading] = useState(false)
   const [loadingMessage, setLoadingMessage] = useState("")
@@ -31,13 +34,17 @@ export default function HomePage() {
   } | null>(null)
 
   useEffect(() => {
+    unifiedTracking.trackPageView()
+  }, [])
+
+  useEffect(() => {
     let interval: NodeJS.Timeout
     if (timerActive && timeLeft > 0) {
       interval = setInterval(() => {
         setTimeLeft((prev) => {
           if (prev <= 1) {
             setTimerActive(false)
-            window.location.href = "/"
+            router.push("/") // Usando router.push ao invés de window.location.href
             return 0
           }
           return prev - 1
@@ -74,6 +81,8 @@ export default function HomePage() {
   ]
 
   const handleStartPuzzle = () => {
+    unifiedTracking.trackPuzzleStarted()
+
     analytics.trackEvent("puzzle_start_clicked", {
       puzzle_type: "lego_challenge",
       total_puzzles: puzzles.length,
@@ -130,6 +139,8 @@ export default function HomePage() {
     moves: number,
     errors: number,
   ) => {
+    unifiedTracking.trackPuzzleCompleted()
+
     analytics.trackEvent("puzzle_completed", {
       puzzle_number: currentPuzzle + 1,
       moves_count: moves || 0,
@@ -202,6 +213,10 @@ export default function HomePage() {
 
   const handleCpfConfirm = () => {
     if (cpf.length >= 11) {
+      console.log("[v0] CPF confirmado, iniciando transição para roleta")
+
+      unifiedTracking.trackCpfEntered()
+
       analytics.trackEvent("cpf_confirmed", {
         cpf_length: cpf.replace(/\D/g, "").length,
         discount_earned: puzzleResult?.value || 80,
@@ -213,16 +228,7 @@ export default function HomePage() {
         ready_for_roulette: true,
       })
 
-      setShowPerformance(false)
-      setShowCpfConfirmation(true)
-
-      setTimeout(() => {
-        analytics.trackEvent("redirecting_to_roulette", {
-          user_cpf_provided: true,
-          discount_earned: puzzleResult?.value || 80,
-          total_journey_time: Date.now() - (window.performance?.timing?.navigationStart || Date.now()),
-        })
-
+      try {
         localStorage.setItem("puzzleCompleted", "true")
         localStorage.setItem("discountEarned", puzzleResult?.value.toString() || "80")
         localStorage.setItem("discountType", puzzleResult?.type || "discount")
@@ -230,9 +236,27 @@ export default function HomePage() {
           localStorage.setItem("freeProductName", puzzleResult.productName)
         }
         localStorage.setItem("userCpf", cpf)
+
+        console.log("[v0] Dados salvos no localStorage com sucesso")
+      } catch (error) {
+        console.error("[v0] Erro ao salvar no localStorage:", error)
+      }
+
+      setShowPerformance(false)
+      setShowCpfConfirmation(true)
+
+      setTimeout(() => {
+        console.log("[v0] Redirecionando para roleta")
+
+        analytics.trackEvent("redirecting_to_roulette", {
+          user_cpf_provided: true,
+          discount_earned: puzzleResult?.value || 80,
+          total_journey_time: Date.now() - (window.performance?.timing?.navigationStart || Date.now()),
+        })
+
         setShowCpfConfirmation(false)
-        window.location.href = "/roulette"
-      }, 3000)
+        router.push("/roulette") // Usando router.push ao invés de window.location.href
+      }, 1000) // Reduzindo delay de 3000ms para 1000ms
     }
   }
 
