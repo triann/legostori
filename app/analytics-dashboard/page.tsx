@@ -80,19 +80,29 @@ export default function AnalyticsDashboard() {
 
     console.log("[v0] Calculando métricas para", logs.length, "logs")
 
+    const eventCounts: Record<string, number> = {}
+    const statusCounts: Record<string, number> = {}
+
     logs.forEach((log, index) => {
-      if (index < 5) {
+      const eventName = log.eventName || log.event_name || "UNDEFINED"
+      const status = log.status || "UNDEFINED"
+
+      // Contar todos os eventos
+      eventCounts[eventName] = (eventCounts[eventName] || 0) + 1
+      statusCounts[status] = (statusCounts[status] || 0) + 1
+
+      if (index < 10) {
         console.log(`[v0] Log ${index}:`, {
           eventName: log.eventName,
           event_name: log.event_name,
+          finalEventName: eventName,
           status: log.status,
           platform: log.platform,
+          data: log.data,
         })
       }
 
       if (log.status === "success") {
-        const eventName = log.eventName || log.event_name
-
         switch (eventName) {
           case "PageView":
             metrics.pageViews++
@@ -125,11 +135,15 @@ export default function AnalyticsDashboard() {
             metrics.purchase++
             break
           default:
-            console.log("[v0] Evento não reconhecido:", eventName)
+            console.log("[v0] Evento não reconhecido:", eventName, "Status:", status)
         }
+      } else {
+        console.log("[v0] Evento ignorado por status:", eventName, "Status:", status)
       }
     })
 
+    console.log("[v0] Contagem de todos os eventos:", eventCounts)
+    console.log("[v0] Contagem de status:", statusCounts)
     console.log("[v0] Métricas calculadas:", metrics)
     setFunnelMetrics(metrics)
   }
