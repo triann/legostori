@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { AnalyticsChart } from "@/components/analytics-chart"
-import { Download, RefreshCw, Calendar, Users, Target, ShoppingCart, TrendingUp } from "lucide-react"
+import { Download, RefreshCw, Calendar, Target, Home, Package, Dice6, CheckCircle, RotateCcw, Gift } from "lucide-react"
 
 interface AnalyticsData {
   timestamp: string
@@ -13,37 +13,32 @@ interface AnalyticsData {
   error?: string
   userAgent: string
   url: string
-  event_name?: string // Added for snake_case compatibility
+  event_name?: string
 }
 
 interface FunnelMetrics {
-  pageViews: number
-  puzzleStarted: number
-  puzzleCompleted: number
-  cpfEntered: number
-  rouletteStarted: number
-  discountClaimed: number
-  viewContent: number
-  addToCart: number
-  initiateCheckout: number
-  purchase: number
+  homePageView: number
+  productPageView: number
+  roulettePageView: number
+  rouletteTermsAccepted: number
+  rouletteFirstSpin: number
+  rouletteDecision80OrRisk: number
+  rouletteFinalResult: number
 }
 
 export default function AnalyticsDashboard() {
   const [data, setData] = useState<AnalyticsData[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0])
+
   const [funnelMetrics, setFunnelMetrics] = useState<FunnelMetrics>({
-    pageViews: 0,
-    puzzleStarted: 0,
-    puzzleCompleted: 0,
-    cpfEntered: 0,
-    rouletteStarted: 0,
-    discountClaimed: 0,
-    viewContent: 0,
-    addToCart: 0,
-    initiateCheckout: 0,
-    purchase: 0,
+    homePageView: 0,
+    productPageView: 0,
+    roulettePageView: 0,
+    rouletteTermsAccepted: 0,
+    rouletteFirstSpin: 0,
+    rouletteDecision80OrRisk: 0,
+    rouletteFinalResult: 0,
   })
 
   const fetchAnalytics = async () => {
@@ -66,16 +61,13 @@ export default function AnalyticsDashboard() {
 
   const calculateFunnelMetrics = (logs: AnalyticsData[]) => {
     const metrics: FunnelMetrics = {
-      pageViews: 0,
-      puzzleStarted: 0,
-      puzzleCompleted: 0,
-      cpfEntered: 0,
-      rouletteStarted: 0,
-      discountClaimed: 0,
-      viewContent: 0,
-      addToCart: 0,
-      initiateCheckout: 0,
-      purchase: 0,
+      homePageView: 0,
+      productPageView: 0,
+      roulettePageView: 0,
+      rouletteTermsAccepted: 0,
+      rouletteFirstSpin: 0,
+      rouletteDecision80OrRisk: 0,
+      rouletteFinalResult: 0,
     }
 
     console.log("[v0] Calculando métricas para", logs.length, "logs")
@@ -87,7 +79,6 @@ export default function AnalyticsDashboard() {
       const eventName = log.eventName || log.event_name || "UNDEFINED"
       const status = log.status || "UNDEFINED"
 
-      // Contar todos os eventos
       eventCounts[eventName] = (eventCounts[eventName] || 0) + 1
       statusCounts[status] = (statusCounts[status] || 0) + 1
 
@@ -103,54 +94,49 @@ export default function AnalyticsDashboard() {
       }
 
       if (log.status === "success") {
+        // Identificar page_view por URL específica
+        if (eventName === "PageView" || eventName === "page_view") {
+          const url = log.data?.url || log.url || ""
+          if (url.includes("/product/") || url.includes("product")) {
+            metrics.productPageView++
+          } else if (url.includes("/roulette") || url.includes("roulette")) {
+            metrics.roulettePageView++
+          } else if (url === "/" || url.includes("home") || !url.includes("/")) {
+            metrics.homePageView++
+          }
+        }
+
+        // Eventos específicos da roleta
         switch (eventName) {
-          case "PageView":
-          case "page_view":
-            metrics.pageViews++
+          case "RouletteTermsAccepted":
+          case "roulette_terms_accepted":
+            metrics.rouletteTermsAccepted++
             break
-          case "PuzzleStarted":
-          case "puzzle_started":
-          case "next_puzzle_started":
-            metrics.puzzleStarted++
-            break
-          case "PuzzleCompleted":
-          case "puzzle_completed":
-          case "all_puzzles_completed":
-            metrics.puzzleCompleted++
-            break
-          case "CpfEntered":
-          case "cpf_entered":
-          case "cpf_confirmed":
-            metrics.cpfEntered++
-            break
+          case "RouletteFirstSpin":
+          case "roulette_first_spin":
           case "RouletteStarted":
           case "roulette_started":
-            metrics.rouletteStarted++
+            metrics.rouletteFirstSpin++
+            break
+          case "RouletteDecision80":
+          case "roulette_decision_80":
+          case "RouletteRiskAll":
+          case "roulette_risk_all":
+            metrics.rouletteDecision80OrRisk++
             break
           case "DiscountClaimed":
           case "discount_claimed":
           case "discount_applied":
-            metrics.discountClaimed++
-            break
-          case "ViewContent":
-          case "view_content":
-          case "products_page_view":
-            metrics.viewContent++
-            break
-          case "AddToCart":
-          case "add_to_cart":
-            metrics.addToCart++
-            break
-          case "InitiateCheckout":
-          case "initiate_checkout":
-            metrics.initiateCheckout++
-            break
-          case "Purchase":
-          case "purchase":
-            metrics.purchase++
+          case "RouletteResult80":
+          case "RouletteResult100":
+          case "roulette_result_80":
+          case "roulette_result_100":
+            metrics.rouletteFinalResult++
             break
           default:
-            console.log("[v0] Evento não reconhecido:", eventName, "Status:", status)
+            if (!["PageView", "page_view"].includes(eventName)) {
+              console.log("[v0] Evento não reconhecido:", eventName, "Status:", status)
+            }
         }
       } else {
         console.log("[v0] Evento ignorado por status:", eventName, "Status:", status)
@@ -203,7 +189,7 @@ export default function AnalyticsDashboard() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Analytics Dashboard</h1>
-          <p className="text-gray-600">Acompanhe o desempenho do funil de conversão em tempo real</p>
+          <p className="text-gray-600">Acompanhe o desempenho do funil de conversão detalhado</p>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -235,74 +221,99 @@ export default function AnalyticsDashboard() {
           </button>
         </div>
 
-        {/* Métricas do Funil */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-4 mb-8">
           <div className="bg-white p-6 rounded-lg shadow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Page Views</p>
-                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.pageViews}</p>
+                <p className="text-sm font-medium text-gray-600">Página Inicial</p>
+                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.homePageView}</p>
               </div>
-              <Users className="w-8 h-8 text-blue-500" />
+              <Home className="w-8 h-8 text-blue-500" />
             </div>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Puzzle Iniciado</p>
-                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.puzzleStarted}</p>
+                <p className="text-sm font-medium text-gray-600">Página Produto</p>
+                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.productPageView}</p>
                 <p className="text-xs text-gray-500">
-                  {conversionRate(funnelMetrics.pageViews, funnelMetrics.puzzleStarted)}% dos views
+                  {conversionRate(funnelMetrics.homePageView, funnelMetrics.productPageView)}%
                 </p>
               </div>
-              <Target className="w-8 h-8 text-orange-500" />
+              <Package className="w-8 h-8 text-green-500" />
             </div>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Puzzle Completo</p>
-                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.puzzleCompleted}</p>
+                <p className="text-sm font-medium text-gray-600">Visualizou Roleta</p>
+                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.roulettePageView}</p>
                 <p className="text-xs text-gray-500">
-                  {conversionRate(funnelMetrics.puzzleStarted, funnelMetrics.puzzleCompleted)}% dos iniciados
+                  {conversionRate(funnelMetrics.productPageView, funnelMetrics.roulettePageView)}%
                 </p>
               </div>
-              <TrendingUp className="w-8 h-8 text-green-500" />
+              <Dice6 className="w-8 h-8 text-purple-500" />
             </div>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Desconto Resgatado</p>
-                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.discountClaimed}</p>
+                <p className="text-sm font-medium text-gray-600">Aceitou Termos</p>
+                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.rouletteTermsAccepted}</p>
                 <p className="text-xs text-gray-500">
-                  {conversionRate(funnelMetrics.cpfEntered, funnelMetrics.discountClaimed)}% dos CPFs
+                  {conversionRate(funnelMetrics.roulettePageView, funnelMetrics.rouletteTermsAccepted)}%
                 </p>
               </div>
-              <ShoppingCart className="w-8 h-8 text-purple-500" />
+              <CheckCircle className="w-8 h-8 text-indigo-500" />
             </div>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Compras</p>
-                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.purchase}</p>
+                <p className="text-sm font-medium text-gray-600">Primeiro Giro</p>
+                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.rouletteFirstSpin}</p>
                 <p className="text-xs text-gray-500">
-                  {conversionRate(funnelMetrics.pageViews, funnelMetrics.purchase)}% conversão final
+                  {conversionRate(funnelMetrics.rouletteTermsAccepted, funnelMetrics.rouletteFirstSpin)}%
                 </p>
               </div>
-              <TrendingUp className="w-8 h-8 text-red-500" />
+              <RotateCcw className="w-8 h-8 text-orange-500" />
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">80% ou Risco</p>
+                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.rouletteDecision80OrRisk}</p>
+                <p className="text-xs text-gray-500">
+                  {conversionRate(funnelMetrics.rouletteFirstSpin, funnelMetrics.rouletteDecision80OrRisk)}%
+                </p>
+              </div>
+              <Target className="w-8 h-8 text-yellow-500" />
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Resultado Final</p>
+                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.rouletteFinalResult}</p>
+                <p className="text-xs text-gray-500">
+                  {conversionRate(funnelMetrics.homePageView, funnelMetrics.rouletteFinalResult)}% total
+                </p>
+              </div>
+              <Gift className="w-8 h-8 text-red-500" />
             </div>
           </div>
         </div>
 
         {/* Gráfico do Funil */}
         <div className="bg-white p-6 rounded-lg shadow mb-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Funil de Conversão</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Funil de Conversão Detalhado</h2>
           <AnalyticsChart data={funnelMetrics} />
         </div>
 

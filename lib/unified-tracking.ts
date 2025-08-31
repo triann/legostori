@@ -81,9 +81,12 @@ class UnifiedTracking {
   }
 
   // Funnel-specific tracking methods
-  async trackPageView() {
-    console.log(`[v0] trackPageView called`)
-    await this.track({ eventName: "PageView" })
+  async trackPageView(url?: string) {
+    console.log(`[v0] trackPageView called with URL:`, url)
+    await this.track({
+      eventName: "PageView",
+      customData: { url: url || window.location.href },
+    })
   }
 
   async trackPuzzleStarted() {
@@ -106,12 +109,47 @@ class UnifiedTracking {
     await this.track({ eventName: "RouletteStarted" })
   }
 
-  async trackDiscountClaimed(discountValue: number) {
-    console.log(`[v0] trackDiscountClaimed called with value:`, discountValue)
+  async trackRouletteTermsAccepted() {
+    console.log(`[v0] trackRouletteTermsAccepted called`)
+    await this.track({ eventName: "RouletteTermsAccepted" })
+  }
+
+  async trackRouletteFirstSpin() {
+    console.log(`[v0] trackRouletteFirstSpin called`)
+    await this.track({ eventName: "RouletteFirstSpin" })
+  }
+
+  async trackRouletteDecision80() {
+    console.log(`[v0] trackRouletteDecision80 called`)
     await this.track({
-      eventName: "DiscountClaimed",
-      value: discountValue,
-      customData: { discount_percentage: discountValue },
+      eventName: "RouletteDecision80",
+      customData: { decision: "take_80_percent" },
+    })
+  }
+
+  async trackRouletteRiskAll() {
+    console.log(`[v0] trackRouletteRiskAll called`)
+    await this.track({
+      eventName: "RouletteRiskAll",
+      customData: { decision: "risk_all" },
+    })
+  }
+
+  async trackRouletteResult80() {
+    console.log(`[v0] trackRouletteResult80 called`)
+    await this.track({
+      eventName: "RouletteResult80",
+      value: 80,
+      customData: { final_discount: 80 },
+    })
+  }
+
+  async trackRouletteResult100() {
+    console.log(`[v0] trackRouletteResult100 called`)
+    await this.track({
+      eventName: "RouletteResult100",
+      value: 100,
+      customData: { final_discount: 100 },
     })
   }
 

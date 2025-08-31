@@ -1,102 +1,94 @@
 "use client"
 
-import { useMemo } from "react"
+import { Bar, BarChart, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from "recharts"
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 
-interface FunnelMetrics {
-  pageViews: number
-  puzzleStarted: number
-  puzzleCompleted: number
-  cpfEntered: number
-  rouletteStarted: number
-  discountClaimed: number
-  viewContent: number
-  addToCart: number
-  initiateCheckout: number
-  purchase: number
+interface FunnelStats {
+  homePageView: number
+  productPageView: number
+  roulettePageView: number
+  rouletteTermsAccepted: number
+  rouletteFirstSpin: number
+  rouletteDecision80OrRisk: number
+  rouletteFinalResult: number
 }
 
 interface AnalyticsChartProps {
-  data: FunnelMetrics
+  data: FunnelStats
 }
 
 export function AnalyticsChart({ data }: AnalyticsChartProps) {
-  const funnelData = useMemo(() => {
-    const steps = [
-      { name: "Page Views", value: data.pageViews, color: "bg-blue-500" },
-      { name: "Puzzle Iniciado", value: data.puzzleStarted, color: "bg-orange-500" },
-      { name: "Puzzle Completo", value: data.puzzleCompleted, color: "bg-green-500" },
-      { name: "CPF Inserido", value: data.cpfEntered, color: "bg-purple-500" },
-      { name: "Roleta Iniciada", value: data.rouletteStarted, color: "bg-pink-500" },
-      { name: "Desconto Resgatado", value: data.discountClaimed, color: "bg-indigo-500" },
-      { name: "Visualizou Produtos", value: data.viewContent, color: "bg-yellow-500" },
-      { name: "Adicionou ao Carrinho", value: data.addToCart, color: "bg-red-500" },
-      { name: "Iniciou Checkout", value: data.initiateCheckout, color: "bg-teal-500" },
-      { name: "Comprou", value: data.purchase, color: "bg-gray-800" },
-    ]
-
-    const maxValue = Math.max(...steps.map((step) => step.value))
-
-    return steps.map((step) => ({
-      ...step,
-      percentage: maxValue > 0 ? (step.value / maxValue) * 100 : 0,
-      conversionRate: data.pageViews > 0 ? ((step.value / data.pageViews) * 100).toFixed(1) : "0.0",
-    }))
-  }, [data])
+  const chartData = [
+    { step: "Página Inicial", count: data.homePageView, rate: 100 },
+    {
+      step: "Página Produto",
+      count: data.productPageView,
+      rate: data.homePageView ? (data.productPageView / data.homePageView) * 100 : 0,
+    },
+    {
+      step: "Visualizou Roleta",
+      count: data.roulettePageView,
+      rate: data.productPageView ? (data.roulettePageView / data.productPageView) * 100 : 0,
+    },
+    {
+      step: "Aceitou Termos",
+      count: data.rouletteTermsAccepted,
+      rate: data.roulettePageView ? (data.rouletteTermsAccepted / data.roulettePageView) * 100 : 0,
+    },
+    {
+      step: "Primeiro Giro",
+      count: data.rouletteFirstSpin,
+      rate: data.rouletteTermsAccepted ? (data.rouletteFirstSpin / data.rouletteTermsAccepted) * 100 : 0,
+    },
+    {
+      step: "80% ou Risco",
+      count: data.rouletteDecision80OrRisk,
+      rate: data.rouletteFirstSpin ? (data.rouletteDecision80OrRisk / data.rouletteFirstSpin) * 100 : 0,
+    },
+    {
+      step: "Resultado Final",
+      count: data.rouletteFinalResult,
+      rate: data.rouletteDecision80OrRisk ? (data.rouletteFinalResult / data.rouletteDecision80OrRisk) * 100 : 0,
+    },
+  ]
 
   return (
     <div className="space-y-4">
-      {funnelData.map((step, index) => (
-        <div key={step.name} className="flex items-center space-x-4">
-          <div className="w-32 text-sm font-medium text-gray-700 text-right">{step.name}</div>
+      <ChartContainer
+        config={{
+          count: {
+            label: "Usuários",
+            color: "hsl(var(--chart-1))",
+          },
+        }}
+        className="h-[400px]"
+      >
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="step" angle={-45} textAnchor="end" height={100} fontSize={12} />
+            <YAxis />
+            <ChartTooltip
+              content={<ChartTooltipContent />}
+              formatter={(value, name, props) => [
+                `${value} usuários (${props.payload?.rate?.toFixed(1)}%)`,
+                "Conversão",
+              ]}
+            />
+            <Bar dataKey="count" fill="var(--color-count)" />
+          </BarChart>
+        </ResponsiveContainer>
+      </ChartContainer>
 
-          <div className="flex-1 bg-gray-200 rounded-full h-8 relative overflow-hidden">
-            <div
-              className={`h-full ${step.color} transition-all duration-500 ease-out flex items-center justify-end pr-3`}
-              style={{ width: `${step.percentage}%` }}
-            >
-              <span className="text-white text-sm font-bold">{step.value}</span>
-            </div>
+      <div className="grid grid-cols-3 gap-4 text-sm">
+        {chartData.map((item, index) => (
+          <div key={item.step} className="flex justify-between p-2 border rounded">
+            <span>{item.step}:</span>
+            <span className="font-bold">
+              {item.count} ({item.rate.toFixed(1)}%)
+            </span>
           </div>
-
-          <div className="w-16 text-sm text-gray-600 text-center">{step.conversionRate}%</div>
-
-          {index > 0 && (
-            <div className="w-20 text-xs text-gray-500 text-center">
-              {funnelData[index - 1].value > 0 ? ((step.value / funnelData[index - 1].value) * 100).toFixed(1) : "0.0"}%
-              do anterior
-            </div>
-          )}
-        </div>
-      ))}
-
-      <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">Resumo de Conversão</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-          <div>
-            <span className="text-gray-600">Taxa de Engajamento:</span>
-            <div className="font-bold text-orange-600">
-              {data.pageViews > 0 ? ((data.puzzleStarted / data.pageViews) * 100).toFixed(1) : "0.0"}%
-            </div>
-          </div>
-          <div>
-            <span className="text-gray-600">Taxa de Conclusão:</span>
-            <div className="font-bold text-green-600">
-              {data.puzzleStarted > 0 ? ((data.puzzleCompleted / data.puzzleStarted) * 100).toFixed(1) : "0.0"}%
-            </div>
-          </div>
-          <div>
-            <span className="text-gray-600">Taxa de Resgate:</span>
-            <div className="font-bold text-purple-600">
-              {data.cpfEntered > 0 ? ((data.discountClaimed / data.cpfEntered) * 100).toFixed(1) : "0.0"}%
-            </div>
-          </div>
-          <div>
-            <span className="text-gray-600">Taxa de Compra:</span>
-            <div className="font-bold text-red-600">
-              {data.pageViews > 0 ? ((data.purchase / data.pageViews) * 100).toFixed(1) : "0.0"}%
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   )
