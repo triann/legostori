@@ -20,32 +20,55 @@ export async function POST(request: NextRequest) {
     const logEntry: TrackingLogEntry = await request.json()
     const supabase = createClient()
 
+    if (!logEntry.eventName || !logEntry.sessionId) {
+      console.error("[Tracking Log API] Missing required fields:", logEntry)
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
+    }
+
     logEntry.ip = request.ip || request.headers.get("x-forwarded-for") || "unknown"
+
+    console.log("[Tracking Log API] Attempting to save event:", logEntry.eventName)
 
     const { data, error } = await supabase
       .from("tracking_logs")
       .insert({
         event_name: logEntry.eventName,
-        event_data: logEntry.data,
+        event_data: logEntry.data || {},
         session_id: logEntry.sessionId,
-        user_agent: logEntry.userAgent,
+        user_agent: logEntry.userAgent || "unknown",
         ip_address: logEntry.ip,
-        platform: logEntry.platform,
-        status: logEntry.status,
-        created_at: new Date(logEntry.timestamp).toISOString(),
+        platform: logEntry.platform || "meta",
+        status: logEntry.status || "success",
+        created_at: new Date(logEntry.timestamp || Date.now()).toISOString(),
       })
       .select()
 
     if (error) {
       console.error("[Tracking Log API] Supabase error:", error)
-      return NextResponse.json({ error: "Failed to save to database" }, { status: 500 })
+      return NextResponse.json(
+        {
+          error: "Failed to save to database",
+          details: error.message,
+        },
+        { status: 500 },
+      )
     }
 
-    console.log("[Tracking Log API] Event saved to database:", logEntry.eventName)
-    return NextResponse.json({ success: true, received: logEntry.eventName, id: data?.[0]?.id })
+    console.log("[Tracking Log API] Event saved successfully:", logEntry.eventName)
+    return NextResponse.json({
+      success: true,
+      received: logEntry.eventName,
+      id: data?.[0]?.id,
+    })
   } catch (error) {
     console.error("[Tracking Log API] Error:", error)
-    return NextResponse.json({ error: "Failed to log event" }, { status: 500 })
+    return NextResponse.json(
+      {
+        error: "Failed to log event",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 },
+    )
   }
 }
 

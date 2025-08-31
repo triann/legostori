@@ -35,16 +35,27 @@ class UnifiedTracking {
   async track(eventData: TrackingEventData) {
     const { eventName, value, currency = "BRL", contentIds = [], customData = {} } = eventData
 
+    console.log(`[v0] UnifiedTracking.track called:`, {
+      eventName,
+      value,
+      currency,
+      contentIds,
+      customData,
+      sessionId: this.sessionId,
+    })
+
     const eventKey = this.getEventKey(eventName, customData)
     if (this.trackedEvents.has(eventKey)) {
-      console.log(`[v0] Duplicate event prevented: ${eventName}`)
+      console.log(`[v0] Duplicate event prevented: ${eventName}`, { eventKey })
       return
     }
     this.trackedEvents.add(eventKey)
 
     try {
+      console.log(`[v0] Calling trackingLogger.log for ${eventName}`)
       trackingLogger.log("meta", eventName, { value, currency, contentIds, customData }, "pending")
 
+      console.log(`[v0] Calling metaTracking.track for ${eventName}`)
       await metaTracking.track(eventName, {
         value,
         currency,
@@ -52,8 +63,12 @@ class UnifiedTracking {
         ...customData,
       })
 
+      console.log(`[v0] Successfully tracked ${eventName}, logging success`)
       trackingLogger.log("meta", eventName, { value, currency, content_ids: contentIds, ...customData }, "success")
+
+      console.log(`[v0] Event ${eventName} completed successfully`)
     } catch (error) {
+      console.error(`[v0] Error tracking ${eventName}:`, error)
       trackingLogger.log(
         "meta",
         eventName,
@@ -67,26 +82,32 @@ class UnifiedTracking {
 
   // Funnel-specific tracking methods
   async trackPageView() {
+    console.log(`[v0] trackPageView called`)
     await this.track({ eventName: "PageView" })
   }
 
   async trackPuzzleStarted() {
+    console.log(`[v0] trackPuzzleStarted called`)
     await this.track({ eventName: "PuzzleStarted" })
   }
 
   async trackPuzzleCompleted() {
+    console.log(`[v0] trackPuzzleCompleted called`)
     await this.track({ eventName: "PuzzleCompleted" })
   }
 
   async trackCpfEntered() {
+    console.log(`[v0] trackCpfEntered called`)
     await this.track({ eventName: "CpfEntered" })
   }
 
   async trackRouletteStarted() {
+    console.log(`[v0] trackRouletteStarted called`)
     await this.track({ eventName: "RouletteStarted" })
   }
 
   async trackDiscountClaimed(discountValue: number) {
+    console.log(`[v0] trackDiscountClaimed called with value:`, discountValue)
     await this.track({
       eventName: "DiscountClaimed",
       value: discountValue,
@@ -103,6 +124,7 @@ class UnifiedTracking {
   }
 
   async trackAddToCart(value: number, productIds: string[] = []) {
+    console.log(`[v0] trackAddToCart called with value:`, value, "productIds:", productIds)
     await this.track({
       eventName: "AddToCart",
       value,
@@ -171,14 +193,17 @@ class UnifiedTracking {
   }
 
   async trackCheckoutPersonalInfo() {
+    console.log(`[v0] trackCheckoutPersonalInfo called`)
     await this.trackCheckoutStep(2, "personal_info", { step_description: "Dados pessoais" })
   }
 
   async trackCheckoutDelivery() {
+    console.log(`[v0] trackCheckoutDelivery called`)
     await this.trackCheckoutStep(3, "delivery", { step_description: "Informações de entrega" })
   }
 
   async trackCheckoutPayment() {
+    console.log(`[v0] trackCheckoutPayment called`)
     await this.trackCheckoutStep(4, "payment", { step_description: "Método de pagamento" })
   }
 }

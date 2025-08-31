@@ -1,40 +1,79 @@
 import { type NextRequest, NextResponse } from "next/server"
 
-const PIXEL_ID = "14315111414682142"
-const ACCESS_TOKEN =
-  "EAAY1z45RfPQBPQ9PQex5YMxNdj675qLbGDeQ7i3OHTnNLztnW60VCu5rpfhWVkZB2zIT9rSkjParGJWoZA6F3WSsqoPtlcR04XNCG51TuTmKXwXOZB6s7yqZCB2VFBWoNq5ZCAktpPBulJvk2xJ63ks8PhiA42KHkUzKUiNIi6ljrTlmoyndFgsMycdfNrQZDZD"
+interface MetaEventData {
+  event_name: string
+  event_time: number
+  event_id: string
+  user_data: {
+    em?: string
+    ph?: string
+    client_ip_address?: string
+    client_user_agent?: string
+    fbc?: string
+    fbp?: string
+  }
+  custom_data?: {
+    content_ids?: string[]
+    content_type?: string
+    content_name?: string
+    value?: number
+    currency?: string
+    num_items?: number
+    order_id?: string
+  }
+  event_source_url: string
+  action_source: string
+}
 
 export async function POST(request: NextRequest) {
   try {
-    const eventData = await request.json()
+    const eventData: MetaEventData = await request.json()
 
-    // Add server-side data
     eventData.user_data.client_ip_address =
-      request.ip || request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip")
+      request.ip || request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown"
 
-    // Send to Meta Conversions API
-    const response = await fetch(`https://graph.facebook.com/v18.0/${PIXEL_ID}/events`, {
+    const pixelId = "14315111414682142"
+    const accessToken =
+      "EAAY1z45RfPQBPQ9PQex5YMxNdj675qLbGDeQ7i3OHTnNLztnW60VCu5rpfhWVkZB2zIT9rSkjParGJWoZA6F3WSsqoPtlcR04XNCG51TuTmKXwXOZB6s7yqZCB2VFBWoNq5ZCAktpPBulJvk2xJ63ks8PhiA42KHkUzKUiNIi6ljrTlmoyndFgsMycdfNrQZDZD"
+
+    const response = await fetch(`https://graph.facebook.com/v18.0/${pixelId}/events`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         data: [eventData],
-        access_token: ACCESS_TOKEN,
+        access_token: accessToken,
       }),
     })
 
     const result = await response.json()
 
     if (response.ok) {
-      console.log("[v0] Meta Conversions API success:", result)
-      return NextResponse.json({ success: true, result })
+      console.log("[Meta Conversions API] Event sent successfully:", eventData.event_name)
+      return NextResponse.json({
+        success: true,
+        event_name: eventData.event_name,
+        event_id: eventData.event_id,
+        result,
+      })
     } else {
-      console.error("[v0] Meta Conversions API error:", result)
-      return NextResponse.json({ success: false, error: result }, { status: 400 })
+      console.error("[Meta Conversions API] Error:", result)
+      return NextResponse.json(
+        {
+          error: "Failed to send to Meta",
+          details: result,
+        },
+        { status: 400 },
+      )
     }
   } catch (error) {
-    console.error("[v0] Meta Conversions API error:", error)
-    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 })
+    console.error("[Meta Conversions API] Error:", error)
+    return NextResponse.json(
+      {
+        error: "Failed to process Meta conversion event",
+      },
+      { status: 500 },
+    )
   }
 }
