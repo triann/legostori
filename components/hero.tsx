@@ -18,9 +18,9 @@ export function Hero({ discount = 0 }: HeroProps) {
       }
     } else {
       return {
-        title: "Nova promoção Lego disponível!",
+        title: "O Quebra-Cabeça Lego está no ar!",
         description:
-          "Escolha o LEGO que você deseja e descubra o quebra-cabeça exclusivo daquele set. Complete o desafio, gire a roleta e ganhe prêmios incríveis. Cada peça montada é uma chance de transformar diversão em recompensa – não perca a sua!",
+          "Escolha o LEGO que você deseja e descubra o quebra-cabeça exclusivo daquele set. Complete o desafio, gire a roleta e ganhe descontos incríveis. Cada peça montada é uma chance de transformar diversão em recompensa – não perca a sua!",
       }
     }
   }
