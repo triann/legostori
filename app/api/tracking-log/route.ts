@@ -28,33 +28,47 @@ export async function POST(request: NextRequest) {
     logEntry.ip = request.ip || request.headers.get("x-forwarded-for") || "unknown"
 
     console.log("[Tracking Log API] Attempting to save event:", logEntry.eventName)
+    console.log("[Tracking Log API] Full log entry:", JSON.stringify(logEntry, null, 2))
 
-    const { data, error } = await supabase
-      .from("tracking_logs")
-      .insert({
-        event_name: logEntry.eventName,
-        event_data: logEntry.data || {},
-        session_id: logEntry.sessionId,
-        user_agent: logEntry.userAgent || "unknown",
-        ip_address: logEntry.ip,
-        platform: logEntry.platform || "meta",
-        status: logEntry.status || "success",
-        created_at: new Date(logEntry.timestamp || Date.now()).toISOString(),
-      })
-      .select()
+    let timestamp
+    try {
+      timestamp = logEntry.timestamp ? new Date(logEntry.timestamp).toISOString() : new Date().toISOString()
+    } catch (e) {
+      console.error("[Tracking Log API] Invalid timestamp:", logEntry.timestamp)
+      timestamp = new Date().toISOString()
+    }
+
+    const insertData = {
+      event_name: logEntry.eventName,
+      event_data: logEntry.data || {},
+      session_id: logEntry.sessionId,
+      user_agent: logEntry.userAgent || "unknown",
+      ip_address: logEntry.ip,
+      platform: logEntry.platform || "meta",
+      status: logEntry.status || "success",
+      created_at: timestamp,
+    }
+
+    console.log("[Tracking Log API] Insert data:", JSON.stringify(insertData, null, 2))
+
+    const { data, error } = await supabase.from("tracking_logs").insert(insertData).select()
 
     if (error) {
       console.error("[Tracking Log API] Supabase error:", error)
+      console.error("[Tracking Log API] Error details:", JSON.stringify(error, null, 2))
       return NextResponse.json(
         {
           error: "Failed to save to database",
           details: error.message,
+          code: error.code,
+          hint: error.hint,
         },
         { status: 500 },
       )
     }
 
     console.log("[Tracking Log API] Event saved successfully:", logEntry.eventName)
+    console.log("[Tracking Log API] Saved data:", JSON.stringify(data, null, 2))
     return NextResponse.json({
       success: true,
       received: logEntry.eventName,
@@ -62,6 +76,7 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error("[Tracking Log API] Error:", error)
+    console.error("[Tracking Log API] Error stack:", error instanceof Error ? error.stack : "No stack")
     return NextResponse.json(
       {
         error: "Failed to log event",
