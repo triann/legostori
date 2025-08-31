@@ -83,9 +83,10 @@ class UnifiedTracking {
   // Funnel-specific tracking methods
   async trackPageView(url?: string) {
     console.log(`[v0] trackPageView called with URL:`, url)
+    const currentUrl = url || (typeof window !== "undefined" ? window.location.href : "server-side-render")
     await this.track({
       eventName: "PageView",
-      customData: { url: url || window.location.href },
+      customData: { url: currentUrl },
     })
   }
 

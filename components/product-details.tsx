@@ -86,7 +86,7 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
     setIsAddingToCart(true)
 
     try {
-      unifiedTracking.trackAddToCart(discount === 100 ? 0 : product.price * (1 - discount / 100), [product.id])
+      await unifiedTracking.trackAddToCart(discount === 100 ? 0 : product.price * (1 - discount / 100), [product.id])
     } catch (error) {
       console.error("[v0] Erro no trackAddToCart:", error)
     }
@@ -178,24 +178,46 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
     setIsAddingToWishlist(false)
   }
 
-  const handleStartPuzzle = () => {
+  const handleStartPuzzle = async () => {
     try {
       console.log("[v0] handleStartPuzzle chamado")
-      unifiedTracking.trackPuzzleStarted()
+      await unifiedTracking.track({
+        eventName: "PuzzleViewed",
+        customData: {
+          product_id: product.id,
+          product_name: product.name,
+          puzzle_discount: product.puzzleDiscount,
+        },
+      })
+
+      await unifiedTracking.trackPuzzleStarted()
       setShowPuzzle(true)
     } catch (error) {
       console.error("[v0] Erro no handleStartPuzzle:", error)
     }
   }
 
-  const handlePuzzleComplete = (
+  const handlePuzzleComplete = async (
     result: { type: "discount" | "free"; value: number; productName?: string },
     moves: number,
     errors: number,
   ) => {
     try {
       console.log("[v0] handlePuzzleComplete chamado com resultado:", result)
-      unifiedTracking.trackPuzzleCompleted()
+      await unifiedTracking.track({
+        eventName: "PuzzleFinished",
+        customData: {
+          product_id: product.id,
+          product_name: product.name,
+          moves_count: moves,
+          errors_count: errors,
+          result_type: result.type,
+          result_value: result.value,
+          completed_successfully: true,
+        },
+      })
+
+      await unifiedTracking.trackPuzzleCompleted()
       setPuzzleResult(result)
       setShowPuzzle(false)
       setShowPuzzleComplete(true)
@@ -204,9 +226,22 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
     }
   }
 
-  const handleCpfConfirm = () => {
+  const handleCpfConfirm = async () => {
     if (cpf.length >= 11) {
-      unifiedTracking.trackCpfEntered()
+      try {
+        await unifiedTracking.track({
+          eventName: "CpfInserted",
+          customData: {
+            product_id: product.id,
+            cpf_length: cpf.replace(/\D/g, "").length,
+            puzzle_result: puzzleResult,
+          },
+        })
+
+        await unifiedTracking.trackCpfEntered()
+      } catch (error) {
+        console.error("[v0] Erro no tracking CPF:", error)
+      }
 
       localStorage.setItem("puzzleCompleted", "true")
       localStorage.setItem("discountEarned", puzzleResult?.value.toString() || "80")

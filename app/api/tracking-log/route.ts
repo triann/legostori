@@ -25,11 +25,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    const rawIp = request.ip || request.headers.get("x-forwarded-for") || "unknown"
-    logEntry.ip = rawIp.split(",")[0].trim()
+    const rawIp =
+      request.ip ||
+      request.headers.get("x-forwarded-for") ||
+      request.headers.get("x-real-ip") ||
+      request.headers.get("cf-connecting-ip") ||
+      "127.0.0.1"
+
+    const cleanIp = rawIp.split(",")[0].trim()
+    // Se ainda for "unknown", usar IP padrão
+    logEntry.ip = cleanIp === "unknown" ? "127.0.0.1" : cleanIp
 
     console.log("[Tracking Log API] Attempting to save event:", logEntry.eventName)
-    console.log("[Tracking Log API] Full log entry:", JSON.stringify(logEntry, null, 2))
+    console.log("[Tracking Log API] IP extracted:", logEntry.ip)
 
     let timestamp
     try {

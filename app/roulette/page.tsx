@@ -57,7 +57,7 @@ export default function RoulettePage() {
     return () => clearInterval(interval)
   }, [])
 
-  const handleSpin = () => {
+  const handleSpin = async () => {
     if (isSpinning) return
 
     if (!hasSeenTerms) {
@@ -65,53 +65,65 @@ export default function RoulettePage() {
       return
     }
 
-    if (attempt === 0) {
-      unifiedTracking.trackRouletteFirstSpin()
+    try {
+      if (attempt === 0) {
+        await unifiedTracking.trackRouletteFirstSpin()
+      }
+
+      await unifiedTracking.track({
+        eventName: "RouletteButtonClicked",
+        customData: {
+          button_id: "button-cta",
+          attempt_number: attempt + 1,
+          user_ready_to_spin: true,
+          product_id: productData?.productId || "unknown",
+        },
+      })
+
+      await unifiedTracking.track({
+        eventName: "RouletteSpinStarted",
+        customData: {
+          attempt_number: attempt + 1,
+          total_attempts: 2,
+          is_final_attempt: attempt === 1,
+          product_id: productData?.productId || "unknown",
+        },
+      })
+    } catch (error) {
+      console.error("[v0] Error tracking roulette events:", error)
     }
-
-    unifiedTracking.track({
-      eventName: "RouletteButtonClicked",
-      customData: {
-        button_id: "button-cta",
-        attempt_number: attempt + 1,
-        user_ready_to_spin: true,
-        product_id: productData?.productId || "unknown",
-      },
-    })
-
-    unifiedTracking.track({
-      eventName: "RouletteSpinStarted",
-      customData: {
-        attempt_number: attempt + 1,
-        total_attempts: 2,
-        is_final_attempt: attempt === 1,
-        product_id: productData?.productId || "unknown",
-      },
-    })
 
     setIsSpinning(true)
 
     if (attempt === 0) {
-      setTimeout(() => {
-        unifiedTracking.trackDiscountClaimed(80)
-        unifiedTracking.track({
-          eventName: "RouletteFirstAttemptCompleted",
-          value: 80,
-          customData: {
-            discount_percentage: 80,
-            has_second_attempt: true,
-            product_id: productData?.productId || "unknown",
-          },
-        })
+      setTimeout(async () => {
+        try {
+          await unifiedTracking.trackDiscountClaimed(80)
+          await unifiedTracking.track({
+            eventName: "RouletteFirstAttemptCompleted",
+            value: 80,
+            customData: {
+              discount_percentage: 80,
+              has_second_attempt: true,
+              product_id: productData?.productId || "unknown",
+            },
+          })
+        } catch (error) {
+          console.error("[v0] Error tracking first attempt completion:", error)
+        }
 
         setShowTryAgainPopup(true)
         setIsSpinning(false)
         setAttempt((prev) => prev + 1)
       }, 10000)
     } else {
-      setTimeout(() => {
-        unifiedTracking.trackDiscountClaimed(100)
-        unifiedTracking.trackRouletteResult100()
+      setTimeout(async () => {
+        try {
+          await unifiedTracking.trackDiscountClaimed(100)
+          await unifiedTracking.trackRouletteResult100()
+        } catch (error) {
+          console.error("[v0] Error tracking second attempt completion:", error)
+        }
 
         if (typeof window !== "undefined" && window.confetti) {
           window.confetti({
@@ -127,8 +139,12 @@ export default function RoulettePage() {
     }
   }
 
-  const handleAcceptTerms = () => {
-    unifiedTracking.trackRouletteTermsAccepted()
+  const handleAcceptTerms = async () => {
+    try {
+      await unifiedTracking.trackRouletteTermsAccepted()
+    } catch (error) {
+      console.error("[v0] Error tracking terms acceptance:", error)
+    }
 
     setShowTermsModal(false)
     setHasSeenTerms(true)
@@ -138,9 +154,13 @@ export default function RoulettePage() {
     setShowTryAgainPopup(false)
   }
 
-  const handleClaim80Discount = () => {
-    unifiedTracking.trackRouletteDecision80()
-    unifiedTracking.trackRouletteResult80()
+  const handleClaim80Discount = async () => {
+    try {
+      await unifiedTracking.trackRouletteDecision80()
+      await unifiedTracking.trackRouletteResult80()
+    } catch (error) {
+      console.error("[v0] Error tracking 80% discount claim:", error)
+    }
 
     setShowTryAgainPopup(false)
     if (productData?.productId) {
@@ -150,17 +170,21 @@ export default function RoulettePage() {
     }
   }
 
-  const handleClaimPrize = () => {
-    unifiedTracking.track({
-      eventName: "DiscountClaimed100Percent",
-      value: 100,
-      customData: {
-        discount_percentage: 100,
-        completed_all_attempts: true,
-        final_prize_claimed: true,
-        product_id: productData?.productId || "unknown",
-      },
-    })
+  const handleClaimPrize = async () => {
+    try {
+      await unifiedTracking.track({
+        eventName: "DiscountClaimed100Percent",
+        value: 100,
+        customData: {
+          discount_percentage: 100,
+          completed_all_attempts: true,
+          final_prize_claimed: true,
+          product_id: productData?.productId || "unknown",
+        },
+      })
+    } catch (error) {
+      console.error("[v0] Error tracking 100% discount claim:", error)
+    }
 
     setShowWinPopup(false)
     if (productData?.productId) {
@@ -170,8 +194,12 @@ export default function RoulettePage() {
     }
   }
 
-  const handleRisk = () => {
-    unifiedTracking.trackRouletteRiskAll()
+  const handleRisk = async () => {
+    try {
+      await unifiedTracking.trackRouletteRiskAll()
+    } catch (error) {
+      console.error("[v0] Error tracking risk all:", error)
+    }
 
     setShowTryAgainPopup(false)
     handleSpin()
