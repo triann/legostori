@@ -25,7 +25,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    logEntry.ip = request.ip || request.headers.get("x-forwarded-for") || "unknown"
+    const rawIp = request.ip || request.headers.get("x-forwarded-for") || "unknown"
+    logEntry.ip = rawIp.split(",")[0].trim()
 
     console.log("[Tracking Log API] Attempting to save event:", logEntry.eventName)
     console.log("[Tracking Log API] Full log entry:", JSON.stringify(logEntry, null, 2))
