@@ -12,7 +12,24 @@ export default function RoulettePage() {
   const [showTermsModal, setShowTermsModal] = useState(false)
   const [hasSeenTerms, setHasSeenTerms] = useState(false)
   const [currentNotification, setCurrentNotification] = useState(0)
+  const [productData, setProductData] = useState<any>(null)
   const router = useRouter()
+
+  useEffect(() => {
+    const savedProductId = localStorage.getItem("productId")
+    const savedDiscountEarned = localStorage.getItem("discountEarned")
+    const savedDiscountType = localStorage.getItem("discountType")
+    const savedUserCpf = localStorage.getItem("userCpf")
+
+    if (savedProductId) {
+      setProductData({
+        productId: savedProductId,
+        discountEarned: Number(savedDiscountEarned) || 80,
+        discountType: savedDiscountType || "discount",
+        userCpf: savedUserCpf,
+      })
+    }
+  }, [])
 
   const notifications = [
     { name: "Pedro Oliveira", discount: "75%", image: "https://i.postimg.cc/RhB8zCK5/24.jpg" },
@@ -54,6 +71,7 @@ export default function RoulettePage() {
         button_id: "button-cta",
         attempt_number: attempt + 1,
         user_ready_to_spin: true,
+        product_id: productData?.productId || "unknown",
       },
     })
 
@@ -63,6 +81,7 @@ export default function RoulettePage() {
         attempt_number: attempt + 1,
         total_attempts: 2,
         is_final_attempt: attempt === 1,
+        product_id: productData?.productId || "unknown",
       },
     })
 
@@ -77,6 +96,7 @@ export default function RoulettePage() {
           customData: {
             discount_percentage: 80,
             has_second_attempt: true,
+            product_id: productData?.productId || "unknown",
           },
         })
 
@@ -93,6 +113,7 @@ export default function RoulettePage() {
           customData: {
             discount_percentage: 100,
             final_result: true,
+            product_id: productData?.productId || "unknown",
           },
         })
 
@@ -116,6 +137,7 @@ export default function RoulettePage() {
       customData: {
         terms_accepted: true,
         ready_to_spin: true,
+        product_id: productData?.productId || "unknown",
       },
     })
 
@@ -135,11 +157,16 @@ export default function RoulettePage() {
         discount_percentage: 80,
         chose_safe_option: true,
         skipped_second_attempt: true,
+        product_id: productData?.productId || "unknown",
       },
     })
 
     setShowTryAgainPopup(false)
-    router.push("/products?discount=80")
+    if (productData?.productId) {
+      router.push(`/product/${productData.productId}?discount=80`)
+    } else {
+      router.push("/products?discount=80")
+    }
   }
 
   const handleClaimPrize = () => {
@@ -150,11 +177,16 @@ export default function RoulettePage() {
         discount_percentage: 100,
         completed_all_attempts: true,
         final_prize_claimed: true,
+        product_id: productData?.productId || "unknown",
       },
     })
 
     setShowWinPopup(false)
-    router.push("/products?discount=100")
+    if (productData?.productId) {
+      router.push(`/product/${productData.productId}?discount=100`)
+    } else {
+      router.push("/products?discount=100")
+    }
   }
 
   const handleRisk = () => {
@@ -164,11 +196,11 @@ export default function RoulettePage() {
         chose_risk_option: true,
         abandoned_80_percent: true,
         going_for_100_percent: true,
+        product_id: productData?.productId || "unknown",
       },
     })
 
     setShowTryAgainPopup(false)
-    // Inicia automaticamente a segunda tentativa da roleta
     handleSpin()
   }
 
