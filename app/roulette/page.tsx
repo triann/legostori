@@ -232,7 +232,7 @@ export default function RoulettePage() {
               }
             />
           </div>
-          <img src="https://i.ibb.co/r97hXK6/button-gire.png" id="roleta3" />
+          <img src="https://i.ibb.co/FbJ4QpF9/button-gire.png" id="roleta3" />
         </div>
         <div className="button-roulette">
           <button onClick={handleSpin} disabled={isSpinning} id="button-cta" className="runSpin">

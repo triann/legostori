@@ -221,6 +221,8 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
     setCpf(formatted)
   }
 
+  const hasDiscount = discount > 0
+
   if (showPuzzle) {
     try {
       console.log("[v0] Renderizando PuzzleGame")
@@ -427,17 +429,36 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
               <Zap className="w-5 h-5 text-red-600" />
               <h3 className="font-bold text-lg text-red-800">Desafio do Quebra-Cabeça</h3>
             </div>
-            <p className="text-sm text-red-700 mb-4">
-              Complete o quebra-cabeça deste produto e ganhe até <strong>{product.puzzleDiscount}% de desconto</strong>{" "}
-              ou até mesmo o <strong>produto GRÁTIS</strong> na roleta da sorte!
-            </p>
-            <Button
-              onClick={handleStartPuzzle}
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all hover:scale-105 animate-pulse shadow-lg flex items-center justify-center gap-2"
-            >
-              <Zap className="w-4 h-4" />
-              Começar Quebra-Cabeça
-            </Button>
+
+            {hasDiscount ? (
+              <>
+                <p className="text-sm text-green-700 mb-4">
+                  <strong>Parabéns!</strong> Você já completou o desafio e ganhou {discount}% de desconto neste produto!
+                </p>
+                <Button
+                  disabled
+                  className="w-full bg-green-600 text-white font-bold rounded-lg cursor-not-allowed opacity-75 flex items-center justify-center gap-2"
+                >
+                  <CheckCircle className="w-4 h-4" />
+                  DESCONTO JÁ APLICADO
+                </Button>
+              </>
+            ) : (
+              <>
+                <p className="text-sm text-red-700 mb-4">
+                  Complete o quebra-cabeça deste produto e ganhe até{" "}
+                  <strong>{product.puzzleDiscount}% de desconto</strong> ou até mesmo o <strong>produto GRÁTIS</strong>{" "}
+                  na roleta da sorte!
+                </p>
+                <Button
+                  onClick={handleStartPuzzle}
+                  className="w-full bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all hover:scale-105 animate-pulse shadow-lg flex items-center justify-center gap-2"
+                >
+                  <Zap className="w-4 h-4" />
+                  Começar Quebra-Cabeça
+                </Button>
+              </>
+            )}
           </div>
 
           <div className="space-y-4">
