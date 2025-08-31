@@ -48,6 +48,9 @@ interface ProductDetailsProps {
 }
 
 export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
+  console.log("[v0] ProductDetails renderizando com produto:", product?.name)
+  console.log("[v0] ProductDetails discount:", discount)
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isAddingToCart, setIsAddingToCart] = useState(false)
   const [isAddingToWishlist, setIsAddingToWishlist] = useState(false)
@@ -63,7 +66,12 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
   const router = useRouter()
 
   useEffect(() => {
-    unifiedTracking.trackProductView(product.id, product.name, product.price)
+    try {
+      console.log("[v0] ProductDetails useEffect - trackProductView")
+      unifiedTracking.trackProductView(product.id, product.name, product.price)
+    } catch (error) {
+      console.error("[v0] Erro no trackProductView:", error)
+    }
   }, [product])
 
   const nextImage = () => {
@@ -164,8 +172,13 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
   }
 
   const handleStartPuzzle = () => {
-    unifiedTracking.trackPuzzleStarted()
-    setShowPuzzle(true)
+    try {
+      console.log("[v0] handleStartPuzzle chamado")
+      unifiedTracking.trackPuzzleStarted()
+      setShowPuzzle(true)
+    } catch (error) {
+      console.error("[v0] Erro no handleStartPuzzle:", error)
+    }
   }
 
   const handlePuzzleComplete = (
@@ -173,10 +186,15 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
     moves: number,
     errors: number,
   ) => {
-    unifiedTracking.trackPuzzleCompleted()
-    setPuzzleResult(result)
-    setShowPuzzle(false)
-    setShowPuzzleComplete(true)
+    try {
+      console.log("[v0] handlePuzzleComplete chamado com resultado:", result)
+      unifiedTracking.trackPuzzleCompleted()
+      setPuzzleResult(result)
+      setShowPuzzle(false)
+      setShowPuzzleComplete(true)
+    } catch (error) {
+      console.error("[v0] Erro no handlePuzzleComplete:", error)
+    }
   }
 
   const handleCpfConfirm = () => {
@@ -204,24 +222,38 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
   }
 
   if (showPuzzle) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 bg-[url('https://i.ibb.co/5Xhm2BC8/bg.png')] bg-cover bg-center bg-no-repeat bg-blend-overlay relative">
-        <div className="flex items-end pb-8 justify-center min-h-screen p-1">
-          <PuzzleGame
-            image={product.puzzleImage}
-            onComplete={handlePuzzleComplete}
-            onClose={() => setShowPuzzle(false)}
-            productName={product.name}
-            discount={product.puzzleDiscount}
-            originalPrice={product.price}
-            discountedPrice={product.price * (1 - product.puzzleDiscount / 100)}
-            timeLimit={product.puzzleTimeLimit}
-            currentPuzzle={1}
-            totalPuzzles={1}
-          />
+    try {
+      console.log("[v0] Renderizando PuzzleGame")
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 bg-[url('https://i.ibb.co/5Xhm2BC8/bg.png')] bg-cover bg-center bg-no-repeat bg-blend-overlay relative">
+          <div className="flex items-end pb-8 justify-center min-h-screen p-1">
+            <PuzzleGame
+              image={product.puzzleImage}
+              onComplete={handlePuzzleComplete}
+              onClose={() => setShowPuzzle(false)}
+              productName={product.name}
+              discount={product.puzzleDiscount}
+              originalPrice={product.price}
+              discountedPrice={product.price * (1 - product.puzzleDiscount / 100)}
+              timeLimit={product.puzzleTimeLimit}
+              currentPuzzle={1}
+              totalPuzzles={1}
+            />
+          </div>
         </div>
-      </div>
-    )
+      )
+    } catch (error) {
+      console.error("[v0] Erro ao renderizar PuzzleGame:", error)
+      return (
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h2 className="text-xl font-bold text-red-600 mb-2">Erro no Quebra-Cabeça</h2>
+            <p className="text-gray-600 mb-4">Ocorreu um erro ao carregar o jogo.</p>
+            <Button onClick={() => setShowPuzzle(false)}>Voltar ao Produto</Button>
+          </div>
+        </div>
+      )
+    }
   }
 
   if (showPuzzleComplete) {
@@ -424,7 +456,7 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
               ) : discount === 100 ? (
                 "Resgatar Produto Grátis"
               ) : (
-                `Adicionar à sacola - R$ {(product.price * (1 - discount / 100)).toFixed(2)}`
+                `Adicionar à sacola - R$ ${(product.price * (1 - discount / 100)).toFixed(2)}`
               )}
             </Button>
 
