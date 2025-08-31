@@ -145,6 +145,42 @@ class UnifiedTracking {
       customData: { order_id: orderId },
     })
   }
+
+  async trackProductView(productId: string, productName: string, productPrice: number) {
+    await this.track({
+      eventName: "ViewContent",
+      value: productPrice,
+      contentIds: [productId],
+      customData: {
+        content_name: productName,
+        product_id: productId,
+        product_price: productPrice,
+      },
+    })
+  }
+
+  async trackCheckoutStep(step: number, stepName: string, customData: any = {}) {
+    await this.track({
+      eventName: "CheckoutStep",
+      customData: {
+        checkout_step: step,
+        step_name: stepName,
+        ...customData,
+      },
+    })
+  }
+
+  async trackCheckoutPersonalInfo() {
+    await this.trackCheckoutStep(2, "personal_info", { step_description: "Dados pessoais" })
+  }
+
+  async trackCheckoutDelivery() {
+    await this.trackCheckoutStep(3, "delivery", { step_description: "Informações de entrega" })
+  }
+
+  async trackCheckoutPayment() {
+    await this.trackCheckoutStep(4, "payment", { step_description: "Método de pagamento" })
+  }
 }
 
 export const unifiedTracking = new UnifiedTracking()

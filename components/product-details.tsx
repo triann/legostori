@@ -84,6 +84,13 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
 
   const handleAddToCart = async () => {
     setIsAddingToCart(true)
+
+    try {
+      unifiedTracking.trackAddToCart(discount === 100 ? 0 : product.price * (1 - discount / 100), [product.id])
+    } catch (error) {
+      console.error("[v0] Erro no trackAddToCart:", error)
+    }
+
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
     const isMobile = window.innerWidth < 768
@@ -447,7 +454,7 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
               <>
                 <p className="text-sm text-red-700 mb-4">
                   Complete o quebra-cabeça deste produto e ganhe até{" "}
-                  <strong>80% de desconto</strong> ou até mesmo o <strong>produto GRÁTIS</strong>{" "}
+                  <strong>{product.puzzleDiscount}% de desconto</strong> ou até mesmo o <strong>produto GRÁTIS</strong>{" "}
                   na roleta da sorte!
                 </p>
                 <Button

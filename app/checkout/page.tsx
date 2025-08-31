@@ -440,6 +440,7 @@ export default function CheckoutPage() {
     }
 
     setEmailError("")
+    unifiedTracking.trackCheckoutPersonalInfo()
     setCurrentStep("personal")
     setFormData({ ...formData, email: email })
   }
@@ -631,6 +632,7 @@ export default function CheckoutPage() {
       cpf: cpf,
       phone: phone,
     })
+    unifiedTracking.trackCheckoutDelivery()
     setCurrentStep("address")
   }
 
@@ -639,6 +641,7 @@ export default function CheckoutPage() {
       alert("Por favor, preencha o número do endereço.")
       return
     }
+    unifiedTracking.trackCheckoutPayment()
     setCurrentStep("payment")
   }
 
