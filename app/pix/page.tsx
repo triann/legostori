@@ -5,7 +5,7 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
 import { checkPaymentStatus, generateQRCodeUrl } from "@/lib/pix-api"
-import { useAnalytics } from "@/hooks/use-analytics"
+import { unifiedTracking } from "@/lib/unified-tracking"
 
 interface PixPaymentData {
   qrcode: string
@@ -21,14 +21,10 @@ export default function PixPage() {
   const [pixData, setPixData] = useState<PixPaymentData | null>(null)
   const [paymentStatus, setPaymentStatus] = useState<"pending" | "approved" | "rejected">("pending")
   const [copied, setCopied] = useState(false)
-  const { trackEvent } = useAnalytics()
   let interval: NodeJS.Timeout | null = null
 
   useEffect(() => {
-    trackEvent("pix_page_view", {
-      page: "pix",
-      timestamp: Date.now(),
-    })
+    unifiedTracking.trackPageView()
 
     // Carregar dados do PIX do localStorage
     const savedPixData = localStorage.getItem("pixPayment")
@@ -48,38 +44,8 @@ export default function PixPage() {
       }
 
       setPixData(parsedData)
-
-      trackEvent("pix_data_loaded", {
-        product_name: parsedData.productName,
-        amount: parsedData.amount,
-        token: parsedData.token,
-        page: "pix",
-      })
-    } else {
-      trackEvent("pix_data_error", {
-        error: "no_data_in_localstorage",
-        page: "pix",
-      })
     }
-
-    const startTime = Date.now()
-
-    const handleBeforeUnload = () => {
-      const timeSpent = Date.now() - startTime
-      trackEvent("pix_time_spent", {
-        time_spent_seconds: Math.round(timeSpent / 1000),
-        payment_status: paymentStatus,
-        page: "pix",
-      })
-    }
-
-    window.addEventListener("beforeunload", handleBeforeUnload)
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload)
-      handleBeforeUnload()
-    }
-  }, [trackEvent])
+  }, [])
 
   const showToast = (message: string, type: "success" | "error" | "warning" | "info" = "success") => {
     // Remove toast anterior se existir
@@ -136,12 +102,6 @@ export default function PixPage() {
   }
 
   const confirmPayment = () => {
-    trackEvent("pix_confirm_payment_click", {
-      token: pixData?.token,
-      amount: pixData?.amount,
-      page: "pix",
-    })
-
     if (confirm("Você confirma que já efetuou o pagamento?")) {
       checkPaymentStatusNow()
       showToast("Obrigado! Estamos verificando seu pagamento.", "info")
@@ -161,24 +121,12 @@ export default function PixPage() {
   const checkPaymentStatusNow = async () => {
     if (!pixData?.token) return
 
-    trackEvent("pix_manual_status_check", {
-      token: pixData.token,
-      page: "pix",
-    })
-
     try {
       const status = await checkPaymentStatus(pixData.token)
       if (status.success && status.status === "APPROVED") {
         setPaymentStatus("approved")
         if (interval) clearInterval(interval)
         showToast("Pagamento confirmado! Redirecionando...", "success")
-
-        trackEvent("pix_payment_approved", {
-          token: pixData.token,
-          amount: pixData.amount,
-          product_name: pixData.productName,
-          page: "pix",
-        })
 
         const redirectUrl = getRedirectUrl(pixData.productName)
         setTimeout(() => {
@@ -187,24 +135,12 @@ export default function PixPage() {
       } else if (status.status === "REJECTED") {
         setPaymentStatus("rejected")
         if (interval) clearInterval(interval)
-
-        trackEvent("pix_payment_rejected", {
-          token: pixData.token,
-          amount: pixData.amount,
-          page: "pix",
-        })
       } else {
         showToast("Pagamento ainda está sendo processado.", "warning")
       }
     } catch (error) {
       console.error("Erro ao verificar status:", error)
       showToast("Erro ao verificar status do pagamento.", "error")
-
-      trackEvent("pix_status_check_error", {
-        token: pixData.token,
-        error: (error as Error).message,
-        page: "pix",
-      })
     }
   }
 
@@ -221,13 +157,6 @@ export default function PixPage() {
           if (interval) clearInterval(interval)
           showToast("Pagamento confirmado! Redirecionando...", "success")
 
-          trackEvent("pix_payment_approved_auto", {
-            token: pixData.token,
-            amount: pixData.amount,
-            product_name: pixData.productName,
-            page: "pix",
-          })
-
           const redirectUrl = getRedirectUrl(pixData.productName)
           setTimeout(() => {
             window.location.href = redirectUrl
@@ -235,12 +164,6 @@ export default function PixPage() {
         } else if (status.status === "REJECTED") {
           setPaymentStatus("rejected")
           if (interval) clearInterval(interval)
-
-          trackEvent("pix_payment_rejected_auto", {
-            token: pixData.token,
-            amount: pixData.amount,
-            page: "pix",
-          })
         } else {
           console.log("Pagamento ainda pendente")
         }
@@ -253,30 +176,18 @@ export default function PixPage() {
     setTimeout(() => {
       if (interval) clearInterval(interval)
       console.log("Verificação automática interrompida após 15 minutos")
-
-      trackEvent("pix_verification_timeout", {
-        token: pixData.token,
-        page: "pix",
-      })
     }, 900000)
 
     return () => {
       if (interval) clearInterval(interval)
     }
-  }, [pixData, trackEvent, paymentStatus])
+  }, [pixData])
 
   const copyPixCode = () => {
     if (pixData?.qrcode) {
       navigator.clipboard.writeText(pixData.qrcode)
       setCopied(true)
       showToast("Código PIX copiado!", "success")
-
-      trackEvent("pix_code_copied", {
-        token: pixData.token,
-        amount: pixData.amount,
-        page: "pix",
-      })
-
       setTimeout(() => setCopied(false), 2000)
     }
   }
@@ -331,12 +242,6 @@ export default function PixPage() {
                 src={generateQRCodeUrl(pixData.qrcode) || "/placeholder.svg"}
                 alt="QR Code PIX"
                 className="w-44 h-44 rounded"
-                onLoad={() => {
-                  trackEvent("pix_qr_code_loaded", {
-                    token: pixData.token,
-                    page: "pix",
-                  })
-                }}
               />
             </div>
 

@@ -79,6 +79,8 @@ export default function CheckoutPage() {
   const [product, setProduct] = useState<any>(null)
 
   useEffect(() => {
+    unifiedTracking.trackPageView()
+
     const checkoutData = localStorage.getItem("checkoutProduct")
     if (checkoutData) {
       const item = JSON.parse(checkoutData)

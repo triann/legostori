@@ -112,6 +112,8 @@ export function PuzzleGame({
     })
   }
 
+  const analytics = useAnalytics()
+
   useEffect(() => {
     if (image) {
       const img = new Image()
@@ -192,17 +194,25 @@ export function PuzzleGame({
       createConfetti()
       window.scrollTo(0, 0)
 
+      analytics.trackEvent("all_puzzles_completed", {
+        puzzle_number: currentPuzzle,
+        total_puzzles: totalPuzzles,
+        total_moves: moves,
+        completion_time: timeLimit - timeRemaining,
+        time_remaining: timeRemaining,
+        product_name: productName,
+        success: true,
+      })
+
       setTimeout(() => {
         onComplete({ type: "discount", value: 70 }, moves, 0)
       }, 2000)
     }
-  }, [pieces, isComplete, timeRemaining, onComplete, moves, currentPuzzle, totalPuzzles])
+  }, [pieces, isComplete, timeRemaining, onComplete, moves, currentPuzzle, totalPuzzles, productName, timeLimit])
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
-
-  const analytics = useAnalytics()
 
   const handlePieceClick = (pieceId: number) => {
     if (selectedPiece === null) {
