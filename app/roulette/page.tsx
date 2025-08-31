@@ -255,7 +255,7 @@ export default function RoulettePage() {
 
               <div className="terms-content-simple">
                 <p>
-                  <strong>Parabéns!</strong> Você conquistou <strong>2 tentativas</strong> na nossa Roleta da Sorte!
+                  <strong>Parabéns!</strong> Você conquistou <strong>3 tentativas</strong> na nossa Roleta da Sorte!
                 </p>
 
                 <div className="terms-list">
@@ -298,7 +298,7 @@ export default function RoulettePage() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <span>Você tem 2 tentativas para ganhar</span>
+                    <span>Você tem 3 tentativas para ganhar</span>
                   </div>
                 </div>
 
@@ -333,10 +333,10 @@ export default function RoulettePage() {
             <div className="popup-content">
               <div className="discount-info">
                 <p>
-                  <strong>Parabéns!</strong> você conquistou <strong>80% de desconto</strong> em todos os produtos LEGO!
+                  <strong>Parabéns!</strong> você conquistou <strong>80% de desconto</strong>!
                 </p>
                 <p className="risk-text">
-                  Você ainda tem <strong>1 tentativa</strong> para girar a roleta. O que você escolhe?
+                  Você ainda tem <strong>2 tentativas</strong> para girar a roleta. O que você escolhe?
                 </p>
                 <p className="warning-text">
                   ⚠️ <strong>Atenção:</strong> Se você escolher "ARRISCAR TUDO", não poderá reverter essa decisão!

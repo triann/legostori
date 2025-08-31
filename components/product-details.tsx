@@ -228,7 +228,7 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
       console.log("[v0] Renderizando PuzzleGame")
       return (
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 bg-[url('https://i.ibb.co/5Xhm2BC8/bg.png')] bg-cover bg-center bg-no-repeat bg-blend-overlay relative">
-          <div className="flex items-end pb-8 justify-center min-h-screen p-1">
+          <div className="flex items-center justify-center min-h-screen p-1 pt-16">
             <PuzzleGame
               image={product.puzzleImage}
               onComplete={handlePuzzleComplete}
@@ -447,7 +447,7 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
               <>
                 <p className="text-sm text-red-700 mb-4">
                   Complete o quebra-cabeça deste produto e ganhe até{" "}
-                  <strong>{product.puzzleDiscount}% de desconto</strong> ou até mesmo o <strong>produto GRÁTIS</strong>{" "}
+                  <strong>80% de desconto</strong> ou até mesmo o <strong>produto GRÁTIS</strong>{" "}
                   na roleta da sorte!
                 </p>
                 <Button
