@@ -102,7 +102,7 @@ export function Header() {
           <div className="flex items-center justify-between h-14 md:h-16">
             {/* Logo e menu mobile */}
             <div className="flex items-center gap-2 md:gap-8">
-              <Link href={`/products${discountParam}`}>
+              <Link href={`/`}>
                 <img
                   src="https://legobrasil.vtexassets.com/assets/vtex/assets-builder/legobrasil.dup-template/1.28.0/logo___40c43ea8a6afef0f36be240072a0e00d.png"
                   alt="LEGO"
