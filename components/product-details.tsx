@@ -217,7 +217,6 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
         },
       })
 
-      await unifiedTracking.trackPuzzleCompleted()
       setPuzzleResult(result)
       setShowPuzzle(false)
       setShowPuzzleComplete(true)
@@ -238,7 +237,6 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
           },
         })
 
-        
       } catch (error) {
         console.error("[v0] Erro no tracking CPF:", error)
       }

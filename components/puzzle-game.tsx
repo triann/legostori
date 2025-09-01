@@ -196,16 +196,6 @@ export function PuzzleGame({
       createConfetti()
       window.scrollTo(0, 0)
 
-      analytics.trackEvent("all_puzzles_completed", {
-        puzzle_number: currentPuzzle,
-        total_puzzles: totalPuzzles,
-        total_moves: moves,
-        completion_time: timeLimit - timeRemaining,
-        time_remaining: timeRemaining,
-        product_name: productName,
-        success: true,
-      })
-
       setTimeout(() => {
         onComplete({ type: "discount", value: 70 }, moves, 0)
       }, 2000)
