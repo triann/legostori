@@ -65,6 +65,10 @@ export default function RoulettePage() {
       return
     }
 
+    try {
+      if (attempt === 0) {
+        await unifiedTracking.trackRouletteFirstSpin()
+      }
 
       await unifiedTracking.track({
         eventName: "RouletteButtonClicked",
@@ -72,16 +76,6 @@ export default function RoulettePage() {
           button_id: "button-cta",
           attempt_number: attempt + 1,
           user_ready_to_spin: true,
-          product_id: productData?.productId || "unknown",
-        },
-      })
-
-      await unifiedTracking.track({
-        eventName: "RouletteSpinStarted",
-        customData: {
-          attempt_number: attempt + 1,
-          total_attempts: 2,
-          is_final_attempt: attempt === 1,
           product_id: productData?.productId || "unknown",
         },
       })
