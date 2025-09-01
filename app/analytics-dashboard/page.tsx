@@ -48,8 +48,9 @@ interface FunnelMetrics {
   roulettePageView: number
   rouletteTermsAccepted: number
   rouletteFirstSpin: number
-  rouletteDecision80OrRisk: number
-  rouletteFinalResult: number
+  rouletteDecision80: number
+  rouletteRiskAll: number
+  rouletteResult100: number
 }
 
 export default function AnalyticsDashboard() {
@@ -72,8 +73,9 @@ export default function AnalyticsDashboard() {
     roulettePageView: 0,
     rouletteTermsAccepted: 0,
     rouletteFirstSpin: 0,
-    rouletteDecision80OrRisk: 0,
-    rouletteFinalResult: 0,
+    rouletteDecision80: 0,
+    rouletteRiskAll: 0,
+    rouletteResult100: 0,
   })
 
   const fetchAnalytics = async () => {
@@ -110,8 +112,9 @@ export default function AnalyticsDashboard() {
       roulettePageView: 0,
       rouletteTermsAccepted: 0,
       rouletteFirstSpin: 0,
-      rouletteDecision80OrRisk: 0,
-      rouletteFinalResult: 0,
+      rouletteDecision80: 0,
+      rouletteRiskAll: 0,
+      rouletteResult100: 0,
     }
 
     console.log("[v0] Calculando métricas para", logs.length, "logs")
@@ -209,18 +212,21 @@ export default function AnalyticsDashboard() {
             break
           case "RouletteDecision80":
           case "roulette_decision_80":
+            metrics.rouletteDecision80++
+            break
           case "RouletteRiskAll":
           case "roulette_risk_all":
-            metrics.rouletteDecision80OrRisk++
+            metrics.rouletteRiskAll++
+            break
+          case "RouletteResult100":
+          case "roulette_result_100":
+            metrics.rouletteResult100++
             break
           case "DiscountClaimed":
           case "discount_claimed":
           case "discount_applied":
           case "RouletteResult80":
-          case "RouletteResult100":
           case "roulette_result_80":
-          case "roulette_result_100":
-            metrics.rouletteFinalResult++
             break
           default:
             if (!["PageView", "page_view"].includes(eventName)) {
@@ -310,7 +316,7 @@ export default function AnalyticsDashboard() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-8">
           <div className="bg-white p-6 rounded-lg shadow">
             <div className="flex items-center justify-between">
               <div>
@@ -428,10 +434,10 @@ export default function AnalyticsDashboard() {
           <div className="bg-white p-6 rounded-lg shadow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">80% ou Risco</p>
-                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.rouletteDecision80OrRisk}</p>
+                <p className="text-sm font-medium text-gray-600">Resgatou 80%</p>
+                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.rouletteDecision80}</p>
                 <p className="text-xs text-gray-500">
-                  {conversionRate(funnelMetrics.rouletteFirstSpin, funnelMetrics.rouletteDecision80OrRisk)}%
+                  {conversionRate(funnelMetrics.rouletteFirstSpin, funnelMetrics.rouletteDecision80)}%
                 </p>
               </div>
               <Target className="w-8 h-8 text-yellow-500" />
@@ -441,10 +447,40 @@ export default function AnalyticsDashboard() {
           <div className="bg-white p-6 rounded-lg shadow">
             <div className="flex items-center justify-between">
               <div>
+                <p className="text-sm font-medium text-gray-600">Arriscou Tudo</p>
+                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.rouletteRiskAll}</p>
+                <p className="text-xs text-gray-500">
+                  {conversionRate(funnelMetrics.rouletteFirstSpin, funnelMetrics.rouletteRiskAll)}%
+                </p>
+              </div>
+              <Dice6 className="w-8 h-8 text-red-500" />
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Resgatou 100%</p>
+                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.rouletteResult100}</p>
+                <p className="text-xs text-gray-500">
+                  {conversionRate(funnelMetrics.rouletteRiskAll, funnelMetrics.rouletteResult100)}%
+                </p>
+              </div>
+              <Gift className="w-8 h-8 text-green-500" />
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow">
+            <div className="flex items-center justify-between">
+              <div>
                 <p className="text-sm font-medium text-gray-600">Adicionou à Sacola</p>
                 <p className="text-2xl font-bold text-gray-900">{funnelMetrics.addedToCart}</p>
                 <p className="text-xs text-gray-500">
-                  {conversionRate(funnelMetrics.rouletteFinalResult, funnelMetrics.addedToCart)}%
+                  {conversionRate(
+                    funnelMetrics.rouletteDecision80 + funnelMetrics.rouletteResult100,
+                    funnelMetrics.addedToCart,
+                  )}
+                  %
                 </p>
               </div>
               <ShoppingCart className="w-8 h-8 text-lime-500" />
@@ -493,13 +529,13 @@ export default function AnalyticsDashboard() {
           <div className="bg-white p-6 rounded-lg shadow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Resultado Final</p>
-                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.rouletteFinalResult}</p>
+                <p className="text-sm font-medium text-gray-600">Conversão Total</p>
+                <p className="text-2xl font-bold text-gray-900">{funnelMetrics.checkoutPayment}</p>
                 <p className="text-xs text-gray-500">
-                  {conversionRate(funnelMetrics.homePageView, funnelMetrics.rouletteFinalResult)}% total
+                  {conversionRate(funnelMetrics.homePageView, funnelMetrics.checkoutPayment)}% total
                 </p>
               </div>
-              <Gift className="w-8 h-8 text-red-500" />
+              <CheckCircle className="w-8 h-8 text-green-500" />
             </div>
           </div>
         </div>
