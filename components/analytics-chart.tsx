@@ -3,18 +3,28 @@
 import { Bar, BarChart, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from "recharts"
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 
-interface FunnelStats {
+interface FunnelMetrics {
   homePageView: number
   productPageView: number
+  puzzleViewed: number
+  puzzleStarted: number
+  puzzleFinished: number
+  cpfInserted: number
+  addedToCart: number
+  checkoutViewed: number
+  checkoutPersonalInfo: number
+  checkoutDelivery: number
+  checkoutPayment: number
   roulettePageView: number
   rouletteTermsAccepted: number
   rouletteFirstSpin: number
-  rouletteDecision80OrRisk: number
-  rouletteFinalResult: number
+  rouletteDecision80: number
+  rouletteRiskAll: number
+  rouletteResult100: number
 }
 
 interface AnalyticsChartProps {
-  data: FunnelStats
+  data: FunnelMetrics
 }
 
 export function AnalyticsChart({ data }: AnalyticsChartProps) {
@@ -26,9 +36,29 @@ export function AnalyticsChart({ data }: AnalyticsChartProps) {
       rate: data.homePageView ? (data.productPageView / data.homePageView) * 100 : 0,
     },
     {
+      step: "Visualizou Quebra-cabeça",
+      count: data.puzzleViewed,
+      rate: data.productPageView ? (data.puzzleViewed / data.productPageView) * 100 : 0,
+    },
+    {
+      step: "Iniciou Quebra-cabeça",
+      count: data.puzzleStarted,
+      rate: data.puzzleViewed ? (data.puzzleStarted / data.puzzleViewed) * 100 : 0,
+    },
+    {
+      step: "Finalizou Quebra-cabeça",
+      count: data.puzzleFinished,
+      rate: data.puzzleStarted ? (data.puzzleFinished / data.puzzleStarted) * 100 : 0,
+    },
+    {
+      step: "Inseriu CPF",
+      count: data.cpfInserted,
+      rate: data.puzzleFinished ? (data.cpfInserted / data.puzzleFinished) * 100 : 0,
+    },
+    {
       step: "Visualizou Roleta",
       count: data.roulettePageView,
-      rate: data.productPageView ? (data.roulettePageView / data.productPageView) * 100 : 0,
+      rate: data.cpfInserted ? (data.roulettePageView / data.cpfInserted) * 100 : 0,
     },
     {
       step: "Aceitou Termos",
@@ -41,14 +71,47 @@ export function AnalyticsChart({ data }: AnalyticsChartProps) {
       rate: data.rouletteTermsAccepted ? (data.rouletteFirstSpin / data.rouletteTermsAccepted) * 100 : 0,
     },
     {
-      step: "80% ou Risco",
-      count: data.rouletteDecision80OrRisk,
-      rate: data.rouletteFirstSpin ? (data.rouletteDecision80OrRisk / data.rouletteFirstSpin) * 100 : 0,
+      step: "Resgatou 80%",
+      count: data.rouletteDecision80,
+      rate: data.rouletteFirstSpin ? (data.rouletteDecision80 / data.rouletteFirstSpin) * 100 : 0,
     },
     {
-      step: "Resultado Final",
-      count: data.rouletteFinalResult,
-      rate: data.rouletteDecision80OrRisk ? (data.rouletteFinalResult / data.rouletteDecision80OrRisk) * 100 : 0,
+      step: "Arriscou Tudo",
+      count: data.rouletteRiskAll,
+      rate: data.rouletteFirstSpin ? (data.rouletteRiskAll / data.rouletteFirstSpin) * 100 : 0,
+    },
+    {
+      step: "Resgatou 100%",
+      count: data.rouletteResult100,
+      rate: data.rouletteRiskAll ? (data.rouletteResult100 / data.rouletteRiskAll) * 100 : 0,
+    },
+    {
+      step: "Adicionou à Sacola",
+      count: data.addedToCart,
+      rate:
+        data.rouletteDecision80 + data.rouletteResult100
+          ? (data.addedToCart / (data.rouletteDecision80 + data.rouletteResult100)) * 100
+          : 0,
+    },
+    {
+      step: "Visualizou Checkout",
+      count: data.checkoutViewed,
+      rate: data.addedToCart ? (data.checkoutViewed / data.addedToCart) * 100 : 0,
+    },
+    {
+      step: "Dados Pessoais",
+      count: data.checkoutPersonalInfo,
+      rate: data.checkoutViewed ? (data.checkoutPersonalInfo / data.checkoutViewed) * 100 : 0,
+    },
+    {
+      step: "Entrega",
+      count: data.checkoutDelivery,
+      rate: data.checkoutPersonalInfo ? (data.checkoutDelivery / data.checkoutPersonalInfo) * 100 : 0,
+    },
+    {
+      step: "Pagamento",
+      count: data.checkoutPayment,
+      rate: data.checkoutDelivery ? (data.checkoutPayment / data.checkoutDelivery) * 100 : 0,
     },
   ]
 
@@ -61,12 +124,12 @@ export function AnalyticsChart({ data }: AnalyticsChartProps) {
             color: "hsl(var(--chart-1))",
           },
         }}
-        className="h-[400px]"
+        className="h-[600px]"
       >
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+          <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 120 }}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="step" angle={-45} textAnchor="end" height={100} fontSize={12} />
+            <XAxis dataKey="step" angle={-45} textAnchor="end" height={120} fontSize={10} interval={0} />
             <YAxis />
             <ChartTooltip
               content={<ChartTooltipContent />}
@@ -80,11 +143,11 @@ export function AnalyticsChart({ data }: AnalyticsChartProps) {
         </ResponsiveContainer>
       </ChartContainer>
 
-      <div className="grid grid-cols-3 gap-4 text-sm">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 text-xs">
         {chartData.map((item, index) => (
-          <div key={item.step} className="flex justify-between p-2 border rounded">
-            <span>{item.step}:</span>
-            <span className="font-bold">
+          <div key={item.step} className="flex flex-col p-2 border rounded">
+            <span className="font-medium truncate">{item.step}</span>
+            <span className="font-bold text-blue-600">
               {item.count} ({item.rate.toFixed(1)}%)
             </span>
           </div>
