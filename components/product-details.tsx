@@ -238,7 +238,7 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
           },
         })
 
-        await unifiedTracking.trackCpfEntered()
+        
       } catch (error) {
         console.error("[v0] Erro no tracking CPF:", error)
       }
