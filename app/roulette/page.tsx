@@ -209,7 +209,7 @@ export default function RoulettePage() {
     <div
       className="min-h-screen w-full relative overflow-hidden"
       style={{
-        backgroundImage: "url(https://i.ibb.co/qK15JRb/bg-roleta.png)",
+        backgroundImage: "url(https://i.ibb.co/fG24WYPw/bg-roleta.png)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -223,7 +223,7 @@ export default function RoulettePage() {
           <img src="/placeholder.svg" id="roleta1" />
           <div id="roleta2">
             <img
-              src="https://i.ibb.co/WvS5M873/roleta.png"
+              src="https://i.ibb.co/G4Mst6M6/roleta.png"
               className={
                 isSpinning
                   ? attempt === 0
@@ -256,7 +256,7 @@ export default function RoulettePage() {
 
               <div className="terms-content-simple">
                 <p>
-                  <strong>Parabéns!</strong> Você conquistou <strong>2 tentativas</strong> na nossa Roleta da Sorte!
+                  <strong>Parabéns!</strong> Você conquistou <strong>3 tentativas</strong> na nossa Roleta da Sorte!
                 </p>
 
                 <div className="terms-list">
@@ -299,7 +299,7 @@ export default function RoulettePage() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <span>Você tem 2 tentativas para ganhar</span>
+                    <span>Você tem 3 tentativas para ganhar</span>
                   </div>
                 </div>
 
@@ -334,10 +334,10 @@ export default function RoulettePage() {
             <div className="popup-content">
               <div className="discount-info">
                 <p>
-                  <strong>Parabéns!</strong> você conquistou <strong>80% de desconto</strong> em todos os produtos LEGO!
+                  <strong>Parabéns!</strong> você conquistou <strong>80% de desconto</strong>!
                 </p>
                 <p className="risk-text">
-                  Você ainda tem <strong>1 tentativa</strong> para girar a roleta. O que você escolhe?
+                  Você ainda tem <strong>2 tentativas</strong> para girar a roleta. O que você escolhe?
                 </p>
                 <p className="warning-text">
                   ⚠️ <strong>Atenção:</strong> Se você escolher "ARRISCAR TUDO", não poderá reverter essa decisão!
@@ -378,7 +378,7 @@ export default function RoulettePage() {
           <div id="popup" className="popup">
             <div className="popup-content">
               <h2>Parabéns!</h2>
-              <img src="https://i.ibb.co/qFnYZt08/gratis-png-lego-thumbnail.png" alt="Emoji feliz" />
+              <img src="https://i.ibb.co/4RXXHDwC/gratis-png-lego-thumbnail.png" alt="Emoji feliz" />
               <p>
                 Você ganhou <strong>100% de desconto</strong> na Lego Store! Clique no botão abaixo para resgatar agora.{" "}
               </p>

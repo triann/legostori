@@ -75,6 +75,7 @@ export function PuzzleGame({
 
   const timerRef = useRef<NodeJS.Timeout>()
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const completionEventFired = useRef(false)
 
   const rouletteOptions: RouletteOption[] = [
     { id: 1, label: "30% OFF", discount: 30, color: "#FFE4E1", textColor: "#8B0000" },
@@ -188,7 +189,8 @@ export function PuzzleGame({
 
   useEffect(() => {
     const isCompleted = pieces.every((piece) => piece.correctPosition === piece.currentPosition)
-    if (isCompleted && pieces.length > 0 && !isComplete) {
+    if (isCompleted && pieces.length > 0 && !isComplete && !completionEventFired.current) {
+      completionEventFired.current = true
       setIsComplete(true)
       setShowConfetti(true)
       createConfetti()
@@ -664,7 +666,7 @@ export function PuzzleGame({
                   <span className="font-semibold text-sm text-gray-800">{"Você pode receber:"}</span>
                 </div>
                 <div className="text-xs text-gray-700 space-y-1">
-                  <p>• Descontos de 15% até 70%;</p>
+                  <p>• Descontos de 15% até 80%;</p>
                   <p>• Produto completamente Grátis;</p>
                   <p>• Frete completamente Grátis.</p>
                 </div>

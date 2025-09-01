@@ -269,7 +269,7 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
     try {
       console.log("[v0] Renderizando PuzzleGame")
       return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 bg-[url('https://i.ibb.co/5Xhm2BC8/bg.png')] bg-cover bg-center bg-no-repeat bg-blend-overlay relative">
+        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 bg-[url('https://i.ibb.co/605YbSjM/bg.png')] bg-cover bg-center bg-no-repeat bg-blend-overlay relative">
           <div className="flex items-center justify-center min-h-screen p-1 pt-16">
             <PuzzleGame
               image={product.puzzleImage}
@@ -302,7 +302,7 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
 
   if (showPuzzleComplete) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 bg-[url('https://i.ibb.co/5Xhm2BC8/bg.png')] bg-cover bg-center bg-no-repeat bg-blend-overlay flex items-center justify-center p-3">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 bg-[url('https://i.ibb.co/605YbSjM/bg.png')] bg-cover bg-center bg-no-repeat bg-blend-overlay flex items-center justify-center p-3">
         <div className="max-w-sm w-full bg-white/95 backdrop-blur-sm rounded-lg p-4 text-center">
           <div className="mb-4">
             <div className="flex items-center justify-center gap-2 mb-2">
@@ -489,8 +489,8 @@ export function ProductDetails({ product, discount = 0 }: ProductDetailsProps) {
               <>
                 <p className="text-sm text-red-700 mb-4">
                   Complete o quebra-cabeça deste produto e ganhe até{" "}
-                  <strong>{product.puzzleDiscount}% de desconto</strong> ou até mesmo o <strong>produto GRÁTIS</strong>{" "}
-                  na roleta da sorte!
+                  <strong>80% de desconto</strong> ou até mesmo o <strong>produto GRÁTIS</strong>{" "}
+                  na roleta Lego da sorte!
                 </p>
                 <Button
                   onClick={handleStartPuzzle}
