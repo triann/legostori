@@ -46,7 +46,6 @@ export default function RoulettePage() {
 
   useEffect(() => {
     unifiedTracking.trackPageView(window.location.href)
-    unifiedTracking.trackRouletteStarted()
   }, [])
 
   useEffect(() => {
