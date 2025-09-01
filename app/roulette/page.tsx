@@ -65,10 +65,6 @@ export default function RoulettePage() {
       return
     }
 
-    try {
-      if (attempt === 0) {
-        await unifiedTracking.trackRouletteFirstSpin()
-      }
 
       await unifiedTracking.track({
         eventName: "RouletteButtonClicked",
